@@ -1,0 +1,10 @@
+{
+  "domain": "research-report",
+  "primaryRule": "strict",
+  "targetGlob": ["_REPORT-*.md", "README.md", "evidence.md", "20*-*.md"],
+  "sourcesGlob": ["sources/*"],
+  "outputDir": "changelog",
+  "outputNames": { "findings": "{ts}-factcheck.md", "fixplan": "{ts}-fixplan.md" },
+  "guidance": "Verdicts and output format follow the rubric in references/verdicts.md. Sweep semantically for prescription-detected sentences — a research-log report presents facts and how they connect, never recommendations. One institutional publisher = one primary source; flag source-count overclaims.",
+  "note": "This complements a single-context fact-checker subagent: the agent reads everything in one context; this workflow fans out one verifier per claim for long reports where a single context would degrade."
+}

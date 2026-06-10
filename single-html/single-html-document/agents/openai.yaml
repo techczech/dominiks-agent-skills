@@ -1,0 +1,4 @@
+interface:
+  display_name: "Single HTML Documents"
+  short_description: "Build portable interactive HTML docs"
+  default_prompt: "Use $single-html-document to turn this content into a polished portable single-file HTML document."

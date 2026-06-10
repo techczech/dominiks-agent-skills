@@ -1,0 +1,10 @@
+{
+  "domain": "paper-review",
+  "primaryRule": "moderate",
+  "targetGlob": ["reviews/{folder}-review-*.md"],
+  "sourcesGlob": ["{folder}-fulltext.md", "figures/*.md", "tables/*.md", "00-source-{folder}.md"],
+  "outputDir": "reviews",
+  "outputNames": { "findings": "{folder}-review-{style}-factcheck.md", "fixplan": "{folder}-review-{style}-fixplan.md" },
+  "guidance": "The deliverable is a review of one paper; the sources are that paper's own extracted fulltext, figures, and tables. A claim is verified when the review accurately reflects what the paper says/shows. Flag: findings the paper does not actually make, overstated effect sizes, mis-described figures/tables, and any 'the paper proves X' where the paper only suggests X. This workflow operationalises that audit as a per-claim fan-out.",
+  "note": "Run per paper folder. Resolve {folder} to the paper directory, then targets = its reviews/*.md and sources = its fulltext + figures + tables."
+}

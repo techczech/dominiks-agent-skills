@@ -1,0 +1,20 @@
+{
+  "type": "table",
+  "table_id": "NN",
+  "title": "Table title from paper",
+  "description": "Semantic description: What data does this table present? What is its purpose?",
+  "columns": [
+    {"name": "column1", "type": "categorical"},
+    {"name": "column2", "type": "integer"},
+    {"name": "column3", "type": "float"}
+  ],
+  "key_findings": [
+    "Key finding 1 from table",
+    "Key finding 2 from table"
+  ],
+  "source_page": 0,
+  "data_file": "table-NN.csv",
+  "created": "YYYY-MM-DDTHH:MM:SSZ",
+  "paper_key": "ZOTERO_KEY",
+  "tags": ["tag1", "tag2"]
+}

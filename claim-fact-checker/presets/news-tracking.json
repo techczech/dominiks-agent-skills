@@ -1,0 +1,10 @@
+{
+  "domain": "news-item",
+  "primaryRule": "quote-verbatim",
+  "targetGlob": ["data/collections/{name}/items/*.md", "data/collections/{name}/outputs/chapters/*.md"],
+  "sourcesGlob": ["data/collections/{name}/sources/*"],
+  "outputDir": "data/collections/{name}/analysis",
+  "outputNames": { "findings": "{ts}-factcheck.md", "fixplan": "{ts}-fixplan.md" },
+  "guidance": "The deliverable is curated news items (and the narrative chapters built from them); the sources are the archived full article text in the collection's sources/. Exactness is load-bearing: every quote in an item must be VERBATIM in a source, and every factual assertion (numbers, dates, who-said-what, capability claims) must be supported. Flag headline-style overstatement, quotes that drift from the source, and capability claims that garble the original announcement. This matches the repo's stated principle: Claude does the editorial verification, scripts only convert format.",
+  "note": "Run per collection. Resolve {name} to e.g. 2026-05. Chapters reference items, so check items first; a chapter claim that traces to a verified item is fine."
+}

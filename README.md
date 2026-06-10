@@ -19,7 +19,7 @@ These are **simplified, anonymized copies** of skills I use daily. The canonical
 | [paper-reviewer-skill](paper-reviewer-skill/) | Systematic academic paper review pipeline: Zotero import, rich figure/table extraction, six review templates, single-HTML report builder. |
 | [project-changelog](project-changelog/) | Maintain a repo-local `changelog/` folder as a structured narrative layer alongside git: changes, decisions, backlog, phases. |
 | [project-setup](project-setup/) | Initialize or regularize a project workspace: interview-driven `AGENTS.md` + `CLAUDE.md`, task log, agent instructions, optional changelog and registry steps. |
-| [single-html](single-html/) | Build self-contained single-file HTML deliverables. Two sub-skills: `single-html-document` (reports, handbooks, workbooks) and `single-html-report`. |
+| [single-html](single-html/) | Build self-contained single-file HTML deliverables (reports, handbooks, workbooks) — see the `single-html-document` sub-skill inside. |
 
 ## How to use them
 

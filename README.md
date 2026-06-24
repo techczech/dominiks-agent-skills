@@ -19,6 +19,7 @@ These are **simplified, anonymized copies** of skills I use daily. The canonical
 | [paper-reviewer-skill](paper-reviewer-skill/) | Systematic academic paper review pipeline: Zotero import, rich figure/table extraction, six review templates, single-HTML report builder. |
 | [project-changelog](project-changelog/) | Maintain a repo-local `changelog/` folder as a structured narrative layer alongside git: changes, decisions, backlog, phases. |
 | [project-setup](project-setup/) | Initialize or regularize a project workspace: interview-driven `AGENTS.md` + `CLAUDE.md`, task log, agent instructions, optional changelog and registry steps. |
+| [research-translation-skill](https://github.com/techczech/research-translation-skill/tree/main/research-translation) | **Link only** — lives in its own public repo. Auditable workflows for research-document translation, back-translation, reviewer packages, feedback collation, and HTML/report generation from completed runs. |
 | [single-html](single-html/) | Build self-contained single-file HTML deliverables (reports, handbooks, workbooks) — see the `single-html-document` sub-skill inside. |
 
 ## How to use them

@@ -24,10 +24,10 @@ The current project-layout principle is:
 First determine which project root model applies:
 
 - `~/gitrepos/...` — standard numbered-group repo layout. Use `_REPOLOG` and the archetype table below.
-- `<cloud-storage>/_vibecoding/...` — shared cloud-synced (e.g. OneDrive) vibecoding workspace. This path is intentionally the same on all machines. Treat it as a valid stable home for lightweight prototypes, analysis folders, and non-repo working directories that still benefit from local `AGENTS.md` instructions.
+- `<cloud-storage>/_agent-work-space/...` — shared cloud-synced (e.g. OneDrive) agent workspace. This path is intentionally the same on all machines. Treat it as a valid stable home for lightweight prototypes, analysis folders, and non-repo working directories that still benefit from local `AGENTS.md` instructions.
 - `~/agent-demos/...` — local demos workspace for small experiments, proofs of concept, and model capability tests. Treat it as a valid home for lightweight projects with local git history; promote or mirror into `~/gitrepos/` before `_REPOLOG` registration if cross-machine sync becomes part of done.
 
-If the CWD is under the OneDrive vibecoding root, do **not** tell the user it should move into `~/gitrepos/` by default. Instead, ask whether this folder is:
+If the CWD is under the OneDrive agent-work-space root, do **not** tell the user it should move into `~/gitrepos/` by default. Instead, ask whether this folder is:
 
 - a lightweight OneDrive-first working folder, or
 - a real git repo that should eventually gain a mirrored home under `~/gitrepos/`
@@ -38,7 +38,7 @@ For OneDrive vibecoding folders, infer the archetype from the user interview and
 - dashboard / app / interface → `AGENTS-webapp.md`
 - content-heavy research / notes / writing → `AGENTS-content.md`
 
-If the CWD is under `~/agent-demos/`, treat it similarly to the vibecoding workspace for placement decisions:
+If the CWD is under `~/agent-demos/`, treat it similarly to the agent workspace for placement decisions:
 
 - do not suggest relocation by default
 - create lightweight local git by default
@@ -69,6 +69,6 @@ The group names below are an example taxonomy — substitute your own:
 - `x-experiments/`: throwaway prototype; default minimal `AGENTS-utility.md`.
 - `x-archive/`: superseded repo; refuse and suggest a different folder.
 
-If the CWD is under neither `~/gitrepos/`, the cloud-synced vibecoding root, nor `~/agent-demos/`, ask where it *should* live before doing anything else. The numbered group system is load-bearing for git repos, but the OneDrive vibecoding root and the local demos workspace are also sanctioned work areas.
+If the CWD is under neither `~/gitrepos/`, the cloud-synced vibecoding root, nor `~/agent-demos/`, ask where it *should* live before doing anything else. The numbered group system is load-bearing for git repos, but the OneDrive agent-work-space root and the local demos workspace are also sanctioned work areas.
 
 See `references/archetypes.md` for richer archetype notes, including content-vs-code distinctions, typical tech stacks, and cross-reference patterns.

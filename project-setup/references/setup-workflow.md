@@ -53,7 +53,7 @@ Follow these steps in order. Stop and confirm with the user before any step mark
 4. **Detect root + archetype** from the path and answers (see "Root detection" and "Archetype detection" below). If ambiguous, ask.
 5. **Read context for the detected root**:
    - For `~/gitrepos/` projects: always read `~/gitrepos/_REPOLOG/README.md` (the current machine section) and grep `~/gitrepos/_REPOLOG/repo-map.tsv` for siblings in the same group folder. This grounds sibling-project suggestions in *current* state, not stale memory. Git plus `_REPOLOG` registration are default completion steps, not optional follow-ups.
-   - For cloud-synced (e.g. OneDrive) vibecoding projects under `<cloud-storage>/_vibecoding/`: treat the path itself as the canonical cross-machine location. Do **not** insist on moving it into `~/gitrepos/`, and do **not** propose `_REPOLOG` registration unless the user explicitly wants a separate git mirror under `~/gitrepos/`.
+   - For cloud-synced (e.g. OneDrive) agent-workspace projects under `<cloud-storage>/_agent-work-space/`: treat the path itself as the canonical cross-machine location. Do **not** insist on moving it into `~/gitrepos/`, and do **not** propose `_REPOLOG` registration unless the user explicitly wants a separate git mirror under `~/gitrepos/`.
    - For local demo projects under `~/agent-demos/`: treat this as a sanctioned lightweight workspace for local-first demos, experiments, and capability probes. Create local git by default. If the user wants cross-machine sync or durable registry visibility, mirror or promote the demo into `~/gitrepos/` and register it in `_REPOLOG`; otherwise keep the `_REPOLOG` row out because the registry is rooted in `~/gitrepos/`.
 6. **Interview the user** (see "Interview" below). Ask the route and mode questions, then only the core questions still needed. The answers are the source for `AGENTS.md`; do not fill sections from generic template text alone.
 7. **Propose a plan** summarizing what you'll create: AGENTS.md (yes), CLAUDE.md (yes), `_AGENT-INSTRUCTIONS/` (yes), `_TASK-LOG/` (yes), `_AGENT-INSTRUCTIONS/lessons/` for durable lessons (ask), `_CHANGELOG/` for coding-feature/change history (ask), git init and first commit (default for non-OneDrive), GitHub remote if needed for cloning (default for `~/gitrepos/` repos without a remote), `_REPOLOG` registration (default for `~/gitrepos/` repos), scaffold command (ask). **(confirm)** only when the user has not already approved setup or the plan includes a destructive move, public remote, or ambiguous placement.
@@ -82,7 +82,7 @@ If the user's opening brief already gives a usable project description, do not a
 4. **Why now?** What triggered starting it? (New client ask? Idea that's been simmering? Teaching prep?)
 5. **Immediate goal** — what does "usable" look like in the next 1-2 weeks?
 6. **Long-term vision** — where could this be in 6 months if it works? (Or "throwaway, don't bother.")
-7. **Related projects** — anything in `~/gitrepos/` or the OneDrive vibecoding workspace this depends on, borrows from, or replaces? (Use the `_REPOLOG` read from step 5 to suggest gitrepo candidates when relevant.)
+7. **Related projects** — anything in `~/gitrepos/` or the OneDrive agent workspace this depends on, borrows from, or replaces? (Use the `_REPOLOG` read from step 5 to suggest gitrepo candidates when relevant.)
 8. **Audience** — who uses this? (Self, students, colleagues, teachers, consulting clients, general public.)
 9. **Collaborators** — solo, or are specific people involved? Named clients?
 

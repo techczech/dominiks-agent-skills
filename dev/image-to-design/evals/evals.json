@@ -1,0 +1,29 @@
+{
+  "skill_name": "image-to-design",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Create three generated UI mockup directions for a research dashboard, then build the selected one as HTML/CSS.",
+      "expected_output": "Creates a design planning folder with meta, content, design brief, v1 manifest.yml, three separate model-ready option prompts, three separate image-generation runs, three separate bitmap images, and uses the selected image as the implementation reference.",
+      "files": []
+    },
+    {
+      "id": 2,
+      "prompt": "Here is a screenshot and a colour palette. Make a cleaner version, then revise the second image to be denser and less marketing-like.",
+      "expected_output": "Records screenshot and palette inputs, creates v1 suggestions as separate bitmap images from separate runs, preserves v1, creates v2 with manifest.yml, prompt-v2-option-01.txt, notes, and saves the new image separately.",
+      "files": []
+    },
+    {
+      "id": 3,
+      "prompt": "Make me a local page where I can compare all the generated design versions side by side.",
+      "expected_output": "Creates or updates a static review.html that displays images from version folders with version names, filenames, and notes.",
+      "files": []
+    },
+    {
+      "id": 4,
+      "prompt": "Generate three visual design options for this app screen.",
+      "expected_output": "Uses the image-generation path only, refuses to substitute SVG or hand-written code, and creates three independent image files from three separate runs rather than one combined image.",
+      "files": []
+    }
+  ]
+}

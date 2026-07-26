@@ -1,0 +1,10 @@
+{
+  "domain": "research-report",
+  "primaryRule": "strict",
+  "targetGlob": ["_REPORT-*.md", "README.md", "evidence.md", "20*-*.md"],
+  "sourcesGlob": ["sources/*"],
+  "outputDir": "changelog",
+  "outputNames": { "findings": "{ts}-factcheck.md", "fixplan": "{ts}-fixplan.md" },
+  "guidance": "The deliverable is a research report and its companion files, written from primary sources archived beside it. Verdicts and output format follow references/verdicts.md. Sweep semantically for prescription-detected sentences — the report presents facts and how they connect, never recommendations to an actor. One institutional publisher counts as one primary source; flag claims that inflate the source count.",
+  "note": "Layout assumed: one folder per entry, holding the report, a README, dated atomic notes, an evidence file, an archived sources/ directory and a changelog/ for audit output. Edit the globs if your workspace differs. Reach for this preset when a report is long enough that a single reader would degrade; for a handful of claims, one agent reading the report against the sources is cheaper."
+}

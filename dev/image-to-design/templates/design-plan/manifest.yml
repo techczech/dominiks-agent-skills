@@ -1,0 +1,37 @@
+version: v1
+status: draft
+created_at: YYYY-MM-DD
+source_version:
+source_image:
+prompt_file: prompt-v1-option-01.txt
+generated_images: []
+generation:
+  model:
+  aspect_ratio:
+  width:
+  height:
+  seed:
+  count:
+  output_format: png
+  separate_images: true
+  separate_runs: true
+  one_design_per_image: true
+  allow_svg: false
+  allow_collage: false
+inputs:
+  meta_file: ../../00-meta.md
+  content_file: ../../01-content.md
+  design_brief: ../../02-design-brief.md
+  reference_images: []
+constraints:
+  safe_to_send_to_image_model:
+  exclude_from_generation:
+revision:
+  requested_change:
+  summary:
+runs:
+  - option: 1
+    prompt_file: prompt-v1-option-01.txt
+    output_file: image-01.png
+    seed:
+    status: draft

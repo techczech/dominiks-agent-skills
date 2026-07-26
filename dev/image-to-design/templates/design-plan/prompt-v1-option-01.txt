@@ -1,0 +1,15 @@
+[Write only the exact text to send to the image model here. Do not include YAML, headings, version notes, source metadata, or workflow commentary.]
+
+Generate one bitmap PNG-style UI screenshot/mockup for [surface/type]. Do not create SVG, HTML, CSS, canvas code, wireframe code, or any other code-rendered substitute. Do not place multiple design alternatives in one image.
+
+Purpose: [purpose].
+Audience: [audience].
+Primary task: [primary user task].
+
+Show: [required visible content and elements].
+
+Visual direction: [layout, density, colour palette, typography, spacing, tone].
+
+Use these constraints: [reference-image influence, accessibility, contrast, responsive framing, content boundaries].
+
+Avoid: generic AI-product visual tropes, unreadable decorative text, placeholder-only content when project content is available, comparison sheets, grids of alternatives, collages, and multi-panel option boards.

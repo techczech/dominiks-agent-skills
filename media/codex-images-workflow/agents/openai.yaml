@@ -1,0 +1,4 @@
+interface:
+  display_name: "Codex Images Workflow"
+  short_description: "Reusable image brief and versioning workflow"
+  default_prompt: "Use $codex-images-workflow to create reproducible generated-image assets with briefs and versioning."

@@ -1,0 +1,22 @@
+{
+  "type": "figure",
+  "figure_id": "NN",
+  "figure_type": "bar_chart",
+  "title": "Figure title from paper",
+  "caption": "Figure caption from paper (if available)",
+  "description": "Semantic description: What does this figure show? What are the key visual elements?",
+  "key_findings": [
+    "Finding 1 from this figure",
+    "Finding 2 from this figure"
+  ],
+  "variables": {
+    "x_axis": "X-axis variable name",
+    "y_axis": "Y-axis variable name",
+    "grouping": "Grouping variable (if applicable)"
+  },
+  "source_page": 0,
+  "image_file": "figure-NN.png",
+  "created": "YYYY-MM-DDTHH:MM:SSZ",
+  "paper_key": "ZOTERO_KEY",
+  "tags": ["tag1", "tag2"]
+}

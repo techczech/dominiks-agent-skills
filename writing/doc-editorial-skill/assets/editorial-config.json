@@ -1,0 +1,19 @@
+{
+  "project": "Your Project Name",
+  "docs_dir": "docs",
+  "audience": "Describe your target audience here",
+  "frontmatter": {
+    "required_fields": ["title", "status", "updated"],
+    "allowed_status": ["draft", "review", "published"]
+  },
+  "paths": {
+    "glossary": "editorial-workspace/glossary.json",
+    "changelog": "editorial-workspace/changelog.jsonl",
+    "rules": "editorial-workspace/rules/structural-rules.md",
+    "voice_guide": "editorial-workspace/guides/voice-and-tone.md",
+    "doc_templates": null,
+    "lessons_learned": "editorial-workspace/guides/lessons-learned.md",
+    "audit_reports": "editorial-workspace/audit-reports",
+    "research": "editorial-workspace/research"
+  }
+}

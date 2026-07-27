@@ -1,0 +1,10 @@
+[
+  {
+    "term": "Example Term",
+    "definition": "Replace with your term's definition",
+    "variants_ok": [],
+    "variants_bad": [],
+    "first_defined_in": "example.md",
+    "category": "concept"
+  }
+]

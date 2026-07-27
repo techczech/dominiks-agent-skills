@@ -1,0 +1,4 @@
+interface:
+  display_name: "AgentsMDstreamline"
+  short_description: "Create or review AGENTS.md files"
+  default_prompt: "Use $agents-md-streamline to create or review this project's AGENTS.md and sibling CLAUDE.md bridge."

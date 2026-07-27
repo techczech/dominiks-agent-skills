@@ -1,0 +1,4 @@
+interface:
+  display_name: "Research Translation"
+  short_description: "Set up auditable research translation, review, and report workflows."
+  default_prompt: "Set up or inspect a research translation project, including review packages or report generation from completed runs."

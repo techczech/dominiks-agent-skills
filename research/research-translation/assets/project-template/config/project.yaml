@@ -1,0 +1,22 @@
+project_name: "{{PROJECT_NAME}}"
+created_at: "{{CREATED_AT}}"
+mode: "{{MODE}}"
+source_language: "{{SOURCE_LANGUAGE}}"
+target_languages:
+{{TARGET_LANGUAGES_YAML}}
+
+translation_policy:
+  dummy_outputs_allowed: false
+  allowed_output_sources:
+    - active_agent
+    - named_agent
+    - approved_api_call
+    - user_supplied
+  same_agent_backtranslation_label: "same-agent-check; not independent"
+
+document_types:
+  - to-decide
+
+notes:
+  - "Add source documents to source-documents/."
+  - "Record consent before agent-assisted or API-assisted translation."

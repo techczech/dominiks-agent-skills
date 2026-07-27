@@ -1,0 +1,11 @@
+source_language: "{{SOURCE_LANGUAGE}}"
+target_languages:
+{{TARGET_LANGUAGES_YAML}}
+
+language_profiles:
+  - language: "TO-DECIDE"
+    locale: "TO-DECIDE"
+    script: "TO-DECIDE"
+    intended_readers: "TO-DECIDE"
+    reviewer_needs: "TO-DECIDE"
+

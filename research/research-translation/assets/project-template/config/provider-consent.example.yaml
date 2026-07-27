@@ -1,0 +1,49 @@
+# Template only. Nothing here is approved until the project owner edits this file,
+# saves it as config/provider-consent.yaml, and replaces every "to-confirm" value.
+# The agent tools and API providers below are examples; add, remove, or rename them
+# to match the tools this project actually uses.
+
+status: draft
+source_text_may_leave_local_machine: false
+
+agent_tools:
+  codex:
+    allowed: "to-confirm"
+    translation_allowed: "to-confirm"
+    backtranslation_allowed: "to-confirm"
+    notes: "Can set up, plan, translate, back-translate, inspect, and document without separate API keys. Same-agent back-translation must be labelled not independent."
+  claude_code:
+    allowed: "to-confirm"
+    translation_allowed: "to-confirm"
+    backtranslation_allowed: "to-confirm"
+    notes: "Can be used as a second agent for stronger separation if available. Keep source text hidden from the back-translation agent."
+
+api_providers:
+  openai_api:
+    allowed: false
+    env_var: OPENAI_API_KEY
+    allowed_documents: []
+  anthropic_api:
+    allowed: false
+    env_var: ANTHROPIC_API_KEY
+    allowed_documents: []
+  google_api:
+    allowed: false
+    env_var: GOOGLE_API_KEY
+    allowed_documents: []
+
+terminology_lookup:
+  web_lookup_allowed: false
+  notes: ""
+
+reviewer_feedback:
+  may_be_sent_to_model_providers: false
+
+output_authenticity:
+  dummy_translations_allowed: false
+  dummy_backtranslations_allowed: false
+  if_missing_output_write: "not generated yet"
+
+retention:
+  provider_retention_requirements: "to-confirm"
+  local_deletion_requirements: "to-confirm"

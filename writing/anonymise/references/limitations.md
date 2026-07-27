@@ -1,43 +1,38 @@
 # Limitations and Risks
 
-Quoted directly from the OpenAI Privacy Filter PDF model card (April 22, 2026), section 4 "Bias, Risks, and Limitations".
+A working summary of what Privacy Filter does badly and where it should not be trusted alone. The underlying analysis is OpenAI's, set out in sections 3.2 and 4 of the model card (22 April 2026); read it in full at <https://huggingface.co/openai/privacy-filter>. Everything below is a restatement in this skill's own terms, aimed at someone deciding whether to run the skill on a particular body of text.
 
-## 4.1 Over-reliance Risk
+## It reduces exposure; it does not anonymise
 
-> Privacy Filter is a redaction and data minimization aid, not an anonymization, compliance, or a safety guarantee. Over-reliance on the tool as a blanket anonymization claim would risk missing desired privacy objectives. Privacy Filter is best used as one of multiple layers in a holistic end-to-end privacy-by-design approach.
+OpenAI is explicit that the model is a data-minimisation aid rather than an anonymisation, compliance or safety guarantee, and warns against treating a pass through it as clearance to release text. Nothing about the output is a legal determination, and it is no substitute for policy review where the stakes are real. Treat a redaction pass as one control among several in a privacy-by-design pipeline, and treat any residual text as still potentially identifying.
 
-## 4.2 Static Label Policy
+## The label policy is fixed at training time
 
-> The model will only identify PII spans that match the trained label taxonomy and definitions. Real-life privacy use cases are varied and complex, and definitions of appropriate label policies and decision boundaries can differ. Thus model defaults may not satisfy organization-specific governance requirements without calibration/fine-tuning.
->
-> Privacy Filter does not support configuring label policies dynamically at runtime; instead, changing policies requires further fine-tuning of the model. The native label set and associated decision boundaries may not be appropriate for every use case. For example, the model's training policy aims to prioritize personal identifiers, often preserving context that is not strongly person-linked by design; some users may want to adjust this choice.
->
-> Performance may drop on non-English text, non-Latin scripts, or naming patterns or domains that are out of distribution compared to model training.
+The model finds only what its taxonomy describes, and that taxonomy cannot be reconfigured at runtime — there is no flag that widens or narrows the definitions. Changing the policy means fine-tuning. The training policy leans towards personal identifiers and deliberately leaves weakly person-linked context in place, which is a defensible default but not everyone's. If your governance rules are materially stricter or materially broader than that default, the base model will not meet them without adaptation.
 
-## 4.3 Failure Modes
+## Where accuracy degrades
 
-> Like all models, Privacy Filter can make mistakes, such as: under-detection of uncommon personal names, regional naming conventions, initials, honorific-heavy references, or domain-specific identifiers; over-redaction of public entities, locations, or common nouns when local context is ambiguous; fragmented or shifted span boundaries in mixed-format text, long documents, or text with heavy punctuation and layout artifacts; missed secrets for novel credential formats, project-specific token patterns, or secrets split across surrounding syntax; and over-redaction of benign high-entropy strings, placeholders, hashes, sample credentials, or synthetic examples that resemble secrets.
->
-> These limitations can interact with demographic, regional, and domain variation. For example, names and identifiers that are underrepresented in training data, or that follow conventions different from the dominant training distribution, may be more likely to be missed or inconsistently bounded.
+Detection weakens on text unlike the training distribution: non-English text, non-Latin scripts, and naming conventions or subject domains outside what the model saw. Reported failure patterns fall into a few recurring shapes.
 
-## 4.4 High-Risk Deployment Caution
+- **Missed names**: uncommon personal names, regional naming conventions, bare initials, and references buried in honorifics.
+- **Missed identifiers**: domain-specific record numbers, novel credential formats, project-specific token patterns, and secrets broken across surrounding syntax.
+- **Over-redaction**: public entities, place names and ordinary nouns swallowed when the surrounding context is ambiguous, and benign high-entropy strings — hashes, placeholders, sample keys, synthetic examples — mistaken for live secrets.
+- **Bad span edges**: boundaries that fragment or shift in mixed-format text, long documents, and anything carrying heavy punctuation or layout artefacts.
 
-> Additional caution is warranted in high-sensitivity settings such as medical, legal, financial, human resources, education, and government workflows. In these settings, both false negatives and false positives can be costly: missed spans may expose sensitive information, while excess redaction can remove material context needed for review, auditing, or downstream decision-making.
+These errors are not evenly distributed. Names and identifiers underrepresented in training, or following conventions unlike the dominant ones, are the likeliest to be dropped or badly bounded, so the residual risk lands disproportionately on particular regions, demographics and specialist domains.
 
-## 4.5 Recommendations (OpenAI's own)
+## High-stakes settings need a human in the path
 
-> We recommend using Privacy Filter as part of a holistic privacy-by-design approach rather than as the basis for a blanket anonymization claim. Before production use, it's best to evaluate the model in-domain against local policy references. Task-specific fine-tuning should be used when local policy differs from the base decision boundaries. High-sensitivity workflows should also retain human review paths.
+Medical, legal, financial, HR, education and government workflows deserve extra caution, and for a reason worth stating plainly: both error directions cost something. A missed span leaks sensitive information; an over-eager one strips context that a reviewer, auditor or decision-maker needed. Automatic redaction cannot arbitrate that trade-off, so keep a human review step.
 
-## 3.2 Out-of-Scope and Misuse
+## OpenAI's own recommendations, in short
 
-> Privacy Filter should not be treated as an anonymization, compliance, or safety guarantee, a substitute for policy review in high-stakes deployments, a universal privacy oracle with fixed behavior across all text genres and regions, or a legal determination system.
->
-> Potential misuse includes treating unredacted output as safe for release, relying on default operating points without validating them on the target distribution, or skipping domain adaptation when local policy requires materially stricter or materially broader redaction criteria.
+Evaluate the model in your own domain against your own policy reference before production use; fine-tune where local policy diverges from the trained decision boundaries; keep human review on sensitive workflows; and never let the model stand in for a blanket anonymisation claim. Two misuse patterns they call out specifically: trusting default operating points without validating them on your actual data, and skipping domain adaptation when local policy demands different criteria.
 
-## Operational implication for this skill
+## What this means for the skill
 
-The `anonymise` skill exposes the same model and inherits the same limitations. In particular:
+The skill wraps the same weights and inherits every limitation above.
 
-- For high-stakes settings (medical, legal, financial, HR, education, government), **always retain a human review pass** after the skill runs.
-- For non-English / non-Latin / regional name use, **evaluate on a sample first**. Multilingual scores from the model card are summarised in `multilingual-coverage.md`.
-- For organisational categories outside the eight built-in PII labels, **fine-tune** Privacy Filter on labelled data, or use a separate policy-driven model (such as `openai/gpt-oss-safeguard-20b`) with a written policy. The latter is not implemented in this skill.
+- In high-stakes settings, **always retain a human review pass** after the skill runs.
+- For non-English, non-Latin-script or regionally distinctive names, **evaluate on a sample first**. Reported per-language scores are summarised in `multilingual-coverage.md`.
+- For organisational categories outside the eight built-in labels, **fine-tune** Privacy Filter on labelled data, or reach for a policy-driven classifier such as `openai/gpt-oss-safeguard-20b` with a written policy. Neither path is implemented here.

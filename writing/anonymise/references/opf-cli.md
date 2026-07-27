@@ -23,12 +23,14 @@ uv tool install --editable .
 
 After install, `opf` is on `PATH`.
 
-## Usage examples (from the official PDF model card, pages 8-9)
+## Usage examples
+
+The CLI surface below is documented in the official repository and model card; the sample text is this skill's own.
 
 ```bash
 # One-shot redaction
-opf "Ben Morgan lives at 12 3rd St. Call him at 123 456 7890."
-# → <PRIVATE_PERSON> lives at <PRIVATE_ADDRESS>. Call him at <PRIVATE_PHONE>.
+opf "Rita Vaughan lives at 4 Kiln Lane. Call her on 020 7946 0102."
+# → <PRIVATE_PERSON> lives at <PRIVATE_ADDRESS>. Call her on <PRIVATE_PHONE>.
 
 # File input
 opf -f /path/to/file
@@ -37,10 +39,10 @@ opf -f /path/to/file
 cat /path/to/file | opf
 
 # JSON output (full schema)
-opf "Ben Morgan lives at 12 3rd St." --format json
+opf "Rita Vaughan lives at 4 Kiln Lane." --format json
 
 # Single-label redaction (collapse all categories to <REDACTED>)
-opf "Ben Morgan lives at 12 3rd St." --output-mode redacted
+opf "Rita Vaughan lives at 4 Kiln Lane." --output-mode redacted
 # → <REDACTED> lives at <REDACTED>.
 
 # CPU

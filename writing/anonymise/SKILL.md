@@ -25,7 +25,7 @@ This skill is the right tool when:
 This skill is **not** the right tool when:
 
 - You need to redact bespoke organisational categories (project codenames, internal role titles, the names of particular teams or institutions) — those require either fine-tuning Privacy Filter or using a different model. See `references/limitations.md`.
-- You need a legal anonymisation guarantee. OpenAI explicitly disclaims this — Privacy Filter is "a redaction and data minimization aid, not an anonymization, compliance, or a safety guarantee." Treat the output as one layer in a privacy-by-design pipeline, not the final word.
+- You need a legal anonymisation guarantee. OpenAI explicitly disclaims this: the model is offered as a data-minimisation aid, not as anonymisation, compliance or a safety guarantee. Treat the output as one layer in a privacy-by-design pipeline, not the final word.
 - The text is in Hausa, Western Punjabi, or another language for which the model card reports F1 < 0.86. See `references/multilingual-coverage.md`.
 
 ## Prerequisites
@@ -137,7 +137,7 @@ Scripts in this skill use this PEP 723 inline metadata header:
 
 ## Limitations to know
 
-Quoted from the OpenAI model card (see `references/limitations.md` for full text):
+Summarised from the OpenAI model card (see `references/limitations.md` for the fuller account and a link to the card):
 
 - Privacy Filter is *not* an anonymisation, compliance, or safety guarantee.
 - Performance drops on non-English text, non-Latin scripts, and out-of-distribution domains.
@@ -157,6 +157,6 @@ Quoted from the OpenAI model card (see `references/limitations.md` for full text
 
 ## Related
 
-- **Upstream sources**: the `openai/privacy-filter` model card and repository (`github.com/openai/privacy-filter`) — every quoted claim in the reference pages below comes from the PDF model card dated 22 April 2026.
+- **Upstream sources**: the `openai/privacy-filter` model card (<https://huggingface.co/openai/privacy-filter>) and repository (`github.com/openai/privacy-filter`). Claims about the model's taxonomy, limitations and evaluation scores in the reference pages below are summarised from the model card dated 22 April 2026; follow the link for the vendor's own text.
 - **Beyond the eight categories**: for redaction driven by a written policy rather than a fixed taxonomy, a policy-classification model such as `openai/gpt-oss-safeguard-20b` is the usual complement. That path is not implemented here; this skill deliberately covers only the trained PII taxonomy.
 - **Source references**: `references/opf-cli.md`, `references/label-taxonomy.md`, `references/limitations.md`, `references/multilingual-coverage.md`

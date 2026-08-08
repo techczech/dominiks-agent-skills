@@ -1,0 +1,4 @@
+interface:
+  display_name: "Global Agent Instructions"
+  short_description: "Create and install one trigger-first agent payload"
+  default_prompt: "Use $global-agent-instructions to create or update a small global instruction payload and wire it into my installed agent tools."

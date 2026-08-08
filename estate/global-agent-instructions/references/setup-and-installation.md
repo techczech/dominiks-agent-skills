@@ -32,9 +32,7 @@ The installer supports these default user-level targets:
 - pi: `~/.pi/agent/AGENTS.md` → symlink.
 - Claude Code: `~/.claude/CLAUDE.md` receives one exact `@/absolute/path/AGENTS-global.md` import line. Existing unrelated content remains in place.
 
-Other tools may use project-local instructions or different global paths. Verify their current documentation before adding a target; do not guess.
-
-Current documentation:
+Other tools may use project-local instructions or different global paths. Verify against current documentation before adding a target; do not guess:
 
 - [Codex `AGENTS.md`](https://developers.openai.com/codex/guides/agents-md)
 - [Claude Code memory and imports](https://code.claude.com/docs/en/memory)

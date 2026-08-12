@@ -1,0 +1,4 @@
+interface:
+  display_name: "AI Working Style Builder"
+  short_description: "Improve how you work with AI"
+  default_prompt: "I’d like to improve how I work with AI. Use $ai-working-style-builder to help me find and try the changes that would make the biggest difference."

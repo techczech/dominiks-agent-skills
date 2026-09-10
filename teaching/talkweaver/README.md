@@ -10,4 +10,6 @@ Use `/talkweaver` in Claude Code or `$talkweaver` in Codex, or describe an appro
 
 ## Scope
 
+The skill covers outline editing, Pathways, PowerPoint extraction and conversion, local audience handouts, recording transcription, faithful Script cleanup and rewritten lecture Notes. It includes the input/output contracts for the app's import and recording handoff packs.
+
 Read [the skill](SKILL.md) for supported workflows and limitations. Existing commands are conditional on the installed version and actual exposed tools. No private machine paths, records, credentials or executable helpers are included in the published package.

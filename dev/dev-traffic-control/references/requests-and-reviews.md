@@ -45,6 +45,6 @@ Which export should be the default?
 ```
 ````
 
-With no options the documented defaults are Approve / Needs change / Reject. Retain explicit decision IDs. Answers return in `report.decisions[]`, separate from prose comments.
+With no options the documented defaults are Approve / Needs change / Reject. Retain explicit decision IDs. Answers return in the `document` item's own list, `report.items[0].decisions[]` (`{id, question, choice, comment?}`), separate from prose comments. There is no top-level `report.decisions`. Reading only the top level loses every answer.
 
 A revised source gets a new review snapshot if another review is needed. Apply feedback to the source document, never by rewriting the historical review request.

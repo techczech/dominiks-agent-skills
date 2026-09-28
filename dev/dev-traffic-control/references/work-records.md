@@ -10,6 +10,8 @@ Read the installed root contract for exact current fields. Project folders can c
 
 Declared `state` is exactly `notstarted`, `building`, `built` or `you`. Never declare `done`: it is derived from the app-written answers sidecar when the corresponding feature verdict is `works`. `kind: groundwork` has no state or user verdict; `unlocks` names the enabled feature.
 
+Every time you change a feature's `state:`, set `since: YYYY-MM-DD` beside it to the day it reached that state. The row shows the later of `since` and the reviewer's answer time. A verdict answer can carry `screenshots` (paths relative to the project folder, under `releases/<version>.shots/`): open every picture it names before acting on the verdict.
+
 Edit the ledger in place as work progresses, preserving unrelated fields. Read `<version>.answers.json`; never write it. `off` means something was flagged, not automatic rejection of the whole release. An absent answer is unanswered.
 
 ## Roadmap pool

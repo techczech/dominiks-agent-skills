@@ -10,7 +10,7 @@ For detailed testing, `pass`, `partial`, `fail`, `skip`, `unanswered` mean disti
 
 For `mode: light`, pass means it works; fail means the reviewer flagged something; unanswered is not a verdict. `observations[]` contains separate notes with their own IDs, text and screenshots. File every actionable observation separately and record its destination, even when unrelated to the requested checks. Ignored parked checks are not missing required answers.
 
-For document review, the `document` item's disposition is: pass = approved; partial = approved with changes; fail = needs rework; skip = not reviewed. Read `quotes`, `sectionMarks`, screenshots and `decisions`; an empty decision choice remains undecided. Approval with changes does not mean the changes have been made.
+For document review, the `document` item's disposition is: pass = approved; partial = approved with changes; fail = needs rework; skip = not reviewed. Read `quotes`, `sectionMarks`, screenshots and `items[0].decisions` (nested in the document item, not at the top level); an empty decision choice remains undecided. A `skip` disposition can still carry answered decisions. Approval with changes does not mean the changes have been made.
 
 ## Collection receipt
 

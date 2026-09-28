@@ -38,7 +38,7 @@ Ownership: agents write requests, release records, roadmap idea files, handoff d
   - Checks that consume sample data (answering a verdict, archiving) come **after** the checks that need it.
   - Never ask the reviewer to run a terminal command; give a link to click, in the check and in chat.
   - Point a check at a sandbox project in the record root (for example a `playground/` folder) when trying it could disturb real work.
-- **Release features:** each `## Feature` heading states what changed and what is judged ("The editor window can be dragged by its title bar"), never a step ("Press on the bar and drag"). Steps go under `**How to check**`. See [work records](references/work-records.md).
+- **Release features:** `state:` is exactly `notstarted`, `building`, `built` or `you`; any other word (such as `planned`) is ignored by the app and the feature vanishes from Releases. Each `## Feature` heading states what changed and what is judged ("The editor window can be dragged by its title bar"), never a step ("Press on the bar and drag"). Steps go under `**How to check**`. Set `since: YYYY-MM-DD` whenever you change a `state:`. A verdict can carry screenshots; open every one. See [work records](references/work-records.md).
 - A link to a test request opens as the narrow pinned sidebar; any other record opens big and unpinned. Both land in focus mode.
 
 ## 4. Watching
@@ -51,7 +51,7 @@ A cold answer is collected by hand from the prompt DTC copies. Never imply a wat
 
 ## 5. Collecting
 
-A report is final only when `completedAt` exists. Read every item's status and comment, screenshots, `observations[]` and doc-review `decisions`. File each actionable point where the project keeps them, act on it, then write `<basename>.collected.json` naming where each went. If the reviewer answered in chat instead, write `<basename>.resolved.md`. Short DTC comments are compressed: when one has two readings, ask with the readings spelled out before building.
+A report is final only when `completedAt` exists. Read every item's status and comment, screenshots, `observations[]` and doc-review decisions, which are nested at `items[0].decisions`, never top-level. A `skip` status can still carry answers. File each actionable point where the project keeps them, act on it, then write `<basename>.collected.json` naming where each went. If the reviewer answered in chat instead, write `<basename>.resolved.md`. Short DTC comments are compressed: when one has two readings, ask with the readings spelled out before building.
 
 ## Versions
 
@@ -63,5 +63,7 @@ Features the skill relies on, and the DTC build that brought them:
 | `.opened.json` arming (two-phase watch) | 0.21.0-alpha.13 |
 | Verdict sheet; nothing sends the reviewer to Releases for a verdict | 0.21.0-alpha.14 |
 | Links open by kind (sidebar or big), always in focus mode | 0.21.0-alpha.20 |
+| Release (and `#feature`), roadmap-idea, handoff and thread-entry links open on the item, not the project | 0.21.0-alpha.21 |
+| Feature `since:` dates on release rows; screenshots on verdict answers | 0.21.0-alpha.25 |
 
 When a DTC release changes what agents write or how records open, update this table and the section it affects in the same round.

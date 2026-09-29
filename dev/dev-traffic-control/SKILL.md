@@ -51,7 +51,7 @@ A cold answer is collected by hand from the prompt DTC copies. Never imply a wat
 
 ## 5. Collecting
 
-A report is final only when `completedAt` exists. Read every item's status and comment, screenshots, `observations[]` and doc-review decisions, which are nested at `items[0].decisions`, never top-level. A `skip` status can still carry answers. File each actionable point where the project keeps them, act on it, then write `<basename>.collected.json` naming where each went. If the reviewer answered in chat instead, write `<basename>.resolved.md`. Short DTC comments are compressed: when one has two readings, ask with the readings spelled out before building.
+A report is final only when `completedAt` exists. Read every item's status and comment, screenshots, `observations[]` and doc-review decisions, which are nested at `items[0].decisions`, never top-level. Also read `markups[]` on decisions, items and observations: his marked-up pictures, with each numbered mark's words in `marks[].text` (format in the record root's `AGENTS.md`). A `skip` status can still carry answers. File each actionable point where the project keeps them, act on it, then write `<basename>.collected.json` naming where each went. If the reviewer answered in chat instead, write `<basename>.resolved.md`. Short DTC comments are compressed: when one has two readings, ask with the readings spelled out before building.
 
 ## Versions
 

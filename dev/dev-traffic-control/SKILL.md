@@ -20,6 +20,8 @@ Build the address from the path you wrote. There is no lookup and no id.
 | Thread entry | `dtc://thread/<project>/<thread id from the entry's thread: field>` (never `open`: that lands on the front page) |
 | A whole project | `dtc://project/<project>` |
 
+A record link always starts with `open/` and ends with the file's real name, `.md` included. Wrong: `dtc://talkweaver/2026-10-01-talkweaver-0.37.0-preview.4-check`. Right: `dtc://open/talkweaver/2026-10-01-talkweaver-0.37.0-preview.4-check.md`. Check the file exists at that path before sending the link.
+
 Write it as a markdown link, never a bare URL and never in a code fence: `[Open the request in Dev Traffic Control](dtc://open/example-app/2026-09-11-action-bar.md)`. A terminal makes a bare `dtc://` dead text; a markdown link carries any scheme.
 
 Say in the same reply whether anything is watching (§ 4).

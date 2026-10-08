@@ -20,6 +20,30 @@ Edit the ledger in place as work progresses, preserving unrelated fields. Read `
 
 `<project>/roadmap/<id>.md` is an idea record shared by app and agents; preserve fresh content and unknown frontmatter fields when editing. Use the installed contract for required fields and tier values. App-owned `roadmap/order.json` controls order and promotion/set-aside state; never edit it to move a card. App state can override a proposed candidate release in the idea file.
 
+### Feature requests (0.22.0)
+
+A roadmap idea the reviewer suggested is a feature request. It carries these optional frontmatter fields on top of `id`, `title`, `tier` and `added`:
+
+| Field | Value |
+|---|---|
+| `by` | `reviewer` when the reviewer suggested it, `agent` when you did. |
+| `said` | `{where, when, link}`: where it was said ("a review", "a check", "chat", "a thread"), the date, and a `dtc://open/…` link to the record when one exists. |
+| `quote` | The reviewer's exact words. Leave it out when you do not have them. Never invent or tidy a quote. |
+| `context` | One to three plain sentences: why it came up and what problem it solves. |
+| `plan` | Your next step, in one or two sentences. |
+| `fate` | `waiting` (needs the reviewer's decision) · `planned` · `building` · `built` · `merged` · `declined`. One line, no block scalar. |
+| `fate_note` | Which release it was built in, what it merged into, or why it was declined. |
+| `related` | A list of `dtc://open/…` links or ticket ids. |
+| `candidate` | The release it is aimed at, as a version. One line. |
+
+Rules:
+
+- No `plan` or no `fate` shows as "No plan yet", owed by you.
+- The reviewer's answers are appended by the app as `## Reviewer entry · <date> · <answer>` with an optional note below. Reply by appending `## Agent entry · <date>` and your answer in the text under it. Entries are append-only.
+- Approve → Roadmap is the reviewer's action. It writes `fate: planned` and `candidate: <pending version>`. The pending version is the next minor after the highest release record; it is derived by the app and never a file. Do not move a `waiting` idea to `planned` yourself.
+- The Roadmap shows approved ideas grouped by `candidate`. Moving a card rewrites `candidate`; do the same when you reschedule, and say why in an agent entry.
+- Keep YAML valid: quote any string that contains a colon. An idea with invalid frontmatter disappears from the app.
+
 ## Handoffs
 
 `<project>/handoffs/YYYY-MM-DD-<subject>-handoff.md` records work ready to continue. Fields include `title`, `domain`, repository-relative `repo`, `move: agent | me`, `state: live | superseded | done`, `updated` and a short concrete `resume`. Use only supported known values; do not invent who owns the next action. No project? Use `_unfiled/handoffs/`.

@@ -60,7 +60,7 @@ Which corpus home?
 ```
 ````
 
-- Write each option's full meaning after its short label ("AS-3A: one card per corpus…"), never a bare code. The short label (text before the first colon) is what the rail shows as his pick.
+- Write each option's full meaning after its short label ("AS-3A: one card per corpus…"), never a bare code. The short label (text before the first colon) is what the rail shows as the reviewer's pick.
 - Fallback: with no picture on any option line, images in the same section whose alt text starts with the option's exact short label and a colon (`![AS-3A: …](…)`) are linked. `A:` does not match `AS-3A`. Prefer the option-line form.
 - Give every decision a short `{#id}`: the left-hand list names decisions by their humanised id.
 

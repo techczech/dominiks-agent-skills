@@ -1,4 +1,6 @@
-# Dominik's Agent Skills
+# Agent skills developed or adapted by Dominik Lukeš for public sharing
+
+Website: <https://techczech.github.io/dominiks-agent-skills/>
 
 Curated, sanitised copies of the skills [Dominik Lukeš](https://github.com/techczech)
 uses with coding agents — Claude Code, Codex, and other tools that read the
@@ -6,6 +8,9 @@ Agent Skills format. Each one is maintained in a private monorepo and published
 here through a sanitising pipeline, so this repository holds the public version
 of a skill rather than its working copy: paths and personal references are made
 generic, and anything tied to a private setup is removed before publication.
+
+**Note:** some of these skills may depend on particular agent and machine
+configurations that are not shared here.
 
 ## Layout
 

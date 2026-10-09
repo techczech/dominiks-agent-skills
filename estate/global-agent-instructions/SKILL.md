@@ -1,6 +1,6 @@
 ---
 name: global-agent-instructions
-description: Create, streamline, share, install or repair one canonical global instruction payload across multiple agent tools. Use when setting up global AGENTS.md or CLAUDE.md behaviour, adopting trigger-first progressive disclosure, moving detailed rules into one-hop references, or wiring Codex, Claude Code, OpenCode, Gemini CLI, Antigravity or pi to the same source with symlinks and imports.
+description: Create, streamline, install or repair one canonical global instruction payload across agent tools (Codex, Claude Code, Gemini CLI, pi, Antigravity). Use for global AGENTS.md or CLAUDE.md work.
 ---
 
 # Global Agent Instructions

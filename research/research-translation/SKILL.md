@@ -1,6 +1,6 @@
 ---
 name: research-translation
-description: Guide Codex, Claude Code, or another Agent Skills-compatible coding agent through auditable translation workflows for participant-facing research documents such as consent forms, questionnaires, lay summaries, invitations, study information sheets, and debrief materials. Use when a researcher needs to set up a separate translation workspace, prepare language and terminology research, configure consent and provider keys, run agent-assisted or API-assisted translation and back-translation, record same-agent limitations, create fixed review packages for human reviewers, or generate HTML reports/sites from completed translation runs.
+description: "Auditable translation workflows for participant-facing research documents (consent forms, questionnaires, lay summaries): workspace setup, translation and back-translation, review packages, reports."
 ---
 
 # Research Translation

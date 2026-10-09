@@ -44,7 +44,6 @@ Running a setup with several agents, tools and repositories.
 - [agents-md-streamline](estate/agents-md-streamline/): Writes and tightens AGENTS.md and CLAUDE.md files so they tell an agent what to do, not the project's history.
 - [ai-working-style-builder](estate/ai-working-style-builder/): Helps you describe how you work so AI tools fit your communication, attention and record-keeping habits.
 - [global-agent-instructions](estate/global-agent-instructions/): Keeps one global instruction file and installs it into Codex, Claude Code, Gemini CLI, OpenCode and pi.
-- [reposync](estate/reposync/): Lets agents check repository and sync state through the RepoSync app's existing command line.
 - [todoscout](estate/todoscout/): Lets agents read and summarise the action items held in the TodoScout app.
 
 ### [media](media/)

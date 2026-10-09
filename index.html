@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Agent skills developed or adapted by Dominik Lukeš for public sharing</title>
+<meta name="description" content="Skills for coding agents such as Claude Code and Codex. Each skill is a folder with a SKILL.md file of instructions for the agent, plus any scripts or templates it needs. Note: some of these skills may depend on particular agent and machine configurations that are not shared here.">
+<style>
+:root{--bg:#fbfaf7;--text:#1d1d1b;--muted:#6a675f;--link:#14508c;--rule:#d9d5cb}
+@media (prefers-color-scheme:dark){:root{--bg:#161614;--text:#e8e6e0;--muted:#a09c92;--link:#8ab8ea;--rule:#3a3935}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--text);font:1rem/1.6 system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif}
+main,header,footer{max-width:46rem;margin:0 auto;padding:0 16px}
+header{padding-top:2.5rem}
+h1{font-size:2rem;line-height:1.2;margin:0 0 1rem}
+h2{font-size:1.25rem;margin:2.5rem 0 .5rem;padding-bottom:.3rem;border-bottom:1px solid var(--rule)}
+a{color:var(--link)}
+p{margin:.5rem 0}
+.links a{margin-right:1.25rem}
+ul{list-style:none;margin:1rem 0 0;padding:0}
+li{margin:0 0 .9rem;overflow-wrap:anywhere}
+li>a{font-weight:700}
+.extra{font-size:.875rem;color:var(--muted)}
+.extra a{color:var(--muted);margin-left:.75rem}
+footer{margin-top:3rem;padding-bottom:2.5rem;font-size:.875rem;color:var(--muted)}
+footer a{color:var(--muted)}
+</style>
+</head>
+<body>
+<header>
+<h1>Agent skills developed or adapted by Dominik Lukeš for public sharing</h1>
+<p>Skills for coding agents such as Claude Code and Codex. Each skill is a folder with a SKILL.md file of instructions for the agent, plus any scripts or templates it needs. Note: some of these skills may depend on particular agent and machine configurations that are not shared here.</p>
+<p class="links"><a href="https://github.com/techczech/dominiks-agent-skills">Source on GitHub</a><a href="https://github.com/techczech/dominiks-agent-skills#using-a-skill">How to install a skill</a></p>
+</header>
+<main>
+<section>
+<h2>dev</h2>
+<p>Building and checking software, designs and documents.</p>
+<ul>
+<li><a href="https://github.com/techczech/dominiks-agent-skills/tree/main/dev/cognitive-walkthrough">cognitive-walkthrough</a> Runs a cognitive walkthrough on a mockup, screenshot or live page to check how easily a new user can learn it, and writes a learnability report.</li>
+<li><a href="https://github.com/techczech/dominiks-agent-skills/tree/main/dev/dev-traffic-control">dev-traffic-control</a> Lets agents file test requests and reviews in Dev Traffic Control, a desktop review app, and collect the answers.</li>
+<li><a href="https://github.com/techczech/dominiks-agent-skills/tree/main/dev/image-to-design">image-to-design</a> Takes a design from a written brief through generated mockups to HTML/CSS, keeping every prompt, image and revision on disk.</li>
+<li><a href="https://github.com/techczech/dominiks-agent-skills/tree/main/dev/project-changelog">project-changelog</a> Keeps a structured changelog folder in a repository alongside its git history.</li>
+<li><a href="https://github.com/techczech/dominiks-agent-skills/tree/main/dev/single-html-document">single-html-document</a> Builds self-contained single-file HTML documents (reports, explainers, slide decks, feedback forms) that work offline.</li>
+</ul>
+</section>
+<section>
+<h2>estate</h2>
+<p>Running a setup with several agents, tools and repositories.</p>
+<ul>
+<li><a href="https://github.com/techczech/dominiks-agent-skills/tree/main/estate/agents-md-streamline">agents-md-streamline</a> Writes and tightens AGENTS.md and CLAUDE.md files so they tell an agent what to do, not the project's history.</li>
+<li><a href="https://github.com/techczech/dominiks-agent-skills/tree/main/estate/ai-working-style-builder">ai-working-style-builder</a> Helps you describe how you work so AI tools fit your communication, attention and record-keeping habits. <span class="extra"><a href="ai-interaction-builder/">Interactive guide</a></span></li>
+<li><a href="https://github.com/techczech/dominiks-agent-skills/tree/main/estate/global-agent-instructions">global-agent-instructions</a> Keeps one global instruction file and installs it into Codex, Claude Code, Gemini CLI, OpenCode and pi.</li>
+<li><a href="https://github.com/techczech/dominiks-agent-skills/tree/main/estate/reposync">reposync</a> Lets agents check repository and sync state through the RepoSync app's existing command line.</li>
+<li><a href="https://github.com/techczech/dominiks-agent-skills/tree/main/estate/todoscout">todoscout</a> Lets agents read and summarise the action items held in the TodoScout app.</li>
+</ul>
+</section>
+<section>
+<h2>media</h2>
+<p>Generated images and video analysis.</p>
+<ul>
+<li><a href="https://github.com/techczech/dominiks-agent-skills/tree/main/media/codex-images-workflow">codex-images-workflow</a> Treats generated images as reproducible files: a written brief first, the image beside it, both versioned.</li>
+<li><a href="https://github.com/techczech/dominiks-agent-skills/tree/main/media/video-analysis">video-analysis</a> Describes, summarises or answers questions about a video on your own machine with a local model.</li>
+</ul>
+</section>
+<section>
+<h2>research</h2>
+<p>Research workflows: papers, sources, translation and model benchmarks.</p>
+<ul>
+<li><a href="https://github.com/techczech/dominiks-agent-skills/tree/main/research/academic-pdf-to-mkd">academic-pdf-to-mkd</a> Converts academic PDFs, including scans, into Markdown with figures, tables and page images as separate files.</li>
+<li><a href="https://github.com/techczech/dominiks-agent-skills/tree/main/research/ai-model-benchmarks">ai-model-benchmarks</a> Builds offline comparison charts and tables of AI models from Artificial Analysis, Arena and OpenRouter data.</li>
+<li><a href="https://github.com/techczech/dominiks-agent-skills/tree/main/research/claim-fact-checker">claim-fact-checker</a> Checks every factual claim in a report against its sources, one isolated checker per claim, and writes findings and a fix plan.</li>
+<li><a href="https://github.com/techczech/dominiks-agent-skills/tree/main/research/paper-reviewer-skill">paper-reviewer-skill</a> Imports a paper from Zotero, extracts its text, figures and tables, and writes structured reviews.</li>
+<li><a href="https://github.com/techczech/dominiks-agent-skills/tree/main/research/research-translation">research-translation</a> Runs auditable translation and back-translation of participant-facing research documents such as consent forms.</li>
+</ul>
+</section>
+<section>
+<h2>teaching</h2>
+<p>Presentations and teaching content.</p>
+<ul>
+<li><a href="https://github.com/techczech/dominiks-agent-skills/tree/main/teaching/talkweaver">talkweaver</a> Lets agents write and revise presentation content for the TalkWeaver app, including converting PowerPoint files and processing recordings.</li>
+</ul>
+</section>
+<section>
+<h2>writing</h2>
+<p>Editing, anonymising and organising writing.</p>
+<ul>
+<li><a href="https://github.com/techczech/dominiks-agent-skills/tree/main/writing/anonymise">anonymise</a> Finds and redacts personal information in text on your own machine with an open-weight model, with no cloud service.</li>
+<li><a href="https://github.com/techczech/dominiks-agent-skills/tree/main/writing/doc-editorial-skill">doc-editorial-skill</a> Edits documents for clarity and structure.</li>
+<li><a href="https://github.com/techczech/dominiks-agent-skills/tree/main/writing/writeflex">writeflex</a> Lets agents read, organise and prepare Markdown content for the WriteFlex app.</li>
+</ul>
+</section>
+</main>
+<footer>
+<p>MIT licence. Generated by the publish pipeline from the repository's skill folders. <a href="https://github.com/techczech/dominiks-agent-skills">GitHub</a></p>
+</footer>
+</body>
+</html>

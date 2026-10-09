@@ -1,6 +1,6 @@
 ---
 name: video-analysis
-description: "Analyse video locally with Gemma 4 12B via LM Studio on Apple Silicon. Use whenever the user wants to describe, summarise, or ask questions about a video file, get a timestamped scene breakdown, or combine what is said with what is shown — even if they don't say 'video analysis' explicitly (e.g. 'what happens in this recording', 'summarise this screen capture', 'check what this demo shows')."
+description: Analyse a video file locally with Gemma 4 12B via LM Studio. Use to describe, summarise or question a video or screen capture, or get a timestamped scene breakdown.
 ---
 
 # Video Analysis

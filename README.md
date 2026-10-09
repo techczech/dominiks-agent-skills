@@ -36,6 +36,7 @@ Building and checking software, designs and documents.
 - [image-to-design](dev/image-to-design/): Takes a design from a written brief through generated mockups to HTML/CSS, keeping every prompt, image and revision on disk.
 - [project-changelog](dev/project-changelog/): Keeps a structured changelog folder in a repository alongside its git history.
 - [single-html-document](dev/single-html-document/): Builds self-contained single-file HTML documents (reports, explainers, slide decks, feedback forms) that work offline.
+- [skill-explorer](https://github.com/techczech/skill-explorer): Turns a SKILL.md file into an interactive web page showing its structure, code and connections. (separate repository)
 
 ### [estate](estate/)
 
@@ -48,25 +49,32 @@ Running a setup with several agents, tools and repositories.
 
 ### [media](media/)
 
-Generated images and video analysis.
+Images, audio and video: generation, transcription, speech and analysis.
 
 - [codex-images-workflow](media/codex-images-workflow/): Treats generated images as reproducible files: a written brief first, the image beside it, both versioned.
+- [speech-to-text-skill](https://github.com/techczech/speech-to-text-skill): Transcribes audio locally on Apple Silicon into time-coded transcripts, with optional speaker labels. (separate repository)
+- [text-to-image-skill](https://github.com/techczech/text-to-image-skill): Generates and edits images locally on Apple Silicon with open models such as FLUX.2 Klein and Qwen-Image. (separate repository)
+- [text-to-speech-skill](https://github.com/techczech/text-to-speech-skill): Generates speech locally on Apple Silicon with several open voice models, including voice cloning and Czech. (separate repository)
 - [video-analysis](media/video-analysis/): Describes, summarises or answers questions about a video on your own machine with a local model.
 
 ### [research](research/)
 
-Research workflows: papers, sources, translation and model benchmarks.
+Research workflows: papers, sources, translation, corpus linguistics and model benchmarks.
 
 - [academic-pdf-to-mkd](research/academic-pdf-to-mkd/): Converts academic PDFs, including scans, into Markdown with figures, tables and page images as separate files.
 - [ai-model-benchmarks](research/ai-model-benchmarks/): Builds offline comparison charts and tables of AI models from Artificial Analysis, Arena and OpenRouter data.
+- [cesky-narodni-korpus-skill](https://github.com/techczech/cesky-narodni-korpus-skill): Queries the Czech National Corpus (KonText) for concordances, frequencies and collocations from inside an agent. (separate repository)
 - [claim-fact-checker](research/claim-fact-checker/): Checks every factual claim in a report against its sources, one isolated checker per claim, and writes findings and a fix plan.
+- [corpus-tools-skill](https://github.com/techczech/corpus-tools-skill): Sets up a local corpus-linguistics toolchain on a Mac (NLTK, spaCy, Stanza, Corpus Workbench, OPUS) with a parallel-concordance tool. Draft. (separate repository)
 - [paper-reviewer-skill](research/paper-reviewer-skill/): Imports a paper from Zotero, extracts its text, figures and tables, and writes structured reviews.
 - [research-translation](research/research-translation/): Runs auditable translation and back-translation of participant-facing research documents such as consent forms.
+- [sketchengine-skill](https://github.com/techczech/sketchengine-skill): Connects an agent to Sketch Engine to run word sketches, word lists and keyword analyses on its corpora. (separate repository)
 
 ### [teaching](teaching/)
 
 Presentations and teaching content.
 
+- [PPT2HandoutSkill](https://github.com/techczech/PPT2HandoutSkill): Converts a PowerPoint presentation into an interactive handout website. (separate repository)
 - [talkweaver](teaching/talkweaver/): Lets agents write and revise presentation content for the TalkWeaver app, including converting PowerPoint files and processing recordings.
 
 ### [writing](writing/)
@@ -75,6 +83,7 @@ Editing, anonymising and organising writing.
 
 - [anonymise](writing/anonymise/): Finds and redacts personal information in text on your own machine with an open-weight model, with no cloud service.
 - [doc-editorial-skill](writing/doc-editorial-skill/): Edits documents for clarity and structure.
+- [readability-skill](https://github.com/techczech/readability-skill): Helps write more readable text and design more readable slides. (separate repository)
 - [writeflex](writing/writeflex/): Lets agents read, organise and prepare Markdown content for the WriteFlex app.
 
 <!-- skill-index:end -->

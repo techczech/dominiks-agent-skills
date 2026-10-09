@@ -1,0 +1,77 @@
+{
+ "_meta": {
+  "note": "synthetic test icons"
+ },
+ "anthropic": {
+  "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"#ffff\"><path d=\"M4 20 12 4l8 16z\"/></svg>",
+  "title": "x",
+  "category": "AI",
+  "tokens": [
+   "x"
+  ]
+ },
+ "openai": {
+  "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\"><circle cx=\"12\" cy=\"12\" r=\"8\" fill=\"#fff\"/></svg>",
+  "title": "x",
+  "category": "AI",
+  "tokens": [
+   "x"
+  ]
+ },
+ "google": {
+  "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\"><defs><linearGradient id=\"a\"><stop offset=\"0\" stop-color=\"#f00\"/><stop offset=\"1\" stop-color=\"#00f\"/></linearGradient></defs><rect x=\"4\" y=\"4\" width=\"16\" height=\"16\" fill=\"url(#a)\"/></svg>",
+  "title": "x",
+  "category": "AI",
+  "tokens": [
+   "x"
+  ]
+ },
+ "meta": {
+  "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\"><defs><linearGradient id=\"a\"><stop offset=\"0\" stop-color=\"#0a0\"/><stop offset=\"1\" stop-color=\"#050\"/></linearGradient></defs><circle cx=\"12\" cy=\"12\" r=\"9\" fill=\"url(#a)\"/></svg>",
+  "title": "x",
+  "category": "AI",
+  "tokens": [
+   "x"
+  ]
+ },
+ "xai": {
+  "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"#fff\"><path d=\"M4 4h16v16H4z\"/></svg>",
+  "title": "x",
+  "category": "AI",
+  "tokens": [
+   "x"
+  ]
+ },
+ "qwen": {
+  "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"#ffff\"><path d=\"M12 3 21 12 12 21 3 12z\"/></svg>",
+  "title": "x",
+  "category": "AI",
+  "tokens": [
+   "x"
+  ]
+ },
+ "deepseek": {
+  "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\"><circle cx=\"12\" cy=\"12\" r=\"9\" fill=\"#4D6BFE\"/></svg>",
+  "title": "x",
+  "category": "AI",
+  "tokens": [
+   "x"
+  ]
+ },
+ "mistral-ai": {
+  "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\"><rect x=\"3\" y=\"3\" width=\"18\" height=\"6\" fill=\"#F7D046\"/><rect x=\"3\" y=\"15\" width=\"18\" height=\"6\" fill=\"#F2A73B\"/></svg>",
+  "title": "x",
+  "category": "AI",
+  "tokens": [
+   "x"
+  ]
+ },
+ "kimi": {
+  "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\"><rect width=\"24\" height=\"24\" fill=\"#027aff\"/><circle cx=\"12\" cy=\"12\" r=\"5\" fill=\"#fff\"/></svg>",
+  "title": "x",
+  "category": "AI",
+  "tokens": [
+   "x"
+  ]
+ }
+}

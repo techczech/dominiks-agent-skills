@@ -1,0 +1,5 @@
+{
+  "key_source": "env",
+  "env_var": "ARTIFICIAL_ANALYSIS_API_KEY",
+  "icons_dir": "/path/to/a/folder/containing/svgl.json"
+}

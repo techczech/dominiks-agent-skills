@@ -1,0 +1,12 @@
+{
+ "_meta": {
+  "note": "synthetic test icons"
+ },
+ "zai": {
+  "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\"><path d=\"M3 3h18L3 21h18\" fill=\"currentColor\"/></svg>",
+  "title": "x",
+  "tokens": [
+   "x"
+  ]
+ }
+}

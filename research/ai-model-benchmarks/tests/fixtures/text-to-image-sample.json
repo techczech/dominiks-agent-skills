@@ -1,0 +1,74 @@
+{
+ "fetched_at": "2026-10-09T00:00:00+00:00",
+ "tier": "free",
+ "intelligence_index_version": null,
+ "source": "https://artificialanalysis.ai",
+ "data": [
+  {
+   "id": "synthetic-img-0",
+   "name": "Example Image A",
+   "slug": "example-image-a",
+   "model_creator": {
+    "id": "synthetic-creator",
+    "name": "OpenAI"
+   },
+   "elo": 1190,
+   "ci_95": 9
+  },
+  {
+   "id": "synthetic-img-1",
+   "name": "Example Image B",
+   "slug": "example-image-b",
+   "model_creator": {
+    "id": "synthetic-creator",
+    "name": "Google"
+   },
+   "elo": 1160,
+   "ci_95": 10
+  },
+  {
+   "id": "synthetic-img-2",
+   "name": "Example Image C",
+   "slug": "example-image-c",
+   "model_creator": {
+    "id": "synthetic-creator",
+    "name": "SpaceXAI"
+   },
+   "elo": 1150,
+   "ci_95": 11
+  },
+  {
+   "id": "synthetic-img-3",
+   "name": "Example Image D",
+   "slug": "example-image-d",
+   "model_creator": {
+    "id": "synthetic-creator",
+    "name": "Meta"
+   },
+   "elo": 1120,
+   "ci_95": 12
+  },
+  {
+   "id": "synthetic-img-4",
+   "name": "Example Image E",
+   "slug": "example-image-e",
+   "model_creator": {
+    "id": "synthetic-creator",
+    "name": "OpenAI"
+   },
+   "elo": 1100,
+   "ci_95": 13
+  },
+  {
+   "id": "synthetic-img-5",
+   "name": "Example Image F",
+   "slug": "example-image-f",
+   "model_creator": {
+    "id": "synthetic-creator",
+    "name": "Google"
+   },
+   "elo": 1090,
+   "ci_95": 14
+  }
+ ]
+}

@@ -51,6 +51,7 @@ Running a setup with several agents, tools and repositories.
 Images, audio and video: generation, transcription, speech and analysis.
 
 - [codex-images-workflow](media/codex-images-workflow/): Treats generated images as reproducible files: a written brief first, the image beside it, both versioned.
+- [speech-to-text-skill](https://github.com/techczech/speech-to-text-skill): Transcribes audio locally on Apple Silicon (Qwen3-ASR, Parakeet, Whisper) into time-coded transcripts, with optional speaker labels. (separate repository)
 - [text-to-image-skill](https://github.com/techczech/text-to-image-skill): Generates and edits images locally on Apple Silicon with open models such as FLUX.2 Klein and Qwen-Image. (separate repository)
 - [text-to-speech-skill](https://github.com/techczech/text-to-speech-skill): Generates speech locally on Apple Silicon with several open voice models, including voice cloning and Czech. (separate repository)
 - [video-analysis](media/video-analysis/): Describes, summarises or answers questions about a video on your own machine with a local model.

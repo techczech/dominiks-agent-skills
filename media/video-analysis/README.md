@@ -27,7 +27,7 @@ A bundled Python script extracts frames at 1 frame per second with `ffmpeg` and 
 - `references/setup.md` - installing LM Studio, downloading the model, starting the server.
 - `references/commands.md` - four analysis recipes and segmentation for long video.
 - `references/troubleshooting.md` - server, model-loading and output-quality problems.
-- `test-fixtures/ForBiggerBlazes.mp4` - a 15-second sample clip that `references/setup.md` identifies as the official Gemma documentation sample (the file gives its source URL), for checking the setup.
+- `scripts/make_test_clip.sh` - makes a 10-second synthetic test clip (`test-fixtures/synthetic-test-clip.mp4`, git-ignored) with ffmpeg, for checking the setup and scene breakdown.
 
 ## How to use it
 
@@ -35,10 +35,11 @@ Put the folder where your agent looks for skills and ask it to analyse a video. 
 
 ```bash
 curl -s http://localhost:1234/v1/models | grep gemma-4-12b
-python3 scripts/lmstudio_video.py test-fixtures/ForBiggerBlazes.mp4 "Describe this video."
+scripts/make_test_clip.sh   # once; needs ffmpeg
+python3 scripts/lmstudio_video.py test-fixtures/synthetic-test-clip.mp4 "Describe this video."
 ```
 
-The answer should describe the Chromecast "For Bigger Blazes" advert.
+The answer should describe a test-pattern video with three scenes (labelled "Scene 1" to "Scene 3" when your ffmpeg has drawtext).
 
 ## Licence
 

@@ -31,5 +31,5 @@ description: Analyse a video file locally with Gemma 4 12B via LM Studio. Use to
 ## Verification
 
 - Check video path, duration (`ffprobe`), server (`curl -s localhost:1234/v1/models`).
-- Recipe 1 against `test-fixtures/ForBiggerBlazes.mp4`; expect coherent Chromecast-ad description.
+- Run `scripts/make_test_clip.sh`, then Recipe 1 against `test-fixtures/synthetic-test-clip.mp4`; expect a description of a test-pattern video with three scenes.
 - Spot-check output against a frame or two from the video.

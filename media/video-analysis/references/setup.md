@@ -30,16 +30,17 @@ No venv — `scripts/lmstudio_video.py` is stdlib-only Python 3.
 
 ```bash
 curl -s http://localhost:1234/v1/models | grep gemma-4-12b
-python3 scripts/lmstudio_video.py test-fixtures/ForBiggerBlazes.mp4 "Describe this video."
+scripts/make_test_clip.sh   # once; needs ffmpeg
+python3 scripts/lmstudio_video.py test-fixtures/synthetic-test-clip.mp4 "Describe this video."
 ```
 
-Expect a coherent description of the Chromecast "For Bigger Blazes" HBO GO ad. If you get that, the path works
+Expect a coherent description of a synthetic test-pattern video with three scenes. If you get that, the path works
 end to end: frame extraction, image encoding, server, and model.
 
 ## Test fixture
 
-- `test-fixtures/ForBiggerBlazes.mp4`: official 15s Gemma docs sample.
-  Source: `https://github.com/bebechien/gemma/raw/refs/heads/main/videos/ForBiggerBlazes.mp4`
+- `test-fixtures/synthetic-test-clip.mp4`: made locally by `scripts/make_test_clip.sh` (ffmpeg; git-ignored).
+  10 s, 640x360, sine audio, three scenes.
 
 ## Alternative: native audio+video (not used by this skill)
 

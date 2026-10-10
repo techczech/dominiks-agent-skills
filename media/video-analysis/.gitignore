@@ -3,3 +3,4 @@ test-output/
 __pycache__/
 *.pyc
 .DS_Store
+test-fixtures/*.mp4

@@ -38,7 +38,7 @@ writing/{project-slug}/
 
 ### Trigger
 
-User requests: "Start a writing project on LLM reliability in medical domains"
+User requests: "Start a writing project on LLM reliability in education domains"
 
 ### Steps
 
@@ -80,12 +80,12 @@ deadline: "2026-03-15"
 tags:
   - "LLM-evaluation"
   - "human-AI-interaction"
-  - "medical-AI"
+  - "education-AI"
 source_papers:
-  - "JZUBTJM9"
+  - "ABCD1234"
   - "ABC123"
 related_notes:
-  - "[[20260211-130500-llm-human-paradox]]"
+  - "[[20260211-130500-tool-reader-paradox]]"
   - "[[data/result-pattern-20260211-152000-benchmark-vs-reality-gap]]"
 progress:
   - "[x] Collect source papers"
@@ -100,7 +100,7 @@ progress:
 
 ## Project Overview
 
-Synthesize findings from papers on LLM evaluation in medical and legal domains to argue for human-in-the-loop evaluation benchmarks.
+Synthesize findings from papers on LLM evaluation in education and legal domains to argue for human-in-the-loop evaluation benchmarks.
 
 ## Key Arguments
 
@@ -110,9 +110,9 @@ Synthesize findings from papers on LLM evaluation in medical and legal domains t
 
 ## Source Papers
 
-### Medical Domain
-- [[bean-2026-llm-medical-assistants-JZUBTJM9/00-source]] - Medical chatbot RCT
-- Key finding: 94.9% LLM-alone accuracy vs. 34.5% human-with-LLM
+### Education Domain
+- [[example-2026-reading-support-ABCD1234/00-source]] - Reading support RCT
+- Key finding: 87.2% Tool-alone accuracy vs. 36.5% reader-with-tool
 
 ### Legal Domain
 - [[smith-2025-legal-reasoning-ABC123/00-source]] - Legal reasoning evaluation
@@ -120,7 +120,7 @@ Synthesize findings from papers on LLM evaluation in medical and legal domains t
 
 ## Relevant Notes
 
-- [[20260211-130500-llm-human-paradox]] - Core paradox insight
+- [[20260211-130500-tool-reader-paradox]] - Core paradox insight
 - [[data/result-pattern-20260211-152000-benchmark-vs-reality-gap]] - Cross-paper pattern
 
 ## Status
@@ -147,16 +147,16 @@ Synthesize findings from papers on LLM evaluation in medical and legal domains t
 ```markdown
 # Source Papers
 
-## Medical Domain
+## Education Domain
 
-### Bean et al. (2026) - Medical Chatbots
-- **Source**: [[bean-2026-llm-medical-assistants-JZUBTJM9/00-source]]
-- **Review**: [[bean-2026-llm-medical-assistants-JZUBTJM9/reviews/gelman-review]]
+### Example & Sample (2026) - Reading Support Tools
+- **Source**: [[example-2026-reading-support-ABCD1234/00-source]]
+- **Review**: [[example-2026-reading-support-ABCD1234/reviews/gelman-review]]
 - **Key findings**:
-  - LLM-alone: 94.9% accuracy
-  - Human-with-LLM: 34.5% accuracy
-  - N=1,298 RCT
-- **Use in paper**: Main example of medical domain performance gap
+  - Tool-alone: 87.2% accuracy
+  - Human-with-LLM: 36.5% accuracy
+  - N=412 RCT
+- **Use in paper**: Main example of education domain performance gap
 
 ## Legal Domain
 
@@ -179,7 +179,7 @@ Synthesize findings from papers on LLM evaluation in medical and legal domains t
 
 ## Core Insights
 
-- [[20260211-130500-llm-human-paradox]] - The central paradox
+- [[20260211-130500-tool-reader-paradox]] - The central paradox
 - [[20260212-100000-interface-design-failure]] - Interface as failure point
 
 ## Cross-Cutting Patterns
@@ -226,12 +226,12 @@ git commit -m "Start writing project: LLM Reliability in High-Stakes Domains"
 - History of automation issues
 - Skill degradation literature
 
-## 3. Evidence from Medical Domain (1200 words)
-### 3.1 Bean et al. (2026) Study
-- **Source**: [[bean-2026-llm-medical-assistants-JZUBTJM9/00-source]]
-- Study design: RCT with N=1,298
-- Finding: 94.9% LLM-alone vs. 34.5% human-with-LLM
-- **Analysis**: [[20260211-130500-llm-human-paradox]]
+## 3. Evidence from Education Domain (1200 words)
+### 3.1 Example & Sample (2026) Study
+- **Source**: [[example-2026-reading-support-ABCD1234/00-source]]
+- Study design: RCT with N=412
+- Finding: 87.2% Tool-alone vs. 36.5% reader-with-tool
+- **Analysis**: [[20260211-130500-tool-reader-paradox]]
 
 ### 3.2 Implications
 - Interface design matters
@@ -300,7 +300,7 @@ status: "draft"
 
 [Draft content with inline wikilinks to source papers and notes...]
 
-Recent advances in large language models (LLMs) have led to their deployment in high-stakes domains such as medicine [[bean-2026-llm-medical-assistants-JZUBTJM9/00-source]] and law [[smith-2025-legal-reasoning-ABC123/00-source]]...
+Recent advances in large language models (LLMs) have led to their deployment in high-stakes domains such as education [[example-2026-reading-support-ABCD1234/00-source]] and law [[smith-2025-legal-reasoning-ABC123/00-source]]...
 ```
 
 #### 2. Update Progress

@@ -82,7 +82,7 @@ The skill is purely additive — it never edits the host repo's own files outsid
 ```bash
 # By title / author / DOI / URL / citekey
 scripts/zotero-import.py "Training language models to be warm"
-scripts/zotero-import.py "10.1038/s41586-026-10410-0"
+scripts/zotero-import.py "10.1000/example.doi"
 scripts/zotero-import.py --rich "<query>"            # chains rich extraction
 scripts/zotero-import.py --print-only "<query>"      # dry-run
 ```

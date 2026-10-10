@@ -33,14 +33,14 @@ Convert PDF to markdown for full-text analysis and search.
 
 ```bash
 # PDFs are stored in source-files/ only
-ls source-files/JZUBTJM9-*.pdf
+ls source-files/ABCD1234-*.pdf
 ```
 
 #### 2. Run Extraction Script
 
 ```bash
 cd scripts/
-./pdf-to-markdown.sh source-files/JZUBTJM9-*.pdf papers/bean-2026-llm-medical-assistants-JZUBTJM9 bean-2026-llm-medical-assistants-JZUBTJM9
+./pdf-to-markdown.sh source-files/ABCD1234-*.pdf papers/example-2026-reading-support-ABCD1234 example-2026-reading-support-ABCD1234
 ```
 
 **Parameters**:
@@ -53,7 +53,7 @@ cd scripts/
 Script creates: `papers/{folder-name}/{paper-id}.md`
 
 ```bash
-Read papers/bean-2026-llm-medical-assistants-JZUBTJM9/bean-2026-llm-medical-assistants-JZUBTJM9.md
+Read papers/example-2026-reading-support-ABCD1234/example-2026-reading-support-ABCD1234.md
 ```
 
 Preview first 20 lines to verify quality.
@@ -72,16 +72,16 @@ Edit `extracts/full-text.md` to add frontmatter:
 ---
 type: extract
 extract_type: "full-text"
-paper_key: "JZUBTJM9"
+paper_key: "ABCD1234"
 paper_title: "Full paper title"
 extracted_date: "2026-02-11"
 extraction_method: "pdftotext"
-source_file: "source-files/JZUBTJM9-*.pdf"
+source_file: "source-files/ABCD1234-*.pdf"
 tags:
   - "full-text"
   - "extracted"
 links:
-  - "[[bean-2026-llm-medical-assistants-JZUBTJM9/00-source]]"
+  - "[[example-2026-reading-support-ABCD1234/00-source]]"
 notes: |
   Extracted using pdftotext with -layout flag.
   Quality: Good. Some formatting artifacts in tables.
@@ -96,10 +96,10 @@ notes: |
 
 ```yaml
 papers:
-  JZUBTJM9:
+  ABCD1234:
     extracts:
       - type: "full-text"
-        file: "papers/bean-2026-llm-medical-assistants-JZUBTJM9/extracts/full-text.md"
+        file: "papers/example-2026-reading-support-ABCD1234/extracts/full-text.md"
         date: "2026-02-11"
         word_count: 8560
 ```
@@ -107,9 +107,9 @@ papers:
 #### 7. Git Commit
 
 ```bash
-git add papers/bean-2026-llm-medical-assistants-JZUBTJM9/extracts/full-text.md
+git add papers/example-2026-reading-support-ABCD1234/extracts/full-text.md
 git add index/papers.yaml
-git commit -m "Extract full text from Bean et al. (2026)"
+git commit -m "Extract full text from Example & Sample (2026)"
 ```
 
 ---
@@ -134,7 +134,7 @@ If Zotero import includes embedded highlights, extract to separate atomic files 
 #### 1. Read Highlights from Source
 
 ```bash
-Read source-files/JZUBTJM9-*.md
+Read source-files/ABCD1234-*.md
 # Check YAML frontmatter for highlights array
 # Or check markdown content for highlight annotations
 ```
@@ -161,8 +161,8 @@ From highlight content:
 - Create kebab-case slug
 
 **Examples**:
-- "main-finding" (from "LLMs achieve 94.9% accuracy")
-- "performance-gap" (from "humans achieve only 34.5%")
+- "main-finding" (from "Tools achieve 87.2% accuracy")
+- "performance-gap" (from "humans achieve only 36.5%")
 - "study-design" (from "randomized controlled trial")
 
 #### 5. Determine Significance
@@ -190,12 +190,12 @@ text: |
   Can span multiple lines.
 context: "Optional surrounding context if needed for understanding"
 created: "2026-02-11T14:30:00Z"
-paper_key: "JZUBTJM9"
+paper_key: "ABCD1234"
 tags:
   - "RCT"
   - "performance"
 links:
-  - "[[bean-2026-llm-medical-assistants-JZUBTJM9/00-source]]"
+  - "[[example-2026-reading-support-ABCD1234/00-source]]"
 ---
 
 # Descriptive Title Based on Content
@@ -238,29 +238,29 @@ See `highlights/` folder for extracted highlights (9 files).
 
 ```yaml
 papers:
-  JZUBTJM9:
+  ABCD1234:
     highlights_extracted: true
     highlights_count: 9
 
 index/note-graph.yaml:
   nodes:
-    - id: "bean-2026-llm-medical-assistants-JZUBTJM9/highlights/001"
+    - id: "example-2026-reading-support-ABCD1234/highlights/001"
       type: "highlight"
       title: "Main finding"
   edges:
-    - from: "bean-2026-llm-medical-assistants-JZUBTJM9/highlights/001"
-      to: "bean-2026-llm-medical-assistants-JZUBTJM9/00-source"
+    - from: "example-2026-reading-support-ABCD1234/highlights/001"
+      to: "example-2026-reading-support-ABCD1234/00-source"
       type: "extracted_from"
 ```
 
 #### 9. Git Commit
 
 ```bash
-git add papers/bean-2026-llm-medical-assistants-JZUBTJM9/highlights/
-git add papers/bean-2026-llm-medical-assistants-JZUBTJM9/00-source.md
+git add papers/example-2026-reading-support-ABCD1234/highlights/
+git add papers/example-2026-reading-support-ABCD1234/00-source.md
 git add index/papers.yaml
 git add index/note-graph.yaml
-git commit -m "Extract 9 highlights from Bean et al. (2026)"
+git commit -m "Extract 9 highlights from Example & Sample (2026)"
 ```
 
 ---
@@ -285,9 +285,9 @@ User requests: "Extract Figure 3 from bean paper"
 #### 2. Locate Figure in PDF
 
 ```bash
-Read source-files/JZUBTJM9-*.pdf
+Read source-files/ABCD1234-*.pdf
 # Or specify page if known:
-Read source-files/JZUBTJM9-*.pdf --pages "5"
+Read source-files/ABCD1234-*.pdf --pages "5"
 ```
 
 #### 3. Extract Figure Image
@@ -295,7 +295,7 @@ Read source-files/JZUBTJM9-*.pdf --pages "5"
 **Option A: Use extraction script**:
 ```bash
 cd scripts/
-./extract-figures.sh source-files/JZUBTJM9-*.pdf papers/bean-2026-llm-medical-assistants-JZUBTJM9 bean-2026-llm-medical-assistants-JZUBTJM9
+./extract-figures.sh source-files/ABCD1234-*.pdf papers/example-2026-reading-support-ABCD1234 example-2026-reading-support-ABCD1234
 ```
 
 **Option B: Manual screenshot**:
@@ -322,21 +322,21 @@ Identify:
   "figure_type": "bar_chart",
   "title": "Performance comparison across LLM conditions",
   "caption": "Figure caption from paper (if available)",
-  "description": "Semantic description: This bar chart compares accuracy rates for condition identification and disposition recommendation across three LLM models (GPT-4o, Llama 3, Command R+) when used by human participants versus tested alone.",
+  "description": "Semantic description: This bar chart compares accuracy rates for comprehension questions and summary writing across three LLM models (Tool A, Tool B, Tool C) when used by human participants versus tested alone.",
   "key_findings": [
-    "LLMs alone achieve 94.9% accuracy for condition identification",
-    "Humans with LLMs achieve only 34.5% accuracy",
+    "LLMs alone achieve 87.2% accuracy for comprehension questions",
+    "Readers with tools achieve only 36.5% accuracy",
     "Performance gap exists across all three models tested"
   ],
   "variables": {
-    "x_axis": "Condition (LLM model + usage mode)",
+    "x_axis": "Condition (tool type + usage mode)",
     "y_axis": "Accuracy (%)",
-    "grouping": "Task type (condition identification vs disposition)"
+    "grouping": "Task type (comprehension questions vs summary writing)"
   },
   "source_page": 5,
   "image_file": "figure-01.png",
   "created": "2026-02-11T14:30:00Z",
-  "paper_key": "JZUBTJM9",
+  "paper_key": "ABCD1234",
   "tags": ["performance", "comparison", "human-LLM-interaction"]
 }
 ```
@@ -345,7 +345,7 @@ Identify:
 
 ```yaml
 papers:
-  JZUBTJM9:
+  ABCD1234:
     figures_extracted: true
     figures_count: 1
 ```
@@ -353,10 +353,10 @@ papers:
 #### 7. Git Commit
 
 ```bash
-git add papers/bean-2026-llm-medical-assistants-JZUBTJM9/figures/figure-01.png
-git add papers/bean-2026-llm-medical-assistants-JZUBTJM9/figures/figure-01.json
+git add papers/example-2026-reading-support-ABCD1234/figures/figure-01.png
+git add papers/example-2026-reading-support-ABCD1234/figures/figure-01.json
 git add index/papers.yaml
-git commit -m "Extract Figure 1 from Bean et al. (2026): Performance comparison"
+git commit -m "Extract Figure 1 from Example & Sample (2026): Performance comparison"
 ```
 
 ---
@@ -376,7 +376,7 @@ User requests: "Extract Table 1 from bean paper"
 #### 2. Locate Table in PDF
 
 ```bash
-Read source-files/JZUBTJM9-*.pdf --pages "4"
+Read source-files/ABCD1234-*.pdf --pages "4"
 ```
 
 #### 3. Extract Table Data
@@ -384,7 +384,7 @@ Read source-files/JZUBTJM9-*.pdf --pages "4"
 **Option A: Use extraction script**:
 ```bash
 cd scripts/
-./extract-tables.sh source-files/JZUBTJM9-*.pdf papers/bean-2026-llm-medical-assistants-JZUBTJM9 bean-2026-llm-medical-assistants-JZUBTJM9
+./extract-tables.sh source-files/ABCD1234-*.pdf papers/example-2026-reading-support-ABCD1234 example-2026-reading-support-ABCD1234
 ```
 
 **Option B: Manual transcription**:
@@ -410,21 +410,21 @@ Identify:
   "type": "table",
   "table_id": "01",
   "title": "Demographic characteristics of study participants",
-  "description": "Breakdown of 1,298 participants by age group, gender, education level, and prior medical knowledge.",
+  "description": "Breakdown of 412 participants by age group, gender, education level, and prior reading experience.",
   "columns": [
     {"name": "demographic_variable", "type": "categorical"},
     {"name": "n", "type": "integer"},
     {"name": "percentage", "type": "float"}
   ],
   "key_findings": [
-    "Majority of participants (65%) had no prior medical training",
+    "Majority of participants (65%) had no prior experience with reading support tools",
     "Age range: 18-75, median age 34",
     "Gender distribution: 52% female, 48% male"
   ],
   "source_page": 4,
   "data_file": "table-01.csv",
   "created": "2026-02-11T14:30:00Z",
-  "paper_key": "JZUBTJM9",
+  "paper_key": "ABCD1234",
   "tags": ["demographics", "participants", "sample-characteristics"]
 }
 ```
@@ -433,7 +433,7 @@ Identify:
 
 ```yaml
 papers:
-  JZUBTJM9:
+  ABCD1234:
     tables_extracted: true
     tables_count: 1
 ```
@@ -441,10 +441,10 @@ papers:
 #### 7. Git Commit
 
 ```bash
-git add papers/bean-2026-llm-medical-assistants-JZUBTJM9/figures/table-01.csv
-git add papers/bean-2026-llm-medical-assistants-JZUBTJM9/figures/table-01.json
+git add papers/example-2026-reading-support-ABCD1234/figures/table-01.csv
+git add papers/example-2026-reading-support-ABCD1234/figures/table-01.json
 git add index/papers.yaml
-git commit -m "Extract Table 1 from Bean et al. (2026): Demographics"
+git commit -m "Extract Table 1 from Example & Sample (2026): Demographics"
 ```
 
 ---

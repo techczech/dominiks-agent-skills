@@ -59,8 +59,8 @@ Read source-files/{zotero_key}-*.md
 ```
 
 Extract metadata from YAML frontmatter:
-- `zotero_key` - e.g., `JZUBTJM9`
-- `creators` - e.g., `["Bean, Andrew M.", "Seifert, Collin", ...]`
+- `zotero_key` - e.g., `ABCD1234`
+- `creators` - e.g., `["Example, A.", "Sample, B.", ...]`
 - `year` - e.g., `2026`
 - `title` - Full title
 - `abstract` - Abstract text
@@ -72,32 +72,32 @@ Extract metadata from YAML frontmatter:
 
 **Steps**:
 1. Extract first author's last name:
-   - From `creators[0]`: `"Bean, Andrew M."`
-   - Extract: `Bean`
+   - From `creators[0]`: `"Example, A."`
+   - Extract: `Example`
    - Lowercase: `bean`
 
 2. Extract year:
    - From `year`: `2026`
 
 3. Create short title (2-4 words, kebab-case):
-   - Read full title: "Reliability of LLMs as medical assistants for the general public..."
-   - Extract key concepts: "LLM", "medical", "assistants"
-   - Create slug: `llm-medical-assistants`
+   - Read full title: "Invented title about a study of reading support tools..."
+   - Extract key concepts: "reading", "support", "tools"
+   - Create slug: `reading-support`
 
 4. Append zotero_key:
-   - From `zotero_key`: `JZUBTJM9`
+   - From `zotero_key`: `ABCD1234`
 
-**Result**: `bean-2026-llm-medical-assistants-JZUBTJM9`
+**Result**: `example-2026-reading-support-ABCD1234`
 
 **Good vs Bad Short Titles**:
 
 ✅ **Good**:
-- `llm-medical-assistants` (clear, concise)
-- `chatbot-reliability-rct` (descriptive with method)
+- `reading-support` (clear, concise)
+- `reading-support-rct` (descriptive with method)
 - `ai-education-outcomes` (clear domain and focus)
 
 ❌ **Bad**:
-- `reliability-of-llms-as-medical-assistants-for-general-public` (too long)
+- `invented-title-about-a-study-of-reading-support-tools-and-their-effects` (too long)
 - `paper` (too generic)
 - `llm` (too vague)
 - `study-2026` (not descriptive)
@@ -105,12 +105,12 @@ Extract metadata from YAML frontmatter:
 #### 4. Create Paper Directory Structure
 
 ```bash
-mkdir -p papers/bean-2026-llm-medical-assistants-JZUBTJM9/{highlights,figures,additional-sources,reviews,extracts,notes}
+mkdir -p papers/example-2026-reading-support-ABCD1234/{highlights,figures,additional-sources,reviews,extracts,notes}
 ```
 
 Folder structure:
 ```
-papers/bean-2026-llm-medical-assistants-JZUBTJM9/
+papers/example-2026-reading-support-ABCD1234/
 ├── 00-source.md              # Metadata + abstract (NO PDF, NO highlights)
 ├── highlights/               # Atomic highlight files (created later)
 ├── figures/                  # Figures and tables with metadata
@@ -127,7 +127,7 @@ papers/bean-2026-llm-medical-assistants-JZUBTJM9/
 ```bash
 # Option A: If highlights are NOT yet extracted to separate files
 # Copy the markdown file as-is (includes embedded highlights)
-cp source-files/JZUBTJM9-*.md papers/bean-2026-llm-medical-assistants-JZUBTJM9/00-source.md
+cp source-files/ABCD1234-*.md papers/example-2026-reading-support-ABCD1234/00-source.md
 
 # Option B: If highlights ARE extracted to separate files (Workflow 1b)
 # Create 00-source.md WITHOUT embedded highlights (see Workflow 1b)
@@ -137,9 +137,9 @@ Update YAML frontmatter to note PDF location:
 ```yaml
 ---
 type: source
-zotero_key: "JZUBTJM9"
+zotero_key: "ABCD1234"
 # ... other metadata ...
-pdf_location: "source-files/JZUBTJM9-*.pdf"  # Reference to PDF
+pdf_location: "source-files/ABCD1234-*.pdf"  # Reference to PDF
 highlights_extracted: false                   # Will update after extraction
 highlights_folder: "highlights/"
 ---
@@ -179,13 +179,13 @@ Add entry for the new paper:
 
 ```yaml
 papers:
-  JZUBTJM9:
-    title: "Reliability of LLMs as medical assistants for the general public: a randomized preliminary evaluation"
-    authors: "Bean et al."
+  ABCD1234:
+    title: "Invented title about a study of reading support tools"
+    authors: "Example & Sample"
     year: 2026
-    folder_name: "bean-2026-llm-medical-assistants-JZUBTJM9"
-    path: "papers/bean-2026-llm-medical-assistants-JZUBTJM9/"
-    source_path: "source-files/JZUBTJM9-*.pdf"
+    folder_name: "example-2026-reading-support-ABCD1234"
+    path: "papers/example-2026-reading-support-ABCD1234/"
+    source_path: "source-files/ABCD1234-*.pdf"
     status: imported
     reviews: []
     extracts: []
@@ -199,10 +199,10 @@ papers:
 #### 8. Git Commit
 
 ```bash
-git add source-files/JZUBTJM9-*
-git add papers/bean-2026-llm-medical-assistants-JZUBTJM9/
+git add source-files/ABCD1234-*
+git add papers/example-2026-reading-support-ABCD1234/
 git add index/papers.yaml
-git commit -m "Import paper: Reliability of LLMs as medical assistants (Bean et al., 2026)"
+git commit -m "Import paper: Invented title about a study of reading support tools (Example & Sample, 2026)"
 ```
 
 ---
@@ -250,7 +250,7 @@ In `index/papers.yaml`, note collection membership:
 
 ```yaml
 papers:
-  JZUBTJM9:
+  ABCD1234:
     # ... other fields ...
     collections:
       - "llm-evaluation-studies"
@@ -277,11 +277,11 @@ tags:
 
 ## Overview
 
-27 papers examining how LLMs perform in disciplinary contexts (medical, legal, educational, etc.).
+27 papers examining how LLMs perform in disciplinary contexts (education, legal, clinical, etc.).
 
 ## Papers
 
-- [[bean-2026-llm-medical-assistants-JZUBTJM9/00-source]] - Medical domain
+- [[example-2026-reading-support-ABCD1234/00-source]] - Education domain
 - [[smith-2025-legal-reasoning-ABC123/00-source]] - Legal domain
 - ...
 
@@ -354,12 +354,12 @@ text: |
   Can span multiple lines.
 context: "Optional surrounding context"
 created: "2026-02-11T14:30:00Z"
-paper_key: "JZUBTJM9"
+paper_key: "ABCD1234"
 tags:
   - "RCT"
   - "performance-degradation"
 links:
-  - "[[bean-2026-llm-medical-assistants-JZUBTJM9/00-source]]"
+  - "[[example-2026-reading-support-ABCD1234/00-source]]"
 ---
 
 # Descriptive Title Based on Content
@@ -404,7 +404,7 @@ See `highlights/` folder for extracted highlights (9 files).
 
 ```yaml
 papers:
-  JZUBTJM9:
+  ABCD1234:
     # ... other fields ...
     highlights_extracted: true
     highlights_count: 9
@@ -416,14 +416,14 @@ Add nodes for each highlight:
 
 ```yaml
 nodes:
-  - id: "bean-2026-llm-medical-assistants-JZUBTJM9/highlights/001"
+  - id: "example-2026-reading-support-ABCD1234/highlights/001"
     type: "highlight"
     title: "Main finding"
     color: "yellow"
 
 edges:
-  - from: "bean-2026-llm-medical-assistants-JZUBTJM9/highlights/001"
-    to: "bean-2026-llm-medical-assistants-JZUBTJM9/00-source"
+  - from: "example-2026-reading-support-ABCD1234/highlights/001"
+    to: "example-2026-reading-support-ABCD1234/00-source"
     type: "extracted_from"
 ```
 
@@ -450,21 +450,21 @@ VS Code extension that visualizes markdown note connections via wikilinks.
 #### 1. Link Papers to Papers
 
 ```markdown
-See also [[bean-2026-llm-medical-assistants-JZUBTJM9/00-source]]
+See also [[example-2026-reading-support-ABCD1234/00-source]]
 Related work: [[smith-2025-ai-education-ABC123/00-source]]
 ```
 
 #### 2. Link Reviews to Papers
 
 ```markdown
-Reviewed paper: [[bean-2026-llm-medical-assistants-JZUBTJM9/00-source]]
-Building on [[bean-2026-llm-medical-assistants-JZUBTJM9/reviews/quick-read]]
+Reviewed paper: [[example-2026-reading-support-ABCD1234/00-source]]
+Building on [[example-2026-reading-support-ABCD1234/reviews/quick-read]]
 ```
 
 #### 3. Link Notes to Notes
 
 ```markdown
-Related insight: [[20260211-130500-llm-human-interaction-paradox]]
+Related insight: [[20260211-130500-tool-reader-interaction-paradox]]
 Contradicts: [[20260210-120000-benchmark-reliability]]
 ```
 
@@ -472,7 +472,7 @@ Contradicts: [[20260210-120000-benchmark-reliability]]
 
 ```markdown
 Papers in this collection:
-- [[bean-2026-llm-medical-assistants-JZUBTJM9/00-source]]
+- [[example-2026-reading-support-ABCD1234/00-source]]
 - [[smith-2025-ai-education-ABC123/00-source]]
 ```
 
@@ -510,12 +510,12 @@ Visualize:
 
 In `00-source.md` YAML:
 ```yaml
-pdf_location: "source-files/JZUBTJM9-*.pdf"
+pdf_location: "source-files/ABCD1234-*.pdf"
 ```
 
 When reading PDFs:
 ```bash
-Read source-files/JZUBTJM9-*.pdf
+Read source-files/ABCD1234-*.pdf
 ```
 
 ---
@@ -524,7 +524,7 @@ Read source-files/JZUBTJM9-*.pdf
 
 ### Good Examples
 
-✅ `bean-2026-llm-medical-assistants-JZUBTJM9`
+✅ `example-2026-reading-support-ABCD1234`
 - Clear first author, year, descriptive title, unique key
 
 ✅ `smith-2025-rct-design-evaluation-ABC123`
@@ -535,16 +535,16 @@ Read source-files/JZUBTJM9-*.pdf
 
 ### Bad Examples
 
-❌ `bean-2026-reliability-of-large-language-models-as-medical-assistants-for-the-general-public-a-randomized-preliminary-evaluation-JZUBTJM9`
+❌ `example-2026-invented-title-about-a-study-of-reading-support-tools-and-their-effects-on-comprehension-ABCD1234`
 - Too long, hard to reference
 
-❌ `JZUBTJM9`
+❌ `ABCD1234`
 - Not human-readable
 
-❌ `paper-2026-JZUBTJM9`
+❌ `paper-2026-ABCD1234`
 - Not descriptive
 
-❌ `llm-paper-JZUBTJM9`
+❌ `llm-paper-ABCD1234`
 - Too vague
 
 ---
@@ -553,7 +553,7 @@ Read source-files/JZUBTJM9-*.pdf
 
 ### Problem: Can't find zotero_key
 
-**Solution**: Check YAML frontmatter in markdown file. Should be `zotero_key: "JZUBTJM9"`.
+**Solution**: Check YAML frontmatter in markdown file. Should be `zotero_key: "ABCD1234"`.
 
 ### Problem: Multiple PDFs for one paper
 
@@ -568,7 +568,7 @@ Read source-files/JZUBTJM9-*.pdf
 
 ### Problem: Folder name too long
 
-**Solution**: Use 2-3 word title slug. Example: `reliability-of-llms-medical-assistants` → `llm-medical-assistants`.
+**Solution**: Use 2-3 word title slug. Example: `invented-title-reading-support-tools` → `reading-support`.
 
 ---
 

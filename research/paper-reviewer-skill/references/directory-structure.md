@@ -57,12 +57,12 @@ Complete organization of a host repository that vendors this skill.
 │       │   ├── summary-card.md
 │       │   └── ...
 │       └── notes/                  # Paper-specific atomic notes
-│           ├── 20260211-130500-llm-human-paradox.md
+│           ├── 20260211-130500-tool-reader-paradox.md
 │           └── ...
 │
 ├── data/                            # Cross-cutting atomic notes
 │   ├── method-20260211-143000-randomized-controlled-trial.md
-│   ├── dataset-20260211-150000-medical-scenarios-benchmark.md
+│   ├── dataset-20260211-150000-reading-passages-benchmark.md
 │   ├── analytical-approach-20260211-151000-precision-recall.md
 │   ├── result-pattern-20260211-152000-benchmark-vs-reality-gap.md
 │   └── ...
@@ -132,12 +132,12 @@ Complete organization of a host repository that vendors this skill.
 
 All folders use human-readable names:
 - `{author}-{year}-{title-short}-{zotero_key}`
-- Example: `bean-2026-llm-medical-assistants-JZUBTJM9`
+- Example: `example-2026-reading-support-ABCD1234`
 
 This enables:
 - Context-free file identification
 - Easy browsing and discovery
-- Clear wikilinks: `[[bean-2026-llm-medical-assistants-JZUBTJM9/00-source]]`
+- Clear wikilinks: `[[example-2026-reading-support-ABCD1234/00-source]]`
 
 ### 3. Atomic Elements
 
@@ -288,7 +288,7 @@ Each element gets its own file:
 ls papers/
 
 # By zotero_key (lookup)
-grep "JZUBTJM9" index/papers.yaml
+grep "ABCD1234" index/papers.yaml
 
 # By topic
 Read index/by-topic.md
@@ -297,10 +297,10 @@ Read index/by-topic.md
 ### Finding related content
 ```bash
 # All highlights for a paper
-ls papers/bean-2026-llm-medical-assistants-JZUBTJM9/highlights/
+ls papers/example-2026-reading-support-ABCD1234/highlights/
 
 # All reviews for a paper
-ls papers/bean-2026-llm-medical-assistants-JZUBTJM9/reviews/
+ls papers/example-2026-reading-support-ABCD1234/reviews/
 
 # Cross-cutting method notes
 ls data/method-*.md

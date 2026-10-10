@@ -36,10 +36,10 @@ Every markdown file in this repository MUST have YAML frontmatter. This enables:
 ```yaml
 ---
 type: source
-zotero_key: "JZUBTJM9"                    # Unique Zotero identifier
+zotero_key: "ABCD1234"                    # Unique Zotero identifier
 title: "Full paper title"
 creators:                                  # Authors (last, first format)
-  - "Bean, Andrew M."
+  - "Example, A."
   - "Smith, John"
 year: 2026
 doi: "10.1000/example.doi"
@@ -47,7 +47,7 @@ url: "https://doi.org/10.1000/example.doi"
 tags:
   - "RCT"
   - "LLM-evaluation"
-  - "medical-AI"
+  - "education-AI"
 abstract: |
   Full abstract text here.
   Can span multiple lines.
@@ -74,20 +74,20 @@ status: "imported"                         # imported | in_progress | completed
 ```yaml
 ---
 type: source
-zotero_key: "JZUBTJM9"
-title: "Reliability of LLMs as medical assistants for the general public: a randomized preliminary evaluation"
+zotero_key: "ABCD1234"
+title: "Invented title about a study of reading support tools"
 creators:
-  - "Bean, Andrew M."
-  - "Seifert, Collin"
+  - "Example, A."
+  - "Sample, B."
   - "Lakkaraju, Kiran"
   - "Stites, Molly"
 year: 2026
-doi: "10.1016/j.artmed.2025.103073"
-url: "https://doi.org/10.1016/j.artmed.2025.103073"
+doi: "10.1000/example.doi"
+url: "https://doi.org/10.1000/example.doi"
 tags:
   - "RCT"
   - "LLM-evaluation"
-  - "medical-AI"
+  - "education-AI"
   - "human-AI-interaction"
 abstract: |
   Large language models (LLMs) are being explored as assistants for general-population users...
@@ -127,12 +127,12 @@ text: |                                    # Full highlighted text
   Text from the paper that was highlighted.
   Can span multiple lines.
 created: "2026-02-11T14:30:00Z"           # ISO 8601 timestamp
-paper_key: "JZUBTJM9"                     # Zotero key of source paper
+paper_key: "ABCD1234"                     # Zotero key of source paper
 tags:
   - "RCT"
   - "performance-degradation"
 links:
-  - "[[bean-2026-llm-medical-assistants-JZUBTJM9/00-source]]"
+  - "[[example-2026-reading-support-ABCD1234/00-source]]"
 ---
 ```
 
@@ -142,7 +142,7 @@ links:
 context: "Optional surrounding context"    # Additional context if needed
 notes: "Personal annotations"              # Your thoughts about this highlight
 related:                                   # Links to related highlights/notes
-  - "[[bean-2026-llm-medical-assistants-JZUBTJM9/highlights/002-red-result]]"
+  - "[[example-2026-reading-support-ABCD1234/highlights/002-red-result]]"
 ```
 
 ### Color Coding
@@ -165,16 +165,16 @@ color: "red"
 color_code: "#ff6666"
 significance: "critical-result"
 text: |
-  Tested alone, LLMs complete the scenarios accurately, correctly identifying conditions in 94.9% of cases and disposition in 56.3% on average. However, participants using the same LLMs identified relevant conditions in fewer than 34.5% of cases and disposition in fewer than 44.2%, both no better than the control group.
-context: "Main results comparing LLM-alone vs. human-with-LLM performance"
+  Tested alone, the reading support tools produced accurate summaries, answering comprehension questions correctly in 87.2% of cases and summary writing in 41.8% on average. However, participants using the same tools answered comprehension questions correctly in fewer than 36.5% of cases and summary writing in fewer than 44.2%, both no better than the control group.
+context: "Main results comparing Tool-alone vs. reader-with-tool performance"
 created: "2026-02-11T16:30:00Z"
-paper_key: "JZUBTJM9"
+paper_key: "ABCD1234"
 tags:
   - "performance-gap"
   - "human-LLM-interaction"
   - "main-finding"
 links:
-  - "[[bean-2026-llm-medical-assistants-JZUBTJM9/00-source]]"
+  - "[[example-2026-reading-support-ABCD1234/00-source]]"
 ---
 
 # Performance Gap Between LLM-Alone and Human-with-LLM
@@ -183,11 +183,11 @@ links:
 
 ## Notes
 
-This is the central paradox of the paper - LLMs perform well in isolation but fail to help humans.
+This is the central paradox of the paper - the tools perform well in isolation but fail to help readers.
 
 ## Related
 
-- [[bean-2026-llm-medical-assistants-JZUBTJM9/notes/20260211-130500-llm-human-interaction-paradox]]
+- [[example-2026-reading-support-ABCD1234/notes/20260211-130500-tool-reader-interaction-paradox]]
 ```
 
 ---
@@ -216,7 +216,7 @@ This is the central paradox of the paper - LLMs perform well in isolation but fa
   "source_page": 5,
   "image_file": "figure-01.png",
   "created": "2026-02-11T14:30:00Z",
-  "paper_key": "JZUBTJM9",
+  "paper_key": "ABCD1234",
   "tags": ["performance", "comparison"]
 }
 ```
@@ -255,22 +255,22 @@ This is the central paradox of the paper - LLMs perform well in isolation but fa
   "figure_id": "01",
   "figure_type": "bar_chart",
   "title": "Performance comparison across LLM conditions",
-  "caption": "Accuracy rates for condition identification and disposition recommendation",
-  "description": "Bar chart comparing accuracy rates for condition identification and disposition recommendation across three LLM models (GPT-4o, Llama 3, Command R+) when used by human participants versus tested alone.",
+  "caption": "Accuracy rates for comprehension questions and summary writing",
+  "description": "Bar chart comparing accuracy rates for comprehension questions and summary writing across three LLM models (Tool A, Tool B, Tool C) when used by human participants versus tested alone.",
   "key_findings": [
-    "LLMs alone achieve 94.9% accuracy for condition identification",
-    "Humans with LLMs achieve only 34.5% accuracy",
+    "LLMs alone achieve 87.2% accuracy for comprehension questions",
+    "Readers with tools achieve only 36.5% accuracy",
     "Performance gap exists across all three models tested"
   ],
   "variables": {
-    "x_axis": "Condition (LLM model + usage mode)",
+    "x_axis": "Condition (tool type + usage mode)",
     "y_axis": "Accuracy (%)",
-    "grouping": "Task type (condition identification vs disposition)"
+    "grouping": "Task type (comprehension questions vs summary writing)"
   },
   "source_page": 5,
   "image_file": "figure-01.png",
   "created": "2026-02-11T14:30:00Z",
-  "paper_key": "JZUBTJM9",
+  "paper_key": "ABCD1234",
   "tags": ["performance", "comparison", "human-LLM-interaction"]
 }
 ```
@@ -304,7 +304,7 @@ This is the central paradox of the paper - LLMs perform well in isolation but fa
   "source_page": 4,
   "data_file": "table-01.csv",
   "created": "2026-02-11T14:30:00Z",
-  "paper_key": "JZUBTJM9",
+  "paper_key": "ABCD1234",
   "tags": ["demographics"]
 }
 ```
@@ -326,21 +326,21 @@ This is the central paradox of the paper - LLMs perform well in isolation but fa
   "type": "table",
   "table_id": "01",
   "title": "Demographic characteristics of study participants",
-  "description": "Breakdown of 1,298 participants by age group, gender, education level, and prior medical knowledge.",
+  "description": "Breakdown of 412 participants by age group, gender, education level, and prior reading experience.",
   "columns": [
     {"name": "demographic_variable", "type": "categorical"},
     {"name": "n", "type": "integer"},
     {"name": "percentage", "type": "float"}
   ],
   "key_findings": [
-    "Majority of participants (65%) had no prior medical training",
+    "Majority of participants (65%) had no prior experience with reading support tools",
     "Age range: 18-75, median age 34",
     "Gender distribution: 52% female, 48% male"
   ],
   "source_page": 4,
   "data_file": "table-01.csv",
   "created": "2026-02-11T14:30:00Z",
-  "paper_key": "JZUBTJM9",
+  "paper_key": "ABCD1234",
   "tags": ["demographics", "participants", "sample-characteristics"]
 }
 ```
@@ -359,7 +359,7 @@ This is the central paradox of the paper - LLMs perform well in isolation but fa
 ---
 type: review
 review_style: "gelman-review"             # gelman-review | quick-read | methods-deep-dive | critical-review
-paper_key: "JZUBTJM9"
+paper_key: "ABCD1234"
 paper_title: "Full paper title"
 reviewed_date: "2026-02-11"
 reviewer: "Claude Sonnet 4.5"
@@ -369,7 +369,7 @@ tags:
   - "RCT"
   - "methodological-critique"
 links:
-  - "[[bean-2026-llm-medical-assistants-JZUBTJM9/00-source]]"
+  - "[[example-2026-reading-support-ABCD1234/00-source]]"
 ---
 ```
 
@@ -388,15 +388,15 @@ links:
 ---
 type: review
 review_style: "gelman-review"
-paper_key: "JZUBTJM9"
-paper_title: "Reliability of LLMs as medical assistants for the general public"
+paper_key: "ABCD1234"
+paper_title: "Invented title about a study of reading support tools"
 reviewed_date: "2026-02-11"
 reviewer: "Claude Sonnet 4.5"
 status: "completed"
 rating: 7
 strengths:
   - "Rigorous RCT design with preregistration"
-  - "Large sample size (N=1,298)"
+  - "Large sample size (N=412)"
   - "Clear paradoxical finding"
 weaknesses:
   - "Limited ecological validity"
@@ -407,8 +407,8 @@ tags:
   - "methodological-critique"
   - "LLM-evaluation"
 links:
-  - "[[bean-2026-llm-medical-assistants-JZUBTJM9/00-source]]"
-  - "[[bean-2026-llm-medical-assistants-JZUBTJM9/extracts/methods]]"
+  - "[[example-2026-reading-support-ABCD1234/00-source]]"
+  - "[[example-2026-reading-support-ABCD1234/extracts/methods]]"
 ---
 ```
 
@@ -426,7 +426,7 @@ links:
 ---
 type: extract
 extract_type: "methods"                    # methods | conclusions | summary-card | full-text
-paper_key: "JZUBTJM9"
+paper_key: "ABCD1234"
 paper_title: "Full paper title"
 extracted_date: "2026-02-11"
 source_section: "Methods"                  # Section name from paper
@@ -434,7 +434,7 @@ tags:
   - "RCT"
   - "n=1298"
 links:
-  - "[[bean-2026-llm-medical-assistants-JZUBTJM9/00-source]]"
+  - "[[example-2026-reading-support-ABCD1234/00-source]]"
 ---
 ```
 
@@ -453,24 +453,24 @@ links:
 ---
 type: extract
 extract_type: "methods"
-paper_key: "JZUBTJM9"
-paper_title: "Reliability of LLMs as medical assistants"
+paper_key: "ABCD1234"
+paper_title: "Invented title about a study of reading support tools"
 extracted_date: "2026-02-11"
 source_section: "Methods"
 tags:
   - "RCT"
   - "n=1298"
   - "preregistered"
-  - "medical-scenarios"
+  - "reading-passages"
 links:
-  - "[[bean-2026-llm-medical-assistants-JZUBTJM9/00-source]]"
+  - "[[example-2026-reading-support-ABCD1234/00-source]]"
 ---
 
 # Methods Extract
 
 ## Study Design
 
-Randomized controlled trial with N=1,298 participants...
+Randomized controlled trial with N=412 participants...
 ```
 
 ---
@@ -493,10 +493,10 @@ tags:
   - "paradox"
   - "human-AI-interaction"
 links:
-  - "[[bean-2026-llm-medical-assistants-JZUBTJM9/00-source]]"
-  - "[[bean-2026-llm-medical-assistants-JZUBTJM9/reviews/gelman-review]]"
+  - "[[example-2026-reading-support-ABCD1234/00-source]]"
+  - "[[example-2026-reading-support-ABCD1234/reviews/gelman-review]]"
 related_papers:
-  - "JZUBTJM9"
+  - "ABCD1234"
 ---
 ```
 
@@ -516,26 +516,26 @@ questions:                                 # Open questions
 ---
 type: note
 id: "20260211-143000"
-title: "LLM-Human Interaction Paradox"
+title: "Tool-Reader Interaction Paradox"
 created: "2026-02-11T14:30:00Z"
 tags:
   - "paradox"
   - "human-AI-interaction"
   - "performance-degradation"
 links:
-  - "[[bean-2026-llm-medical-assistants-JZUBTJM9/00-source]]"
-  - "[[bean-2026-llm-medical-assistants-JZUBTJM9/reviews/gelman-review]]"
-  - "[[bean-2026-llm-medical-assistants-JZUBTJM9/highlights/002-red-performance-gap]]"
+  - "[[example-2026-reading-support-ABCD1234/00-source]]"
+  - "[[example-2026-reading-support-ABCD1234/reviews/gelman-review]]"
+  - "[[example-2026-reading-support-ABCD1234/highlights/002-red-performance-gap]]"
 related_papers:
-  - "JZUBTJM9"
+  - "ABCD1234"
 related_notes:
   - "[[20260210-120000-benchmark-vs-reality]]"
 status: "completed"
 ---
 
-# LLM-Human Interaction Paradox
+# Tool-Reader Interaction Paradox
 
-LLMs perform well in isolation (94.9% accuracy) but fail to help humans (34.5% accuracy)...
+Tools perform well in isolation (87.2% accuracy) but fail to help readers (36.5% accuracy)...
 ```
 
 ---
@@ -561,10 +561,10 @@ tags:
   - "experimental-design"
   - "causal-inference"
 related_papers:
-  - "JZUBTJM9"
+  - "ABCD1234"
   - "ABC123"
 links:
-  - "[[bean-2026-llm-medical-assistants-JZUBTJM9/00-source]]"
+  - "[[example-2026-reading-support-ABCD1234/00-source]]"
 ---
 ```
 
@@ -591,10 +591,10 @@ tags:
   - "causal-inference"
   - "gold-standard"
 related_papers:
-  - "JZUBTJM9"
+  - "ABCD1234"
   - "ABC123"
 links:
-  - "[[bean-2026-llm-medical-assistants-JZUBTJM9/00-source]]"
+  - "[[example-2026-reading-support-ABCD1234/00-source]]"
   - "[[data/method-20260211-144500-preregistration-protocol]]"
 ---
 
@@ -606,8 +606,8 @@ Experimental design where participants are randomly assigned to treatment and co
 
 ## Examples in Papers
 
-### Bean et al. (2026) - JZUBTJM9
-- N=1,298 participants
+### Example & Sample (2026) - ABCD1234
+- N=412 participants
 - Random assignment to LLM vs. control
 - Preregistered protocol
 ```
@@ -636,10 +636,10 @@ tags:
   - "LLM-evaluation"
   - "synthesis"
 source_papers:
-  - "JZUBTJM9"
+  - "ABCD1234"
   - "ABC123"
 related_notes:
-  - "[[20260211-130500-llm-human-paradox]]"
+  - "[[20260211-130500-tool-reader-paradox]]"
   - "[[data/result-pattern-20260211-152000-benchmark-vs-reality-gap]]"
 ---
 ```
@@ -659,12 +659,12 @@ deadline: "2026-03-15"
 tags:
   - "LLM-evaluation"
   - "human-AI-interaction"
-  - "medical-AI"
+  - "education-AI"
 source_papers:
-  - "JZUBTJM9"
+  - "ABCD1234"
   - "ABC123"
 related_notes:
-  - "[[20260211-130500-llm-human-paradox]]"
+  - "[[20260211-130500-tool-reader-paradox]]"
   - "[[data/result-pattern-20260211-152000-benchmark-vs-reality-gap]]"
 progress:
   - "[x] Collect source papers"
@@ -677,7 +677,7 @@ progress:
 
 ## Project Overview
 
-Synthesize findings from papers on LLM evaluation in medical and legal domains...
+Synthesize findings from papers on LLM evaluation in education and legal domains...
 ```
 
 ---

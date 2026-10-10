@@ -39,30 +39,30 @@ Look up in `index/papers.yaml` to get `folder_name`:
 
 ```yaml
 papers:
-  JZUBTJM9:
-    folder_name: "bean-2026-llm-medical-assistants-JZUBTJM9"
+  ABCD1234:
+    folder_name: "example-2026-reading-support-ABCD1234"
 ```
 
 #### 2. Read Source Material
 
 ```bash
 # Read metadata and abstract
-Read papers/bean-2026-llm-medical-assistants-JZUBTJM9/00-source.md
+Read papers/example-2026-reading-support-ABCD1234/00-source.md
 
 # Read PDF if needed for figures/tables/full text
-Read source-files/JZUBTJM9-*.pdf
+Read source-files/ABCD1234-*.pdf
 
 # Check for existing extracts
-ls papers/bean-2026-llm-medical-assistants-JZUBTJM9/extracts/
+ls papers/example-2026-reading-support-ABCD1234/extracts/
 
 # Check highlights if extracted
-ls papers/bean-2026-llm-medical-assistants-JZUBTJM9/highlights/
+ls papers/example-2026-reading-support-ABCD1234/highlights/
 ```
 
 #### 3. Check Existing Reviews
 
 ```bash
-ls papers/bean-2026-llm-medical-assistants-JZUBTJM9/reviews/
+ls papers/example-2026-reading-support-ABCD1234/reviews/
 ```
 
 **If review exists**:
@@ -95,7 +95,7 @@ Follow template structure:
 ---
 type: review
 review_style: "gelman-review"
-paper_key: "JZUBTJM9"
+paper_key: "ABCD1234"
 paper_title: "Full paper title"
 reviewed_date: "2026-02-11"
 reviewer: "Claude Sonnet 4.5"
@@ -111,7 +111,7 @@ tags:
   - "RCT"
   - "methodological-critique"
 links:
-  - "[[bean-2026-llm-medical-assistants-JZUBTJM9/00-source]]"
+  - "[[example-2026-reading-support-ABCD1234/00-source]]"
 ---
 ```
 
@@ -124,12 +124,12 @@ links:
 
 **Add appropriate tags**:
 - Research design (RCT, observational, qualitative, etc.)
-- Domain (medical-AI, legal-AI, education, etc.)
+- Domain (education-AI, legal-AI, education, etc.)
 - Critique type (methodological-critique, statistical-issues, etc.)
 
 **Link to source paper**:
 ```markdown
-- "[[bean-2026-llm-medical-assistants-JZUBTJM9/00-source]]"
+- "[[example-2026-reading-support-ABCD1234/00-source]]"
 ```
 
 **Follow section structure from template** - Don't skip sections, adapt them to the paper.
@@ -137,7 +137,7 @@ links:
 #### 6. Write Review File
 
 ```bash
-Write papers/bean-2026-llm-medical-assistants-JZUBTJM9/reviews/gelman-review.md
+Write papers/example-2026-reading-support-ABCD1234/reviews/gelman-review.md
 ```
 
 **Naming convention**:
@@ -153,11 +153,11 @@ Update `index/papers.yaml`:
 
 ```yaml
 papers:
-  JZUBTJM9:
+  ABCD1234:
     # ... other fields ...
     reviews:
       - type: "gelman-review"
-        file: "papers/bean-2026-llm-medical-assistants-JZUBTJM9/reviews/gelman-review.md"
+        file: "papers/example-2026-reading-support-ABCD1234/reviews/gelman-review.md"
         date: "2026-02-11"
         rating: 7
         status: "completed"
@@ -166,9 +166,9 @@ papers:
 #### 8. Git Commit (REQUIRED)
 
 ```bash
-git add papers/bean-2026-llm-medical-assistants-JZUBTJM9/reviews/gelman-review.md
+git add papers/example-2026-reading-support-ABCD1234/reviews/gelman-review.md
 git add index/papers.yaml
-git commit -m "Add gelman-review for Reliability of LLMs as medical assistants (Bean et al., 2026)"
+git commit -m "Add gelman-review for Invented title about a study of reading support tools (Example & Sample, 2026)"
 ```
 
 **IMPORTANT**: ALWAYS commit immediately after completing a review. Each review should be its own commit.
@@ -329,11 +329,11 @@ After creating a review, consider creating atomic notes for key insights:
 
 1. Conduct Gelman review
 2. Identify key insight: "LLM-human interaction paradox"
-3. Create atomic note: `20260211-143000-llm-human-paradox.md`
+3. Create atomic note: `20260211-143000-tool-reader-paradox.md`
 4. Link note to review:
    ```yaml
    links:
-     - "[[bean-2026-llm-medical-assistants-JZUBTJM9/reviews/gelman-review]]"
+     - "[[example-2026-reading-support-ABCD1234/reviews/gelman-review]]"
    ```
 ```
 
@@ -384,13 +384,13 @@ Add {review-style} for {short-title} ({author} et al., {year})
 
 ```bash
 # Good
-"Add gelman-review for LLM medical assistants (Bean et al., 2026)"
+"Add gelman-review for reading support tools (Example & Sample, 2026)"
 "Add quick-read for AI education outcomes (Smith et al., 2025)"
 
 # Bad
 "Add review"
 "Gelman review"
-"Bean paper review"
+"Example paper review"
 ```
 
 ---

@@ -14,7 +14,7 @@ NC='\033[0m' # No Color
 # Check arguments
 if [ "$#" -ne 2 ]; then
     echo -e "${RED}Usage: $0 {zotero_key} {pdf_path}${NC}"
-    echo "Example: $0 JZUBTJM9 source-files/JZUBTJM9-paper.pdf"
+    echo "Example: $0 ABCD1234 source-files/ABCD1234-paper.pdf"
     exit 1
 fi
 

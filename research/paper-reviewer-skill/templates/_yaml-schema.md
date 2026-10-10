@@ -13,7 +13,7 @@ This document defines the YAML frontmatter structure for all markdown files in t
 ```yaml
 ---
 type: source
-zotero_key: JZUBTJM9          # Zotero item key — stable, use this for lookups
+zotero_key: ABCD1234          # Zotero item key — stable, use this for lookups
 item_id: 9038                 # Zotero's local numeric row id; local to one install
 library_id: 1                 # 1 is the personal library; group libraries differ
 library_name: "My Library"    # Whatever the library is called in your Zotero
@@ -67,7 +67,7 @@ exported_at: "2026-02-11T11:35:40.962Z"
 ---
 type: review
 review_style: gelman-review  # or quick-read, methods-deep-dive, critical-review
-paper_key: JZUBTJM9
+paper_key: ABCD1234
 paper_title: "Paper title"
 reviewed_date: "2026-02-11T14:30:00Z"
 reviewer: "Claude Code (claude-sonnet-4-5)"
@@ -78,8 +78,8 @@ tags:
   - "statistical-issues"
   - "RCT"
 links:
-  - "[[bean-2026-llm-medical-assistants-JZUBTJM9/00-source]]"
-  - "[[20260211-143000-llm-human-paradox]]"
+  - "[[example-2026-reading-support-ABCD1234/00-source]]"
+  - "[[20260211-143000-tool-reader-paradox]]"
 ---
 ```
 
@@ -115,7 +115,7 @@ links:
 ---
 type: extract
 extract_type: methods  # or conclusions, summary-card
-paper_key: JZUBTJM9
+paper_key: ABCD1234
 paper_title: "Paper title"
 extracted_date: "2026-02-11T14:30:00Z"
 source_section: "Methods"  # Original section name from paper
@@ -124,8 +124,8 @@ tags:
   - "n=1298"
   - "LLM-evaluation"
 links:
-  - "[[bean-2026-llm-medical-assistants-JZUBTJM9/00-source]]"
-  - "[[bean-2026-llm-medical-assistants-JZUBTJM9/reviews/methods-deep-dive]]"
+  - "[[example-2026-reading-support-ABCD1234/00-source]]"
+  - "[[example-2026-reading-support-ABCD1234/reviews/methods-deep-dive]]"
 ---
 ```
 
@@ -159,18 +159,18 @@ links:
 ---
 type: note
 id: "20260211-143000"  # Timestamp-based unique ID: YYYYMMDD-HHMMSS
-title: "LLM-Human Interaction Paradox"
+title: "Tool-Reader Interaction Paradox"
 created: "2026-02-11T14:30:00Z"
 tags:
   - "paradox"
   - "human-AI-interaction"
   - "performance-degradation"
 links:
-  - "[[bean-2026-llm-medical-assistants-JZUBTJM9/00-source]]"
+  - "[[example-2026-reading-support-ABCD1234/00-source]]"
   - "[[smith-2025-ai-education-ABC123/notes/similar-finding]]"
   - "[[20260210-120000-user-prompt-quality]]"
 related_papers:
-  - "JZUBTJM9"
+  - "ABCD1234"
   - "ABC123"
 ---
 ```
@@ -208,24 +208,24 @@ Use double square brackets for internal links:
 
 **Linking to Source Papers**:
 ```markdown
-[[bean-2026-llm-medical-assistants-JZUBTJM9/00-source]]
+[[example-2026-reading-support-ABCD1234/00-source]]
 ```
 
 **Linking to Reviews**:
 ```markdown
-[[bean-2026-llm-medical-assistants-JZUBTJM9/reviews/gelman-review]]
-[[bean-2026-llm-medical-assistants-JZUBTJM9/reviews/quick-read]]
+[[example-2026-reading-support-ABCD1234/reviews/gelman-review]]
+[[example-2026-reading-support-ABCD1234/reviews/quick-read]]
 ```
 
 **Linking to Extracts**:
 ```markdown
-[[bean-2026-llm-medical-assistants-JZUBTJM9/extracts/methods]]
-[[bean-2026-llm-medical-assistants-JZUBTJM9/extracts/summary-card]]
+[[example-2026-reading-support-ABCD1234/extracts/methods]]
+[[example-2026-reading-support-ABCD1234/extracts/summary-card]]
 ```
 
 **Linking to Notes (Same Paper)**:
 ```markdown
-[[20260211-143000-llm-human-paradox]]
+[[20260211-143000-tool-reader-paradox]]
 [[20260211-150000-benchmark-vs-reality]]
 ```
 
@@ -319,8 +319,8 @@ Before committing any markdown file, verify:
 ---
 type: review
 review_style: gelman-review
-paper_key: JZUBTJM9
-paper_title: "Reliability of LLMs as medical assistants for the general public"
+paper_key: ABCD1234
+paper_title: "Invented title about a study of reading support tools"
 reviewed_date: "2026-02-11T14:30:00Z"
 reviewer: "Claude Code (claude-sonnet-4-5)"
 status: completed
@@ -330,10 +330,10 @@ tags:
   - "RCT"
   - "statistical-issues"
 links:
-  - "[[bean-2026-llm-medical-assistants-JZUBTJM9/00-source]]"
+  - "[[example-2026-reading-support-ABCD1234/00-source]]"
 ---
 
-# Gelman Review: Reliability of LLMs as Medical Assistants
+# Gelman Review: Invented title about a study of reading support tools
 
 ## Executive Summary
 
@@ -348,22 +348,22 @@ This is a well-designed randomized controlled trial...
 ---
 type: note
 id: "20260211-143000"
-title: "LLM-Human Interaction Paradox"
+title: "Tool-Reader Interaction Paradox"
 created: "2026-02-11T14:30:00Z"
 tags:
   - "paradox"
   - "human-AI-interaction"
   - "performance-degradation"
 links:
-  - "[[bean-2026-llm-medical-assistants-JZUBTJM9/00-source]]"
-  - "[[bean-2026-llm-medical-assistants-JZUBTJM9/reviews/gelman-review]]"
+  - "[[example-2026-reading-support-ABCD1234/00-source]]"
+  - "[[example-2026-reading-support-ABCD1234/reviews/gelman-review]]"
 related_papers:
-  - "JZUBTJM9"
+  - "ABCD1234"
 ---
 
-# LLM-Human Interaction Paradox
+# Tool-Reader Interaction Paradox
 
-A fascinating finding from Bean et al. (2026): LLMs tested alone achieved 94.9% accuracy on identifying conditions, but humans using the same LLMs achieved only 34.5% accuracy.
+A fascinating finding from Example & Sample (2026): tools tested alone achieved 87.2% accuracy on comprehension questions, but readers using the same tools achieved only 36.5% accuracy.
 
 This suggests that the interface between human and LLM is a critical failure point, not just the LLM's capabilities.
 
@@ -395,16 +395,16 @@ session_date: "2026-02-11T12:19:49Z"  # ISO 8601 timestamp
 session_number: 1  # Optional sequential session number
 description: "Initial repository setup and first paper review"
 papers_processed:
-  - zotero_key: "JZUBTJM9"
+  - zotero_key: "ABCD1234"
     title: "Paper title"
     folder_name: "author-year-title-short-KEY"
     action: "imported and fully reviewed"
 reviews:
-  - paper_key: "JZUBTJM9"
+  - paper_key: "ABCD1234"
     review_style: "gelman-review"
     file: "papers/folder-name/reviews/gelman-review.md"
 extracts:
-  - paper_key: "JZUBTJM9"
+  - paper_key: "ABCD1234"
     extract_type: "methods"
     file: "papers/folder-name/extracts/methods.md"
 notes:
@@ -428,7 +428,7 @@ tags:
   - "initial-setup"
   - "methodology-focus"
 links:
-  - "[[bean-2026-llm-medical-assistants-JZUBTJM9/00-source]]"
+  - "[[example-2026-reading-support-ABCD1234/00-source]]"
   - "[[changelog/20260211-151212-collection-import]]"
 ---
 ```

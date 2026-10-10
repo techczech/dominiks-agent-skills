@@ -5,16 +5,16 @@ session_date: "YYYY-MM-DDTHH:MM:SSZ"  # ISO 8601 timestamp
 session_number: null  # Optional session number (1, 2, 3...)
 description: "Brief session description"
 papers_processed:
-  - zotero_key: "JZUBTJM9"
+  - zotero_key: "ABCD1234"
     title: "Paper title"
     folder_name: "author-year-title-short-KEY"
     action: "imported"  # or reviewed, extracted, noted
 reviews:
-  - paper_key: "JZUBTJM9"
+  - paper_key: "ABCD1234"
     review_style: "gelman-review"
     file: "papers/folder-name/reviews/gelman-review.md"
 extracts:
-  - paper_key: "JZUBTJM9"
+  - paper_key: "ABCD1234"
     extract_type: "methods"
     file: "papers/folder-name/extracts/methods.md"
 notes:
@@ -42,11 +42,11 @@ related_commits:
   - "cf9df2d"
 tags:
   - "initial-setup"
-  - "bean-2026"
+  - "example-2026"
   - "methodology-focus"
 links:
-  - "[[bean-2026-llm-medical-assistants-JZUBTJM9/00-source]]"
-  - "[[bean-2026-llm-medical-assistants-JZUBTJM9/reviews/gelman-review]]"
+  - "[[example-2026-reading-support-ABCD1234/00-source]]"
+  - "[[example-2026-reading-support-ABCD1234/reviews/gelman-review]]"
 ---
 
 # Session: [Brief Description]

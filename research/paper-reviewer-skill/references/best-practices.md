@@ -120,10 +120,10 @@ This guide covers:
 
 **Good examples**:
 ```
-Import paper: Reliability of LLMs as medical assistants (Bean et al., 2026)
-Add gelman-review for LLM medical assistants (Bean et al., 2026)
-Extract 9 highlights from Bean et al. (2026)
-Add note: LLM-Human Interaction Paradox (bean-2026)
+Import paper: Invented title about a study of reading support tools (Example & Sample, 2026)
+Add gelman-review for reading support tools (Example & Sample, 2026)
+Extract 9 highlights from Example & Sample (2026)
+Add note: Tool-Reader Interaction Paradox (example-2026)
 Create data note: Benchmark vs. Reality Gap (cross-paper pattern)
 Update CLAUDE.md: Add collection processing workflow
 Import collection: llm-evaluation-studies (27 papers)
@@ -133,7 +133,7 @@ Import collection: llm-evaluation-studies (27 papers)
 ```
 Add review
 Updated files
-Bean paper
+Example paper
 Work in progress
 Fix
 ```
@@ -180,8 +180,8 @@ Fix
 
 ✅ **Good**:
 ```markdown
-[[bean-2026-llm-medical-assistants-JZUBTJM9/00-source]]
-[[bean-2026-llm-medical-assistants-JZUBTJM9/reviews/gelman-review]]
+[[example-2026-reading-support-ABCD1234/00-source]]
+[[example-2026-reading-support-ABCD1234/reviews/gelman-review]]
 [[data/result-pattern-20260211-152000-benchmark-vs-reality-gap]]
 ```
 
@@ -197,19 +197,19 @@ Fix
 **Source links** (note → paper):
 ```markdown
 links:
-  - "[[bean-2026-llm-medical-assistants-JZUBTJM9/00-source]]"
+  - "[[example-2026-reading-support-ABCD1234/00-source]]"
 ```
 
 **Review links** (note → review):
 ```markdown
 links:
-  - "[[bean-2026-llm-medical-assistants-JZUBTJM9/reviews/gelman-review]]"
+  - "[[example-2026-reading-support-ABCD1234/reviews/gelman-review]]"
 ```
 
 **Note-to-note links**:
 ```markdown
 related_notes:
-  - "[[20260211-143000-llm-human-paradox]]"
+  - "[[20260211-143000-tool-reader-paradox]]"
 ```
 
 **Data note links**:
@@ -251,12 +251,12 @@ Related: [[data/result-pattern-20260211-152000-benchmark-vs-reality-gap]]
 **Format**: `{author}-{year}-{title-short}-{zotero_key}`
 
 ✅ **Good**:
-- `bean-2026-llm-medical-assistants-JZUBTJM9`
+- `example-2026-reading-support-ABCD1234`
 - `smith-2025-rct-design-evaluation-ABC123`
 
 ❌ **Bad**:
-- `bean-2026-reliability-of-llms-medical-assistants-general-public-JZUBTJM9` (too long)
-- `JZUBTJM9` (not human-readable)
+- `example-2026-invented-title-about-a-study-of-reading-support-tools-ABCD1234` (too long)
+- `ABCD1234` (not human-readable)
 - `paper-2026` (not descriptive)
 
 ### Note IDs
@@ -277,7 +277,7 @@ Related: [[data/result-pattern-20260211-152000-benchmark-vs-reality-gap]]
 **Format**: kebab-case, 2-4 words
 
 ✅ **Good**:
-- `llm-human-paradox`
+- `tool-reader-paradox`
 - `benchmark-vs-reality`
 - `rct-design`
 
@@ -297,7 +297,7 @@ Related: [[data/result-pattern-20260211-152000-benchmark-vs-reality-gap]]
 
 **Solution**: PDFs ONLY in `source-files/`. Reference via YAML:
 ```yaml
-pdf_location: "source-files/JZUBTJM9-*.pdf"
+pdf_location: "source-files/ABCD1234-*.pdf"
 ```
 
 ### Pitfall 2: Skipping YAML Frontmatter
@@ -320,15 +320,15 @@ pdf_location: "source-files/JZUBTJM9-*.pdf"
 
 ### Pitfall 5: Poor Folder Naming
 
-**Problem**: Folders named `JZUBTJM9` or `bean-paper`.
+**Problem**: Folders named `ABCD1234` or `example-paper`.
 
-**Solution**: Use human-readable format: `bean-2026-llm-medical-assistants-JZUBTJM9`.
+**Solution**: Use human-readable format: `example-2026-reading-support-ABCD1234`.
 
 ### Pitfall 6: Relative Wikilinks
 
 **Problem**: Using relative links like `[[00-source]]`.
 
-**Solution**: Use full paths: `[[bean-2026-llm-medical-assistants-JZUBTJM9/00-source]]`.
+**Solution**: Use full paths: `[[example-2026-reading-support-ABCD1234/00-source]]`.
 
 ### Pitfall 7: Too Many Tags
 
@@ -359,7 +359,7 @@ pdf_location: "source-files/JZUBTJM9-*.pdf"
 
 **Solution**:
 1. Check `index/papers.yaml` for `folder_name`
-2. Search by zotero_key: `grep "JZUBTJM9" index/papers.yaml`
+2. Search by zotero_key: `grep "ABCD1234" index/papers.yaml`
 3. List folders: `ls papers/`
 
 ### Problem: Wikilinks not resolving

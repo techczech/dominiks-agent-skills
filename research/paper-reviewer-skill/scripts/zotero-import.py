@@ -15,7 +15,7 @@ item, then:
 Usage:
   scripts/zotero-import.py "Training language models to be warm"
   scripts/zotero-import.py "ibrahimTrainingLanguageModels2026"
-  scripts/zotero-import.py "10.1038/s41586-026-10410-0"
+  scripts/zotero-import.py "10.1000/example.doi"
   scripts/zotero-import.py "https://www.nature.com/articles/s41586-026-10410-0"
   scripts/zotero-import.py --slug warmth-accuracy-tradeoff "Training language models..."
 

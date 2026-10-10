@@ -79,7 +79,7 @@ date -u +"%Y%m%d-%H%M%S"
 **Examples**:
 
 ✅ **Good slugs**:
-- `llm-human-interaction-paradox`
+- `tool-reader-interaction-paradox`
 - `benchmark-vs-reality-gap`
 - `ecological-validity-concern`
 
@@ -93,43 +93,43 @@ date -u +"%Y%m%d-%H%M%S"
 From `index/papers.yaml`:
 ```yaml
 papers:
-  JZUBTJM9:
-    folder_name: "bean-2026-llm-medical-assistants-JZUBTJM9"
+  ABCD1234:
+    folder_name: "example-2026-reading-support-ABCD1234"
 ```
 
 #### 5. Write Note with YAML Header
 
 **Location**: `papers/{folder-name}/notes/{timestamp}-{slug}.md`
 
-**Example**: `papers/bean-2026-llm-medical-assistants-JZUBTJM9/notes/20260211-143000-llm-human-interaction-paradox.md`
+**Example**: `papers/example-2026-reading-support-ABCD1234/notes/20260211-143000-tool-reader-interaction-paradox.md`
 
 **YAML frontmatter**:
 ```yaml
 ---
 type: note
 id: "20260211-143000"
-title: "LLM-Human Interaction Paradox"
+title: "Tool-Reader Interaction Paradox"
 created: "2026-02-11T14:30:00Z"
 tags:
   - "paradox"
   - "human-AI-interaction"
   - "performance-degradation"
 links:
-  - "[[bean-2026-llm-medical-assistants-JZUBTJM9/00-source]]"
-  - "[[bean-2026-llm-medical-assistants-JZUBTJM9/reviews/gelman-review]]"
-  - "[[bean-2026-llm-medical-assistants-JZUBTJM9/highlights/002-red-performance-gap]]"
+  - "[[example-2026-reading-support-ABCD1234/00-source]]"
+  - "[[example-2026-reading-support-ABCD1234/reviews/gelman-review]]"
+  - "[[example-2026-reading-support-ABCD1234/highlights/002-red-performance-gap]]"
 related_papers:
-  - "JZUBTJM9"
+  - "ABCD1234"
 related_notes:
   - "[[20260210-120000-benchmark-vs-reality]]"
 status: "completed"
 ---
 
-# LLM-Human Interaction Paradox
+# Tool-Reader Interaction Paradox
 
 ## The Paradox
 
-LLMs tested in isolation achieve 94.9% accuracy on medical scenario identification, but humans using the same LLMs achieve only 34.5% accuracy—no better than control groups without LLM assistance.
+Reading support tools tested in isolation achieve 87.2% accuracy on passage comprehension checks, but readers using the same tools achieve only 36.5% accuracy—no better than control groups without tool assistance.
 
 ## Possible Explanations
 
@@ -161,16 +161,16 @@ Add to `index/note-graph.yaml`:
 nodes:
   - id: "20260211-143000"
     type: "note"
-    title: "LLM-Human Interaction Paradox"
+    title: "Tool-Reader Interaction Paradox"
     created: "2026-02-11T14:30:00Z"
-    paper: "JZUBTJM9"
+    paper: "ABCD1234"
 
 edges:
   - from: "20260211-143000"
-    to: "bean-2026-llm-medical-assistants-JZUBTJM9/00-source"
+    to: "example-2026-reading-support-ABCD1234/00-source"
     type: "references"
   - from: "20260211-143000"
-    to: "bean-2026-llm-medical-assistants-JZUBTJM9/reviews/gelman-review"
+    to: "example-2026-reading-support-ABCD1234/reviews/gelman-review"
     type: "extracted_from"
   - from: "20260211-143000"
     to: "20260210-120000"
@@ -183,22 +183,22 @@ Add to `index/papers.yaml`:
 
 ```yaml
 papers:
-  JZUBTJM9:
+  ABCD1234:
     # ... other fields ...
     notes:
       - id: "20260211-143000"
-        file: "papers/bean-2026-llm-medical-assistants-JZUBTJM9/notes/20260211-143000-llm-human-interaction-paradox.md"
-        title: "LLM-Human Interaction Paradox"
+        file: "papers/example-2026-reading-support-ABCD1234/notes/20260211-143000-tool-reader-interaction-paradox.md"
+        title: "Tool-Reader Interaction Paradox"
         created: "2026-02-11T14:30:00Z"
 ```
 
 #### 8. Git Commit
 
 ```bash
-git add papers/bean-2026-llm-medical-assistants-JZUBTJM9/notes/20260211-143000-llm-human-interaction-paradox.md
+git add papers/example-2026-reading-support-ABCD1234/notes/20260211-143000-tool-reader-interaction-paradox.md
 git add index/note-graph.yaml
 git add index/papers.yaml
-git commit -m "Add note: LLM-Human Interaction Paradox (bean-2026)"
+git commit -m "Add note: Tool-Reader Interaction Paradox (example-2026)"
 ```
 
 ---
@@ -249,7 +249,7 @@ Choose one:
 
 **Examples**:
 - `randomized-controlled-trial` (method)
-- `medical-scenarios-benchmark` (dataset)
+- `reading-passages-benchmark` (dataset)
 - `precision-recall-analysis` (analytical-approach)
 - `benchmark-vs-reality-gap` (result-pattern)
 
@@ -259,7 +259,7 @@ Choose one:
 
 **Examples**:
 - `method-20260211-143000-randomized-controlled-trial.md`
-- `dataset-20260211-150000-medical-scenarios-benchmark.md`
+- `dataset-20260211-150000-reading-passages-benchmark.md`
 - `result-pattern-20260211-152000-benchmark-vs-reality-gap.md`
 
 #### 6. Write Data Note
@@ -281,11 +281,11 @@ tags:
   - "ecological-validity"
   - "performance-gap"
 related_papers:
-  - "JZUBTJM9"
+  - "ABCD1234"
   - "ABC123"
   - "XYZ789"
 links:
-  - "[[bean-2026-llm-medical-assistants-JZUBTJM9/00-source]]"
+  - "[[example-2026-reading-support-ABCD1234/00-source]]"
   - "[[smith-2025-legal-reasoning-ABC123/00-source]]"
   - "[[data/method-20260211-143000-randomized-controlled-trial]]"
 ---
@@ -298,9 +298,9 @@ A recurring pattern in LLM evaluation research: models perform well on benchmark
 
 ## Observed Instances
 
-### Bean et al. (2026) - Medical Domain
-- **Benchmark**: LLMs achieve 94.9% accuracy in isolation
-- **Reality**: Humans with LLMs achieve 34.5% accuracy
+### Example & Sample (2026) - Education Domain
+- **Benchmark**: Tools achieve 87.2% accuracy in isolation
+- **Reality**: Readers with tools achieve 36.5% accuracy
 - **Gap**: 60.4 percentage points
 
 ### Smith et al. (2025) - Legal Domain
@@ -347,7 +347,7 @@ nodes:
 
 edges:
   - from: "result-pattern-20260211-152000"
-    to: "bean-2026-llm-medical-assistants-JZUBTJM9/00-source"
+    to: "example-2026-reading-support-ABCD1234/00-source"
     type: "references"
   - from: "result-pattern-20260211-152000"
     to: "smith-2025-legal-reasoning-ABC123/00-source"
@@ -363,7 +363,7 @@ Add data note reference to ALL related papers:
 
 ```yaml
 papers:
-  JZUBTJM9:
+  ABCD1234:
     # ... other fields ...
     data_notes:
       - "result-pattern-20260211-152000"
@@ -391,22 +391,22 @@ git commit -m "Add data note: Benchmark vs. Reality Gap (cross-paper pattern)"
 
 1. **Source links**: Note → Paper
    ```markdown
-   - "[[bean-2026-llm-medical-assistants-JZUBTJM9/00-source]]"
+   - "[[example-2026-reading-support-ABCD1234/00-source]]"
    ```
 
 2. **Review links**: Note → Review
    ```markdown
-   - "[[bean-2026-llm-medical-assistants-JZUBTJM9/reviews/gelman-review]]"
+   - "[[example-2026-reading-support-ABCD1234/reviews/gelman-review]]"
    ```
 
 3. **Highlight links**: Note → Highlight
    ```markdown
-   - "[[bean-2026-llm-medical-assistants-JZUBTJM9/highlights/002-red-result]]"
+   - "[[example-2026-reading-support-ABCD1234/highlights/002-red-result]]"
    ```
 
 4. **Note-to-note links**: Note → Note
    ```markdown
-   - "[[20260211-143000-llm-human-paradox]]"
+   - "[[20260211-143000-tool-reader-paradox]]"
    ```
 
 5. **Data note links**: Note → Data Note
@@ -478,7 +478,7 @@ Grep pattern="tags:.*paradox" path="papers/" output_mode="files_with_matches"
 ### Finding Notes by Paper
 
 ```bash
-ls papers/bean-2026-llm-medical-assistants-JZUBTJM9/notes/
+ls papers/example-2026-reading-support-ABCD1234/notes/
 ```
 
 ### Finding Related Notes

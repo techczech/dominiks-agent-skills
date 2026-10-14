@@ -1,0 +1,14 @@
+{
+  "state": "running",
+  "evidence": "Mock UI: fictional finder progress window says Processing; no real app action occurred",
+  "selection": {
+    "library": "users/0",
+    "collection": "ABCDEFGH",
+    "keys": [
+      "PARENTAA",
+      "PARENTBB"
+    ],
+    "evidence": "Mock UI: two fictional parent references selected in Fictional Reading"
+  },
+  "identity_checks": []
+}

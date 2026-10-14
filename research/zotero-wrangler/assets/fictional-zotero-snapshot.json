@@ -1,0 +1,7 @@
+{
+  "server_id": "fictional-server-never-execute",
+  "api_version": "3",
+  "library": "users/0",
+  "collections": [{"key":"ABCDEFGH","data":{"key":"ABCDEFGH","version":1,"name":"Fictional Reading","parentCollection":false}}],
+  "items": []
+}

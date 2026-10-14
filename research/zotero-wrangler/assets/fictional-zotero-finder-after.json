@@ -1,0 +1,87 @@
+{
+  "server_id": "fictional-server-never-execute",
+  "api_version": "3",
+  "library": "users/0",
+  "includes_children": true,
+  "collections": [
+    {
+      "key": "ABCDEFGH",
+      "data": {
+        "key": "ABCDEFGH",
+        "version": 1,
+        "name": "Fictional Reading",
+        "parentCollection": false
+      }
+    },
+    {
+      "key": "CHILDCAA",
+      "data": {
+        "key": "CHILDCAA",
+        "version": 1,
+        "name": "Fictional Methods",
+        "parentCollection": "ABCDEFGH"
+      }
+    }
+  ],
+  "items": [
+    {
+      "key": "PARENTAA",
+      "data": {
+        "key": "PARENTAA",
+        "version": 1,
+        "itemType": "journalArticle",
+        "title": "Fictional comparison of translation methods",
+        "DOI": "10.9999/fictional-demo",
+        "collections": [
+          "ABCDEFGH",
+          "CHILDCAA"
+        ],
+        "tags": [
+          {
+            "tag": "User tag",
+            "type": 1
+          }
+        ],
+        "abstractNote": "Fictional abstract supplied for this fixture only."
+      }
+    },
+    {
+      "key": "PARENTBB",
+      "data": {
+        "key": "PARENTBB",
+        "version": 1,
+        "itemType": "journalArticle",
+        "title": "Fictional preliminary candidate",
+        "DOI": "10.9999/fictional-candidate",
+        "collections": [
+          "ABCDEFGH"
+        ],
+        "tags": []
+      }
+    },
+    {
+      "key": "USERNATE",
+      "data": {
+        "key": "USERNATE",
+        "version": 1,
+        "itemType": "note",
+        "parentItem": "PARENTAA",
+        "note": "Fictional existing user note; preserve unchanged.",
+        "tags": [],
+        "collections": []
+      }
+    },
+    {
+      "key": "PDFADDXX",
+      "data": {
+        "key": "PDFADDXX",
+        "version": 2,
+        "itemType": "attachment",
+        "parentItem": "PARENTAA",
+        "contentType": "application/pdf",
+        "md5": "ae2c659699c4b1d56bce9df108dd6ee6",
+        "url": "https://example.org/fictional-paper.pdf"
+      }
+    }
+  ]
+}

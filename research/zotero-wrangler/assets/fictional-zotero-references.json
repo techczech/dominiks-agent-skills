@@ -1,0 +1,18 @@
+[
+  {
+    "title": "Fictional demonstration of reading methods",
+    "DOI": "10.9999/fictional-demo",
+    "itemType": "journalArticle",
+    "date": "2025",
+    "creators": [{"creatorType":"author","firstName":"Alex","lastName":"Example"}],
+    "provenance": [{"source":"Fictional fixture only","query":"Search stream A"}],
+    "topics": [{"name":"Methods from search stream","basis":"search-stream"}],
+    "priority": {"value":4,"basis":"title-only provisional","evidence":"Fictional title suggests methods relevance; no quality appraisal."},
+    "availability": {"status":"not assessed","limits":"Fictional fixture; no actual publication or repository."}
+  },
+  {
+    "title": "Fictional demonstration of reading methods",
+    "DOI": "https://doi.org/10.9999/FICTIONAL-DEMO",
+    "provenance": [{"source":"Fictional fixture only","query":"Search stream B"}]
+  }
+]

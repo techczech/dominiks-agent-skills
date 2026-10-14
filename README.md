@@ -68,6 +68,7 @@ Research workflows: papers, sources, translation, corpus linguistics and model b
 - [paper-reviewer-skill](research/paper-reviewer-skill/): Imports a paper from Zotero, extracts its text, figures and tables, and writes structured reviews.
 - [research-translation](research/research-translation/): Runs auditable translation and back-translation of participant-facing research documents such as consent forms.
 - [sketchengine-skill](https://github.com/techczech/sketchengine-skill): Connects an agent to Sketch Engine to run word sketches, word lists and keyword analyses on its corpora. (separate repository)
+- [zotero-wrangler](research/zotero-wrangler/): Manages Zotero imports, linked notes, evidence-backed tags and scoped native full-text discovery.
 
 ### [teaching](teaching/)
 

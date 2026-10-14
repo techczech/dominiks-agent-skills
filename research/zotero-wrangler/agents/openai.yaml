@@ -1,0 +1,4 @@
+interface:
+  display_name: "Zotero Wrangler"
+  short_description: "Manage Zotero imports, notes, tags and full text"
+  default_prompt: "Use $zotero-wrangler to prepare a reviewable literature import into my Zotero collection."

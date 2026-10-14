@@ -1,0 +1,100 @@
+{
+  "collections": [
+    {
+      "key": "ABCDEFGH",
+      "purpose": "Fictional reading set and linked reading notes",
+      "limits": "Mock Data only; not an eligible study set"
+    },
+    {
+      "key": "CHILDCAA",
+      "purpose": "Fictional methods search stream",
+      "limits": "Search-stream membership, not independent screening"
+    }
+  ],
+  "papers": [
+    {
+      "key": "PARENTAA",
+      "status": "source-backed",
+      "annotation": "Fictional saved annotation says Example Translator and human backtranslation were used. This is Mock Data, not an actual study.",
+      "source": {
+        "url": "https://example.org/fictional-paper",
+        "locator": "Fictional Methods, page 2",
+        "access": "saved annotation"
+      },
+      "provenance": [
+        {
+          "source": "Mock Data fixture",
+          "query": "Fictional methods search"
+        }
+      ],
+      "reading_priority": {
+        "value": 4,
+        "basis": "abstract judgement",
+        "evidence": "Fictional assessor considers it useful for a fictional methods question; not study quality"
+      },
+      "availability": {
+        "status": "not assessed",
+        "limits": "Fictional source; no repository or experiments"
+      },
+      "follow_up": [
+        "Read primary full text before citing findings",
+        "Check model date, data licence and reviewer qualifications"
+      ],
+      "features": [
+        {
+          "tag": "Tool used — Example Translator",
+          "kind": "empirical-use",
+          "assessor": "Fictional assessor",
+          "evidence": {
+            "source": "https://example.org/fictional-paper",
+            "locator": "Fictional Methods, page 2",
+            "statement": "Fictional methods explicitly report tool use",
+            "access": "saved annotation"
+          }
+        },
+        {
+          "tag": "Method used — Human backtranslation",
+          "kind": "empirical-use",
+          "assessor": "Fictional assessor",
+          "evidence": {
+            "source": "https://example.org/fictional-paper",
+            "locator": "Fictional Methods, page 2",
+            "statement": "Fictional methods explicitly report human backtranslation",
+            "access": "saved annotation"
+          }
+        },
+        {
+          "tag": "Guidance — Target-user pretesting",
+          "kind": "guidance",
+          "assessor": "Fictional assessor",
+          "evidence": {
+            "source": "https://example.org/fictional-paper",
+            "locator": "Fictional Methods, page 2",
+            "statement": "Fictional discussion recommends pretesting; not evidence it was performed",
+            "access": "saved annotation"
+          }
+        }
+      ]
+    },
+    {
+      "key": "PARENTBB",
+      "status": "preliminary",
+      "provenance": [
+        {
+          "source": "Mock Data fixture",
+          "query": "Fictional search stream"
+        }
+      ],
+      "reading_priority": {
+        "value": 3,
+        "basis": "title-only provisional",
+        "evidence": "Fictional title-only reading triage; reassess after reading"
+      },
+      "features": [],
+      "follow_up": [
+        "Obtain genuine abstract",
+        "Assess relevance and methods; no feature tags yet"
+      ]
+    }
+  ]
+}

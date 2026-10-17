@@ -1,6 +1,6 @@
 ---
 name: doc-editorial
-description: "Edit documents for clarity and structure."
+description: "Runs interactive editorial workflows on markdown docs: structure audits, voice review, terminology checks and fact-checking. Proposes each change and asks before editing. Use when auditing or editing a docs folder, or setting up an editorial workspace."
 ---
 
 # Doc Editorial Skill

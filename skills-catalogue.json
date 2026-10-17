@@ -7,31 +7,37 @@
  "explainer": [
   {
    "id": "what-a-skill-is",
+   "section": "about",
    "heading": "What a skill is",
    "text": "A skill is a folder with instructions for agents on how to perform certain tasks consistently."
   },
   {
    "id": "whats-in-the-folder",
+   "section": "about",
    "heading": "What is in the folder",
    "text": "The folder contains a `SKILL.md` file that describes what the skill does and links to other instructions in a `references/` folder or to scripts the agent can run in a `scripts/` folder. Some skills have only a single file; others are extensive collections of instructions and scripts, and some also contain `assets/` such as images. Some skills depend on other apps being installed on your machine."
   },
   {
    "id": "installing-a-skill",
+   "section": "install",
    "heading": "Installing a skill",
    "text": "To install a skill means registering it with your agent, so it can use the skill when needed, and putting it in a folder on your computer that the agent can access. You can install a skill as it is, ask the agent to modify it for your purposes, or have it build a new skill to fit your workflow. There are three ways to install one."
   },
   {
    "id": "check-before-you-install",
+   "section": "install",
    "heading": "Check before you install",
    "text": "Always ask your agent to review a skill before you use it, to make sure it has no hidden instructions and no scripts that have bugs or are malicious."
   },
   {
    "id": "which-agents-and-models",
+   "section": "about",
    "heading": "Which agents and models",
    "text": "Agent skills are a universal standard and work with any desktop agent, and now with some chatbots. Some skills have instructions that assume the capabilities of a certain model or agent. They will still work with any model, but the model may be less reliable on those tasks. For example, the image-to-design skill assumes the agent can generate images; at the time of writing, Codex and the ChatGPT desktop app can do this."
   },
   {
    "id": "review-your-skills-over-time",
+   "section": "about",
    "heading": "Review your skills over time",
    "text": "As the models behind agents get better, the need for some skills decreases because the models can already make good decisions. A skill can even become counterproductive when it goes against the agent's ability to make good decisions. Review your skills periodically to make sure they still serve their intended purpose."
   }
@@ -100,19 +106,23 @@
   {
    "id": "start",
    "title": "Start here",
-   "blurb": "Three skills to try first.",
+   "blurb": "Set up your agent, then make your first document.",
    "steps": [
     {
+     "skill": "ai-working-style-builder",
+     "why": "Describe how you work and what you need from an AI tool."
+    },
+    {
+     "skill": "agents-md-streamline",
+     "why": "Turn that into a short instruction file your agent will follow."
+    },
+    {
+     "skill": "global-agent-instructions",
+     "why": "Install the same instructions in every agent you use."
+    },
+    {
      "skill": "single-html-document",
-     "why": "Start with something you can see: ask for a one-page explainer and open it in your browser."
-    },
-    {
-     "skill": "readability-skill",
-     "why": "Run it on the text you just made, so you can compare the before and after."
-    },
-    {
-     "skill": "claim-fact-checker",
-     "why": "Check the facts last, once the wording has settled."
+     "why": "Then make something you can see: ask for a one-page explainer and open it in your browser."
     }
    ]
   },
@@ -136,6 +146,10 @@
     {
      "skill": "claim-fact-checker",
      "why": "Check the claims in your own write-up against its sources."
+    },
+    {
+     "skill": "anonymise",
+     "why": "Remove names and contact details from transcripts or survey responses before you share them."
     },
     {
      "skill": "ai-model-benchmarks",
@@ -182,10 +196,6 @@
     {
      "skill": "claim-fact-checker",
      "why": "Check every factual claim against its sources."
-    },
-    {
-     "skill": "anonymise",
-     "why": "Remove personal details before you share the draft."
     }
    ]
   },
@@ -215,37 +225,14 @@
      "why": "Ask people to test the result and collect their answers in one place."
     }
    ]
-  },
-  {
-   "id": "agents",
-   "title": "Setting up your agents",
-   "blurb": "Make an agent follow your way of working.",
-   "steps": [
-    {
-     "skill": "ai-working-style-builder",
-     "why": "Describe how you work and what you need from an AI tool."
-    },
-    {
-     "skill": "agents-md-streamline",
-     "why": "Turn that into a short instruction file your agent will follow."
-    },
-    {
-     "skill": "global-agent-instructions",
-     "why": "Install the same instructions in every agent you use."
-    },
-    {
-     "skill": "skill-explorer",
-     "why": "Read other people's skills to see how they are built."
-    }
-   ]
   }
  ],
  "apps": [
   {
    "skill": "dev-traffic-control",
    "app": "Dev Traffic Control",
-   "what": "A desktop app where agents file test requests and reviews, and you answer them.",
-   "url": null
+   "what": "A Mac app where your coding agents send you checks, design reviews and handoffs, and you answer them.",
+   "url": "https://techczech.github.io/dev-traffic-control/"
   },
   {
    "skill": "writeflex",
@@ -361,7 +348,6 @@
    "category": "writing",
    "summary": "Finds and redacts personal information in text on your own machine with an open-weight model, with no cloud service.",
    "jobs": [
-    "writing",
     "research"
    ],
    "needs": [
@@ -399,8 +385,7 @@
    "summary": "Checks every factual claim in a report against its sources, one isolated checker per claim, and writes findings and a fix plan.",
    "jobs": [
     "research",
-    "writing",
-    "teaching"
+    "writing"
    ],
    "needs": [],
    "when": "You have a report, review or news item and want each claim checked before it goes out.",
@@ -652,8 +637,7 @@
    "category": "dev",
    "summary": "Turns a SKILL.md file into an interactive web page showing its structure, code and connections.",
    "jobs": [
-    "building",
-    "agent-setup"
+    "building"
    ],
    "needs": [],
    "when": "You want to understand a skill someone else wrote, or explain one to a class.",

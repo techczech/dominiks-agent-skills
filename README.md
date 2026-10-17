@@ -59,6 +59,10 @@ Images, audio and video: generation, transcription, speech and analysis.
 - [text-to-speech-skill](https://github.com/techczech/text-to-speech-skill): Generates speech locally on Apple Silicon with several open voice models, including voice cloning and Czech. (separate repository)
 - [video-analysis](media/video-analysis/): Describes, summarises or answers questions about a video on your own machine with a local model.
 
+### [philosophy-for-agents](philosophy-for-agents/)
+
+- [judgement-vs-code](philosophy-for-agents/judgement-vs-code/): Helps an agent decide when a task needs reading and judgement rather than string matching.
+
 ### [research](research/)
 
 Research workflows: papers, sources, translation, corpus linguistics and model benchmarks.

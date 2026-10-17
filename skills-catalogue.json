@@ -558,6 +558,23 @@
    "extraLinks": []
   },
   {
+   "name": "judgement-vs-code",
+   "id": "skill-judgement-vs-code",
+   "category": "philosophy-for-agents",
+   "summary": "Helps an agent decide when a task needs reading and judgement rather than string matching.",
+   "jobs": [
+    "building",
+    "agent-setup"
+   ],
+   "needs": [],
+   "when": "Your agent is about to write code that processes language or document content.",
+   "status": "published",
+   "link": "https://github.com/techczech/dominiks-agent-skills/tree/main/philosophy-for-agents/judgement-vs-code",
+   "external": false,
+   "repo": null,
+   "extraLinks": []
+  },
+  {
    "name": "paper-reviewer-skill",
    "id": "skill-paper-reviewer-skill",
    "category": "research",
@@ -829,23 +846,6 @@
    ],
    "needs": [],
    "when": "You want an agent's reports, documentation or web copy to be plain and specific.",
-   "status": "coming",
-   "link": null,
-   "external": false,
-   "repo": null,
-   "extraLinks": []
-  },
-  {
-   "name": "judgement-vs-code",
-   "id": "skill-judgement-vs-code",
-   "category": "estate",
-   "summary": "Helps an agent decide when a task needs reading and judgement rather than string matching.",
-   "jobs": [
-    "building",
-    "agent-setup"
-   ],
-   "needs": [],
-   "when": "Your agent is about to write code that processes language or document content.",
    "status": "coming",
    "link": null,
    "external": false,

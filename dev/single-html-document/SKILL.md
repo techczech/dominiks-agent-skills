@@ -1,29 +1,30 @@
 ---
 name: single-html-document
-description: "Build polished single-file HTML documents."
+description: "Builds a document as a normal website from Markdown/YAML source, then packages it as one offline HTML file and delivers the editable source with it. Use for a single-file HTML report, handout, slide deck or review workbook that opens from disk."
 ---
 
 # Single-File HTML Documents
 
-Build the website first. Package it second.
+Build the website first. Package it second. Deliver the editable source with it.
 
-Treat single-file HTML as a delivery format, not an authoring format. Keep content, styling, scripts, media, interaction state, and export contracts separate while building the project, then collapse the finished document into one browser-openable file only after the normal website works.
+Treat single-file HTML as a delivery format, not an authoring format. Keep content, styling, scripts, media, interaction state, and export contracts separate while building the project, then collapse the finished document into one browser-openable file only after the normal website works. The canonical authored source for every user-facing string is Markdown with YAML front matter; the HTML is generated output. Read [references/editable-source.md](references/editable-source.md) before authoring or revising a deliverable.
 
 ## Non-Negotiable Principle
 
 The delivered document is one modern, polished HTML file that contains the full reading or working experience.
 
-- Do not make text notes, Markdown, JSON, transcripts, manifests, source documents, or review plans available only as downloads or adjacent files.
-- Any text file needed for understanding the document must be incorporated into the page as rendered content, searchable content, an appendix, source drawer, or embedded provenance section.
+- Do not make the Markdown source available only as a detached export, download, or provenance appendix. It must be the editable source that drives the build.
+- Keep every authored user-facing string in Markdown with YAML front matter, including prose, guides, prompts, headings, navigation, labels, placeholders, help, errors, status messages, accessibility labels, and calendar/export copy. Inline HTML markup is allowed in Markdown where needed for rendering.
+- Any local source text needed for understanding the document must be incorporated into the page as rendered content, searchable content, an appendix, source drawer, or embedded provenance section.
 - Downloads are reserved for files that genuinely need separate distribution, especially PDFs, CSVs, spreadsheets, slide decks, or other binary/tabular attachments.
 - External links are acceptable as citations or live service embeds, but they are not a substitute for incorporating the local source text needed by the document.
-- If the document collects notes, annotations, edits, ratings, screenshots, or audio, those are first-class document data with a versioned export contract.
+- If the document collects notes, annotations, edits, ratings, screenshots, or audio, those are runtime user-entered or imported data, distinct from authored copy, with a versioned export contract.
 - The final file should feel like a designed product, not a plain generated dump.
 
 ## Start Here
 
 - Reuse an existing project if the user already has one. Otherwise default to Vite + React + TypeScript for new work.
-- Keep content in Markdown with YAML front matter, then compile it into generated JSON or TypeScript before rendering.
+- Keep all authored content and UI copy in Markdown with YAML front matter, then compile it into generated JSON or TypeScript before rendering. Do not maintain a second authored copy in HTML, JavaScript, JSON, or TypeScript.
 - Keep author-time CSS and JavaScript in separate files. Inline only at the packaging stage.
 - For interactive feedback, annotation, or edit-diff documents, keep the reviewed data, commented client JavaScript, and generated HTML separate. Strip comments and package the distribution script only in the build step.
 - Build a normal multi-file site first. Do not try to design directly inside one giant HTML file.
@@ -48,20 +49,23 @@ Prefer reusing a proven content-build pattern over inventing a new schema from s
 
 1. Inspect the source material, existing project, and delivery goal.
    Identify whether the user is starting from Markdown content, a PPT-derived site, a research document, an explainer, a review workbook, an editable draft, or an already-built website that now needs a single-file export.
-2. Choose the content model before touching UI code.
+2. Establish the editable source contract before touching UI code.
+   Create or identify the source folder containing Markdown files with YAML front matter. Inventory all authored copy, including interface, accessibility, fallback, error, status, and export/calendar strings. If an existing HTML deliverable has hardcoded copy, extract and reconcile it into Markdown without silently overwriting user edits.
+3. Choose the content model before touching UI code.
    Read [references/content-model.md](references/content-model.md) when designing or normalizing the schema.
-3. Choose the visual/interaction contract before touching UI code.
+4. Choose the visual/interaction contract before touching UI code.
    If the document is meant to be interactive or reviewable, read [references/html-effectiveness-patterns.md](references/html-effectiveness-patterns.md), name the closest source pattern, and list the pattern behaviours that must survive adaptation.
    If no source pattern fits, stop and suggest a new pattern contract to the user instead of silently inventing one.
    Build a narrow prototype only after the user accepts the proposal; update the pattern reference only after the prototype is approved.
-4. Build the normal website first.
+5. Build the normal website first.
    Make sure it works as a regular multi-file site with separated JS, CSS, and assets before collapsing it.
-5. Choose the packaging mode.
+6. Choose the packaging mode.
    Read [references/architecture.md](references/architecture.md) for the decision table and implementation patterns.
-6. Package the site into a single deliverable.
-   Keep the output browser-openable from disk. Avoid leaving external assets, split bundles, or runtime fetches.
-7. Verify the packaged file under realistic conditions.
+7. Package the site into a single deliverable and deliver the source folder alongside it.
+   Keep the output browser-openable from disk. Avoid leaving external assets, split bundles, or runtime fetches. Document the exact rebuild command in the source folder README or build notes.
+8. Verify the packaged file and source contract under realistic conditions.
    Open it from `file://`, test navigation, media, search, downloads, and attachment export. Run `scripts/audit-single-html.mjs` on the final file.
+   Make one representative edit to a Markdown source file, rebuild with the documented command, and verify that the changed text reaches the generated HTML. Check that authored strings in templates and generated output have a Markdown source reference; treat reader-entered notes and imported live data separately.
 
 ## Choose The Packaging Mode
 
@@ -78,9 +82,10 @@ Do not use Web Bundles as the primary plan. They remain experimental and were re
 ## Content Rules
 
 - Separate content, presentation, and packaging concerns.
-- Prefer `content/` plus a compile step over fetching raw Markdown at runtime.
+- Deliver a source folder containing Markdown/YAML, the compiler/build entry point, and a README or build note with the rebuild command. Prefer `content/` plus a compile step over fetching raw Markdown at runtime.
+- Use Markdown as the canonical editable source for every authored string. Generated JSON/TypeScript is an intermediate; HTML and JavaScript must not become the only editable home of copy.
 - Keep theme tokens separate from narrative content.
-- Store complex blocks as structured fields or sidecar JSON/YAML, not as ad-hoc HTML fragments.
+- Store complex blocks as structured fields in Markdown front matter or Markdown body, not as ad-hoc HTML fragments. Sidecar JSON/YAML may carry generated or non-authored machine metadata, but must not become the canonical home for authored text.
 - Treat attachments as manifest entries with metadata and payload, not as giant literal `href="data:..."` links sprinkled through templates.
 - Precompute navigation, search indexes, figure metadata, and attachment metadata at build time.
 
@@ -143,6 +148,7 @@ Architecture and packaging:
 Content model and authoring:
 
 - [references/content-model.md](references/content-model.md) — Markdown/YAML schema layers (document, page, blocks, theme, interaction modes).
+- [references/editable-source.md](references/editable-source.md) — canonical Markdown source contract, source-folder delivery, rebuild documentation, and source-to-output verification.
 - [references/page-contract.md](references/page-contract.md) — page-level invariants every deliverable honours: sidebar TOC by default, no horizontal page scroll, no overflow inside blocks, predictable diagram-edge routing, print and offline safety. Required reading before designing a new shell or archetype.
 - [references/icons.md](references/icons.md) — Lucide-by-name icon system. Authors reference icons by name (`icon: "shield-alert"`); the build tree-shakes so only used icons land in the output. Catalogue and how to add icons live here.
 - [references/patterns/_protocol.md](references/patterns/_protocol.md) — page-pattern layer (parallel to blocks). Patterns are reusable page features (TOC, global search, keyboard help, future patterns) that manifests opt into and the build tree-shakes. Per-pattern docs in `references/patterns/<name>.md`; renderers in `scripts/patterns/<name>.js`.
@@ -213,6 +219,9 @@ and a textual masthead for institutional identity.
 
 - Make the site work normally before packaging it.
 - Build the final output and open it from disk in a modern browser.
+- Confirm the delivered source folder contains the canonical Markdown/YAML files and a documented rebuild command.
+- Edit a representative Markdown string, rebuild, and verify the changed string appears in the generated HTML; revert or preserve the edit according to the user's requested change.
+- Audit authored copy across templates, fallback/error/status/accessibility paths, and export/calendar text for a Markdown source reference. Runtime user-entered or imported data is not authored copy.
 - Run:
 
 ```bash

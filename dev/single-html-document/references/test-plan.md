@@ -6,6 +6,8 @@ Use this list on every substantial document before sending it to readers.
 
 - Build the normal website first.
 - Build the packaged `.single.html` file.
+- Confirm the source folder is delivered alongside the HTML and contains Markdown/YAML with YAML front matter for all authored copy plus a documented rebuild command.
+- Change one representative authored string in Markdown, run the documented rebuild command, and verify the changed string reaches the generated HTML. Do not treat a detached Markdown export as evidence that Markdown drives the build.
 - Run `node scripts/audit-single-html.mjs <file> --strict`.
 - Run `node scripts/test-feedback-media-runtime.mjs` when annotation, feedback, or edit-diff export helpers are used.
 - Confirm size is within the agreed budget: usually 10-30 MB, with an explicit exception for 30-100 MB documents.
@@ -50,12 +52,15 @@ Use these checks whenever the deliverable selected a source pattern from
 
 ## Content Checks
 
+- Confirm every authored user-facing string has a canonical Markdown source reference: prose, guides, prompts, headings, navigation, labels, placeholders, help, errors, status messages, accessibility labels, and calendar/export copy.
+- Inspect templates and fallback paths for hardcoded authored strings that bypass Markdown. Inline HTML markup inside Markdown is acceptable; an HTML or JavaScript-only copy source is not.
 - Confirm all local source text needed to understand the document is rendered in the page.
 - Confirm source appendix or provenance sections are searchable.
 - Confirm citations or external links are clearly supplementary, not required for basic comprehension.
 - Confirm the document can still be understood if JavaScript fails, at least at the level of static reading.
 - Confirm the cover, title, date, version, and audience are clear.
 - Confirm generated annotation or edit exports use versioned schemas and stable target IDs.
+- Confirm runtime user-entered notes, annotations, edits, ratings, screenshots, audio, and imported live data are clearly separated from authored copy and covered by their own export contract.
 
 ## Privacy And Payload Checks
 

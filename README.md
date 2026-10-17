@@ -64,6 +64,7 @@ Images, audio and video: generation, transcription, speech and analysis.
 - [expository-writing](philosophy-for-agents/expository-writing/): Keeps an agent's prose literal and specific: every sentence says something checkable.
 - [judgement-vs-code](philosophy-for-agents/judgement-vs-code/): Helps an agent decide when a task needs reading and judgement rather than string matching.
 - [metaphor](philosophy-for-agents/metaphor/): Helps an agent use and examine metaphors without over-extending them.
+- [text-as-graph](philosophy-for-agents/text-as-graph/): Treats documents and courses as connected parts so they can be reused and recombined without copies drifting.
 
 ### [research](research/)
 

@@ -764,6 +764,23 @@
    "extraLinks": []
   },
   {
+   "name": "text-as-graph",
+   "id": "skill-text-as-graph",
+   "category": "philosophy-for-agents",
+   "summary": "Treats documents and courses as connected parts so they can be reused and recombined without copies drifting.",
+   "jobs": [
+    "teaching",
+    "building"
+   ],
+   "needs": [],
+   "when": "You are designing how documents, courses or slides are structured and reused.",
+   "status": "published",
+   "link": "https://github.com/techczech/dominiks-agent-skills/tree/main/philosophy-for-agents/text-as-graph",
+   "external": false,
+   "repo": null,
+   "extraLinks": []
+  },
+  {
    "name": "text-to-image-skill",
    "id": "skill-text-to-image-skill",
    "category": "media",
@@ -865,23 +882,6 @@
    "when": "You want an agent to import references, fetch PDFs or tidy collections in Zotero.",
    "status": "published",
    "link": "https://github.com/techczech/dominiks-agent-skills/tree/main/research/zotero-wrangler",
-   "external": false,
-   "repo": null,
-   "extraLinks": []
-  },
-  {
-   "name": "text-as-graph",
-   "id": "skill-text-as-graph",
-   "category": "teaching",
-   "summary": "Treats documents and courses as connected parts so they can be reused and recombined without copies drifting.",
-   "jobs": [
-    "teaching",
-    "building"
-   ],
-   "needs": [],
-   "when": "You are designing how documents, courses or slides are structured and reused.",
-   "status": "coming",
-   "link": null,
    "external": false,
    "repo": null,
    "extraLinks": []

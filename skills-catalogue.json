@@ -509,6 +509,23 @@
    "extraLinks": []
   },
   {
+   "name": "expository-writing",
+   "id": "skill-expository-writing",
+   "category": "philosophy-for-agents",
+   "summary": "Keeps an agent's prose literal and specific: every sentence says something checkable.",
+   "jobs": [
+    "writing",
+    "agent-setup"
+   ],
+   "needs": [],
+   "when": "You want an agent's reports, documentation or web copy to be plain and specific.",
+   "status": "published",
+   "link": "https://github.com/techczech/dominiks-agent-skills/tree/main/philosophy-for-agents/expository-writing",
+   "external": false,
+   "repo": null,
+   "extraLinks": []
+  },
+  {
    "name": "global-agent-instructions",
    "id": "skill-global-agent-instructions",
    "category": "estate",
@@ -831,23 +848,6 @@
    "when": "You want an agent to import references, fetch PDFs or tidy collections in Zotero.",
    "status": "published",
    "link": "https://github.com/techczech/dominiks-agent-skills/tree/main/research/zotero-wrangler",
-   "external": false,
-   "repo": null,
-   "extraLinks": []
-  },
-  {
-   "name": "expository-writing",
-   "id": "skill-expository-writing",
-   "category": "writing",
-   "summary": "Keeps an agent's prose literal and specific: every sentence says something checkable.",
-   "jobs": [
-    "writing",
-    "agent-setup"
-   ],
-   "needs": [],
-   "when": "You want an agent's reports, documentation or web copy to be plain and specific.",
-   "status": "coming",
-   "link": null,
    "external": false,
    "repo": null,
    "extraLinks": []

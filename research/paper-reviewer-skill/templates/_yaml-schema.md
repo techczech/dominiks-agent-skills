@@ -70,7 +70,7 @@ review_style: gelman-review  # or quick-read, methods-deep-dive, critical-review
 paper_key: ABCD1234
 paper_title: "Paper title"
 reviewed_date: "2026-02-11T14:30:00Z"
-reviewer: "Claude Code (claude-sonnet-4-5)"
+reviewer: "<agent> (<model id>)"
 status: completed  # or in_progress, pending
 duration_minutes: 45
 tags:
@@ -322,7 +322,7 @@ review_style: gelman-review
 paper_key: ABCD1234
 paper_title: "Invented title about a study of reading support tools"
 reviewed_date: "2026-02-11T14:30:00Z"
-reviewer: "Claude Code (claude-sonnet-4-5)"
+reviewer: "<agent> (<model id>)"
 status: completed
 duration_minutes: 45
 tags:

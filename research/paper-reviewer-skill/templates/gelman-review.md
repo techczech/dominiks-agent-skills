@@ -13,7 +13,7 @@ review_style: gelman-review
 paper_key: {ZOTERO_KEY}
 paper_title: "{FULL_TITLE}"
 reviewed_date: "{YYYY-MM-DDTHH:MM:SSZ}"
-reviewer: "Claude Code (claude-sonnet-4-5)"
+reviewer: "<agent> (<model id>)"
 status: completed
 duration_minutes: {MINUTES}
 tags:

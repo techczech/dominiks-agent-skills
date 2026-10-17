@@ -1,6 +1,6 @@
 ---
 name: project-changelog
-description: "Maintain repo-local changelogs."
+description: "Keeps a repo's changelog/ folder in order: change notes, decisions, phases and backlog items under one frontmatter schema, with helper scripts. Use when adding an entry, setting up changelog/ in a new repo, fixing an inconsistent one, or closing a backlog item."
 ---
 
 # Project Changelog

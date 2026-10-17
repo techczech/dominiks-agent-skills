@@ -42,6 +42,7 @@ Building and checking software, designs and documents.
 
 Running a setup with several agents, tools and repositories.
 
+- [agent-roles](estate/agent-roles/): Orchestrator playbook for Claude Code: which model plans, builds, fixes, reviews and tests, with dated seat choices, cost evidence and paste-in briefs.
 - [agents-md-streamline](estate/agents-md-streamline/): Writes and tightens AGENTS.md and CLAUDE.md files so they tell an agent what to do, not the project's history.
 - [ai-working-style-builder](estate/ai-working-style-builder/): Helps you describe how you work so AI tools fit your communication, attention and record-keeping habits.
 - [global-agent-instructions](estate/global-agent-instructions/): Keeps one global instruction file and installs it into Codex, Claude Code, Gemini CLI, OpenCode and pi.
@@ -81,7 +82,7 @@ Presentations and teaching content.
 Editing, anonymising and organising writing.
 
 - [anonymise](writing/anonymise/): Finds and redacts personal information in text on your own machine with an open-weight model, with no cloud service.
-- [doc-editorial-skill](writing/doc-editorial-skill/): Edits documents for clarity and structure.
+- [doc-editorial-skill](writing/doc-editorial-skill/): Audits, reviews and fact-checks markdown documentation, proposing each change and asking before editing.
 - [readability-skill](https://github.com/techczech/readability-skill): Helps write more readable text and design more readable slides. (separate repository)
 - [writeflex](writing/writeflex/): Lets agents read, organise and prepare Markdown content for the WriteFlex app.
 

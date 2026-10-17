@@ -4,6 +4,7 @@ Running a setup with several agents, tools and repositories.
 
 [All skills](../README.md)
 
+- [agent-roles](agent-roles/): Orchestrator playbook for Claude Code: which model plans, builds, fixes, reviews and tests, with dated seat choices, cost evidence and paste-in briefs.
 - [agents-md-streamline](agents-md-streamline/): Writes and tightens AGENTS.md and CLAUDE.md files so they tell an agent what to do, not the project's history.
 - [ai-working-style-builder](ai-working-style-builder/): Helps you describe how you work so AI tools fit your communication, attention and record-keeping habits.
 - [global-agent-instructions](global-agent-instructions/): Keeps one global instruction file and installs it into Codex, Claude Code, Gemini CLI, OpenCode and pi.

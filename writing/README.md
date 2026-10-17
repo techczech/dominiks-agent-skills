@@ -5,7 +5,7 @@ Editing, anonymising and organising writing.
 [All skills](../README.md)
 
 - [anonymise](anonymise/): Finds and redacts personal information in text on your own machine with an open-weight model, with no cloud service.
-- [doc-editorial-skill](doc-editorial-skill/): Edits documents for clarity and structure.
+- [doc-editorial-skill](doc-editorial-skill/): Audits, reviews and fact-checks markdown documentation, proposing each change and asking before editing.
 - [readability-skill](https://github.com/techczech/readability-skill): Helps write more readable text and design more readable slides. (separate repository)
 - [writeflex](writeflex/): Lets agents read, organise and prepare Markdown content for the WriteFlex app.
 

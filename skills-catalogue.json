@@ -196,6 +196,10 @@
     {
      "skill": "claim-fact-checker",
      "why": "Check every factual claim against its sources."
+    },
+    {
+     "skill": "writeflex",
+     "why": "Keep your drafts and collections in the WriteFlex app, where an agent can read and organise them with you."
     }
    ]
   },
@@ -204,6 +208,14 @@
    "title": "For people building apps",
    "blurb": "From an idea to a checked prototype.",
    "steps": [
+    {
+     "skill": "ux-journeys",
+     "why": "Write down who the user is and what they do at each step."
+    },
+    {
+     "skill": "design-first-dev",
+     "why": "Take those journeys through drawn designs to a locked mockup before any code."
+    },
     {
      "skill": "image-to-design",
      "why": "Explore what the app could look like with generated mockups."
@@ -444,6 +456,22 @@
    "link": "https://github.com/techczech/corpus-tools-skill",
    "external": true,
    "repo": "https://github.com/techczech/corpus-tools-skill",
+   "extraLinks": []
+  },
+  {
+   "name": "design-first-dev",
+   "id": "skill-design-first-dev",
+   "category": "dev",
+   "summary": "Takes an app or feature from user journeys and drawn designs to a locked mockup before any code is written.",
+   "jobs": [
+    "building"
+   ],
+   "needs": [],
+   "when": "You are about to build an app or a feature and want the design settled before any code is written.",
+   "status": "published",
+   "link": "https://github.com/techczech/dominiks-agent-skills/tree/main/dev/design-first-dev",
+   "external": false,
+   "repo": null,
    "extraLinks": []
   },
   {
@@ -775,22 +803,6 @@
    "extraLinks": []
   },
   {
-   "name": "design-first-dev",
-   "id": "skill-design-first-dev",
-   "category": "dev",
-   "summary": "Takes an app or feature from user journeys and drawn designs to a locked mockup before any code is written.",
-   "jobs": [
-    "building"
-   ],
-   "needs": [],
-   "when": "",
-   "status": "coming",
-   "link": null,
-   "external": false,
-   "repo": null,
-   "extraLinks": []
-  },
-  {
    "name": "expository-writing",
    "id": "skill-expository-writing",
    "category": "writing",
@@ -800,7 +812,7 @@
     "agent-setup"
    ],
    "needs": [],
-   "when": "",
+   "when": "You want an agent's reports, documentation or web copy to be plain and specific.",
    "status": "coming",
    "link": null,
    "external": false,
@@ -813,11 +825,11 @@
    "category": "estate",
    "summary": "Helps an agent decide when a task needs reading and judgement rather than string matching.",
    "jobs": [
-    "agent-setup",
-    "building"
+    "building",
+    "agent-setup"
    ],
    "needs": [],
-   "when": "",
+   "when": "Your agent is about to write code that processes language or document content.",
    "status": "coming",
    "link": null,
    "external": false,
@@ -831,10 +843,10 @@
    "summary": "Helps an agent use and examine metaphors without over-extending them.",
    "jobs": [
     "writing",
-    "research"
+    "teaching"
    ],
    "needs": [],
-   "when": "",
+   "when": "You are explaining something with a metaphor, or using one to frame a design.",
    "status": "coming",
    "link": null,
    "external": false,
@@ -848,10 +860,10 @@
    "summary": "Treats documents and courses as connected parts so they can be reused and recombined without copies drifting.",
    "jobs": [
     "teaching",
-    "writing"
+    "building"
    ],
    "needs": [],
-   "when": "",
+   "when": "You are designing how documents, courses or slides are structured and reused.",
    "status": "coming",
    "link": null,
    "external": false,
@@ -867,7 +879,7 @@
     "building"
    ],
    "needs": [],
-   "when": "",
+   "when": "You are starting design work and need to agree who the user is and what they do at each step.",
    "status": "coming",
    "link": null,
    "external": false,

@@ -32,6 +32,7 @@ sits beside it in the same folder.
 Building and checking software, designs and documents.
 
 - [cognitive-walkthrough](dev/cognitive-walkthrough/): Runs a cognitive walkthrough on a mockup, screenshot or live page to check how easily a new user can learn it, and writes a learnability report.
+- [design-first-dev](dev/design-first-dev/): Takes an app or feature from user journeys and drawn designs to a locked mockup before any code is written.
 - [dev-traffic-control](dev/dev-traffic-control/): Lets agents file test requests and reviews in Dev Traffic Control, a desktop review app, and collect the answers.
 - [image-to-design](dev/image-to-design/): Takes a design from a written brief through generated mockups to HTML/CSS, keeping every prompt, image and revision on disk.
 - [project-changelog](dev/project-changelog/): Keeps a structured changelog folder in a repository alongside its git history.

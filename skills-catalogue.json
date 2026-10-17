@@ -592,6 +592,23 @@
    "extraLinks": []
   },
   {
+   "name": "metaphor",
+   "id": "skill-metaphor",
+   "category": "philosophy-for-agents",
+   "summary": "Helps an agent use and examine metaphors without over-extending them.",
+   "jobs": [
+    "writing",
+    "teaching"
+   ],
+   "needs": [],
+   "when": "You are explaining something with a metaphor, or using one to frame a design.",
+   "status": "published",
+   "link": "https://github.com/techczech/dominiks-agent-skills/tree/main/philosophy-for-agents/metaphor",
+   "external": false,
+   "repo": null,
+   "extraLinks": []
+  },
+  {
    "name": "paper-reviewer-skill",
    "id": "skill-paper-reviewer-skill",
    "category": "research",
@@ -848,23 +865,6 @@
    "when": "You want an agent to import references, fetch PDFs or tidy collections in Zotero.",
    "status": "published",
    "link": "https://github.com/techczech/dominiks-agent-skills/tree/main/research/zotero-wrangler",
-   "external": false,
-   "repo": null,
-   "extraLinks": []
-  },
-  {
-   "name": "metaphor",
-   "id": "skill-metaphor",
-   "category": "writing",
-   "summary": "Helps an agent use and examine metaphors without over-extending them.",
-   "jobs": [
-    "writing",
-    "teaching"
-   ],
-   "needs": [],
-   "when": "You are explaining something with a metaphor, or using one to frame a design.",
-   "status": "coming",
-   "link": null,
    "external": false,
    "repo": null,
    "extraLinks": []

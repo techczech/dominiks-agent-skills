@@ -1,0 +1,894 @@
+{
+ "schema": 1,
+ "basePath": "/agents/skills/",
+ "title": "Agent skills by Dominik Lukeš",
+ "repo": "https://github.com/techczech/dominiks-agent-skills",
+ "pagesUrl": "https://techczech.github.io/dominiks-agent-skills/",
+ "explainer": [
+  {
+   "id": "what-a-skill-is",
+   "heading": "What a skill is",
+   "text": "A skill is a folder with instructions for agents on how to perform certain tasks consistently."
+  },
+  {
+   "id": "whats-in-the-folder",
+   "heading": "What is in the folder",
+   "text": "The folder contains a `SKILL.md` file that describes what the skill does and links to other instructions in a `references/` folder or to scripts the agent can run in a `scripts/` folder. Some skills have only a single file; others are extensive collections of instructions and scripts, and some also contain `assets/` such as images. Some skills depend on other apps being installed on your machine."
+  },
+  {
+   "id": "installing-a-skill",
+   "heading": "Installing a skill",
+   "text": "To install a skill means registering it with your agent, so it can use the skill when needed, and putting it in a folder on your computer that the agent can access. You can install a skill as it is, ask the agent to modify it for your purposes, or have it build a new skill to fit your workflow. There are three ways to install one."
+  },
+  {
+   "id": "check-before-you-install",
+   "heading": "Check before you install",
+   "text": "Always ask your agent to review a skill before you use it, to make sure it has no hidden instructions and no scripts that have bugs or are malicious."
+  },
+  {
+   "id": "which-agents-and-models",
+   "heading": "Which agents and models",
+   "text": "Agent skills are a universal standard and work with any desktop agent, and now with some chatbots. Some skills have instructions that assume the capabilities of a certain model or agent. They will still work with any model, but the model may be less reliable on those tasks. For example, the image-to-design skill assumes the agent can generate images; at the time of writing, Codex and the ChatGPT desktop app can do this."
+  },
+  {
+   "id": "review-your-skills-over-time",
+   "heading": "Review your skills over time",
+   "text": "As the models behind agents get better, the need for some skills decreases because the models can already make good decisions. A skill can even become counterproductive when it goes against the agent's ability to make good decisions. Review your skills periodically to make sure they still serve their intended purpose."
+  }
+ ],
+ "install": [
+  {
+   "id": "install-ask",
+   "title": "Ask your agent to choose",
+   "kind": "prompt",
+   "code": "Look at https://github.com/techczech/dominiks-agent-skills and tell me which of these skills would fit my work. I mainly … Install the ones I pick.",
+   "body": "Open Claude Code, Codex or another agent and paste this prompt. Replace the … with a sentence about your work. The agent reads the repository, suggests skills and installs the ones you agree to."
+  },
+  {
+   "id": "install-cli",
+   "title": "Install with the skills command",
+   "kind": "shell",
+   "code": "npx skills add techczech/dominiks-agent-skills",
+   "body": "Run this in a terminal. It lists the skills in the repository and lets you choose which ones to install. You need Node.js."
+  },
+  {
+   "id": "install-copy",
+   "title": "Copy the skill’s folder",
+   "kind": "shell",
+   "code": "git clone https://github.com/techczech/dominiks-agent-skills\ncp -r dominiks-agent-skills/<category>/<name> ~/.claude/skills/<name>",
+   "body": "Download the repository and copy one skill’s folder into your agent’s skills folder. For Claude Code that is ~/.claude/skills/<name>. Skills marked ‘own repository’ are copied from their own repository in the same way."
+  }
+ ],
+ "jobs": [
+  {
+   "id": "research",
+   "label": "Research with sources",
+   "blurb": "Papers, sources, fact-checking and corpora."
+  },
+  {
+   "id": "writing",
+   "label": "Write and edit",
+   "blurb": "Editing, readability and anonymising."
+  },
+  {
+   "id": "teaching",
+   "label": "Teach and present",
+   "blurb": "Presentations and learning materials."
+  },
+  {
+   "id": "building",
+   "label": "Build software and documents",
+   "blurb": "Software, design and HTML documents."
+  },
+  {
+   "id": "media",
+   "label": "Work with images, audio and video",
+   "blurb": "Generate, transcribe and describe media."
+  },
+  {
+   "id": "agent-setup",
+   "label": "Set up your agents",
+   "blurb": "Instructions and how you work with AI."
+  }
+ ],
+ "needs": {
+  "mac-local": "Runs on your Mac",
+  "app": "Needs one of my apps",
+  "account": "Needs an account"
+ },
+ "paths": [
+  {
+   "id": "start",
+   "title": "Start here",
+   "blurb": "Three skills to try first.",
+   "steps": [
+    {
+     "skill": "single-html-document",
+     "why": "Start with something you can see: ask for a one-page explainer and open it in your browser."
+    },
+    {
+     "skill": "readability-skill",
+     "why": "Run it on the text you just made, so you can compare the before and after."
+    },
+    {
+     "skill": "claim-fact-checker",
+     "why": "Check the facts last, once the wording has settled."
+    }
+   ]
+  },
+  {
+   "id": "researchers",
+   "title": "For researchers",
+   "blurb": "From a PDF to a checked review.",
+   "steps": [
+    {
+     "skill": "academic-pdf-to-mkd",
+     "why": "Turn the PDF into Markdown so the agent can read its text, tables and figures."
+    },
+    {
+     "skill": "zotero-wrangler",
+     "why": "File the paper and your notes in your Zotero library."
+    },
+    {
+     "skill": "paper-reviewer-skill",
+     "why": "Write structured reviews of a paper from your library."
+    },
+    {
+     "skill": "claim-fact-checker",
+     "why": "Check the claims in your own write-up against its sources."
+    },
+    {
+     "skill": "ai-model-benchmarks",
+     "why": "Only if your work compares AI models: build the charts from current data."
+    }
+   ]
+  },
+  {
+   "id": "teachers",
+   "title": "For teachers",
+   "blurb": "From a topic to slides and handouts people can read.",
+   "steps": [
+    {
+     "skill": "readability-skill",
+     "why": "Write the text so that everyone in the room can read it."
+    },
+    {
+     "skill": "single-html-document",
+     "why": "Package a handout or explainer as one file that students can open offline."
+    },
+    {
+     "skill": "talkweaver",
+     "why": "Move the talk itself into the TalkWeaver app."
+    },
+    {
+     "skill": "text-to-image-skill",
+     "why": "Add images last, when you know what each slide needs."
+    }
+   ]
+  },
+  {
+   "id": "writers",
+   "title": "For writers",
+   "blurb": "Draft, edit, check and share.",
+   "steps": [
+    {
+     "skill": "doc-editorial-skill",
+     "why": "Fix the structure first, before you polish sentences you might cut."
+    },
+    {
+     "skill": "readability-skill",
+     "why": "Then make the sentences and the layout easier to read."
+    },
+    {
+     "skill": "claim-fact-checker",
+     "why": "Check every factual claim against its sources."
+    },
+    {
+     "skill": "anonymise",
+     "why": "Remove personal details before you share the draft."
+    }
+   ]
+  },
+  {
+   "id": "builders",
+   "title": "For people building apps",
+   "blurb": "From an idea to a checked prototype.",
+   "steps": [
+    {
+     "skill": "image-to-design",
+     "why": "Explore what the app could look like with generated mockups."
+    },
+    {
+     "skill": "cognitive-walkthrough",
+     "why": "Walk through the design as a first-time user to find where people get stuck."
+    },
+    {
+     "skill": "single-html-document",
+     "why": "Write up the plan or a report as one file anyone can open."
+    },
+    {
+     "skill": "project-changelog",
+     "why": "Record what changed and why as you build."
+    },
+    {
+     "skill": "dev-traffic-control",
+     "why": "Ask people to test the result and collect their answers in one place."
+    }
+   ]
+  },
+  {
+   "id": "agents",
+   "title": "Setting up your agents",
+   "blurb": "Make an agent follow your way of working.",
+   "steps": [
+    {
+     "skill": "ai-working-style-builder",
+     "why": "Describe how you work and what you need from an AI tool."
+    },
+    {
+     "skill": "agents-md-streamline",
+     "why": "Turn that into a short instruction file your agent will follow."
+    },
+    {
+     "skill": "global-agent-instructions",
+     "why": "Install the same instructions in every agent you use."
+    },
+    {
+     "skill": "skill-explorer",
+     "why": "Read other people's skills to see how they are built."
+    }
+   ]
+  }
+ ],
+ "apps": [
+  {
+   "skill": "dev-traffic-control",
+   "app": "Dev Traffic Control",
+   "what": "A desktop app where agents file test requests and reviews, and you answer them.",
+   "url": null
+  },
+  {
+   "skill": "writeflex",
+   "app": "WriteFlex",
+   "what": "A Markdown writing app for collections of documents.",
+   "url": "https://writeflex.app"
+  },
+  {
+   "skill": "talkweaver",
+   "app": "TalkWeaver",
+   "what": "An app for writing, presenting and recording talks.",
+   "url": "https://github.com/techczech/talkweaver-app"
+  }
+ ],
+ "companions": {
+  "label": "Matt Pocock's skills",
+  "url": "https://github.com/mattpocock/skills",
+  "what": "planning skills for grilling an idea, writing a spec and splitting the work into tickets"
+ },
+ "skills": [
+  {
+   "name": "academic-pdf-to-mkd",
+   "id": "skill-academic-pdf-to-mkd",
+   "category": "research",
+   "summary": "Converts academic PDFs, including scans, into Markdown with figures, tables and page images as separate files.",
+   "jobs": [
+    "research"
+   ],
+   "needs": [],
+   "when": "You want a paper or book chapter in a form an agent can read and quote accurately.",
+   "status": "published",
+   "link": "https://github.com/techczech/dominiks-agent-skills/tree/main/research/academic-pdf-to-mkd",
+   "external": false,
+   "repo": null,
+   "extraLinks": []
+  },
+  {
+   "name": "agent-roles",
+   "id": "skill-agent-roles",
+   "category": "estate",
+   "summary": "Orchestrator playbook for Claude Code: which model plans, builds, fixes, reviews and tests, with dated seat choices, cost evidence and paste-in briefs.",
+   "jobs": [
+    "agent-setup",
+    "building"
+   ],
+   "needs": [],
+   "when": "You run Claude Code as the planner and hand building, fixing, review and testing to other models.",
+   "status": "published",
+   "link": "https://github.com/techczech/dominiks-agent-skills/tree/main/estate/agent-roles",
+   "external": false,
+   "repo": null,
+   "extraLinks": []
+  },
+  {
+   "name": "agents-md-streamline",
+   "id": "skill-agents-md-streamline",
+   "category": "estate",
+   "summary": "Writes and tightens AGENTS.md and CLAUDE.md files so they tell an agent what to do, not the project's history.",
+   "jobs": [
+    "agent-setup"
+   ],
+   "needs": [],
+   "when": "Your instruction files have grown long and the agent follows them less well.",
+   "status": "published",
+   "link": "https://github.com/techczech/dominiks-agent-skills/tree/main/estate/agents-md-streamline",
+   "external": false,
+   "repo": null,
+   "extraLinks": []
+  },
+  {
+   "name": "ai-model-benchmarks",
+   "id": "skill-ai-model-benchmarks",
+   "category": "research",
+   "summary": "Builds offline comparison charts and tables of AI models from Artificial Analysis, Arena and OpenRouter data.",
+   "jobs": [
+    "research",
+    "teaching"
+   ],
+   "needs": [
+    "account"
+   ],
+   "when": "You need a current chart of model quality, price or usage for a talk or report.",
+   "status": "published",
+   "link": "https://github.com/techczech/dominiks-agent-skills/tree/main/research/ai-model-benchmarks",
+   "external": false,
+   "repo": null,
+   "extraLinks": []
+  },
+  {
+   "name": "ai-working-style-builder",
+   "id": "skill-ai-working-style-builder",
+   "category": "estate",
+   "summary": "Helps you describe how you work so AI tools fit your communication, attention and record-keeping habits.",
+   "jobs": [
+    "agent-setup"
+   ],
+   "needs": [],
+   "when": "You are starting to work with an agent and want it to fit how you think and write.",
+   "status": "published",
+   "link": "https://github.com/techczech/dominiks-agent-skills/tree/main/estate/ai-working-style-builder",
+   "external": false,
+   "repo": null,
+   "extraLinks": [
+    {
+     "label": "Interactive guide",
+     "url": "https://techczech.github.io/dominiks-agent-skills/ai-interaction-builder/"
+    }
+   ]
+  },
+  {
+   "name": "anonymise",
+   "id": "skill-anonymise",
+   "category": "writing",
+   "summary": "Finds and redacts personal information in text on your own machine with an open-weight model, with no cloud service.",
+   "jobs": [
+    "writing",
+    "research"
+   ],
+   "needs": [
+    "mac-local"
+   ],
+   "when": "You need to remove names and contact details from transcripts or survey responses before sharing them.",
+   "status": "published",
+   "link": "https://github.com/techczech/dominiks-agent-skills/tree/main/writing/anonymise",
+   "external": false,
+   "repo": null,
+   "extraLinks": []
+  },
+  {
+   "name": "cesky-narodni-korpus-skill",
+   "id": "skill-cesky-narodni-korpus-skill",
+   "category": "research",
+   "summary": "Queries the Czech National Corpus (KonText) for concordances, frequencies and collocations from inside an agent.",
+   "jobs": [
+    "research"
+   ],
+   "needs": [
+    "account"
+   ],
+   "when": "You study Czech and want corpus evidence without leaving the agent.",
+   "status": "published",
+   "link": "https://github.com/techczech/cesky-narodni-korpus-skill",
+   "external": true,
+   "repo": "https://github.com/techczech/cesky-narodni-korpus-skill",
+   "extraLinks": []
+  },
+  {
+   "name": "claim-fact-checker",
+   "id": "skill-claim-fact-checker",
+   "category": "research",
+   "summary": "Checks every factual claim in a report against its sources, one isolated checker per claim, and writes findings and a fix plan.",
+   "jobs": [
+    "research",
+    "writing",
+    "teaching"
+   ],
+   "needs": [],
+   "when": "You have a report, review or news item and want each claim checked before it goes out.",
+   "status": "published",
+   "link": "https://github.com/techczech/dominiks-agent-skills/tree/main/research/claim-fact-checker",
+   "external": false,
+   "repo": null,
+   "extraLinks": []
+  },
+  {
+   "name": "codex-images-workflow",
+   "id": "skill-codex-images-workflow",
+   "category": "media",
+   "summary": "Treats generated images as reproducible files: a written brief first, the image beside it, both versioned.",
+   "jobs": [
+    "media",
+    "building"
+   ],
+   "needs": [],
+   "when": "You generate posters, mockups or diagrams and need to regenerate or revise them later.",
+   "status": "published",
+   "link": "https://github.com/techczech/dominiks-agent-skills/tree/main/media/codex-images-workflow",
+   "external": false,
+   "repo": null,
+   "extraLinks": []
+  },
+  {
+   "name": "cognitive-walkthrough",
+   "id": "skill-cognitive-walkthrough",
+   "category": "dev",
+   "summary": "Runs a cognitive walkthrough on a mockup, screenshot or live page to check how easily a new user can learn it, and writes a learnability report.",
+   "jobs": [
+    "building"
+   ],
+   "needs": [],
+   "when": "You have a design or a prototype and want to know where a first-time user would get stuck.",
+   "status": "published",
+   "link": "https://github.com/techczech/dominiks-agent-skills/tree/main/dev/cognitive-walkthrough",
+   "external": false,
+   "repo": null,
+   "extraLinks": []
+  },
+  {
+   "name": "corpus-tools-skill",
+   "id": "skill-corpus-tools-skill",
+   "category": "research",
+   "summary": "Sets up a local corpus-linguistics toolchain on a Mac (NLTK, spaCy, Stanza, Corpus Workbench, OPUS) with a parallel-concordance tool. Draft.",
+   "jobs": [
+    "research"
+   ],
+   "needs": [
+    "mac-local"
+   ],
+   "when": "You want to run corpus linguistics on your own machine.",
+   "status": "published",
+   "link": "https://github.com/techczech/corpus-tools-skill",
+   "external": true,
+   "repo": "https://github.com/techczech/corpus-tools-skill",
+   "extraLinks": []
+  },
+  {
+   "name": "dev-traffic-control",
+   "id": "skill-dev-traffic-control",
+   "category": "dev",
+   "summary": "Lets agents file test requests and reviews in Dev Traffic Control, a desktop review app, and collect the answers.",
+   "jobs": [
+    "building"
+   ],
+   "needs": [
+    "app"
+   ],
+   "when": "You review agent work in Dev Traffic Control and want agents to file requests and read your answers.",
+   "status": "published",
+   "link": "https://github.com/techczech/dominiks-agent-skills/tree/main/dev/dev-traffic-control",
+   "external": false,
+   "repo": null,
+   "extraLinks": []
+  },
+  {
+   "name": "doc-editorial-skill",
+   "id": "skill-doc-editorial-skill",
+   "category": "writing",
+   "summary": "Audits, reviews and fact-checks markdown documentation, proposing each change and asking before editing.",
+   "jobs": [
+    "writing"
+   ],
+   "needs": [],
+   "when": "You have a draft or documentation set and want structured editing help.",
+   "status": "published",
+   "link": "https://github.com/techczech/dominiks-agent-skills/tree/main/writing/doc-editorial-skill",
+   "external": false,
+   "repo": null,
+   "extraLinks": []
+  },
+  {
+   "name": "global-agent-instructions",
+   "id": "skill-global-agent-instructions",
+   "category": "estate",
+   "summary": "Keeps one global instruction file and installs it into Codex, Claude Code, Gemini CLI, OpenCode and pi.",
+   "jobs": [
+    "agent-setup"
+   ],
+   "needs": [],
+   "when": "You use more than one agent and want the same instructions in each.",
+   "status": "published",
+   "link": "https://github.com/techczech/dominiks-agent-skills/tree/main/estate/global-agent-instructions",
+   "external": false,
+   "repo": null,
+   "extraLinks": []
+  },
+  {
+   "name": "goalify",
+   "id": "skill-goalify",
+   "category": "dev",
+   "summary": "Turns a project or product interview into durable goal prompts for OpenAI Codex.",
+   "jobs": [
+    "building"
+   ],
+   "needs": [],
+   "when": "You want to hand Codex a long-running goal that is written down clearly.",
+   "status": "published",
+   "link": "https://github.com/techczech/goalify",
+   "external": true,
+   "repo": "https://github.com/techczech/goalify",
+   "extraLinks": []
+  },
+  {
+   "name": "image-to-design",
+   "id": "skill-image-to-design",
+   "category": "dev",
+   "summary": "Takes a design from a written brief through generated mockups to HTML/CSS, keeping every prompt, image and revision on disk.",
+   "jobs": [
+    "building",
+    "media"
+   ],
+   "needs": [],
+   "when": "You are exploring a user interface visually and want each version kept and comparable.",
+   "status": "published",
+   "link": "https://github.com/techczech/dominiks-agent-skills/tree/main/dev/image-to-design",
+   "external": false,
+   "repo": null,
+   "extraLinks": []
+  },
+  {
+   "name": "paper-reviewer-skill",
+   "id": "skill-paper-reviewer-skill",
+   "category": "research",
+   "summary": "Imports a paper from Zotero, extracts its text, figures and tables, and writes structured reviews.",
+   "jobs": [
+    "research"
+   ],
+   "needs": [],
+   "when": "You want a structured review of a paper that is in your Zotero library.",
+   "status": "published",
+   "link": "https://github.com/techczech/dominiks-agent-skills/tree/main/research/paper-reviewer-skill",
+   "external": false,
+   "repo": null,
+   "extraLinks": []
+  },
+  {
+   "name": "project-changelog",
+   "id": "skill-project-changelog",
+   "category": "dev",
+   "summary": "Keeps a structured changelog folder in a repository alongside its git history.",
+   "jobs": [
+    "building"
+   ],
+   "needs": [],
+   "when": "You want a project's history, decisions and backlog recorded in the repository itself.",
+   "status": "published",
+   "link": "https://github.com/techczech/dominiks-agent-skills/tree/main/dev/project-changelog",
+   "external": false,
+   "repo": null,
+   "extraLinks": []
+  },
+  {
+   "name": "readability-skill",
+   "id": "skill-readability-skill",
+   "category": "writing",
+   "summary": "Helps write more readable text and design more readable slides.",
+   "jobs": [
+    "writing",
+    "teaching"
+   ],
+   "needs": [],
+   "when": "You want text or slides that are easier to read, including for dyslexic readers.",
+   "status": "published",
+   "link": "https://github.com/techczech/readability-skill",
+   "external": true,
+   "repo": "https://github.com/techczech/readability-skill",
+   "extraLinks": []
+  },
+  {
+   "name": "research-translation",
+   "id": "skill-research-translation",
+   "category": "research",
+   "summary": "Runs auditable translation and back-translation of participant-facing research documents such as consent forms.",
+   "jobs": [
+    "research",
+    "writing"
+   ],
+   "needs": [],
+   "when": "You need a consent form or questionnaire translated with a record of each check.",
+   "status": "published",
+   "link": "https://github.com/techczech/dominiks-agent-skills/tree/main/research/research-translation",
+   "external": false,
+   "repo": null,
+   "extraLinks": []
+  },
+  {
+   "name": "single-html-document",
+   "id": "skill-single-html-document",
+   "category": "dev",
+   "summary": "Builds self-contained single-file HTML documents (reports, explainers, slide decks, feedback forms) that work offline.",
+   "jobs": [
+    "building",
+    "teaching",
+    "writing"
+   ],
+   "needs": [],
+   "when": "You want one HTML file you can email, open from disk or put on a web server.",
+   "status": "published",
+   "link": "https://github.com/techczech/dominiks-agent-skills/tree/main/dev/single-html-document",
+   "external": false,
+   "repo": null,
+   "extraLinks": []
+  },
+  {
+   "name": "sketchengine-skill",
+   "id": "skill-sketchengine-skill",
+   "category": "research",
+   "summary": "Connects an agent to Sketch Engine to run word sketches, word lists and keyword analyses on its corpora.",
+   "jobs": [
+    "research"
+   ],
+   "needs": [
+    "account"
+   ],
+   "when": "You have a Sketch Engine subscription and want an agent to run queries.",
+   "status": "published",
+   "link": "https://github.com/techczech/sketchengine-skill",
+   "external": true,
+   "repo": "https://github.com/techczech/sketchengine-skill",
+   "extraLinks": []
+  },
+  {
+   "name": "skill-explorer",
+   "id": "skill-skill-explorer",
+   "category": "dev",
+   "summary": "Turns a SKILL.md file into an interactive web page showing its structure, code and connections.",
+   "jobs": [
+    "building",
+    "agent-setup"
+   ],
+   "needs": [],
+   "when": "You want to understand a skill someone else wrote, or explain one to a class.",
+   "status": "published",
+   "link": "https://github.com/techczech/skill-explorer",
+   "external": true,
+   "repo": "https://github.com/techczech/skill-explorer",
+   "extraLinks": []
+  },
+  {
+   "name": "speech-to-text-skill",
+   "id": "skill-speech-to-text-skill",
+   "category": "media",
+   "summary": "Transcribes audio locally on Apple Silicon (Qwen3-ASR, Parakeet, Whisper) into time-coded transcripts, with optional speaker labels.",
+   "jobs": [
+    "media",
+    "research"
+   ],
+   "needs": [
+    "mac-local"
+   ],
+   "when": "You have a recording of a lecture, interview or meeting that needs a transcript.",
+   "status": "published",
+   "link": "https://github.com/techczech/speech-to-text-skill",
+   "external": true,
+   "repo": "https://github.com/techczech/speech-to-text-skill",
+   "extraLinks": []
+  },
+  {
+   "name": "talkweaver",
+   "id": "skill-talkweaver",
+   "category": "teaching",
+   "summary": "Lets agents write and revise presentation content for the TalkWeaver app, including converting PowerPoint files and processing recordings.",
+   "jobs": [
+    "teaching"
+   ],
+   "needs": [
+    "app"
+   ],
+   "when": "You build talks in TalkWeaver and want help with outlines, handouts or recordings.",
+   "status": "published",
+   "link": "https://github.com/techczech/dominiks-agent-skills/tree/main/teaching/talkweaver",
+   "external": false,
+   "repo": null,
+   "extraLinks": []
+  },
+  {
+   "name": "text-to-image-skill",
+   "id": "skill-text-to-image-skill",
+   "category": "media",
+   "summary": "Generates and edits images locally on Apple Silicon with open models such as FLUX.2 Klein and Qwen-Image.",
+   "jobs": [
+    "media",
+    "teaching"
+   ],
+   "needs": [
+    "mac-local"
+   ],
+   "when": "You want illustrations for slides or documents without sending prompts to a service.",
+   "status": "published",
+   "link": "https://github.com/techczech/text-to-image-skill",
+   "external": true,
+   "repo": "https://github.com/techczech/text-to-image-skill",
+   "extraLinks": []
+  },
+  {
+   "name": "text-to-speech-skill",
+   "id": "skill-text-to-speech-skill",
+   "category": "media",
+   "summary": "Generates speech locally on Apple Silicon with several open voice models, including voice cloning and Czech.",
+   "jobs": [
+    "media"
+   ],
+   "needs": [
+    "mac-local"
+   ],
+   "when": "You want narration or an audio version of a text.",
+   "status": "published",
+   "link": "https://github.com/techczech/text-to-speech-skill",
+   "external": true,
+   "repo": "https://github.com/techczech/text-to-speech-skill",
+   "extraLinks": []
+  },
+  {
+   "name": "video-analysis",
+   "id": "skill-video-analysis",
+   "category": "media",
+   "summary": "Describes, summarises or answers questions about a video on your own machine with a local model.",
+   "jobs": [
+    "media",
+    "research"
+   ],
+   "needs": [
+    "mac-local"
+   ],
+   "when": "You have a screen recording or video and want a description or timestamped scene list without uploading it.",
+   "status": "published",
+   "link": "https://github.com/techczech/dominiks-agent-skills/tree/main/media/video-analysis",
+   "external": false,
+   "repo": null,
+   "extraLinks": []
+  },
+  {
+   "name": "writeflex",
+   "id": "skill-writeflex",
+   "category": "writing",
+   "summary": "Lets agents read, organise and prepare Markdown content for the WriteFlex app.",
+   "jobs": [
+    "writing"
+   ],
+   "needs": [
+    "app"
+   ],
+   "when": "You keep your writing in WriteFlex and want an agent to help with collections and documents.",
+   "status": "published",
+   "link": "https://github.com/techczech/dominiks-agent-skills/tree/main/writing/writeflex",
+   "external": false,
+   "repo": null,
+   "extraLinks": []
+  },
+  {
+   "name": "zotero-wrangler",
+   "id": "skill-zotero-wrangler",
+   "category": "research",
+   "summary": "Manages Zotero imports, linked notes, evidence-backed tags and scoped native full-text discovery.",
+   "jobs": [
+    "research"
+   ],
+   "needs": [],
+   "when": "You want an agent to import references, fetch PDFs or tidy collections in Zotero.",
+   "status": "published",
+   "link": "https://github.com/techczech/dominiks-agent-skills/tree/main/research/zotero-wrangler",
+   "external": false,
+   "repo": null,
+   "extraLinks": []
+  },
+  {
+   "name": "design-first-dev",
+   "id": "skill-design-first-dev",
+   "category": "dev",
+   "summary": "Takes an app or feature from user journeys and drawn designs to a locked mockup before any code is written.",
+   "jobs": [
+    "building"
+   ],
+   "needs": [],
+   "when": "",
+   "status": "coming",
+   "link": null,
+   "external": false,
+   "repo": null,
+   "extraLinks": []
+  },
+  {
+   "name": "expository-writing",
+   "id": "skill-expository-writing",
+   "category": "writing",
+   "summary": "Keeps an agent's prose literal and specific: every sentence says something checkable.",
+   "jobs": [
+    "writing",
+    "agent-setup"
+   ],
+   "needs": [],
+   "when": "",
+   "status": "coming",
+   "link": null,
+   "external": false,
+   "repo": null,
+   "extraLinks": []
+  },
+  {
+   "name": "judgement-vs-code",
+   "id": "skill-judgement-vs-code",
+   "category": "estate",
+   "summary": "Helps an agent decide when a task needs reading and judgement rather than string matching.",
+   "jobs": [
+    "agent-setup",
+    "building"
+   ],
+   "needs": [],
+   "when": "",
+   "status": "coming",
+   "link": null,
+   "external": false,
+   "repo": null,
+   "extraLinks": []
+  },
+  {
+   "name": "metaphor",
+   "id": "skill-metaphor",
+   "category": "writing",
+   "summary": "Helps an agent use and examine metaphors without over-extending them.",
+   "jobs": [
+    "writing",
+    "research"
+   ],
+   "needs": [],
+   "when": "",
+   "status": "coming",
+   "link": null,
+   "external": false,
+   "repo": null,
+   "extraLinks": []
+  },
+  {
+   "name": "text-as-graph",
+   "id": "skill-text-as-graph",
+   "category": "teaching",
+   "summary": "Treats documents and courses as connected parts so they can be reused and recombined without copies drifting.",
+   "jobs": [
+    "teaching",
+    "writing"
+   ],
+   "needs": [],
+   "when": "",
+   "status": "coming",
+   "link": null,
+   "external": false,
+   "repo": null,
+   "extraLinks": []
+  },
+  {
+   "name": "ux-journeys",
+   "id": "skill-ux-journeys",
+   "category": "dev",
+   "summary": "Pins down who the user is, what they are trying to do and what they see at each step, before visual design starts.",
+   "jobs": [
+    "building"
+   ],
+   "needs": [],
+   "when": "",
+   "status": "coming",
+   "link": null,
+   "external": false,
+   "repo": null,
+   "extraLinks": []
+  }
+ ]
+}

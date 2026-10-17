@@ -750,6 +750,22 @@
    "extraLinks": []
   },
   {
+   "name": "ux-journeys",
+   "id": "skill-ux-journeys",
+   "category": "dev",
+   "summary": "Pins down who the user is, what they are trying to do and what they see at each step, before visual design starts.",
+   "jobs": [
+    "building"
+   ],
+   "needs": [],
+   "when": "You are starting design work and need to agree who the user is and what they do at each step.",
+   "status": "published",
+   "link": "https://github.com/techczech/dominiks-agent-skills/tree/main/dev/ux-journeys",
+   "external": false,
+   "repo": null,
+   "extraLinks": []
+  },
+  {
    "name": "video-analysis",
    "id": "skill-video-analysis",
    "category": "media",
@@ -864,22 +880,6 @@
    ],
    "needs": [],
    "when": "You are designing how documents, courses or slides are structured and reused.",
-   "status": "coming",
-   "link": null,
-   "external": false,
-   "repo": null,
-   "extraLinks": []
-  },
-  {
-   "name": "ux-journeys",
-   "id": "skill-ux-journeys",
-   "category": "dev",
-   "summary": "Pins down who the user is, what they are trying to do and what they see at each step, before visual design starts.",
-   "jobs": [
-    "building"
-   ],
-   "needs": [],
-   "when": "You are starting design work and need to agree who the user is and what they do at each step.",
    "status": "coming",
    "link": null,
    "external": false,

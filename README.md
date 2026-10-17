@@ -38,6 +38,7 @@ Building and checking software, designs and documents.
 - [project-changelog](dev/project-changelog/): Keeps a structured changelog folder in a repository alongside its git history.
 - [single-html-document](dev/single-html-document/): Builds self-contained single-file HTML documents (reports, explainers, slide decks, feedback forms) that work offline.
 - [skill-explorer](https://github.com/techczech/skill-explorer): Turns a SKILL.md file into an interactive web page showing its structure, code and connections. (separate repository)
+- [ux-journeys](dev/ux-journeys/): Pins down who the user is, what they are trying to do and what they see at each step, before visual design starts.
 
 ### [estate](estate/)
 

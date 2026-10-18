@@ -373,6 +373,23 @@
    "extraLinks": []
   },
   {
+   "name": "archive-scout",
+   "id": "skill-archive-scout",
+   "category": "research",
+   "summary": "Searches, quotes and counts words in your own writing and reading highlights with the local scout tool, and writes cited reports with a JSON evidence file.",
+   "jobs": [
+    "research",
+    "writing"
+   ],
+   "needs": [],
+   "when": "You want to find and quote what you have written or highlighted, or count how your use of a word changed over time.",
+   "status": "published",
+   "link": "https://github.com/techczech/dominiks-agent-skills/tree/main/research/archive-scout",
+   "external": false,
+   "repo": null,
+   "extraLinks": []
+  },
+  {
    "name": "cesky-narodni-korpus-skill",
    "id": "skill-cesky-narodni-korpus-skill",
    "category": "research",

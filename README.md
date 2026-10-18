@@ -72,6 +72,7 @@ Research workflows: papers, sources, translation, corpus linguistics and model b
 
 - [academic-pdf-to-mkd](research/academic-pdf-to-mkd/): Converts academic PDFs, including scans, into Markdown with figures, tables and page images as separate files.
 - [ai-model-benchmarks](research/ai-model-benchmarks/): Builds offline comparison charts and tables of AI models from Artificial Analysis, Arena and OpenRouter data.
+- [archive-scout](research/archive-scout/): Searches, quotes and counts words in your own writing and reading highlights with the local scout tool, and writes cited reports with a JSON evidence file.
 - [cesky-narodni-korpus-skill](https://github.com/techczech/cesky-narodni-korpus-skill): Queries the Czech National Corpus (KonText) for concordances, frequencies and collocations from inside an agent. (separate repository)
 - [claim-fact-checker](research/claim-fact-checker/): Checks every factual claim in a report against its sources, one isolated checker per claim, and writes findings and a fix plan.
 - [corpus-tools-skill](https://github.com/techczech/corpus-tools-skill): Sets up a local corpus-linguistics toolchain on a Mac (NLTK, spaCy, Stanza, Corpus Workbench, OPUS) with a parallel-concordance tool. Draft. (separate repository)

@@ -888,6 +888,23 @@
    "extraLinks": []
   },
   {
+   "name": "writing-modes",
+   "id": "skill-writing-modes",
+   "category": "philosophy-for-agents",
+   "summary": "Makes an agent decide who a text is for and in whose name it speaks before it writes, and load only that register's rules.",
+   "jobs": [
+    "writing",
+    "agent-setup"
+   ],
+   "needs": [],
+   "when": "You want an agent to settle who a text is for before it writes, so that chat replies, instruction files and anything sent in your name each get the right treatment.",
+   "status": "published",
+   "link": "https://github.com/techczech/dominiks-agent-skills/tree/main/philosophy-for-agents/writing-modes",
+   "external": false,
+   "repo": null,
+   "extraLinks": []
+  },
+  {
    "name": "zotero-wrangler",
    "id": "skill-zotero-wrangler",
    "category": "research",
@@ -930,6 +947,11 @@
     "skill": "expository-writing",
     "label": "Expository writing",
     "text": "Every sentence should say something a reader can use or dispute, with no decorative or journalistic language unless asked. On 24 July 2026 a live correction added that register (how sentences are written) and structure (layout) are separate axes, and a complaint about one is not licence to change the other."
+   },
+   {
+    "skill": "writing-modes",
+    "label": "Writing modes",
+    "text": "Before writing any prose, the agent decides who the text is for and in whose name it speaks: for agents (instruction files, logs), for you (chat, READMEs, explanations), or as you (anything sent or published under your name, using only your own sources and voice). It announces the register and reads only that register's rules. It came out of the same series as Expository writing: I renamed the registers on 24 July 2026 after correcting an agent that had announced a register without applying it. You can rename the registers, add one, or point the 'as you' register at your own voice notes."
    }
   ],
   "categoryBlurb": "Instruction files distilled from my dictated thinking on language, meaning, metaphor and writing."

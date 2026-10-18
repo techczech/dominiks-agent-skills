@@ -67,6 +67,7 @@ Instruction files distilled from my dictated thinking on language, meaning, meta
 - [judgement-vs-code](philosophy-for-agents/judgement-vs-code/): Helps an agent decide when a task needs reading and judgement rather than string matching.
 - [metaphor](philosophy-for-agents/metaphor/): Helps an agent use and examine metaphors without over-extending them.
 - [text-as-graph](philosophy-for-agents/text-as-graph/): Treats documents and courses as connected parts so they can be reused and recombined without copies drifting.
+- [writing-modes](philosophy-for-agents/writing-modes/): Makes an agent decide who a text is for and in whose name it speaks before it writes, and load only that register's rules.
 
 ### [research](research/)
 

@@ -1,5 +1,7 @@
 # philosophy-for-agents
 
+Instruction files distilled from my dictated thinking on language, meaning, metaphor and writing.
+
 [All skills](../README.md)
 
 - [expository-writing](expository-writing/): Keeps an agent's prose literal and specific: every sentence says something checkable.

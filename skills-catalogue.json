@@ -903,5 +903,35 @@
    "repo": null,
    "extraLinks": []
   }
- ]
+ ],
+ "philosophy": {
+  "title": "Philosophy for agents",
+  "intro": [
+   "On 17 July 2026 I started dictating conversations about how I think about language and meaning. I have a background in cognitive linguistics and metaphor research, and I wanted agents to work from the ideas I use myself rather than from their defaults. Each topic became an instruction file that agents load, with an essay version for people.",
+   "A model drafted each distillation, a model from a different family reviewed it independently, and I decided every disputed point. The essays were drafted alongside and are not yet published."
+  ],
+  "skills": [
+   {
+    "skill": "judgement-vs-code",
+    "label": "Grep and Grok",
+    "text": "Says when a task over language needs reading and judgement (Grok) and when string operations (Grep) are right; the failure is using one where the other belongs. The core line from the series is \"we think in schemas and we speak in propositions\", and the name comes from my Grep and Grok cartoons."
+   },
+   {
+    "skill": "text-as-graph",
+    "label": "Text as a graph",
+    "text": "Treats documents and courses as graphs of connected parts. Slides, handouts and outlines are views derived from them, and every copy records where it came from and how to regenerate it. This was the first file in the series and set the pattern for the rest."
+   },
+   {
+    "skill": "metaphor",
+    "label": "Metaphor",
+    "text": "Metaphor mappings are partial and negotiated, so an agent should neither dismiss a metaphor nor import everything from its source. It draws on my metaphor research (Metaphor Hacker blog)."
+   },
+   {
+    "skill": "expository-writing",
+    "label": "Expository writing",
+    "text": "Every sentence should say something a reader can use or dispute, with no decorative or journalistic language unless asked. On 24 July 2026 a live correction added that register (how sentences are written) and structure (layout) are separate axes, and a complaint about one is not licence to change the other."
+   }
+  ],
+  "categoryBlurb": "Instruction files distilled from my dictated thinking on language, meaning, metaphor and writing."
+ }
 }

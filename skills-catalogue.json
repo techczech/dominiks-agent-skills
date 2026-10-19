@@ -458,6 +458,20 @@
    "extraLinks": []
   },
   {
+   "name": "coordination-hub",
+   "id": "skill-coordination-hub",
+   "category": "estate",
+   "summary": "Sets up one hub where every agent session starts, so you never have to remember where your projects are or what state they are in.",
+   "jobs": [],
+   "needs": [],
+   "when": "",
+   "status": "published",
+   "link": "https://github.com/techczech/dominiks-agent-skills/tree/main/estate/coordination-hub",
+   "external": false,
+   "repo": null,
+   "extraLinks": []
+  },
+  {
    "name": "corpus-tools-skill",
    "id": "skill-corpus-tools-skill",
    "category": "research",

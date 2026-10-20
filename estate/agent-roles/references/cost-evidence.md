@@ -13,6 +13,10 @@ Pinned 2026-10-17. These are measurements and observations from one operator's w
 - **GLM Flash** (z.ai coding plan through pi): about five points behind Sol on a coding benchmark, a third family on a third meter, with 5-hour and weekly caps and no local meter. A capped plan can fail as "Request timed out" with exit code 0.
 - **Muse Wonder** (Meta, through Muse Code): used experimentally as a third-family reviewer; billing not yet verified.
 
+## Fable as a routine reviewer is too expensive
+
+When the Codex allowance ran low, review and re-review rounds fell back to Fable 5.1. Within a few days that had used about 60% of Fable's weekly allowance, which also has to cover the work only Fable should do. Sol does the same reviews for a fraction of the cost and, in the operator's judgement, as well. Rule: Sol reviews even when the Codex meter is behind pace; Fable reviews only what the operator calls really important.
+
 ## Builder choice: Opus against Sonnet
 
 A pilot replayed five Sonnet 5.5 builds on Opus 5.5. Opus cost **2.4×** as much for about equal verified quality. One run, so not settled; Sonnet stays the default builder until a larger benchmark says otherwise. Side-by-side model judging needs both orderings: in that pilot, 7 of 10 judgements went to whichever build was shown first.

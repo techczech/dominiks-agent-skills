@@ -121,6 +121,10 @@
      "why": "Install the same instructions in every agent you use."
     },
     {
+     "skill": "coordination-hub",
+     "why": "Set up one hub where every agent session starts and finds your projects."
+    },
+    {
      "skill": "single-html-document",
      "why": "Then make something you can see: ask for a one-page explainer and open it in your browser."
     }
@@ -477,12 +481,12 @@
    "name": "coordination-hub",
    "id": "skill-coordination-hub",
    "category": "estate",
-   "summary": "Sets up one hub where every agent session starts, so you never have to remember where your projects are or what state they are in.",
+   "summary": "Sets up a hub repo where every agent session starts, holding a registry of your projects, a backlog, handoff notes and a lessons log, with a routine check for uncommitted or unpushed work.",
    "jobs": [
     "agent-setup"
    ],
    "needs": [],
-   "when": "You run agents across many projects and want every session to start from one place that knows where each project lives and what state it is in.",
+   "when": "You work on many projects with agents and cannot keep track of where each one lives or what state you left it in.",
    "status": "published",
    "link": "https://github.com/techczech/dominiks-agent-skills/tree/main/estate/coordination-hub",
    "external": false,

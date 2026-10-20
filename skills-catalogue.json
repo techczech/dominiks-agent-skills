@@ -109,6 +109,10 @@
    "blurb": "Set up your agent, then make your first document.",
    "steps": [
     {
+     "skill": "learn-from-dominiks-setup",
+     "why": "Paste one line into your agent and it compares your setup with Dominik's and suggests where to start."
+    },
+    {
      "skill": "ai-working-style-builder",
      "why": "Describe how you work and what you need from an AI tool."
     },
@@ -649,9 +653,11 @@
    "id": "skill-learn-from-dominiks-setup",
    "category": "estate",
    "summary": "Looks at your own agent setup, compares it with Dominik's practices and points you to the few skills worth trying; you start by pasting one line into your agent, with nothing to install first.",
-   "jobs": [],
+   "jobs": [
+    "agent-setup"
+   ],
    "needs": [],
-   "when": "",
+   "when": "You want to know which of Dominik's skills are worth trying and would rather your agent looked at your setup than read a long list.",
    "status": "published",
    "link": "https://github.com/techczech/dominiks-agent-skills/tree/main/estate/learn-from-dominiks-setup",
    "external": false,

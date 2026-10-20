@@ -62,7 +62,7 @@ Images, audio and video: generation, transcription, speech and analysis.
 
 ### [philosophy-for-agents](philosophy-for-agents/)
 
-Instruction files distilled from my dictated thinking on language, meaning, metaphor and writing.
+Instruction files distilled from Dominik's dictated thinking on language, meaning, metaphor and writing.
 
 - [expository-writing](philosophy-for-agents/expository-writing/): Keeps an agent's prose literal and specific: every sentence says something checkable.
 - [judgement-vs-code](philosophy-for-agents/judgement-vs-code/): Helps an agent decide when a task needs reading and judgement rather than string matching.

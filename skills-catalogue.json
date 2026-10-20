@@ -99,7 +99,7 @@
  ],
  "needs": {
   "mac-local": "Runs on your Mac",
-  "app": "Needs one of my apps",
+  "app": "Needs one of Dominik's apps",
   "account": "Needs an account"
  },
  "paths": [
@@ -373,6 +373,22 @@
    "extraLinks": []
   },
   {
+   "name": "app-design-elements",
+   "id": "skill-app-design-elements",
+   "category": "dev",
+   "summary": "The shared elements every desktop app carries: commands, keyboard, menus, Settings and agent access.",
+   "jobs": [
+    "building"
+   ],
+   "needs": [],
+   "when": "You want an agent to build a desktop app whose commands, shortcuts, menus and Settings window work the same way as in your other apps.",
+   "status": "published",
+   "link": "https://github.com/techczech/app-design-elements",
+   "external": true,
+   "repo": "https://github.com/techczech/app-design-elements",
+   "extraLinks": []
+  },
+  {
    "name": "archive-scout",
    "id": "skill-archive-scout",
    "category": "research",
@@ -462,9 +478,11 @@
    "id": "skill-coordination-hub",
    "category": "estate",
    "summary": "Sets up one hub where every agent session starts, so you never have to remember where your projects are or what state they are in.",
-   "jobs": [],
+   "jobs": [
+    "agent-setup"
+   ],
    "needs": [],
-   "when": "",
+   "when": "You run agents across many projects and want every session to start from one place that knows where each project lives and what state it is in.",
    "status": "published",
    "link": "https://github.com/techczech/dominiks-agent-skills/tree/main/estate/coordination-hub",
    "external": false,
@@ -938,14 +956,14 @@
  "philosophy": {
   "title": "Philosophy for agents",
   "intro": [
-   "On 17 July 2026 I started dictating conversations about how I think about language and meaning. I have a background in cognitive linguistics and metaphor research, and I wanted agents to work from the ideas I use myself rather than from their defaults. Each topic became an instruction file that agents load, with an essay version for people.",
-   "A model drafted each distillation, a model from a different family reviewed it independently, and I decided every disputed point. The essays were drafted alongside and are not yet published."
+   "On 17 July 2026 Dominik started dictating conversations about how he thinks about language and meaning. He has a background in cognitive linguistics and metaphor research, and he wanted agents to work from the ideas he uses himself rather than from their defaults. Each topic became an instruction file that agents load, with an essay version for people.",
+   "A model drafted each distillation, a model from a different family reviewed it independently, and Dominik decided every disputed point. The essays were drafted alongside and are not yet published."
   ],
   "skills": [
    {
     "skill": "judgement-vs-code",
     "label": "Grep and Grok",
-    "text": "Says when a task over language needs reading and judgement (Grok) and when string operations (Grep) are right; the failure is using one where the other belongs. The core line from the series is \"we think in schemas and we speak in propositions\", and the name comes from my Grep and Grok cartoons."
+    "text": "Says when a task over language needs reading and judgement (Grok) and when string operations (Grep) are right; the failure is using one where the other belongs. The core line from the series is \"we think in schemas and we speak in propositions\", and the name comes from Dominik's Grep and Grok cartoons."
    },
    {
     "skill": "text-as-graph",
@@ -955,7 +973,7 @@
    {
     "skill": "metaphor",
     "label": "Metaphor",
-    "text": "Metaphor mappings are partial and negotiated, so an agent should neither dismiss a metaphor nor import everything from its source. It draws on my metaphor research (Metaphor Hacker blog)."
+    "text": "Metaphor mappings are partial and negotiated, so an agent should neither dismiss a metaphor nor import everything from its source. It draws on Dominik's metaphor research (Metaphor Hacker blog)."
    },
    {
     "skill": "expository-writing",
@@ -965,10 +983,10 @@
    {
     "skill": "writing-modes",
     "label": "Writing modes",
-    "text": "Before writing any prose, the agent decides who the text is for and in whose name it speaks: for agents (instruction files, logs), for you (chat, READMEs, explanations), or as you (anything sent or published under your name, using only your own sources and voice). It announces the register and reads only that register's rules. It came out of the same series as Expository writing: I renamed the registers on 24 July 2026 after correcting an agent that had announced a register without applying it. You can rename the registers, add one, or point the 'as you' register at your own voice notes."
+    "text": "Before writing any prose, the agent decides who the text is for and in whose name it speaks: for agents (instruction files, logs), for you (chat, READMEs, explanations), or as you (anything sent or published under your name, using only your own sources and voice). It announces the register and reads only that register's rules. It came out of the same series as Expository writing: Dominik renamed the registers on 24 July 2026 after correcting an agent that had announced a register without applying it. You can rename the registers, add one, or point the 'as you' register at your own voice notes."
    }
   ],
-  "categoryBlurb": "Instruction files distilled from my dictated thinking on language, meaning, metaphor and writing."
+  "categoryBlurb": "Instruction files distilled from Dominik's dictated thinking on language, meaning, metaphor and writing."
  },
  "movedTo": "https://dominiklukes.net/agents/skills/"
 }

@@ -1,6 +1,6 @@
 # philosophy-for-agents
 
-Instruction files distilled from my dictated thinking on language, meaning, metaphor and writing.
+Instruction files distilled from Dominik's dictated thinking on language, meaning, metaphor and writing.
 
 [All skills](../README.md)
 

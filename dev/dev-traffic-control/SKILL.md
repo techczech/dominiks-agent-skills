@@ -1,15 +1,17 @@
 ---
 name: dev-traffic-control
-description: Dev Traffic Control (DTC). File test requests and reviews in the DTC record root, watch and collect answers, keep releases, roadmap, threads, handoffs. Use for anything DTC or dtc://. Always end with the dtc:// link.
+description: Dev Traffic Control (DTC). File test requests and reviews in the DTC record root, watch and collect answers, keep releases, roadmap, threads, handoffs. Use for anything DTC or dtc://. End with the dtc:// link only when the reply asks the reviewer to open the record.
 ---
 
 # Dev Traffic Control
 
 Dev Traffic Control (DTC) is a desktop app in which a reviewer checks agent work. Agents write records into its watched record root, one folder per project (the workspace instructions name the root); the app reads them and writes the reviewer's verdicts back as app-owned sidecars. This skill is the agent's side of that contract, and it follows the app's releases (see § Versions).
 
-## 1. Every reply ends with the link (hard rule)
+## 1. A link means "open this" (hard rule)
 
-When a reply files, updates, collects or even mentions a DTC record, its **last line is a markdown link to that record**. A filed request announced in prose gets missed; that is what DTC's links exist to fix.
+When a reply asks the reviewer to open a DTC record (a check to do, a review to answer, a request to read and decide), its **last line is a markdown link to that record**. A filed request announced in prose gets missed; that is what DTC's links exist to fix.
+
+When a reply needs no action from the reviewer (a status update, answers collected, something filed for later), **name the record in words and put no link**. A link is the strongest cue to act in a message; "no action required" followed by a link contradicts itself (the reviewer, 2026-10-13).
 
 Build the address from the path you wrote. There is no lookup and no id.
 
@@ -26,6 +28,8 @@ Write it as a markdown link, never a bare URL and never in a code fence: `[Open 
 
 Say in the same reply whether anything is watching (§ 4).
 
+**Handoffs: mark them picked up (0.23+).** The moment you open a handoff to act on it, write `<handoff-basename>.picked-up.json` = `{ "agent", "machine", "pickedUpAt" }` (non-blank strings, ISO time) beside it, so the reviewer never sees a stale handoff. The app reads it and never writes it.
+
 ## 2. Where the formats live
 
 The app writes the authoritative file contract into the record root's own `AGENTS.md`. **Read it before writing a record type for the first time in a session**; where it and the references below disagree, it wins, because it matches the installed app. Never edit it. Never run Git inside the record root; leave commits to the tool that syncs it.
@@ -35,8 +39,12 @@ Ownership: agents write requests, release records, roadmap idea files, handoff d
 ## 3. Filing
 
 - **Screenshot pass before a request (2026-10-08).** For an Electron app where something visible changed, run the Haiku screenshot pass first (`agent-roles` § Verification) and file what is left as a `kind: doc-review` with the pictures embedded and a decision toggle per judgement call, since a light request renders no images. Drop what the pictures settle; say in the intro what was dropped.
+- **Asking versus telling (0.23+, the reviewer's rule 2026-10-18).** Only a record with a button the reviewer presses waits on them: a check request with checks (Works / Doesn't), a doc-review with at least one ```` ```decision ```` block, or a release with `state: you` features. File one only when your work is blocked on the answer. Everything else is telling, never waiting: a doc-review with no decision is shown as "To read"; handoffs and thread entries never wait (`move: me` on a thread no longer reaches the reviewer: to get an answer, file a decision); the `playground` project never counts. Never put `status:` in a check request's frontmatter: it marks the file as a document, and its checks are not read.
+- **No To read filings (the reviewer, 2026-10-20: "unless there's a button I can press with an important decision i don't want to see it - it should be archived for later"; "I'd rather agent make a reversible error than me having to do lots of drudgery").** Never file a doc-review without a decision, a request without a check, or any record whose only purpose is to inform. Status, summaries and reports go in the release record, a thread entry, a handoff or the project's own docs, where they stay findable. Ask only for decisions that are his and important (what the app does, how it looks, money, anything outward-facing or hard to undo). Decide everything reversible yourself, record why, and move on; he would rather undo a reversible error than do the drudgery.
+- **Test versus decide (the reviewer, 2026-10-20).** A decision is about future work, design or an action ("which should we build", "how should it look", "may I publish"). A test asks whether something already built works for him. Never dress a test up as a decision sheet. Label every ask in its title and in chat as one or the other. **By default file no test at all** ("I usually find out if it works when I use the app and I'll tell you"): verify with the screenshot pass and the tester, install, and let him report what he finds in use. File a test only when it is absolutely essential (something only he can judge and that would be costly to get wrong), keep it to the minimum, never let work wait on it, and give it screenshots of each step and of what he should see, as a doc-review; never words alone.
 - **Test a feature:** a light request by default: at most four user-facing checks, one paragraph each, in `## Heading {#id}` blocks, and a reserved `## Also worth checking` last. See [requests and reviews](references/requests-and-reviews.md).
 - **Review a design or document:** `kind: doc-review`, a short decision-focused distillation with drawings embedded as images and ```` ```decision {#id} ```` blocks for choices.
+- **Worth answering away from the Mac (0.23+):** add `online: ask` to a review's frontmatter. The owner sees "Asks to be answered online" and decides with one click; nothing goes online without that click or his own switch. Never ask for it on records with secrets or private data.
 - **Before filing, check the request itself:**
   - Checks that consume sample data (answering a verdict, archiving) come **after** the checks that need it.
   - Never ask the reviewer to run a terminal command; give a link to click, in the check and in chat.
@@ -57,17 +65,18 @@ A cold answer is collected by hand from the prompt DTC copies. Never imply a wat
 
 ## 5. Collecting
 
-A report is final only when `completedAt` exists. `dtc_answers` (the mod) returns the same content as the report file; without it, read the file. Read every item's status and comment, screenshots, `observations[]` and doc-review decisions, which are nested at `items[0].decisions`, never top-level. Also read `markups[]` on decisions, items and observations: the reviewer's marked-up pictures, with each numbered mark's words in `marks[].text` (format in the record root's `AGENTS.md`). A `skip` status can still carry answers. File each actionable point where the project keeps them, act on it, then write `<basename>.collected.json` naming where each went. If the reviewer answered in chat instead, write `<basename>.resolved.md`. Short DTC comments are compressed: when one has two readings, ask with the readings spelled out before building.
+A report is final only when `completedAt` exists. `dtc_answers` (the mod) returns the same content as the report file; without it, read the file. Read every item's status and comment, screenshots, `observations[]` and doc-review decisions, which are nested at `items[0].decisions`, never top-level. Also read `markups[]` on decisions, items and observations: the reviewer's marked-up pictures, with each numbered mark's words in `marks[].text` (format in the record root's `AGENTS.md`). A `skip` status can still carry answers. File each actionable point where the project keeps them, act on it, then write `<basename>.collected.json` naming where each went. The receipt must carry non-blank string fields `agent`, `machine` and `collectedAt` (ISO, not earlier than the report's `completedAt`); `note`, if present, is one line. Extra keys such as `routed` are fine. A receipt without those fields does not count, and the request stays in the reviewer's waiting list (58 such receipts were found on 2026-10-11). If the reviewer answered in chat instead, write `<basename>.resolved.md`. Short DTC comments are compressed: when one has two readings, ask with the readings spelled out before building.
 
 ## 6. Feature requests and the roadmap
 
-Every suggestion the reviewer makes is filed as a roadmap idea (`<project>/roadmap/<id>.md`) the moment it is made, wherever it was said: a review comment, a check, chat, a thread. The app lists these under **Feature requests** and shows what happened to each. Full fields and rules: [work records](references/work-records.md).
+Every suggestion the reviewer makes is filed as a roadmap idea (`<project>/roadmap/<id>.md`) the moment it is made, wherever it was said: a review comment, a check, chat, a thread. Full fields and rules: [work records](references/work-records.md).
 
-- File it with `by: reviewer`, the reviewer's exact words in `quote`, `said` (where, when, and a link to the record if one exists), a `context` that states the whole point in one to three sentences, a `plan`, and a `fate`. Never invent a quote.
-- A request with no `plan` or no `fate` shows as "No plan yet" and counts as owed by you. Keep `fate` and `fate_note` current when work lands, merges or is declined.
-- The reviewer answers on the card. The app appends `## Reviewer entry · <date> · <answer>` to the idea's body. Read it, act, and reply by appending `## Agent entry · <date>` with your answer in the text below it. Do not edit earlier entries.
-- **Approve → Roadmap** is the reviewer's button: it sets `fate: planned` and `candidate: <pending version>`. Do not set `planned` on a `waiting` idea yourself.
-- Two prompts arrive from the app's buttons: "plan this request" (fill in `context`, `plan`, `fate`, `related` on one idea and reply with its link) and "review all requests" (give every request a plan and fate, propose priorities and `candidate` releases, and file a doc-review of the proposed order for approval).
+- **Approved by default (the reviewer, 2026-10-18).** A feature the reviewer suggests goes straight onto the Roadmap: file it with `by: reviewer`, `fate: planned` and no `candidate` (Unscheduled). Never ask the reviewer to approve an idea for the roadmap; `fate: waiting` is retired (0.23+ reads it as planned).
+- File it with the reviewer's exact words in `quote`, `said` (where, when, and a link to the record if one exists), a `context` that states the whole point in one to three sentences, a `plan`, and a `fate`. Never invent a quote. Keep `fate` and `fate_note` current when work lands, merges or is declined.
+- **The real decision is the design.** Once a meaningful design or spec exists for an idea (journeys, a mockup, a spec; never a one-sentence idea), file a doc-review with a decision asking whether the reviewer is happy with it. Once per design. Version assignment happens on the Roadmap board or in chat and is never a waiting item.
+- **Chat decisions go into the record the same turn.** When the reviewer decides in chat (a version, dropping an idea, a design yes or no), write `candidate`, `fate` and a `## Agent entry · <date>` quoting what was agreed, so DTC never lags behind chat.
+- The reviewer can answer on the card; the app appends `## Reviewer entry · <date> · <answer>`. Read it, act, and reply by appending `## Agent entry · <date>`. Do not edit earlier entries.
+- Two prompts arrive from the app's buttons: "plan this request" (fill in `context`, `plan`, `fate`, `related` on one idea and reply naming it) and "review all requests" (give every request a plan and fate, propose priorities and `candidate` releases, and file a doc-review of the proposed order with a decision).
 
 ## Versions
 
@@ -84,6 +93,7 @@ Features the skill relies on, and the DTC build that brought them:
 | Option pictures on decision lines; `markups[]` in reports | 0.22.0 |
 | Feature-request fields, reviewer and agent entries, Approve → Roadmap, pending release | 0.22.0 |
 | Links without `open/` or `.md` still open | 0.22.0 |
+| Waiting on you = only records with a button; ideas approved by default; `.picked-up.json` on handoffs | 0.23.0 |
 | `dtc-inbox` mod 0.2.0: `dtc_answers` with mark text, feature-request answers and release verdicts | 0.22.0 |
 
 When a DTC release changes what agents write or how records open, update this table and the section it affects in the same round.

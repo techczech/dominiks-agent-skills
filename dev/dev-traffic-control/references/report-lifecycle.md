@@ -43,6 +43,8 @@ Use the real outcome and location. This closes the queue without manufacturing a
 
 ## Active watches: two phases
 
+With the `dtc-inbox` Claude Code mod loaded (`dtc_answers` tool present), skip both phases: the mod delivers the answer to the filing session; collect with `dtc_answers`. The phases below are for sessions without the mod.
+
 A watch waits for the reviewer first, and only then for the answer.
 
 1. **After filing, a session staying alive for the answer waits on `<basename>.opened.json`.** Dev Traffic Control writes that file when a request surface opens (0.21.0-alpha.13 or newer). The wait must cost no tokens: use one backgrounded shell that blocks until the file appears, then returns (for example `until [ -f "$REQ.opened.json" ]; do sleep 5; done`, run in the background). Never run a poll loop that the model drives. Do not write `.watch.json` in this phase.

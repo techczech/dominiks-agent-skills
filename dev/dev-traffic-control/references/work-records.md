@@ -31,7 +31,7 @@ A roadmap idea the reviewer suggested is a feature request. It carries these opt
 | `quote` | The reviewer's exact words. Leave it out when you do not have them. Never invent or tidy a quote. |
 | `context` | One to three plain sentences: why it came up and what problem it solves. |
 | `plan` | Your next step, in one or two sentences. |
-| `fate` | `waiting` (needs the reviewer's decision) · `planned` · `building` · `built` · `merged` · `declined`. One line, no block scalar. |
+| `fate` | `planned` (the default for a reviewer's idea: approved, Unscheduled until it has a `candidate`) · `building` · `built` · `merged` · `declined`. `waiting` is retired: 0.23+ reads it as `planned`. One line, no block scalar. |
 | `fate_note` | Which release it was built in, what it merged into, or why it was declined. |
 | `related` | A list of `dtc://open/…` links or ticket ids. |
 | `candidate` | The release it is aimed at, as a version. One line. |
@@ -40,7 +40,8 @@ Rules:
 
 - No `plan` or no `fate` shows as "No plan yet", owed by you.
 - The reviewer's answers are appended by the app as `## Reviewer entry · <date> · <answer>` with an optional note below. Reply by appending `## Agent entry · <date>` and your answer in the text under it. Entries are append-only.
-- Approve → Roadmap is the reviewer's action. It writes `fate: planned` and `candidate: <pending version>`. The pending version is the next minor after the highest release record; it is derived by the app and never a file. Do not move a `waiting` idea to `planned` yourself.
+- Reviewer ideas are approved by default; there is no approval step and no Approve → Roadmap button from 0.23. An idea never waits on the reviewer. The decision the reviewer is asked is about a design: once a real design or spec exists, file a doc-review with a decision, once per design.
+- A decision made in chat (version, fate, design yes or no) is written into the idea the same turn: `candidate`, `fate`, and an agent entry quoting what was agreed.
 - The Roadmap shows approved ideas grouped by `candidate`. Moving a card rewrites `candidate`; do the same when you reschedule, and say why in an agent entry.
 - Keep YAML valid: quote any string that contains a colon. An idea with invalid frontmatter disappears from the app.
 
@@ -48,12 +49,12 @@ Rules:
 
 `<project>/handoffs/YYYY-MM-DD-<subject>-handoff.md` records work ready to continue. Fields include `title`, `domain`, repository-relative `repo`, `move: agent | me`, `state: live | superseded | done`, `updated` and a short concrete `resume`. Use only supported known values; do not invent who owns the next action. No project? Use `_unfiled/handoffs/`.
 
-The app owns `<basename>.state.json` with pickup/archive timestamps. Read it; do not modify or delete it to manufacture pickup or reopen an item. Use an available app operation or leave a truthful proposed action.
+The app owns `<basename>.state.json` with pickup/archive timestamps. Read it; do not modify or delete it. When you open a handoff to act on it, write the agent-owned marker `<basename>.picked-up.json` = `{ agent, machine, pickedUpAt }` at once (0.23+); the app reads it as picked up. Handoffs never appear in Waiting on you.
 
 ## Threads
 
 An entry is `YYYY-MM-DD-HHMM-entry-<subject>.md` in `<project>/threads/` or `_unfiled/threads/`. Entries are immutable, append-only contributions. A thread is the `thread` ID across entries, not a folder. Later entries can assert new state; do not rewrite earlier reasoning.
 
-Required field: `thread`. Other supported fields include `title`, `by`, `written_by`, `at`, `projects`, `parents`, `move`, `form`, `state`, `outcome`, `dictation`. Thread `move` is `me | agent | nobody`; `state` is `open | retired`. Set `move: me` only when the entry's own body asks the reviewer a question they can answer; a pointer to a request or review gets a `dtc://` link and `move: agent`, because that record already waits on the reviewer. After the reviewer answers, append an entry that moves the thread off them. Use actual authorship and the installed schema's author vocabulary; do not relabel a user's words as agent reasoning or vice versa. Preserve dictated text and record the requested routing separately.
+Required field: `thread`. Other supported fields include `title`, `by`, `written_by`, `at`, `projects`, `parents`, `move`, `form`, `state`, `outcome`, `dictation`. Thread `move` is `me | agent | nobody`; `state` is `open | retired`. From 0.23 `move: me` no longer puts a thread in front of the reviewer: a thread has no button. When you need the reviewer's answer, file a doc-review with a decision (or a check) and point to it from the entry with `move: agent`. After the reviewer answers, append an entry that moves the thread off them. Use actual authorship and the installed schema's author vocabulary; do not relabel a user's words as agent reasoning or vice versa. Preserve dictated text and record the requested routing separately.
 
 When an observation needs follow-up, use the project's established issue/task store or a correctly formed thread entry. Link that destination in the collection receipt. Do not invent an external backlog service or silently create a second task system.

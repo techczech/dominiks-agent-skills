@@ -645,6 +645,20 @@
    "extraLinks": []
   },
   {
+   "name": "learn-from-dominiks-setup",
+   "id": "skill-learn-from-dominiks-setup",
+   "category": "estate",
+   "summary": "Looks at your own agent setup, compares it with Dominik's practices and points you to the few skills worth trying; you start by pasting one line into your agent, with nothing to install first.",
+   "jobs": [],
+   "needs": [],
+   "when": "",
+   "status": "published",
+   "link": "https://github.com/techczech/dominiks-agent-skills/tree/main/estate/learn-from-dominiks-setup",
+   "external": false,
+   "repo": null,
+   "extraLinks": []
+  },
+  {
    "name": "metaphor",
    "id": "skill-metaphor",
    "category": "philosophy-for-agents",

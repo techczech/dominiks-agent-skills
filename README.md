@@ -49,6 +49,7 @@ Running a setup with several agents, tools and repositories.
 - [ai-working-style-builder](estate/ai-working-style-builder/): Helps you describe how you work so AI tools fit your communication, attention and record-keeping habits.
 - [coordination-hub](estate/coordination-hub/): Sets up a hub repo where every agent session starts, holding a registry of your projects, a backlog, handoff notes and a lessons log, with a routine check for uncommitted or unpushed work.
 - [global-agent-instructions](estate/global-agent-instructions/): Keeps one global instruction file and installs it into Codex, Claude Code, Gemini CLI, OpenCode and pi.
+- [learn-from-dominiks-setup](estate/learn-from-dominiks-setup/): Looks at your own agent setup, compares it with Dominik's practices and points you to the few skills worth trying; you start by pasting one line into your agent, with nothing to install first.
 
 ### [media](media/)
 

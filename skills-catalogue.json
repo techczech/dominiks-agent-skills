@@ -99,11 +99,13 @@
  ],
  "needs": {
   "local-model": "Needs a local model",
+  "packages": "Needs software installed",
   "app": "Needs one of Dominik's apps",
   "account": "Needs an account"
  },
  "needNotes": {
   "local-model": "This skill runs an AI model on your own computer rather than sending your data to a service, for anonymising text, transcription, speech, images or video description. The model has to be downloaded first, and models can take several gigabytes. A more powerful machine with plenty of memory helps, and whether a given model runs, and how fast, depends on your hardware and how your machine is set up. The current scripts were written and tested on Apple Silicon Macs (several use MLX), so on Linux or Windows you may need a different model or runtime.",
+  "packages": "This skill runs programs or libraries that you install on your own computer first, such as Python packages or command-line tools installed with Homebrew, pip or uv. Each skill's card names what it needs, and the skill's README gives the install steps.",
   "account": "This skill calls an outside service through its API, so you need an account and a key or login. Some of these services are free or have a free tier, but all of them need you to sign in.",
   "app": "This skill works inside one of Dominik's apps, which you need to install first."
  },
@@ -286,7 +288,14 @@
    "jobs": [
     "research"
    ],
-   "needs": [],
+   "needs": [
+    "packages"
+   ],
+   "packages": [
+    "poppler",
+    "ocrmypdf",
+    "ghostscript"
+   ],
    "when": "You want a paper or book chapter in a form an agent can read and quote accurately.",
    "status": "published",
    "link": "https://github.com/techczech/dominiks-agent-skills/tree/main/research/academic-pdf-to-mkd",
@@ -304,6 +313,7 @@
     "building"
    ],
    "needs": [],
+   "packages": [],
    "when": "You run Claude Code as the planner and hand building, fixing, review and testing to other models.",
    "status": "published",
    "link": "https://github.com/techczech/dominiks-agent-skills/tree/main/estate/agent-roles",
@@ -320,6 +330,7 @@
     "agent-setup"
    ],
    "needs": [],
+   "packages": [],
    "when": "Your instruction files have grown long and the agent follows them less well.",
    "status": "published",
    "link": "https://github.com/techczech/dominiks-agent-skills/tree/main/estate/agents-md-streamline",
@@ -339,6 +350,7 @@
    "needs": [
     "account"
    ],
+   "packages": [],
    "when": "You need a current chart of model quality, price or usage for a talk or report.",
    "status": "published",
    "link": "https://github.com/techczech/dominiks-agent-skills/tree/main/research/ai-model-benchmarks",
@@ -355,6 +367,7 @@
     "agent-setup"
    ],
    "needs": [],
+   "packages": [],
    "when": "You are starting to work with an agent and want it to fit how you think and write.",
    "status": "published",
    "link": "https://github.com/techczech/dominiks-agent-skills/tree/main/estate/ai-working-style-builder",
@@ -376,7 +389,13 @@
     "research"
    ],
    "needs": [
-    "local-model"
+    "local-model",
+    "packages"
+   ],
+   "packages": [
+    "uv",
+    "transformers",
+    "PyTorch"
    ],
    "when": "You need to remove names and contact details from transcripts or survey responses before sharing them.",
    "status": "published",
@@ -394,6 +413,7 @@
     "building"
    ],
    "needs": [],
+   "packages": [],
    "when": "You want an agent to build a desktop app whose commands, shortcuts, menus and Settings window work the same way as in your other apps.",
    "status": "published",
    "link": "https://github.com/techczech/app-design-elements",
@@ -410,7 +430,12 @@
     "research",
     "writing"
    ],
-   "needs": [],
+   "needs": [
+    "packages"
+   ],
+   "packages": [
+    "scout command-line tool (Rust)"
+   ],
    "when": "You want to find and quote what you have written or highlighted, or count how your use of a word changed over time.",
    "status": "published",
    "link": "https://github.com/techczech/dominiks-agent-skills/tree/main/research/archive-scout",
@@ -429,6 +454,7 @@
    "needs": [
     "account"
    ],
+   "packages": [],
    "when": "You study Czech and want corpus evidence without leaving the agent.",
    "status": "published",
    "link": "https://github.com/techczech/cesky-narodni-korpus-skill",
@@ -446,6 +472,7 @@
     "writing"
    ],
    "needs": [],
+   "packages": [],
    "when": "You have a report, review or news item and want each claim checked before it goes out.",
    "status": "published",
    "link": "https://github.com/techczech/dominiks-agent-skills/tree/main/research/claim-fact-checker",
@@ -463,6 +490,7 @@
     "building"
    ],
    "needs": [],
+   "packages": [],
    "when": "You generate posters, mockups or diagrams and need to regenerate or revise them later.",
    "status": "published",
    "link": "https://github.com/techczech/dominiks-agent-skills/tree/main/media/codex-images-workflow",
@@ -479,6 +507,7 @@
     "building"
    ],
    "needs": [],
+   "packages": [],
    "when": "You have a design or a prototype and want to know where a first-time user would get stuck.",
    "status": "published",
    "link": "https://github.com/techczech/dominiks-agent-skills/tree/main/dev/cognitive-walkthrough",
@@ -495,6 +524,7 @@
     "agent-setup"
    ],
    "needs": [],
+   "packages": [],
    "when": "You work on many projects with agents and cannot keep track of where each one lives or what state you left it in.",
    "status": "published",
    "link": "https://github.com/techczech/dominiks-agent-skills/tree/main/estate/coordination-hub",
@@ -510,7 +540,17 @@
    "jobs": [
     "research"
    ],
-   "needs": [],
+   "needs": [
+    "packages"
+   ],
+   "packages": [
+    "uv",
+    "NLTK",
+    "spaCy",
+    "Stanza",
+    "IMS Corpus Workbench",
+    "pdftotext"
+   ],
    "when": "You want to run corpus linguistics on your own machine.",
    "status": "published",
    "link": "https://github.com/techczech/corpus-tools-skill",
@@ -527,6 +567,7 @@
     "building"
    ],
    "needs": [],
+   "packages": [],
    "when": "You are about to build an app or a feature and want the design settled before any code is written.",
    "status": "published",
    "link": "https://github.com/techczech/dominiks-agent-skills/tree/main/dev/design-first-dev",
@@ -545,6 +586,7 @@
    "needs": [
     "app"
    ],
+   "packages": [],
    "when": "You review agent work in Dev Traffic Control and want agents to file requests and read your answers.",
    "status": "published",
    "link": "https://github.com/techczech/dominiks-agent-skills/tree/main/dev/dev-traffic-control",
@@ -561,6 +603,7 @@
     "writing"
    ],
    "needs": [],
+   "packages": [],
    "when": "You have a draft or documentation set and want structured editing help.",
    "status": "published",
    "link": "https://github.com/techczech/dominiks-agent-skills/tree/main/writing/doc-editorial-skill",
@@ -578,6 +621,7 @@
     "agent-setup"
    ],
    "needs": [],
+   "packages": [],
    "when": "You want an agent's reports, documentation or web copy to be plain and specific.",
    "status": "published",
    "link": "https://github.com/techczech/dominiks-agent-skills/tree/main/philosophy-for-agents/expository-writing",
@@ -594,6 +638,7 @@
     "agent-setup"
    ],
    "needs": [],
+   "packages": [],
    "when": "You use more than one agent and want the same instructions in each.",
    "status": "published",
    "link": "https://github.com/techczech/dominiks-agent-skills/tree/main/estate/global-agent-instructions",
@@ -610,6 +655,7 @@
     "building"
    ],
    "needs": [],
+   "packages": [],
    "when": "You want to hand Codex a long-running goal that is written down clearly.",
    "status": "published",
    "link": "https://github.com/techczech/goalify",
@@ -627,6 +673,7 @@
     "media"
    ],
    "needs": [],
+   "packages": [],
    "when": "You are exploring a user interface visually and want each version kept and comparable.",
    "status": "published",
    "link": "https://github.com/techczech/dominiks-agent-skills/tree/main/dev/image-to-design",
@@ -644,6 +691,7 @@
     "agent-setup"
    ],
    "needs": [],
+   "packages": [],
    "when": "Your agent is about to write code that processes language or document content.",
    "status": "published",
    "link": "https://github.com/techczech/dominiks-agent-skills/tree/main/philosophy-for-agents/judgement-vs-code",
@@ -660,6 +708,7 @@
     "agent-setup"
    ],
    "needs": [],
+   "packages": [],
    "when": "You want to know which of Dominik's skills are worth trying and would rather your agent looked at your setup than read a long list.",
    "status": "published",
    "link": "https://github.com/techczech/dominiks-agent-skills/tree/main/estate/learn-from-dominiks-setup",
@@ -677,6 +726,7 @@
     "teaching"
    ],
    "needs": [],
+   "packages": [],
    "when": "You are explaining something with a metaphor, or using one to frame a design.",
    "status": "published",
    "link": "https://github.com/techczech/dominiks-agent-skills/tree/main/philosophy-for-agents/metaphor",
@@ -692,7 +742,15 @@
    "jobs": [
     "research"
    ],
-   "needs": [],
+   "needs": [
+    "packages"
+   ],
+   "packages": [
+    "poppler",
+    "pandoc",
+    "ocrmypdf",
+    "uv"
+   ],
    "when": "You want a structured review of a paper that is in your Zotero library.",
    "status": "published",
    "link": "https://github.com/techczech/dominiks-agent-skills/tree/main/research/paper-reviewer-skill",
@@ -709,6 +767,7 @@
     "building"
    ],
    "needs": [],
+   "packages": [],
    "when": "You want a project's history, decisions and backlog recorded in the repository itself.",
    "status": "published",
    "link": "https://github.com/techczech/dominiks-agent-skills/tree/main/dev/project-changelog",
@@ -726,6 +785,7 @@
     "teaching"
    ],
    "needs": [],
+   "packages": [],
    "when": "You want text or slides that are easier to read, including for dyslexic readers.",
    "status": "published",
    "link": "https://github.com/techczech/readability-skill",
@@ -743,6 +803,7 @@
     "writing"
    ],
    "needs": [],
+   "packages": [],
    "when": "You need a consent form or questionnaire translated with a record of each check.",
    "status": "published",
    "link": "https://github.com/techczech/dominiks-agent-skills/tree/main/research/research-translation",
@@ -761,6 +822,7 @@
     "writing"
    ],
    "needs": [],
+   "packages": [],
    "when": "You want one HTML file you can email, open from disk or put on a web server.",
    "status": "published",
    "link": "https://github.com/techczech/dominiks-agent-skills/tree/main/dev/single-html-document",
@@ -777,7 +839,12 @@
     "research"
    ],
    "needs": [
-    "account"
+    "account",
+    "packages"
+   ],
+   "packages": [
+    "GitHub CLI (gh)",
+    "jq"
    ],
    "when": "You have a Sketch Engine subscription and want an agent to run queries.",
    "status": "published",
@@ -795,6 +862,7 @@
     "building"
    ],
    "needs": [],
+   "packages": [],
    "when": "You want to understand a skill someone else wrote, or explain one to a class.",
    "status": "published",
    "link": "https://github.com/techczech/skill-explorer",
@@ -812,7 +880,13 @@
     "research"
    ],
    "needs": [
-    "local-model"
+    "local-model",
+    "packages"
+   ],
+   "packages": [
+    "ffmpeg",
+    "parakeet-mlx",
+    "mlx-audio"
    ],
    "when": "You have a recording of a lecture, interview or meeting that needs a transcript.",
    "status": "published",
@@ -832,6 +906,7 @@
    "needs": [
     "app"
    ],
+   "packages": [],
    "when": "You build talks in TalkWeaver and want help with outlines, handouts or recordings.",
    "status": "published",
    "link": "https://github.com/techczech/dominiks-agent-skills/tree/main/teaching/talkweaver",
@@ -849,6 +924,7 @@
     "building"
    ],
    "needs": [],
+   "packages": [],
    "when": "You are designing how documents, courses or slides are structured and reused.",
    "status": "published",
    "link": "https://github.com/techczech/dominiks-agent-skills/tree/main/philosophy-for-agents/text-as-graph",
@@ -866,7 +942,11 @@
     "teaching"
    ],
    "needs": [
-    "local-model"
+    "local-model",
+    "packages"
+   ],
+   "packages": [
+    "mflux"
    ],
    "when": "You want illustrations for slides or documents without sending prompts to a service.",
    "status": "published",
@@ -884,7 +964,13 @@
     "media"
    ],
    "needs": [
-    "local-model"
+    "local-model",
+    "packages"
+   ],
+   "packages": [
+    "uv",
+    "ffmpeg",
+    "mlx-audio"
    ],
    "when": "You want narration or an audio version of a text.",
    "status": "published",
@@ -902,6 +988,7 @@
     "building"
    ],
    "needs": [],
+   "packages": [],
    "when": "You are starting design work and need to agree who the user is and what they do at each step.",
    "status": "published",
    "link": "https://github.com/techczech/dominiks-agent-skills/tree/main/dev/ux-journeys",
@@ -919,7 +1006,12 @@
     "research"
    ],
    "needs": [
-    "local-model"
+    "local-model",
+    "packages"
+   ],
+   "packages": [
+    "ffmpeg",
+    "LM Studio"
    ],
    "when": "You have a screen recording or video and want a description or timestamped scene list without uploading it.",
    "status": "published",
@@ -939,6 +1031,7 @@
    "needs": [
     "app"
    ],
+   "packages": [],
    "when": "You keep your writing in WriteFlex and want an agent to help with collections and documents.",
    "status": "published",
    "link": "https://github.com/techczech/dominiks-agent-skills/tree/main/writing/writeflex",
@@ -956,6 +1049,7 @@
     "agent-setup"
    ],
    "needs": [],
+   "packages": [],
    "when": "You want an agent to settle who a text is for before it writes, so that chat replies, instruction files and anything sent in your name each get the right treatment.",
    "status": "published",
    "link": "https://github.com/techczech/dominiks-agent-skills/tree/main/philosophy-for-agents/writing-modes",
@@ -972,6 +1066,7 @@
     "research"
    ],
    "needs": [],
+   "packages": [],
    "when": "You want an agent to import references, fetch PDFs or tidy collections in Zotero.",
    "status": "published",
    "link": "https://github.com/techczech/dominiks-agent-skills/tree/main/research/zotero-wrangler",

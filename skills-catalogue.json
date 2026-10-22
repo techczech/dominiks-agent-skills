@@ -98,9 +98,14 @@
   }
  ],
  "needs": {
-  "mac-local": "Runs on your Mac",
+  "local-model": "Needs a local model",
   "app": "Needs one of Dominik's apps",
   "account": "Needs an account"
+ },
+ "needNotes": {
+  "local-model": "This skill runs an AI model on your own computer rather than sending your data to a service, for anonymising text, transcription, speech, images or video description. The model has to be downloaded first, and models can take several gigabytes. A more powerful machine with plenty of memory helps, and whether a given model runs, and how fast, depends on your hardware and how your machine is set up. The current scripts were written and tested on Apple Silicon Macs (several use MLX), so on Linux or Windows you may need a different model or runtime.",
+  "account": "This skill calls an outside service through its API, so you need an account and a key or login. Some of these services are free or have a free tier, but all of them need you to sign in.",
+  "app": "This skill works inside one of Dominik's apps, which you need to install first."
  },
  "paths": [
   {
@@ -371,7 +376,7 @@
     "research"
    ],
    "needs": [
-    "mac-local"
+    "local-model"
    ],
    "when": "You need to remove names and contact details from transcripts or survey responses before sharing them.",
    "status": "published",
@@ -505,9 +510,7 @@
    "jobs": [
     "research"
    ],
-   "needs": [
-    "mac-local"
-   ],
+   "needs": [],
    "when": "You want to run corpus linguistics on your own machine.",
    "status": "published",
    "link": "https://github.com/techczech/corpus-tools-skill",
@@ -809,7 +812,7 @@
     "research"
    ],
    "needs": [
-    "mac-local"
+    "local-model"
    ],
    "when": "You have a recording of a lecture, interview or meeting that needs a transcript.",
    "status": "published",
@@ -863,7 +866,7 @@
     "teaching"
    ],
    "needs": [
-    "mac-local"
+    "local-model"
    ],
    "when": "You want illustrations for slides or documents without sending prompts to a service.",
    "status": "published",
@@ -881,7 +884,7 @@
     "media"
    ],
    "needs": [
-    "mac-local"
+    "local-model"
    ],
    "when": "You want narration or an audio version of a text.",
    "status": "published",
@@ -916,7 +919,7 @@
     "research"
    ],
    "needs": [
-    "mac-local"
+    "local-model"
    ],
    "when": "You have a screen recording or video and want a description or timestamped scene list without uploading it.",
    "status": "published",

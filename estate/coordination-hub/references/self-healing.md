@@ -1,15 +1,12 @@
 # Self-healing on user correction
 
-A user correction is evidence of a missing or wrong rule. Capture every one; promote few.
+A user correction is evidence of a missing or wrong rule. Capture every one as an example in a lessons file. It becomes a rule only if the user asks.
 
 ## Protocol
 
 1. Classify: restate the correction as an operational rule in one sentence. Confirm its scope with the user if unclear (this task, this project, everywhere).
 2. Capture: record correction, scope, evidence, outcome in the active `_TASK-LOG/` entry (or the backlog task if no repo task). Capture happens whether or not the rule is promoted.
-3. Gate: decide promotion.
-   - Promote now: the failure was dangerous, destructive, privacy-sensitive, or costly.
-   - Promote after recurrence: the same failure has appeared more than once and a short rule would prevent it.
-   - Do not promote: task-specific, ambiguous, or thinly evidenced. Keep the capture only.
+3. Gate: default is no promotion. Keep the capture as an example in a lessons file. Promote to a rule only if the user asks. Then:
 4. Route to the smallest scope that holds:
    - rule for one repo: that repo's `AGENTS.md`
    - rule for one domain: the domain `AGENTS.md`
@@ -22,7 +19,7 @@ A user correction is evidence of a missing or wrong rule. Capture every one; pro
 
 ## Rules
 
-- No default rule edit: most corrections stay as captures.
+- No default rule edit: corrections stay as examples in a lessons file unless the user asks for a rule.
 - Rationale and dates go in the task log or ADR, not in the live rule.
 - Do not copy one rule into several repos; put it at the shallowest shared scope and point to it.
 

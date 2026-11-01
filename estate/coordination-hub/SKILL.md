@@ -12,7 +12,7 @@ One hub repo where every agent session starts. Hub routes to domains; domains ro
 - Hub repo: AGENTS.md, domains, ADRs, glossary, generated map, doctor check.
 - Backlog: capture every session, promote real work to tasks.
 - Handoff notes in the hub, readable cold.
-- Self-healing: user corrections become rules, gated.
+- Self-healing: a user correction becomes an example in a lessons file; it becomes a rule only if the user asks.
 - Lessons log: reusable facts with evidence.
 - Talking rules: how agents report to the user.
 - Repo registry and sync: one table of repos, the routine repo state check, moving work between machines, the session-end checkpoint.

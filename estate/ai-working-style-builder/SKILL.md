@@ -1,6 +1,6 @@
 ---
 name: ai-working-style-builder
-description: Help users improve how they work with AI. Use for communication, attention, continuity, instructions, or record-keeping problems.
+description: "Use to help someone improve how they work with AI: communication, attention, continuity, instructions, record-keeping."
 ---
 
 # AI Working Style Builder

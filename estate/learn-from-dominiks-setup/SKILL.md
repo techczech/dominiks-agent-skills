@@ -1,6 +1,6 @@
 ---
 name: learn-from-dominiks-setup
-description: Use to learn from Dominik's setup, get started with Dominik's skills collection, or ask which of Dominik's skills fits a situation. Inspects the user's own agent setup read-only, compares it with Dominik's practices, recommends 2-3 skills. Works pasted by URL or installed.
+description: "Use to learn from Dominik's setup, get started with his skills collection, or ask which of his skills fits a situation."
 ---
 
 # Learn from Dominik's setup

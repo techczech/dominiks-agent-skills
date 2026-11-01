@@ -1,6 +1,6 @@
 ---
 name: image-to-design
-description: "Plan, generate, version, and implement UI designs from visual references. Use when the user asks for UI mockups, generated design concepts, visual design exploration, an image or screenshot turned into HTML/CSS, side-by-side comparison of design versions, or a revision of a previously generated mockup."
+description: "Use for UI mockups, design concepts, turning an image into HTML/CSS, or revising a generated mockup."
 ---
 
 # Image to Design

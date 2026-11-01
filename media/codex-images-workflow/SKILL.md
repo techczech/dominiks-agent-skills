@@ -1,6 +1,6 @@
 ---
 name: codex-images-workflow
-description: "Manage generated images as reproducible artefacts: write a Markdown brief before generating, store the image beside its brief, and version both. Use when generating posters, mockups, UI screens, diagrams, concept art or other visuals a project may need to regenerate or revise later."
+description: "Use when generating posters, mockups, diagrams or other visuals a project may regenerate, with a Markdown brief beside each image."
 ---
 
 # Codex Images Workflow

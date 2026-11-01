@@ -23,11 +23,11 @@ One caution from the failure that created this skill: the rejected build had an 
 
 ## The sequence
 
-Never skip a gate. Never reorder them. Code is the last step, not the first.
+Gates scale with the work: run them all for new apps and major redesigns; smaller features take the gates that help, and say which you skipped and why. Keep the order. Code is the last step, not the first.
 
 ### Gate 1 — PRD and user journeys, on the domain model
 
-Pin down, in writing, before any design work: who it is for, the jobs it does, the flows, and **every screen and state by name** (including empty states, error states, onboarding, settings). A feature list is not a PRD; a PRD says what the experience must feel like, screen by screen.
+Pin down, in writing, before any design work: who it is for, the jobs it does, the flows, and **every screen and state by name** (including empty states, error states, onboarding, settings). Each screen gets a **screen contract** with one purpose (`ux-journeys`, `references/screen-contract.md`), reviewed as an interactive HTML walkthrough. A feature list is not a PRD; a PRD says what the experience must feel like, screen by screen.
 
 **Lock the user journeys before any visual design** — run the `ux-journeys` skill: name the aims, enumerate the situations, storyboard divergent candidate journeys for the user to correct (propose, don't ask — the user recognises rightness faster than they can specify it), and lock each with its *right-when* condition. Storyboards are **half visual, half textual** — rough sketches with one-line captions, never prose walls and never polished mockups. Every feature links to the journey it serves; a feature serving no journey is flagged, not silently kept. Locked journeys are design artefacts (`docs/design/<date>-<topic>/journeys.md`, committed same turn). The `cognitive-walkthrough` skill is the closing check after build that the app still walks these journeys — it never substitutes for locking them here.
 

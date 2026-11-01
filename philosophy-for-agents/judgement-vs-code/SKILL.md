@@ -1,6 +1,6 @@
 ---
 name: judgement-vs-code
-description: Decide when a task needs model judgement (reading and understanding) instead of string operations such as regex, keyword lists or first-N-sentences. Load before writing any logic over natural language or document content, and when reviewing such code ("can this be correct without understanding the input?").
+description: "Load before writing any logic over natural language or document content, and when reviewing such code (regex, keyword lists, first-N-sentences)."
 ---
 
 # Judgement vs Code (Grep and Grok): Choosing the Right Implementation for Language Tasks

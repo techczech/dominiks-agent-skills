@@ -1,6 +1,6 @@
 ---
 name: video-analysis
-description: Analyse a video file locally with Gemma 4 12B via LM Studio. Use to describe, summarise or question a video or screen capture, or get a timestamped scene breakdown.
+description: "Use to describe, summarise or question a video or screen capture locally with Gemma 4 via LM Studio."
 ---
 
 # Video Analysis

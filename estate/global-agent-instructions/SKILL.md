@@ -38,6 +38,14 @@ description: Create, streamline, install or repair one canonical global instruct
 
 4. Report the canonical payload, tools wired, tools skipped, backups created and any manual action still required.
 
+## Editing Rule
+
+When editing instructions or skills: change the fewest words that solve the problem.
+Prefer deleting or replacing to adding. Keep what is there unless asked.
+A one-off incident is an example in a lessons file, not a new rule.
+A new hard rule needs the user's say. Anything temporary goes in Temporary rules with an expiry date.
+Skill descriptions say when to use the skill, not what it contains.
+
 ## Rules
 
 - Never overwrite an existing global instruction file silently.

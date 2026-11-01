@@ -1,6 +1,6 @@
 ---
 name: coordination-hub
-description: Set up or repair a personal coordination system for many projects and parallel AI agent sessions. Use for "where are my projects", "set up a hub", "session handoffs", "backlog capture", "agents lose context between sessions", or when a user runs many agent sessions and cannot track their state.
+description: "Use to set up or repair a personal coordination system: \"where are my projects\", \"set up a hub\", session handoffs, agents losing context between sessions."
 ---
 
 # Coordination Hub

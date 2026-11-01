@@ -1,6 +1,6 @@
 ---
 name: design-first-dev
-description: "Design-first process for software with a UI: PRD and user journeys, divergent design rounds, a locked high-fidelity mockup, build to that mockup, live verification of the core path, and a full-features quality gate. Use before writing any plan or code for an app, a feature or a redesign."
+description: "Use before writing any plan or code for an app, feature or redesign with a UI: PRD, journeys, design rounds, locked mockup, build and live check."
 ---
 
 # Design-First Development

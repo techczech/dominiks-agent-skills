@@ -1,6 +1,6 @@
 ---
 name: text-as-graph
-description: Treats texts and courses as graphs of connected parts, with views (slides, handouts, outlines, calendars) as derived pathways and every duplicate carrying provenance and a regeneration rule. Load when designing document or course structure, registries, derived views, provenance, or fork/reuse/remix features in a content app.
+description: "Load when designing document or course structure, registries, derived views, provenance, or fork/reuse/remix features in a content app."
 ---
 
 # Text as Graph, Views as Pathways: Structuring Content Systems

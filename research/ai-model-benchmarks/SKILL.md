@@ -1,6 +1,6 @@
 ---
 name: ai-model-benchmarks
-description: "Fetch Artificial Analysis (AA), Arena and OpenRouter free data and build self-contained comparison widgets (model progress/frontier chart, benchmark comparison, price vs intelligence scatter, leaderboard bar or table, OpenRouter usage share, text-to-image/video/speech arena rankings): ONE inline HTML file with no external requests, for slides or documents (any tool that can embed or open a local HTML file). Also looks up whether a given model, such as an open model to run locally, has benchmark data and a licence. Use for: compare models for a talk/slide/document, model progress, benchmark comparison, leaderboard widget, Artificial Analysis, Arena, OpenRouter."
+description: "Use when building an inline HTML chart or table of AI model benchmarks, prices or arena rankings (Artificial Analysis, Arena, OpenRouter) for slides or documents."
 metadata:
   short-description: Benchmark widgets and model lookup from AA, Arena and OpenRouter
 ---

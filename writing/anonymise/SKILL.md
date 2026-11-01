@@ -1,6 +1,6 @@
 ---
 name: anonymise
-description: "Detect and redact personally identifiable information (PII) in text on your own machine, using OpenAI's open-weight privacy-filter model via Hugging Face Transformers — no cloud API. Use when asked to anonymise or redact a document, scrub names, emails, phone numbers, addresses or credentials from transcripts, logs, survey responses or research data, or clean text before sending it to a hosted LLM. Outputs masked text, stable pseudonyms, or JSON spans with offsets."
+description: "Use to redact names, emails or credentials from text locally before sending it to a hosted LLM, or to anonymise a document."
 ---
 
 # anonymise — Local PII Redaction (OpenAI Privacy Filter)

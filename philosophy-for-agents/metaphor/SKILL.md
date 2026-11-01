@@ -1,6 +1,6 @@
 ---
 name: metaphor
-description: Treats metaphor mappings as partial and negotiated, so an agent neither dismisses a metaphor a priori nor imports its source domain wholesale. Load before building on a metaphor as a design frame or requirement, or before explaining something with one.
+description: "Load before building on a metaphor as a design frame or requirement, or before explaining something with one."
 ---
 
 # Metaphor: Mappings, Not Magic

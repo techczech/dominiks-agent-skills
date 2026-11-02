@@ -1,6 +1,6 @@
 ---
 name: cognitive-walkthrough
-description: "Run a structured cognitive walkthrough on any UI artefact — generated mockup, screenshot, live URL, paper prototype, Figma export — to evaluate learnability from a new user's perspective. Walks the user's task step by step, answers the four Nielsen Norman diagnostic questions per step, and writes a Markdown report with pass/fail verdicts and concrete fixes. Trigger this whenever the user asks for a cognitive walkthrough, learnability review, UX inspection, expert critique of a UI image, evaluation of a prototype, design review from a user's perspective, or wants to know whether a new user could actually complete a task on this interface — even when they don't use those exact words. Especially relevant after a new mockup is generated (image-to-design) and before the next revision, or when an interface is novel enough that established usability heuristics will miss its specific failures."
+description: "Use for a learnability review, UX inspection or expert critique of a UI mockup, screenshot, URL or prototype."
 ---
 
 # Cognitive Walkthrough
@@ -16,6 +16,10 @@ This skill is design-agnostic. The artefact can be a generated mockup from `imag
 - One report file per (artefact × task) pair. Two tasks on the same screen produce two reports.
 - The agent's findings are an inspection by a model adopting a new-user persona. They are *not* observed user behaviour. Report wording must not imply real users were tested.
 - When the artefact uses standard, ubiquitous patterns (typical ecommerce checkout, standard settings panel), say so and recommend a different method. Do not fabricate findings to fill a template.
+
+## Screen Contracts
+
+If the app has screen contracts (`ux-journeys`, `references/screen-contract.md`), check each screen against its `purpose` and `evaluate` lines as well as the four questions. A control that serves neither the purpose nor a listed `extra` item is a finding.
 
 ## When to Use
 

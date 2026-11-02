@@ -1,13 +1,17 @@
 ---
 name: expository-writing
-description: Keeps substantive prose literal and specific — every sentence a determinate proposition the reader can use or dispute, no decorative, journalistic or mannered language unless asked for. Load before writing reports, documentation, web copy, explanations or any other substantive prose, in any register.
+description: "Load before writing reports, documentation, web copy, explanations or other substantive prose, in any register; keeps prose literal and specific."
 ---
 
-# Expository Writing: Substance Before Chrome
+# Expository Writing
 
 Load when writing any substantive prose for the user or in the user's name — documents they will read, artefacts that go out under their name, reports, abstracts, manuals, web copy, README explanations. Governs substance in every register; a voice-fidelity guide, if you have one, governs voice on top of it; agent-facing telegraph files (instructions written for other agents) are exempt. Phrase ban lists are editor-level tripwires; this file is the actual standard they approximate.
 
 If `references/local.md` exists, read it: it holds the local conventions for this workspace and overrides this file where they differ.
+
+## Edit scope takes precedence
+
+Make only requested changes; preserve all other text and structure. Add no unrequested qualifications, checks, conditions or elaboration. Ask before adding anything that appears necessary. Content inventory, argument review and clarity checks diagnose; they do not authorise expanding or rewriting beyond the request. For new drafts, use the requested substance and purpose without inventing extra content.
 
 ## Core Claim
 
@@ -39,13 +43,22 @@ Independent axes. Conflating them is a live failure mode, not a theoretical one.
 - **Contamination vector.** A turn spent writing agent-facing telegraph files leaves telegraph warm; the next reply to the user inherits its voice. Predictable enough to check for by default.
 - Generalises: **a complaint about one axis is not licence to move on the other.** Applies beyond writing — a complaint about density is not licence to cut content, a complaint about verbosity is not licence to drop structure.
 
-## Process
+## Inspectable writing process
 
-1. **Content pass before prose pass**: proposition inventory (what is it, what does it do, who uses it, which distinctions matter, what evidence, what does the reader decide next). Weak inventory → gather evidence or say the section has little to say; never compensate with framing. Substantiveness failure is often missing knowledge, not bad phrasing — no style fixes that.
-2. Draft. Craft rules, all judgement calls, never mechanical: shorter sentences but not telegraphic; clear subject (who does something) or address the reader — passive-avoidance falls out, don't apply it as a rule; important first, background last, not always; lists where they help, don't list everything; repeat the noun when a pronoun would blur the referent, no forced elegant variation.
-3. **Self-check**: functional reverse outline — each sentence is a definition / fact / distinction / mechanism / example / instruction / limitation / transition; no identifiable function = suspect; consecutive significance claims = prose circling its subject. Then reader-delta per paragraph; then the two checks.
-4. Compression ≠ deletion: when cutting, list which propositions disappeared and confirm each disappearance deliberate. Detail budget: as much detail as the reader needs for the question this section answers (pedantic detail suits difficult explanations, not homepage blocks).
-5. **Pattern audit**: if you have a skill or checklist for AI-prose patterns, run it last as the final pattern and specificity audit. Substance, selected register, source fidelity, and accessibility retain precedence; preserve justified punctuation, technical terms, and structure.
+Before substantive drafting, read [the writing process](references/writing-process.md) and [purpose, reader and genre declarations](references/purpose-reader.md). Execute the stages in the existing project workspace. Every stage saves substantive content to a file; a chat summary or a ticked checklist does not complete it.
+
+0. For a new piece or substantive change of direction, read [the author interview and writing decisions](references/author-interview.md). Review available materials, then interview the author about their argument, main lessons, reader and destination before proposing the outline. Ask one question at a time. Save answers and writing decisions; obtain shared understanding or record the author's explicit decision to skip the interview. Existing settled decisions remain valid; narrow edits do not reopen the whole interview.
+1. Open the current author source, interview/decision records and process index. Save the work's purpose, reader and genre declaration. Distinguish the author's confirmed position from the model's proposed interpretation.
+2. Save claims as propositions with source links and relationships. Save the narrative plan: what readers know before each part, what they learn and what prepares them for the next part.
+3. Save one section brief, including its purpose, reader question, exact author text, claims and sources. Assign a visuals/tables editor and an appendix/resources editor where the explanation needs those outputs; save their briefs, artefacts and allocation decisions using [the publication-editor and inspection records](references/editorial-inspection-report.md). State the section's purpose clearly at its opening. Do not draft before the brief's required author review.
+4. The writer loads the named current declaration, claim register, narrative plan, section brief and actual source passages. Save one section draft and the versions read.
+5. A different, independent critic loads the same prerequisites and the draft. Save argument/fidelity findings and a complete sentence, paragraph, heading, table, visual, caption and resource review using the [critic procedure](../../writing/unslop/references/independent-critic.md). Include the dedicated [cohesion review](../../writing/cohesion-review/SKILL.md) of paragraph and section boundaries, with actual antecedents and relationships; the same independent critic may perform that role with separate coverage. Delete empty content within scope; flag source conflicts separately.
+6. Save the revision and repair response. The critic reopens that revision; the coordinator reads the repaired section against the author source. Save the author's decision before progressing to the next section. Retain previous versions and the accepted version's identity.
+7. Recheck the assembled argument, reader knowledge and genre requirements. Write derived summaries from the settled body. Save the handoff record and remaining decisions. On request, export one self-contained HTML editorial inspector from the saved records; include every generated editorial file in the declared scope, exact available task instructions, agent records, inputs, outputs, critiques, repairs and author decisions. Use [the inspection-report contract](references/editorial-inspection-report.md).
+
+When author feedback changes direction, update the writing decisions and affected declarations, claims and briefs before further drafting; preserve the earlier reasoning and mark dependent reviews for recheck. Every handoff names exact prerequisite files and versions to open, including current author decisions. Receiving agents read their contents and record what they actually loaded. Recheck stale or changed inputs before continuing. Paragraph- or sentence-level purpose analysis is required when its contribution is in doubt; keep it in the section record unless it needs its own discussion.
+
+Keep definitions, reasons, mechanisms and examples needed by the reader. The final review removes empty framing and repetition; it does not replace the author's position or restore deleted material. Run Unslop after argument/fidelity and reader-context checks. A wording scan or successful export establishes neither source fidelity nor writing quality.
 
 ## Edit Moves (annotation vocabulary for before/after pairs)
 
@@ -58,13 +71,3 @@ denotational reset (what the noun refers to before why it matters) · classifica
 - Degradation rule: exemplars conflict → plain claim + concrete example; never add personality to resemble the examples. Blend, never caricature; beware averaging into generic internet prose — the same failure in a better costume.
 - Genre split: the standard (determinate claims, exposed reasoning) travels to every genre; the visible essay voice does not — labels, metadata, SOPs stay plain.
 - The user's own before/after edit pairs outrank all public exemplars.
-
-## Canonical Case
-
-A site-copy rewrite for an educational-tools directory (homepage, getting-started and category pages): agent draft → owner's edit. Aphoristic headlines deleted ("More ambitious does not have to mean more complicated" → "Four type of tools" [typo in original]); grand claim → direct address ("Educational software no longer has to fit inside the old boundary…" → "You can now be more ambitious about what tools you make…"); whole sections routed elsewhere. Caveats — the owner rated this round VERY PARTIAL evidence, with more edit rounds on agent drafts to come: some cuts removed determinate propositions (placement/audience, not emptiness — "the owner cut it" proves nothing by itself); the revision has typos — evidence of conceptual revision, not a mechanical style exemplar. Lesson: substance must survive polishing.
-
-## Provenance
-
-Dictated 2026-07-17 (decorative-language concept from Dominik Lukeš's readability work); reviewed independently by a second model family against the site-copy diff, unprejudiced (convergence on contestability + atmospheric validated the terms).
-
-**Two Axes** added 2026-07-24, from a live correction rather than a dictation. An agent labelled a chat reply as written for the user and wrote a briefing document underneath the label; told "this is how you speak to yourself", it over-corrected into structureless prose and banned headings — contradicting the readability principles — and was corrected a second time: "I do want some structure… start with a bullet point summary, add section headings, bold key points." Both corrections in one session; the second is the one worth keeping.

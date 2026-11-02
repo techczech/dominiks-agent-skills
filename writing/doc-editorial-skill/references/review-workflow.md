@@ -29,11 +29,11 @@ Voice, tone, and style review that evolves its own reference guide based on user
 ### Template Compliance (if templates defined)
 
 - Does the doc follow its assigned template structure?
-- Are expected sections present?
+- Are the sections requested for this document present? A template does not authorise adding sections during a narrow edit.
 
 ### Progressive Disclosure
 
-- Are concepts introduced simply before being elaborated?
+- Does the requested explanation provide the needed definitions and sequence? Do not require elaboration merely to match a template.
 - Does complexity build gradually?
 
 ### Jargon Handling

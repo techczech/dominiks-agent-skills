@@ -31,10 +31,10 @@ Check the mechanics of each document:
 ### 2. Content Completeness
 
 Identify thin or incomplete content:
-- Sections with only 1-2 sentences (may need expansion)
+- Missing information needed for the stated purpose; sentence count alone is not a defect
 - Placeholder text or TODO markers
 - Sections promised in headings but not delivered
-- Docs significantly shorter than peers in the same category
+- Promised coverage absent from the document; length relative to peers is not a reason to elaborate
 
 ### 3. Cross-Doc Consistency
 

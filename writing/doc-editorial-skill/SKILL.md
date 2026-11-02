@@ -1,13 +1,13 @@
 ---
 name: doc-editorial
-description: "Runs interactive editorial workflows on markdown docs: structure audits, voice review, terminology checks and fact-checking. Proposes each change and asks before editing. Use when auditing or editing a docs folder, or setting up an editorial workspace."
+description: "Use to audit or edit a markdown docs folder interactively (structure, voice, terminology, fact-check), or to set up an editorial workspace."
 ---
 
 # Doc Editorial Skill
 
 Interactive editorial workflows for markdown documentation. Every workflow follows the same pattern: **propose → ask → act → learn**.
 
-Always confirm with the user before making changes. Never auto-fix without approval.
+An explicit request to make specified changes authorises those changes; do not ask for the same permission again. A review request alone does not authorise fixes. Propose any addition or change outside scope before applying it. Apply the `expository-writing` skill; templates and audit findings never expand scope.
 
 ## Project Setup
 

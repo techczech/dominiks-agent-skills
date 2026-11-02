@@ -1,6 +1,6 @@
 ---
 name: single-html-document
-description: "Builds a document as a normal website from Markdown/YAML source, then packages it as one offline HTML file and delivers the editable source with it. Use for a single-file HTML report, handout, slide deck or review workbook that opens from disk."
+description: "Use for a single-file offline HTML report, handout, slide deck or review workbook built from Markdown/YAML source."
 ---
 
 # Single-File HTML Documents
@@ -9,13 +9,17 @@ Build the website first. Package it second. Deliver the editable source with it.
 
 Treat single-file HTML as a delivery format, not an authoring format. Keep content, styling, scripts, media, interaction state, and export contracts separate while building the project, then collapse the finished document into one browser-openable file only after the normal website works. The canonical authored source for every user-facing string is Markdown with YAML front matter; the HTML is generated output. Read [references/editable-source.md](references/editable-source.md) before authoring or revising a deliverable.
 
+## Content scope
+
+Rendering or packaging authorises no extra prose, checks, qualifications, source appendices or editorial rewrites. Preserve the requested audience content; ask before a necessary addition. Local sources are evidence, not automatically reader-facing material. For Dominik's reports, the standing WriteFlex Folio/native-export instruction takes precedence over the website-build recipe here; use this skill for supported standalone widgets and packaging within scope.
+
 ## Non-Negotiable Principle
 
 The delivered document is one modern, polished HTML file that contains the full reading or working experience.
 
 - Do not make the Markdown source available only as a detached export, download, or provenance appendix. It must be the editable source that drives the build.
 - Keep every authored user-facing string in Markdown with YAML front matter, including prose, guides, prompts, headings, navigation, labels, placeholders, help, errors, status messages, accessibility labels, and calendar/export copy. Inline HTML markup is allowed in Markdown where needed for rendering.
-- Any local source text needed for understanding the document must be incorporated into the page as rendered content, searchable content, an appendix, source drawer, or embedded provenance section.
+- Render the local source material the user authorised for the document. Do not append complete sources or provenance merely because files are available; keep private/internal evidence outside the audience export. Ask before adding explanatory material absent from the authorised content.
 - Downloads are reserved for files that genuinely need separate distribution, especially PDFs, CSVs, spreadsheets, slide decks, or other binary/tabular attachments.
 - External links are acceptable as citations or live service embeds, but they are not a substitute for incorporating the local source text needed by the document.
 - If the document collects notes, annotations, edits, ratings, screenshots, or audio, those are runtime user-entered or imported data, distinct from authored copy, with a versioned export contract.

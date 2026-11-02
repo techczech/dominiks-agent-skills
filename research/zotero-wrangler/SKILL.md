@@ -1,6 +1,6 @@
 ---
 name: zotero-wrangler
-description: Use when managing a Zotero desktop library, importing literature references, retrieving public PDFs or genuine abstracts, or organising collections, through the native API or the app interface.
+description: "Use to manage a Zotero library: import references, retrieve public PDFs or abstracts, organise collections."
 ---
 
 # Zotero Wrangler
@@ -45,7 +45,7 @@ Prepare a reviewable import before changing a library. Use `scripts/zotero-wrang
 
 ## Execute and verify
 
-- Only run `apply --execute` or `attach --execute` within authorised scope. Native keys stay in process memory; never write or print them. The helper uses Zotero's native dialog, including single-use and remembered approval.
+- Only run `apply --execute` or `attach --execute` within authorised scope. Never write keys to files, argv, output or logs. The helper uses Zotero's native dialog: single-use ("Allow") keys stay in process memory; remembered ("Always Allow") keys go to the macOS login Keychain or Windows Credential Manager, scoped by server ID and app name, so later runs skip the prompt. Elsewhere they last one run, with a warning. This OS-store use is a user-approved exception to the Bitwarden-only rule. See `references/reference-zotero-local-api.md`.
 - Keep receipts alongside the exact plan. Reconcile server readback before every retry; a timed-out client may follow a successful server write. Receipts are evidence, not server truth. Server mismatch, wrong-key state, stale versions or incomplete readback stops execution. Inspect and replan unresolved states; do not bypass preconditions.
 - The helper uses batches of at most 50 and version 0 for preallocated new keys. Existing updates retain current planned versions. Attachment receipts preallocate a key before creation, bind source/file hashes and parent, then resume through the local upload flow. Verify parent and MD5 after registration; keep SHA-256 download provenance.
 - Report verified references, reused identities, unavailable abstracts/PDFs, unresolved identities, topic/priority basis and availability limits. Separate offline tests, read-only discovery and live write validation. Exporting a package does not prove a live import or public release.

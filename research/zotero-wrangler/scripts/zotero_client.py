@@ -1,10 +1,18 @@
-"""Native local API transport. No credential persistence or redirect forwarding."""
+"""Native local API transport. No redirect forwarding.
+
+Remembered ("Always Allow") keys persist only in the OS credential store
+(zotero_credentials); single-use keys never leave process memory.
+"""
 import json
 import re
 import secrets
+import sys
 from urllib.error import HTTPError
 from urllib.parse import urlsplit
 from urllib.request import Request, build_opener, HTTPRedirectHandler, ProxyHandler
+import zotero_credentials as credentials
+
+DEFAULT_STORE = object()  # resolve the platform store lazily, on the first write
 
 
 class APIError(RuntimeError):
@@ -31,11 +39,19 @@ def validate_library(library):
     return library
 
 
+def _stderr(message):
+    print('warning: ' + message, file=sys.stderr)
+
+
 class LocalAPI:
-    def __init__(self, base='http://127.0.0.1:23119/api/', app_name='Zotero Wrangler'):
+    def __init__(self, base='http://127.0.0.1:23119/api/', app_name='Zotero Wrangler', store=DEFAULT_STORE, warn=None):
         self.base = validate_base(base); self.app_name = app_name
         self.opener = build_opener(ProxyHandler({}), NoRedirect())
         self.server = None; self.key = None; self.remember = False
+        # Read-only use never touches the credential store.
+        self._store_choice = store; self._store = None; self._store_ready = False
+        self._stored = False; self._store_checked = False; self._warn = warn or _stderr; self._warned = False
+        self._delete_pending = False  # a rejected stored key not yet removed; blocks all writes until it is
         _, h, _ = self.request('', api_version=False)
         self.server = h.get('Zotero-Server-ID')
         self.api_version = h.get('Zotero-API-Version')
@@ -56,29 +72,81 @@ class LocalAPI:
                 if self.server and rh.get('Zotero-Server-ID') != self.server: raise ValueError('Server ID changed or missing; discard cached state')
                 result = json.loads(b) if b and 'json' in response.headers.get('Content-Type', '') else b
                 return result, rh, response.status
-        except HTTPError as e: raise APIError(e.code) from None
+        except HTTPError as e:
+            e.close(); raise APIError(e.code) from None
 
     def get(self, route):
         return self.request(route)[0]
 
+    def _credential_store(self):
+        if not self._store_ready:
+            self._store = credentials.default_store() if self._store_choice is DEFAULT_STORE else self._store_choice
+            self._store_ready = True
+        return self._store
+
+    def _session_only(self, reason):
+        if not self._warned:
+            self._warned = True
+            self._warn(reason + '; "Always Allow" approval is kept for this run only and Zotero will ask again next time')
+
+    def _load_remembered(self):
+        # Once per client, marked only after the store answers. Store errors stop
+        # here, before any Zotero prompt, and recur on every write until it recovers.
+        if self._store_checked: return
+        store = self._credential_store()
+        if store is None or not credentials.valid_scope(self.server, self.app_name):
+            self._store_checked = True; return
+        key = store.get(self.server, self.app_name)
+        if key is not None and not credentials.valid_key(key):
+            store.delete(self.server, self.app_name); key = None
+        self._store_checked = True
+        if key is not None: self.key = key; self.remember = True; self._stored = True
+
+    def _save_remembered(self):
+        store = self._credential_store()
+        if store is None: self._session_only('No supported OS credential store on this platform'); return
+        if not credentials.valid_scope(self.server, self.app_name): self._session_only('Server ID or app name unsuitable for credential storage'); return
+        try: store.set(self.server, self.app_name, self.key)
+        except credentials.CredentialStoreError as e: self._session_only(str(e)); return
+        self._stored = True
+
+    def _forget_rejected(self):
+        self.key = None; self.remember = False
+        if self._stored:
+            self._stored = False; self._delete_pending = True
+            self._remove_rejected()
+
+    def _remove_rejected(self):
+        self._credential_store().delete(self.server, self.app_name)
+        self._delete_pending = False
+
     def authorize(self):
         if not self.server: raise ValueError('Older read-only local API; writes unavailable')
         response, _, _ = self.request('local/authorize', 'POST', {'appName': self.app_name}, timeout=60)
-        self.key = response['key']; self.remember = bool(response.get('remember'))
+        key = response.get('key') if isinstance(response, dict) else None
+        if not credentials.valid_key(key): raise ValueError('Zotero returned no usable authorisation; no writes')
+        self.key = key; self.remember = response.get('remember') is True; self._stored = False
+        if self.remember: self._save_remembered()
 
     def write(self, route, data, headers=None):
         if not self.server: raise ValueError('Read-only local API; writes unavailable')
+        if self._delete_pending: self._remove_rejected()
+        if not self.key: self._load_remembered()
         if not self.key: self.authorize()
         headers = dict(headers or {})
         if isinstance(data, list): headers.setdefault('Zotero-Write-Token', secrets.token_hex(16))
         for attempt in range(2):
             try:
-                result = self.request(route, 'POST', data, {**(headers or {}), 'Zotero-API-Key': self.key})[0]
+                result = self.request(route, 'POST', data, {**headers, 'Zotero-API-Key': self.key})[0]
                 if not self.remember: self.key = None
                 return result
             except APIError as e:
-                self.key = None
-                if e.status != 401 or attempt: raise
+                if e.status != 401:
+                    # 403/429 and others: no prompt; a remembered key stays valid, a single-use key is spent.
+                    if not self.remember: self.key = None
+                    raise
+                self._forget_rejected()
+                if attempt: raise
                 self.authorize()
 
     def upload(self, url, content, content_type):

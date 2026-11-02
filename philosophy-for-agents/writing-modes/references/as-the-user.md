@@ -12,9 +12,11 @@ If text could be copied into the user's report, proposal, briefing, public page,
 
 ## Guardrails
 
+- Make only requested changes; preserve all other wording and structure. Add no unrequested qualifications, checks, conditions or elaboration. Ask before a necessary addition. Voice and review never expand scope.
+
 - Content is the user's — from an original source, their prompt, or their dictation. Voice is *how* it reads; the content is always theirs. Never invent phrasing, conclusions, examples, or claims they did not give.
 - Source required: the user's prior writing, dictation, or bullets. No source → ask; do not proceed.
-- Ask on every gap; flag anything contestable or that could misrepresent them. Surface controversy rather than smoothing it over.
+- Ask only about a concrete gap needed to complete the request; raise it separately and briefly. Do not append generic warnings.
 - No editorial meta-framing in the artefact (no "less formal version" preamble, no "Informal Version" title, no notes on what changed). Editorial decisions go in chat.
 - Three passes before delivery: (1) faithful to their content; (2) their voice; (3) AI tells, padding, and unrequested claims removed.
 
@@ -66,3 +68,11 @@ Never leak agent-facing judgement or process language into them — unless the u
 Substance standard: `expository-writing` skill — the forbidden lists above are tripwires; the actual standard is determinate propositions (clarity + exposure checks), no decoration or journalistic register unbidden, Potter-style exposition without authorial persona.
 
 Depth: the user's voice guide or voice skill, if they have one — full voice procedure, style guides, and writing samples.
+
+## Argument and final prose review
+
+Before handing off substantive prose or a revision, compare the completed text with the current source and requested scope. Preserve its claim or purpose, supporting reasons, evidence, qualifications and conclusion. Check section order and paragraph context before a final Unslop review. A formatting or rendering check cannot establish that this review happened.
+
+## Purpose and reader record
+
+Before substantive drafting, read the current whole-work purpose/reader/genre declaration and the section brief. Create missing declarations in the established writing workspace: purpose, reader identity, reading motive, prior knowledge, required knowledge, exclusions and genre conventions. Record paragraph/sentence purpose when unclear. Use the [shared declaration](../../expository-writing/references/purpose-reader.md) and [file-backed process](../../expository-writing/references/writing-process.md) when available. Name the actual input files in handoffs; downstream agents must read them. Preserve exact author text and deletions.

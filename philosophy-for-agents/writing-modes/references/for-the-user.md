@@ -43,3 +43,11 @@ A turn spent writing FOR AGENTS files (`AGENTS.md`, `SKILL.md`, task specs, logs
 Substance standard: `expository-writing` skill — every sentence a determinate proposition; no decoration; content pass before prose pass.
 
 Depth: `readability` skill, if installed — longer human-facing documents, evidence-based readability checks.
+
+## Argument and final prose review
+
+Before handing off substantive prose or a revision, compare the completed text with the current source and requested scope. Preserve its claim or purpose, supporting reasons, evidence, qualifications and conclusion. Check section order and paragraph context before a final Unslop review. A formatting or rendering check cannot establish that this review happened.
+
+## Purpose and reader record
+
+Before substantive drafting, read the current whole-work purpose/reader/genre declaration and the section brief. Create missing declarations in the established writing workspace: purpose, reader identity, reading motive, prior knowledge, required knowledge, exclusions and genre conventions. Record paragraph/sentence purpose when unclear. Use the [shared declaration](../../expository-writing/references/purpose-reader.md) and [file-backed process](../../expository-writing/references/writing-process.md) when available. Name the actual input files in handoffs; downstream agents must read them. Preserve exact author text and deletions.

@@ -47,7 +47,7 @@ Rule: explore, present what you found, confirm with the user, then write. Read-o
    - one hub where sessions start (registry, backlog, handoffs): `coordination-hub`
    - decide who a text is for: `writing-modes`
    - plain literal prose: `expository-writing`
-   - planner hands work to other models: `agent-roles`
+   - planner hands work to other models: `agent-roles-review` (set up your own roles; Dominik's are its example)
    - one inbox for review and test requests: `dev-traffic-control` (needs Dominik's DTC app)
 3. Score each practice from step 1 evidence: already, partly, not yet, unknown.
 4. Other needs: route by catalogue `when` lines.

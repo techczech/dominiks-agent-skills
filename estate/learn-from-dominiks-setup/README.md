@@ -47,7 +47,7 @@ You can also ask it "which of Dominik's skills fits X". It then skips the inspec
 | One hub where every session starts | [coordination-hub](https://github.com/techczech/dominiks-agent-skills/tree/main/estate/coordination-hub) |
 | Decide who a text is for before writing it | [writing-modes](https://github.com/techczech/dominiks-agent-skills/tree/main/philosophy-for-agents/writing-modes) |
 | Plain, literal prose | [expository-writing](https://github.com/techczech/dominiks-agent-skills/tree/main/philosophy-for-agents/expository-writing) |
-| A planner that hands building, fixing, review and testing to other models | [agent-roles](https://github.com/techczech/dominiks-agent-skills/tree/main/estate/agent-roles) |
+| A planner that hands building, fixing, review and testing to other models | [agent-roles-review](https://github.com/techczech/dominiks-agent-skills/tree/main/estate/agent-roles-review) |
 | One place to answer review and test requests | [dev-traffic-control](https://github.com/techczech/dominiks-agent-skills/tree/main/dev/dev-traffic-control) (needs my DTC app) |
 
 The full table, with what each practice looks like and how the agent recognises that you already do it, is in `references/practices.md`.

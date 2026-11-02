@@ -10,7 +10,7 @@ Skills: https://github.com/techczech/dominiks-agent-skills. Raw base: `https://r
 | One hub where every session starts | Hub repo with registry of projects, backlog, handoff notes, lessons log | `coordination-hub` (estate/) | A known first file or folder routes agents to projects; handoff notes exist |
 | Decide who a text is for before writing | Name the reader (agent, user, you-as-author) and write to it | `writing-modes` (philosophy-for-agents/) | Agent files are terse; chat replies are plain; the two differ |
 | Plain literal prose | Say what you mean; no mannered phrasing | `expository-writing` (philosophy-for-agents/) | Instructions forbid slogans, contrast-for-effect, filler |
-| Planner hands building, fixing, review, testing to other models | Roles by task type; planner does not build | `agent-roles` (estate/) | Rules say which model or agent plans, builds, reviews, tests |
+| Planner hands building, fixing, review, testing to other models | Roles by task type; planner does not build | `agent-roles-review` (estate/) | Works out which model or agent plans, builds, reviews, tests for you; Dominik's roles file is its example |
 | One place to answer review and test requests | Agents file requests; you answer in one inbox | `dev-traffic-control` (dev/); needs Dominik's DTC app | You have a review or test inbox, not chat checklists |
 
 Evidence cues: files named `AGENTS.md`, `CLAUDE.md`, `now.md`, `backlog`, `registry`, `lessons`, `handoff`; skills dir entries; symlinks between agents' instruction files.

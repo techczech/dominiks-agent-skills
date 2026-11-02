@@ -304,21 +304,6 @@
    "extraLinks": []
   },
   {
-   "name": "agent-roles",
-   "id": "skill-agent-roles",
-   "category": "estate",
-   "summary": "The model-role contract and dispatch mechanics for an orchestrating Claude Code session — who plans, builds, fixes, reviews and tests, which model holds each seat, and the brief each gets.",
-   "jobs": [],
-   "needs": [],
-   "packages": [],
-   "when": "",
-   "status": "published",
-   "link": "https://github.com/techczech/dominiks-agent-skills/tree/main/estate/agent-roles",
-   "external": false,
-   "repo": null,
-   "extraLinks": []
-  },
-  {
    "name": "agent-roles-review",
    "id": "skill-agent-roles-review",
    "category": "estate",

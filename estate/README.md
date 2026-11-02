@@ -4,7 +4,6 @@ Running a setup with several agents, tools and repositories.
 
 [All skills](../README.md)
 
-- [agent-roles](agent-roles/): The model-role contract and dispatch mechanics for an orchestrating Claude Code session — who plans, builds, fixes, reviews and tests, which model holds each seat, and the brief each gets.
 - [agent-roles-review](agent-roles-review/): Set up, or periodically review, which models plan, build, fix, review and test your work, from how you work and what it costs; with one operator's roles as a worked example.
 - [agents-md-streamline](agents-md-streamline/): Writes and tightens AGENTS.md and CLAUDE.md files so they tell an agent what to do, not the project's history.
 - [ai-working-style-builder](ai-working-style-builder/): Helps you describe how you work so AI tools fit your communication, attention and record-keeping habits.

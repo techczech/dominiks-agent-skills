@@ -1,11 +1,29 @@
 ---
 name: talkweaver
-description: Use when authoring or revising TalkWeaver content, extracting or converting PowerPoint presentations, creating handouts, or transcribing and processing presentation recordings into Scripts or Notes. Applies to presentation content, not development of the TalkWeaver application.
+description: "Use to author or revise TalkWeaver content, convert PowerPoint presentations, make handouts, or turn recordings into Scripts or Notes. Content work, not app development."
 ---
 
 # TalkWeaver content
 
 Treat the Markdown outline as canonical source. Slides and exported decks are projections; a Pathway selects an alternate ordered cut, and a Run records a delivery. This is an instruction-only skill.
+
+## Search the knowledge stores first
+
+- Before producing new material, search the federated stores you have, such as `talks` (outlines and abstracts), `slide-versions` (every saved slide version), `abstracts-archive` (session abstracts), `learninglog` (lessons and research reports), `highlights` (reading highlights).
+- Run: `scout search --hybrid --limit 20 --json "<query>"` (all corpora), or add `--in <corpus>` to restrict. `scout similar <passage-id>` finds neighbours.
+- Passage ids look like `<corpus>:<path>:<line>`.
+- Reuse a hit by reference: copy it with its passage id or `scout cite` output as provenance. Never retype it without that. Check quotes with `scout verify-quote`.
+- Nothing reusable stays only in chat: before your final answer, file every table, visualisation, piece of evidence and search result worth keeping with `scout capture` into the project's `research/` folder, with its sources.
+- Command: `scout capture --project <talk folder> --kind <kind> --title "<title>" [--prompt "<question>"] [--source scout:<id>|URL|file:<path>]... [--artefact <file>] --by agent --json -` (body on stdin). Kinds: `evidence`, `table`, `visualisation`, `snippet`, `search`, `widget`.
+- Inspect: `scout capture --list --project <talk folder>`; `scout capture --where-used <file>` finds Markdown that mentions a file.
+
+## Research folder
+
+- Every talk has a `research/` folder beside its outline. Each captured unit is one Markdown file (frontmatter: title, kind, prompt, sources, created, project, by) with artefacts beside it.
+- File material there, not in the outline, until it is used on a slide.
+- App route: palette "Capture to research…" (sheet), "Reveal research folder", agent verb `research.capture` (TalkWeaver 0.42.0-alpha.3+; needs `scout` on the machine). Prefer the verb when exposed; else `scout capture`.
+- A folder named `research` (any case) is reserved: never a talk, category, outline or abstract. Creating, renaming, cloning or moving to that name is refused. Never treat its files as talks.
+- A Research panel (⌘⇧R) to insert items and make slides from them is locked in design but not yet built. Do not rely on it.
 
 ## Establish the task
 
@@ -15,9 +33,11 @@ Discover actual available app tools or a verified existing CLI. Electron methods
 
 ## Choose the content operation
 
+- For SVG figures, interactive HTML widgets and source-linked visual galleries with portable insertion codes, use `talkweaver-visuals` when available.
 - For a shorter or differently ordered cut of existing slides, prefer a Pathway. Keep the original outline and slide IDs unchanged.
 - For revised ideas or wording, propose precise source edits. Move complete slide blocks with their notes, triggers and assets; do not renumber IDs after a move or title change.
 - New content can be prepared as a draft outline. Use existing registered layout/object syntax; do not invent triggers from their English names.
+- AI chat or terminal slide (a ChatGPT/Claude-style transcript, an agent session or a shell session shown as a slide; TalkWeaver 0.38.1+; terminals type, chats stream with `stream=on` from 0.38.1-preview.3): use the `{chat}`, `{chat-lanes}`, `{terminal}` or `{terminal-agent}` layouts per [AI chat and terminal slides](references/talkweaver-ai-chat-and-terminal-slides.md). Do not guess the syntax; strip secrets and personal data from transcripts first.
 - Follow [outline and Pathway formats](references/content-formats.md). Follow [available surfaces](references/available-surfaces.md) for app operations and validation limits.
 
 ## Conversion, handouts and recordings

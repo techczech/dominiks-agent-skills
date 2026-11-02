@@ -1,6 +1,6 @@
 ---
 name: ux-journeys
-description: Elicit and lock user journeys (the aim, the situations the user arrives from, what they see, are told and do at each step, and when it is right) before visual design. Use at the start of design work on an app or feature, or when a design keeps missing.
+description: "Use at the start of design work on an app or feature, or when a design keeps missing, to elicit and lock user journeys before visual design."
 ---
 
 # UX Journeys
@@ -8,6 +8,14 @@ description: Elicit and lock user journeys (the aim, the situations the user arr
 If `references/local.md` exists, read it: it holds the local conventions for this workspace and overrides this file where they differ.
 
 The artefact is a **user journey**: in service of a named **aim**, from a **situation**, a sequence of *sees → told → does*, ending in a *right-when* condition. An app's design IS its journeys; a mockup is one surface those journeys pass through. This skill runs BEFORE visual design (`design-first-dev`, PRD gate); `cognitive-walkthrough` asks the same questions AFTER build as the closing check.
+
+## Every screen has a contract
+
+**Before any screen is drawn, write its contract: who is looking at it, what they already know, what data they expect, purpose, why the user is here, what they want to achieve, what they see, what they need to know, the steps, what is extra, and how to evaluate it.** One screen, one purpose. Start from one sentence for what the app is for and an outline of every step. Audit the current app the same way before redesigning it. **Every step-by-step review is an interactive HTML walkthrough.** Fields, rules and the builder: `references/screen-contract.md`. Read it before any journey, screen or redesign work. **Every design uses this skill**: no visual design, mockup or build ticket starts without the walkthrough. Apps with more than one role (teacher and learners) are walked moment by moment with every role's screen side by side, and open with the list of commitments that must hold without exception.
+
+## Before any test request
+
+Never ask the owner to test or review a screen until you have run the journey through it and can say so: "I ran the UX journey." For every screen that means writing down who the user is, what the screen is for, how it serves the app's purpose, how it moves the journey on and what the user needs to know to use it, and checking rule one (at most two bars at the top). A test request without that line is not sent (owner, 2026-11-02).
 
 ## Propose, don't ask
 

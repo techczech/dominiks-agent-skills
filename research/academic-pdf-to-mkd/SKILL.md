@@ -1,6 +1,6 @@
 ---
 name: academic-pdf-to-mkd
-description: "Convert academic PDFs — papers, book chapters, scanned articles — into structured Markdown with figures, tables, and page images as separate files. Picks an extraction engine per document (Docling, pymupdf4llm, MinerU, Poppler) and OCRs scan-only PDFs first. Also repairs scanned PDFs into searchable, copy-friendly PDFs for reference managers."
+description: "Use to convert academic PDFs into Markdown with figures and tables, OCR scans, or repair scanned PDFs for reference managers."
 ---
 
 # Academic PDF to Markdown
@@ -24,6 +24,12 @@ licence terms permissive enough to embed, and structure recovery on two-column
 academic layout. Per-engine licence terms are in [Licence notes](#licence-notes)
 below; if you need a different trade-off, the dispatch table in
 `scripts/extract-pdf.sh` is where another engine would be wired in.
+
+Baidu's Unlimited-OCR 2 was tested against Docling and MinerU on 10 academic
+papers (2026-10-28) and not adopted: on born-digital papers it was about nine
+times slower than Docling with no accuracy gain. It did better than Docling on
+the one scanned chapter, but OCRmyPDF already covers scans here. Results and a
+reproducible setup are in `research/2026-10-27-unlimited-ocr-bench/`.
 
 ## Prerequisites
 

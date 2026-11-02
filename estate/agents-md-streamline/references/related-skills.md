@@ -1,18 +1,13 @@
 # Related Skills
 
-Use when adjacent work appears.
+Route only when adjacent work appears:
 
-## Routing
+- Global payload, multi-tool installation, symlinks, or imports: `global-agent-instructions`.
+- New repository home or administrative scaffold: `project-setup`.
+- Reusable skill creation or revision: `skill-creator`.
+- Machine runtime or package-manager configuration: `machine-config`.
+- Human-facing prose revision: installed readability or editorial skill.
+- Text sent under the user's name: installed voice or author-faithful writing skill.
+- Durable reusable findings: installed lesson-log skill.
 
-Hand off when the request is not an instruction-file edit. Skill names vary by install; match on purpose, and do the work here if no such skill exists.
-
-- Project scaffolding: new repo layout, paired `AGENTS.md` / `CLAUDE.md`.
-- Changelog: durable decisions and change history.
-- Backlog or planning: cross-project plans and resumable work.
-- Dev or setup log: machine and environment progress.
-- Lesson log: researched findings, not routine edits.
-- Skill authoring: creating or updating a reusable skill.
-
-## Rule
-
-Keep references split by trigger. Do not merge routing, loading, placement, and provenance.
+Keep instruction-file editing here. Do not merge setup, writing, knowledge capture, and project creation into this skill.

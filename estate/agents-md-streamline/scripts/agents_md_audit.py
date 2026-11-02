@@ -3,8 +3,21 @@
 from __future__ import annotations
 
 import argparse
+import os
 import re
 from pathlib import Path
+
+SUPPORTED_NAMES = {"agents.md", "claude.md", "skill.md"}
+SKIP_DIRS = {
+    ".git",
+    ".hg",
+    ".svn",
+    ".venv",
+    "build",
+    "dist",
+    "node_modules",
+    "vendor",
+}
 
 BLOAT_PATTERNS = {
     "history/background": re.compile(r"\b(history|background|why this exists|rationale|origin|developed|past)\b", re.I),
@@ -49,17 +62,25 @@ def iter_targets(paths: list[Path]) -> list[Path]:
     seen: set[str] = set()
     for path in paths:
         if path.is_dir():
-            for name in ("AGENTS.md", "AGENTS.MD", "CLAUDE.md", "SKILL.md"):
-                candidate = path / name
-                key = str(candidate.resolve()).lower()
-                if candidate.exists() and key not in seen:
-                    targets.append(candidate)
-                    seen.add(key)
+            for root, dirnames, filenames in os.walk(path):
+                dirnames[:] = sorted(name for name in dirnames if name not in SKIP_DIRS)
+                for filename in sorted(filenames):
+                    if filename.lower() not in SUPPORTED_NAMES:
+                        continue
+                    candidate = Path(root) / filename
+                    key = str(candidate.resolve()).lower()
+                    if key not in seen:
+                        targets.append(candidate)
+                        seen.add(key)
         elif path.exists():
+            if not path.is_file() or path.name.lower() not in SUPPORTED_NAMES:
+                raise ValueError(f"unsupported target: {path}")
             key = str(path.resolve()).lower()
             if key not in seen:
                 targets.append(path)
                 seen.add(key)
+        else:
+            raise ValueError(f"target does not exist: {path}")
     return targets
 
 
@@ -81,10 +102,21 @@ def extract_frontmatter(text: str) -> str:
 
 
 def description_value(frontmatter: str) -> str | None:
-    for line in frontmatter.splitlines():
-        if line.startswith("description:"):
-            value = line.split(":", 1)[1].strip()
-            return value.strip("'\"")
+    lines = frontmatter.splitlines()
+    for index, line in enumerate(lines):
+        match = re.match(r"^\s*description\s*:\s*(.*)$", line)
+        if not match:
+            continue
+        value = match.group(1).strip()
+        if value in {"|", ">", "|-", ">-", "|+", ">+"}:
+            chunks: list[str] = []
+            for following in lines[index + 1 :]:
+                if following and not following[0].isspace():
+                    break
+                if following.strip():
+                    chunks.append(following.strip())
+            return " ".join(chunks)
+        return value.strip("'\"")
     return None
 
 
@@ -149,7 +181,7 @@ def audit(path: Path) -> int:
             print("  size: review band; keep only operational sections")
             status = max(status, 1)
         elif len(lines) <= 150:
-            print("  size: split band; move detail into README.md, _AGENT-INSTRUCTIONS/, _TASK-LOG/, _CHANGELOG/, or skills")
+            print("  size: split band; move detail into one-hop references, README.md, task state, lessons, or skills")
             status = max(status, 2)
         else:
             print("  size: exceptional; justify or split by directory")
@@ -213,11 +245,19 @@ def audit(path: Path) -> int:
 
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("paths", nargs="+", type=Path, help="AGENTS.md, CLAUDE.md, or folders to audit")
+    parser.add_argument(
+        "paths",
+        nargs="+",
+        type=Path,
+        help="AGENTS.md, CLAUDE.md, SKILL.md, or folders to audit recursively",
+    )
     args = parser.parse_args()
-    targets = iter_targets(args.paths)
+    try:
+        targets = iter_targets(args.paths)
+    except ValueError as error:
+        parser.error(str(error))
     if not targets:
-        parser.error("no AGENTS.md or CLAUDE.md files found")
+        parser.error("no AGENTS.md, CLAUDE.md, or SKILL.md files found")
     status = 0
     for target in targets:
         status = max(status, audit(target))

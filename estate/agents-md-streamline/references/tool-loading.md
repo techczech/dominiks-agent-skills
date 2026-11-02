@@ -1,40 +1,24 @@
 # Tool Loading
 
-Use when loader facts matter.
+Read only when loader behaviour affects the edit.
 
-Keep this here. Do not copy loader explanations into generated `AGENTS.md`.
+## Repository Scope
 
-## Loading
+- Keep `AGENTS.md` as the canonical cross-agent body where supported.
+- Keep a sibling `CLAUDE.md` as `@./AGENTS.md` when using the bridge convention.
+- Use nested instruction files only for a genuine change in commands, risk, ownership, or verification.
+- Do not explain loader mechanics inside generated instruction files.
 
-- Codex: global, repo-root, then nested `AGENTS.md`; closer wins.
-- Claude Code: `CLAUDE.md`; local file is only `@./AGENTS.md`.
-- Claude global: absolute `@.../AGENTS.md` is acceptable.
-- Other tools: prefer canonical `AGENTS.md` plus thin bridges.
+## Global Scope
 
-## Folder Pattern
-
-Default:
-
-```text
-AGENTS.md
-CLAUDE.md
-_AGENT-INSTRUCTIONS/
-  README.md
-  scripts/
-  templates/
-  cache/        # optional
-_TASK-LOG/
-_CHANGELOG/    # optional, for coding-feature/change history
-```
-
-Folder names are conventional. Match the project's own names when it has them.
-
-Keep human project content visible.
+- Use `global-agent-instructions` for current tool paths, symlinks, Claude imports, backups, checks, and uninstall.
+- Do not assume every tool reads the same basename or location.
+- Keep one canonical payload; use thin tool-specific wiring.
+- Verify current tool documentation before adding a new target.
 
 ## Bridge Rules
 
-- Sibling `AGENTS.md` needs sibling `CLAUDE.md`.
-- Local `CLAUDE.md`: exactly `@./AGENTS.md`.
-- No heading. No explanation.
-- Do not use `@` imports to hide bloat.
-- Occasional procedures go in `_AGENT-INSTRUCTIONS/` or skills.
+- Keep bridges content-free except for the required import.
+- Do not use imports to conceal an oversized always-loaded body.
+- Verify that the imported or linked destination exists.
+- Update the bridge and installer together when the canonical path moves.

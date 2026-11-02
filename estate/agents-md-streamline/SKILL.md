@@ -1,116 +1,87 @@
 ---
 name: agents-md-streamline
-description: "Create or tighten AGENTS.md, CLAUDE.md, and instruction-skill files. Telegraph style for agent-facing files; switch register when content moves to README and other human-facing docs."
+description: "Use to create, audit or shorten global, repo or nested agent instruction files."
 ---
 
-# AgentsMDstreamline
+# Streamline Agent Instructions
 
-## Scope
+## First Move
 
-Three registers. Classify before writing; do not carry one across a move.
+- Classify the target: global payload, repository root, nested scope, bridge, or skill.
+- For a global multi-tool payload or installation, use `global-agent-instructions`.
+- If that skill is unavailable, revise content only; report installation or wiring as blocked instead of guessing paths.
+- Inspect active instructions, bridges, referenced files, and nearby human documentation.
+- Run `scripts/agents_md_audit.py` against every target.
 
-- **For agents** — `AGENTS.md`, `CLAUDE.md`, `SKILL.md`, `TASK.md`, logs. Telegraph. See `## Style`.
-- **For the reader** — `README.md`, reports, explainers. Readable. See `## Human-Facing Output`.
-- **As the author** — text sent out under the human's name. Strict guardrails. See `## Author-Faithful Output`.
+- Run `python3 scripts/agents_md_audit.py PATH...`; directories are recursive and skip generated or dependency directories.
+- Exit 0 means clear, 1 means review, and 2 means a strong split warning or invalid input.
+- Treat findings as heuristics; never delete automatically from a keyword match.
 
-## Style
+## Core Test
+Keep a rule only when it is:
 
-Telegraph style. Short labels. Imperatives. No throat-clearing.
+- needed in this scope;
+- likely to prevent a material mistake;
+- operational rather than historical;
+- short enough to load repeatedly; and
+- at the closest correct layer.
 
-- `AGENTS.md`: working context, not memory.
-- `SKILL.md`: trigger and procedure, not essay.
-- `description`: generic trigger, not summary.
-- Keep decisions; cut rationale.
-- Terse still means self-contained; keep load-bearing nouns, conditions, and file relationships.
-- Prefer `Label: action.` over paragraphs.
-- Prefer bullets or `key: value`; avoid Markdown tables.
-- Use Markdown headings through `###` for real subsections.
+## Editing Rule
 
-## Human-Facing Output
+When editing instructions or skills: change the fewest words that solve the problem.
+Prefer deleting or replacing to adding. Keep what is there unless asked.
+A one-off incident is an example in a lessons file, not a new rule.
+A new hard rule needs the user's say. Anything temporary goes in Temporary rules with an expiry date.
+Skill descriptions say when to use the skill, not what it contains.
 
-Applies to `README.md`, reports, explainers, posts.
+Treat `AGENTS.md` as working context, not memory. Treat `SKILL.md` as trigger and procedure, not an essay.
 
-- Use verbs; short paragraphs and sentences.
-- Bullets for lists when useful; not always.
-- Important info first; background last; do not skip.
-- Bold key phrases; visual cues for scanning.
-- TOC when document is long.
-- Longer edits: route to a readability or editing skill if the install has one.
+## Progressive Disclosure
 
-## Author-Faithful Output
-
-Writing AS the human author: text that goes out under their name. Content is theirs, not yours.
-
-- Trigger: edits to their documents, dictation→text, abstracts/TLDRs of their material, anything sent as them.
-- Source required: their prior writing, dictation, or bullets. No source → ask; do not proceed.
-- Never invent phrasing, comments, conclusions, examples, or claims they did not give.
-- Ask on every gap; flag anything contestable or that could misrepresent them.
-- No editorial meta-framing in the artefact (no "informal version" titles or change notes). Notes go in chat.
-- Strip AI tells and generic filler; if it would fit any author, it is wrong.
-- Three passes: faithful content; their voice; AI tells/padding/unrequested claims removed.
-- Route to the author's own voice/style resource when one exists.
-
-## Size
-
-- Lean: under 50 lines.
-- Normal repo root: 30-90 lines.
-- Review: 90-120 lines.
-- Split: over 120 lines.
-- Exceptional: over 150 lines.
-- Aim: fewer than 20 atomic instructions.
+- Keep always-needed boundaries and first actions inline.
+- Route situational detail as `when X, read Y`.
+- Make every route one hop: instruction file or invoked skill → exact destination.
+- Create and review the destination before adding its trigger.
+- Use descriptive, searchable filenames; folder containment is not enough identity.
+- Do not leave a live rule only in an ADR, handoff, task log, or changelog.
+- Put evidence and decisions in records; expose the current operational rule through a skill, reference, or README.
+- Keep lower-frequency corrections in a reviewable lessons space instead of the global payload.
+- Never use imports to conceal content that still loads every session.
 
 ## Placement
+- Global cross-project default: direct global reference.
+- Repeated workflow: skill.
+- Repository-wide command, constraint, ownership, or verification: root `AGENTS.md`.
+- Different nested command, risk, or ownership: nested `AGENTS.md`.
+- Detailed local procedure, template, or schema: one-hop reference.
+- Human overview, rationale, or history: `README.md`.
+- Current blocker or next action: task state.
+- Decision evidence or chronology: decision or change record.
+- Reusable correction: lessons or corrections space.
+- Self-loading instruction or duplicate body: delete.
 
-### Keep
+Read `references/placement-rules.md` when placement is disputed.
+Read `references/related-skills.md` when the work crosses into setup, writing, machine configuration, or knowledge capture.
 
-- Commands, constraints, ownership, verification.
-- Paths needed to avoid mistakes.
-- Often-forgotten rules.
-- Skill or local-doc routing.
-- One first action, if it changes most work.
+## Register Boundary
 
-### Move
+- Agent-facing file: telegraph style; short labels, imperatives, no throat-clearing.
+- Human-facing destination: rewrite as natural prose; do not paste telegraph text.
+- Text sent under a person's name: use their source and voice workflow; do not infer missing claims.
+- Route longer prose to the installed writing or readability skill.
 
-- Human overview, history, rationale -> `README.md`.
-- Procedures, templates, scripts, cache -> `_AGENT-INSTRUCTIONS/`.
-- Status, blockers, next action -> `_TASK-LOG/`.
-- Decisions, change history, backlog -> `_CHANGELOG/`.
-- Repeated cross-project procedure -> skill.
-- Plans and priorities -> the project's backlog or planning file.
-- Sources, examples, schemas -> referenced docs.
+## Bridges
+- Keep one canonical instruction body per scope.
+- Repository Claude bridge: none. Claude Code 2.1.277+ reads `AGENTS.md` natively at the repo root and in subfolders on demand, provided no `CLAUDE.md` or `CLAUDE.local.md` exists there or in a parent. Add a `CLAUDE.md` only for genuinely Claude-only content; it then hides `AGENTS.md` unless the user setting `pluginConfigs."agents-md@builtin".options.instructionFiles` is `claude-md-and-agents-md`. The global payload still reaches Claude through `~/.claude/CLAUDE.md` imports (no user-level `AGENTS.md` exists).
+- Global tool paths, imports, symlinks, checks, and uninstall: `global-agent-instructions`.
+- Read `references/tool-loading.md` only when loader behaviour affects the edit.
 
-Folder names above are the default convention. Reuse the project's own names when it has them; one home per kind of content is the rule, not the spelling.
+## Workflow
 
-### Never in agent-facing files
-
-- Tell agents to read/load/open/consult the same local `AGENTS.md`.
-- Explain auto-loading or discovery semantics in generated files.
-- Include provenance, history, rationale, research takeaways, or chronology. These belong in `README.md`.
-- Hide bloat behind Claude `@` imports.
-
-## Layering
-
-- Global: defaults true almost everywhere.
-- Repo root: rules true across the repo.
-- Nested: only for different commands, risks, or ownership.
-- Audience: three registers — agent-facing `## Style`; reader-facing `## Human-Facing Output`; author-faithful `## Author-Faithful Output`.
-
-Claude bridge: every `AGENTS.md` has `CLAUDE.md` in the same folder with `@./AGENTS.md` as its only content.
-
-## Streamline Workflow
-
-1. Read active instructions and nearby bridge files.
-2. Run this skill's `scripts/agents_md_audit.py` over the target paths.
-3. Mark each line: keep, move, delete, compress.
-4. Rewrite as short operational rules.
-5. Move context material elsewhere; do not duplicate it.
-6. On move to `README.md` or human-facing file: rewrite in human register per `## Human-Facing Output`. Do not carry telegraph style across the move.
-7. Keep `CLAUDE.md` exactly `@./AGENTS.md`.
-8. Put first moves, safety, routing, and verification near the top.
-9. Re-run audit; report line count and moved content.
-
-## References
-
-- `references/placement-rules.md`: stricter placement tests.
-- `references/tool-loading.md`: loader facts; do not copy into generated files.
-- `references/related-skills.md`: routing to adjacent skills.
+1. Mark each line: keep, route, rewrite for humans, record as evidence, or delete.
+2. Record the disposition of removed details before deleting them.
+3. Rewrite retained rules as self-contained operations.
+4. Add exact routes only after their destinations exist.
+5. Update bridge files and inbound links.
+6. Re-run the audit and verify referenced destinations.
+7. Report final line count, routes added, material moved, and records retained.

@@ -37,7 +37,9 @@ Keep the reserved `## Also worth checking` section last. Parked checks need no a
 
 Write a new immutable review request with frontmatter `id`, `title`, `app`, `date`, `intro`, `kind: doc-review`, and provenance `source` plus `commit` when known. The full source remains at its home; the review carries a brief summary and only the sections needing a decision, not a verbatim copy of a long specification.
 
-Use Markdown tables, images or small fenced HTML/SVG examples when they help the decision. Confirm support for relative images in the installed app. A decision block supplies clickable choices:
+Use Markdown tables, images or fenced HTML/SVG when they help the decision. Confirm support for relative images in the installed app.
+
+Live visuals (DTC 0.23.0-alpha.44+): an interactive HTML visual made for review (mockup with state buttons, chart, diagram) goes in live, not as screenshots. Inline ```` ```html ```` fence, or ```` ```html src="name.html" ```` with an empty body for a file beside the review (relative path inside the record root; .html/.htm/.svg; ≤5 MB). Self-contained only: no network, no CDN, no web fonts (blocked). Frame fits content; DTC colours arrive as T3-style CSS variables (`var(--foreground,#…)`, `--card`, `--border`, `--primary`…), always give fallbacks. Inline the frame fits content; in full screen (0.23.0-alpha.46+) the frame has the window height, so full-viewport pages work there. Screenshots stay right for real app windows and for side-by-side option pictures on decisions. Older DTC builds run no scripts inside visuals. A decision block supplies clickable choices:
 
 ````markdown
 ```decision {#export-default}
@@ -48,6 +50,8 @@ Which export should be the default?
 ````
 
 With no options the documented defaults are Approve / Needs change / Reject. Retain explicit decision IDs.
+
+Live-visual comments (DTC 0.23.0-alpha.45+): **Comment on what you see** captures the visible state for the existing picture mark-up flow. Saved marks attach as normal report `markups[]`; the caption in `option` identifies the visual (for example `Live visual 2`). Collect the captured picture and its marks, since reopening the HTML may show a different interactive state.
 
 **Choosing between pictures (0.21.0-alpha.31+): put each option's picture on its option line.** The app then shows the pictures side by side inside the decision, with a Choose button under each, an enlarge that steps between those options only, and a big compare view. Linked pictures leave the document body, so do not repeat them above. Options without a picture stay plain buttons. The picture is stripped from the label; `choice` returns the label without it.
 

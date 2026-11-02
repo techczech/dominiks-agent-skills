@@ -1,15 +1,6 @@
 ---
 name: claim-fact-checker
-description: >-
-  Fan-out fact-checking workflow that verifies every non-obvious factual claim in a deliverable against its
-  archived sources — one isolated verifier subagent per claim, plus a source-quality skeptic — and writes a
-  findings + fix-plan pair. Use this whenever the user wants to fact-check, claims-audit, source-check, or
-  verify a research report, an academic paper review, or a curated news item/chapter before committing or
-  publishing. Trigger on phrases like "fact-check this report", "verify the claims", "audit the sources",
-  "check this review against the paper", "is every quote in this news item real", or when finishing a
-  report, review or news roundup in any workspace that archives its sources next to the deliverable. Built on
-  Claude Code dynamic workflows, so it stays accurate on long deliverables a single context window would let
-  degrade.
+description: "Use to fact-check, claims-audit or source-check a research report, paper review or other deliverable, one verifier subagent per claim."
 ---
 
 # Claim fact-checker
@@ -20,7 +11,7 @@ A deliverable that makes factual claims (a research report, a paper review, a ne
 
 This skill defeats that by **fanning out**: an extractor lists every claim, then **one verifier subagent checks exactly one claim in its own clean context**, and a **source-quality skeptic** re-checks the cited source. No single context holds the whole job, so quality does not decay with length. Three presets cover three kinds of deliverable; the checking machinery is the same in each.
 
-**It does not edit the deliverable.** It produces a *findings* file and a *fix-plan* file. A separate step (you, or a fixer agent) applies the plan. The audit trail must be independent of the author.
+**It does not edit the deliverable.** It produces a *findings* file and a *fix-plan* file. A separate, authorised step applies only the requested fixes. Findings and fix-plans do not authorise inserting qualifications, checks or elaboration into the deliverable. The audit trail must be independent of the author.
 
 ## When to use which preset
 

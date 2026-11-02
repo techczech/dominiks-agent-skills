@@ -273,7 +273,9 @@ cited from it. This is the most useful section for downstream readers. -->
 
 **Do not cite this paper for**: ...
 
-**Always include the caveat that**: ...
+**Source-supported limits relevant to this citation, if any**: ...
+
+<!-- Give citation guidance within the requested audit. Do not prescribe an automatic disclaimer or insert this text into the user's manuscript. -->
 
 ---
 

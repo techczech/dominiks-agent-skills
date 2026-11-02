@@ -138,7 +138,7 @@ Replace all `{PLACEHOLDERS}` with actual values.
 ### Missing Nuance
 
 <!-- What complexity is being ignored? -->
-<!-- What qualifications should be added? -->
+<!-- Which source-supported qualifications, if any, merit proposing within this requested review? Do not insert them into another draft without authorisation. -->
 <!-- Where is more careful language needed? -->
 
 

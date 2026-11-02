@@ -1,25 +1,15 @@
 ---
 name: paper-reviewer-skill
-description: |
-  Systematic academic paper review pipeline. Import a paper from Zotero by
-  title/author/DOI/URL/citekey, extract layout-aware fulltext + per-figure +
-  per-table assets with caption metadata, write multi-style reviews
-  (quick-read, gelman, methods, critical, methods-and-relevance,
-  claims-audit-and-press), and render the result as a self-contained
-  single-HTML report with embedded figures and PDF download.
-
-  TRIGGERS: Use when:
-  - User asks to review an academic paper
-  - User points at a PDF and says "import this", "extract this", "review this"
-  - User mentions a paper by title, author, DOI, or URL
-  - User asks for figures/tables to be extracted from a paper
-  - User wants an HTML report or shareable summary of a review
-  - Used as the working skill in any "paper-reviews" host repo (papers/{folder}/ layout)
+description: "Use to review academic papers, from one quick read to the full pipeline: Zotero import, figure and table extraction, atomic notes, multi-style reviews (Gelman, quick-read, methods, critical) and a single-HTML report."
 ---
 
 # Paper Reviewer Skill
 
 A complete academic-paper-review pipeline as a reusable skill. Drop into any host repo that wants to do systematic paper reviews — it brings its own scripts, templates, and conventions.
+
+## Writing scope
+
+A requested paper review may discuss source-supported limitations and counterarguments. It does not authorise adding them to the user's own manuscript or expanding a narrowly requested edit. Templates are prompts, not mandatory filler; omit unsupported or inapplicable sections. Apply the `expository-writing` skill for substantive prose.
 
 ## Architecture
 

@@ -30,6 +30,7 @@ def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(
         description="Create a feedback request folder for one reviewer."
     )
+    parser.add_argument("--internal-staging", action="store_true", help="Acknowledge internal-only staging; never release this folder to reviewers.")
     parser.add_argument("--project-dir", required=True, help="Translation project workspace.")
     parser.add_argument("--reviewer-code", required=True, help="Reviewer code or pseudonym.")
     parser.add_argument("--language", action="append", default=[], help="Target language under review. Repeat as needed.")
@@ -45,6 +46,8 @@ def parse_args() -> argparse.Namespace:
 
 def main() -> int:
     args = parse_args()
+    if not args.internal_staging:
+        raise SystemExit("Internal staging only: use --internal-staging. For reviewer release use verify_review_release.py.")
     project_dir = Path(args.project_dir).expanduser().resolve()
     if not project_dir.exists():
         raise SystemExit(f"Project directory not found: {project_dir}")

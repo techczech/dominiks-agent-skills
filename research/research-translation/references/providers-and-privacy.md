@@ -34,7 +34,7 @@ Independence: not independent; forward translation and back-translation used the
 
 Do not present same-agent back-translation as independent evidence. It can still help catch omissions, obvious meaning drift, or formatting mistakes.
 
-For stronger separation without API keys, use two agent tools when available. For example, Codex may produce the forward translation and Claude Code may perform a blind back-translation in a separate workspace or thread. Record both agents and keep the back-translation prompt blind to the source text.
+For stronger separation without API keys, use separately identified different models/agents when available. Tool names alone do not establish different models. Record tool, visible model, context separation and source withholding separately. A new thread or different tool using the same model remains a same-model check; unknown model identity means independence unverified. Keep the back-translation prompt blind to source text.
 
 ## Agent-Only Trial Route
 
@@ -68,16 +68,14 @@ If the researcher wants to continue after the trial, decide whether to keep agen
 
 ## Keys
 
-Never hardcode keys in project files.
+Never hardcode keys in project files, plaintext credential files, or shell profiles.
 
-Prefer environment variables:
+Hand a key only to the one command that needs it:
 
-```bash
-export OPENAI_API_KEY="..."
-export GOOGLE_API_KEY="..."
-```
+- a secret manager's run-one-command feature, which injects the key into that process alone; or
+- `PROVIDER_API_KEY=value command`, with the value read from the secret manager at that moment rather than typed or stored.
 
-If the user uses a password manager or secret manager, help them expose keys only to the shell session that runs the scripts.
+Do not set `ANTHROPIC_API_KEY` in a shell that also runs Claude Code. Claude Code will then bill that API key instead of the user's subscription.
 
 ## Consent
 

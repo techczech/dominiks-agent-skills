@@ -2,6 +2,8 @@
 
 Use this reference when creating artefacts for researchers or human reviewers.
 
+**Release gate:** Read `release-contract.md` first. The requested origins are binding; missing a requested professional arm blocks release even if two AI arms exist. Professional provenance comes from independently inspected original delivery evidence, not an A/B key.
+
 For HTML reports, report sites, dashboards, operator reports, cost reports, or project-local report builders, also read `report-generation.md`.
 
 ## Keep Two Surfaces Separate
@@ -78,7 +80,7 @@ Store returned feedback under `feedback/` and record:
 - changes requested
 - follow-up decisions
 
-Use `scripts/prepare_feedback_request.py` to create one outgoing request folder per reviewer when the project needs a structured return route. The folder contains:
+Use `scripts/prepare_feedback_request.py --internal-staging` for internal request staging when the project needs a structured return route. Its manifest includes local paths, its CSV has one template row per language/material rather than per item, and it does not assign package/version identity. Before using the template, add the fixed package identity/version and item IDs from the actual review package. Keep the manifest internal; select and inspect the reviewer-facing files separately. The folder contains:
 
 - copied reviewer package files, if provided
 - `feedback-form.csv`
@@ -91,4 +93,10 @@ Use `scripts/collate_feedback.py` after returned feedback files have been saved 
 - `feedback-collated.json`
 - `feedback-summary.md`
 
+The collator retains package/version identifiers, hashes and additional rating fields in JSON and CSV, including metadata inherited from a JSON export. Conflicting package identity between an export and a row is an error. Additional nested values are JSON-encoded strings in the tabular outputs. Summary comments remain separated by package version and candidate identity. Keep original returns unchanged; a collated row can represent an unanswered item and is not evidence of a completed review. Collated outputs are internal researcher records, not automatically safe external packages.
+
+Verify the whole return route with an explicitly labelled automation-only response before sending: enter feedback in the actual page, download it, collate it, and compare identity, item IDs, ratings and comments with the downloaded bytes. Keep these test responses separate from genuine reviewer returns.
+
 Collation is not adjudication. After collating, a researcher or translation lead still needs to decide which comments require source correction, translation revision, reviewer follow-up, or no action.
+
+The internal staging folder contains private source paths and is not a reviewer release. Use the strict release helper or a separately verified project-specific exporter for the actual archive.

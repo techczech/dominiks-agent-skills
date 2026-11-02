@@ -1,64 +1,36 @@
 ---
 name: research-translation
-description: "Auditable translation workflows for participant-facing research documents (consent forms, questionnaires, lay summaries): workspace setup, translation and back-translation, review packages, reports."
+description: "Use for participant-facing research translations, questionnaires, professional-versus-AI comparison, back-translation or returned translation feedback."
 ---
 
 # Research Translation
 
-## Boundary
+Keep this reusable skill separate from study data. Read existing project routing before operating in an established workspace. Using this skill does not establish participant suitability or clinical approval.
 
-This folder is the skill, not the translation project.
+## Route
 
-Do not put source documents, provider consent files, generated runs, reviewer feedback, or project-specific notes inside the skill folder. Create a separate workspace for every translation project and copy templates from `assets/project-template/` into that workspace.
+| Request | Read/use |
+|---|---|
+| Create separate workspace | `references/project-setup.md`; `scripts/init_translation_project.py` |
+| Consent, agent/API exposure, usage | `references/providers-and-privacy.md` |
+| Translate or back-translate | `references/workflow.md`; `references/language-and-document-risks.md` |
+| Process guide/prompts | `references/process-guide-and-prompts.md` |
+| Fixed review/comparison package | `references/release-contract.md`, then `references/review-packages.md` |
+| HTML/dashboard/report | `references/report-generation.md`; inventory project builders first |
+| Genuine feedback | `scripts/collate_feedback.py`; collation is not adjudication |
 
-If an existing translation project has its own `SKILL.md`, `AGENTS.md`, or `_AGENT-INSTRUCTIONS/`, read that project-local routing before using this generic skill.
+## Input and generation
 
-## Start
+Record authoritative source version/hash, languages/materials, stable units and options/branching, requested candidate origins, authorised provider exposure, audience and completion criteria. Do not flatten structured questionnaires. Seek clarification on consequential ambiguous source structure. Locate approved professional inputs across the authorised project sources and prior deliveries, rather than assuming the repository is the complete source estate.
 
-1. Identify whether the user wants to set up a project, configure providers, plan translation, run translation, review outputs, package reviewer materials, or generate reports/sites from completed runs.
-2. If they need a new workspace, run `scripts/init_translation_project.py` from the skill folder and create the workspace outside the skill.
-3. Load only the reference file needed for the current stage.
+Do not send study text or reviewer feedback to agent/API providers without applicable recorded consent. API execution must follow the project's live-call gate. No open-web terminology lookup without consent. Never invent translations, back-translations or reviewer scores. Isolated mechanical tests may use visibly labelled synthetic tokens; keep them outside study results.
 
-New workspace example:
+Preserve forward, critique, reconciliation and back-translation stages, exact prompts, raw outputs, retries and provider usage. Resume verified completed work rather than repeating paid calls. Label the same model or agent used for both directions as **same-model or same-agent check**, even in a separate context; context isolation alone does not establish independence. Record source withholding separately. Token costs remain estimates until billing reconciliation.
 
-```bash
-python3 /path/to/research-translation/scripts/init_translation_project.py \
-  --project-dir /path/to/new-translation-project \
-  --project-name "Study translation project" \
-  --source-language English \
-  --target-language Bengali \
-  --target-language Urdu
-```
+## Review release
 
-## Reference Map
+The requested comparison governs the package. **No silent downgrade or substitution:** missing professional evidence blocks a requested professional-versus-AI release, even when two AI arms exist. Prepare a researcher readiness note instead. Freeze origin requirements before candidate assembly; resolve origins from separate source receipts/run records. Display labels and an unblinding key are not provenance. A conflicting key blocks release pending resolution.
 
-- `references/project-setup.md`: create and explain a new workspace.
-- `references/providers-and-privacy.md`: keys, consent, agent-assisted mode, and safe provider use.
-- `references/workflow.md`: intake, language research, segmentation, translation, critique, reconciliation, and back-translation.
-- `references/process-guide-and-prompts.md`: shareable process guide, prompt transparency, dynamic insertion markers, and source contamination checks.
-- `references/language-and-document-risks.md`: language research and document-type risks.
-- `references/review-packages.md`: researcher review and external reviewer packages.
-- `references/report-generation.md`: HTML reports/sites, dashboards, operator reports, cost reports, and project-local report builders.
+Use `scripts/verify_review_release.py` for its supported JSON archive contract. It verifies approved source/candidate hashes and structural coverage before writing an identity-free archive. Its strict allowlist excludes private paths, origins, keys and logs. It does not validate clinical meaning, authenticate professional credentials, or build HTML/workbooks. Project-specific renderers still need parity, actual archive membership and browser/export checks against output hashes.
 
-Useful scripts:
-
-- `scripts/init_translation_project.py`: copy the generic project template into a separate workspace.
-- `scripts/prepare_feedback_request.py`: create a reviewer feedback request folder with package copies, manifest, and CSV form.
-- `scripts/collate_feedback.py`: collate returned CSV/JSON feedback into summary CSV, JSON, and Markdown.
-- Report/site builders are project-specific by default. Inventory the project workspace before assuming the generic skill contains them.
-
-## Non-Negotiables
-
-- Do not assume the researcher speaks the target language.
-- Do not use web terminology lookup unless the project consent allows it.
-- Do not send source text to OpenAI, Google, Claude, Codex, or another provider/agent service until consent is recorded in the project workspace.
-- Do not put API keys in project files; use environment variables or the user's secret manager.
-- Do not expose prompts, raw provider logs, unpublished variants, or internal audit notes to external reviewers by default.
-- Never generate dummy, placeholder, illustrative, or fake translations/back-translations. Any shown translation must be produced by the active agent, by another named agent such as Claude Code, by an approved API call, or supplied by the user.
-- If the same agent/model performs both forward translation and back-translation, label the back-translation as a same-agent check, not an independent back-translation.
-- Preserve stable segment IDs across translation, critique, reconciliation, and back-translation.
-- Keep researcher review and external reviewer feedback as separate packages.
-- Before building a review package, check that the source text displayed to reviewers is the intended source for that target language and not a project placeholder, example insertion, or another target-language sentence.
-- Before building HTML reports/sites, dashboards, cost reports, or operator reports, inventory the project workspace for local builders, manifests, generated-run folders, and task logs.
-- Before segmenting questionnaires, forms, tables, response-option lists, matrix questions, or tick-box items, check whether the source contains structural questions. Preserve options, rows, columns, and free-text fields as structure. If structure is ambiguous, ask the user before translating; do not translate a flattened text extraction when the original structured source is available.
-- When live API/provider calls are used, record provider-reported usage metadata and cost estimates for each run. Include provider, model, pricing mode, input tokens, cached input tokens where returned, uncached input tokens, output tokens, total tokens, thinking/reasoning tokens where returned, configured rates, and error metadata. Label token-derived costs as estimates unless they are reconciled against provider billing; do not present estimates as invoices or exact charged amounts.
+The legacy `prepare_feedback_request.py` is **internal staging only**, requires `--internal-staging`, and must never supply the final reviewer archive. Keep researcher receipts outside reviewer payloads. Verify downloaded actual attachment bytes against the release receipt; mark sent only from actual sent-message evidence. Keep prepared, sent, returned, adjudicated and participant-approved separate.

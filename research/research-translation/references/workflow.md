@@ -57,7 +57,7 @@ When live providers or multiple agents are available, prefer a different provide
 Allowed back-translation labels:
 
 - `independent-provider`: back-translation used a different approved provider/model from the forward translation.
-- `independent-agent`: back-translation used a different agent tool or thread, such as Claude Code after Codex produced the translation, with the source text hidden from the back-translation agent.
+- `independent-agent`: back-translation used a separately identified different model/agent, with the source text hidden. Record tool, visible model, thread/context separation and source withholding individually. A different tool or thread using the same model is still a same-model check. If model identity is unknown, record independence as unverified.
 - `same-agent-check`: the same agent/model produced the forward translation and the back-translation. Use only as a simple check and label it as not independent.
 - `blocked`: back-translation was not run because consent, tooling, source separation, or model separation was not available.
 

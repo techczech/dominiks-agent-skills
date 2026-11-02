@@ -130,20 +130,22 @@ def flatten_review_export(data: dict[str, Any], path: Path) -> list[dict[str, st
                 if not isinstance(arm_feedback, dict):
                     arm_feedback = {}
                 comment = str(arm_feedback.get("comment") or "")
-                score = arm_feedback.get("score") or arm_feedback.get("overall")
+                score = pick_value(arm_feedback, ["score", "overall"])
                 rows.append(
                     normalise_row(
                         {
+                            **arm_feedback,
                             "reviewer_code": reviewer_code,
                             "language": language,
                             "material": material_label,
                             "unit_id": unit_id,
                             "section_or_item": unit.get("heading") or "",
                             "translation_label": label,
-                            "score": score or "",
+                            "score": score,
                             "comment": comment,
                         },
                         path,
+                        data,
                     )
                 )
                 for note in arm_feedback.get("phraseComments") or []:
@@ -162,6 +164,7 @@ def flatten_review_export(data: dict[str, Any], path: Path) -> list[dict[str, st
                                     "comment": note.get("note") or "",
                                 },
                                 path,
+                                data,
                             )
                         )
     return rows
@@ -173,6 +176,11 @@ def normalise_row(
     parent: dict[str, Any] | None = None,
 ) -> dict[str, str]:
     parent = parent or {}
+    for field in ("package_id", "package_version", "package_fingerprint"):
+        child_value = pick_value(row, [field])
+        parent_value = pick_value(parent, [field])
+        if child_value != "" and parent_value != "" and stringify(child_value) != stringify(parent_value):
+            raise ValueError(f"Conflicting {field} in feedback file {path}")
     aliases = {
         "reviewer_code": ["reviewer_code", "reviewerCode", "reviewer", "reviewer_id"],
         "section_or_item": ["section_or_item", "section", "item", "heading", "unit_heading"],
@@ -188,6 +196,18 @@ def normalise_row(
         if value == "":
             value = pick_value(parent, aliases.get(field, [field]))
         normalised[field] = stringify(value)
+    # Keep version identifiers and renderer-specific questions without duplicating
+    # the parent export's complete feedback/material payload into every row.
+    extras = {key: value for key, value in parent.items()
+              if key not in {"feedback", "rows", "materials"}}
+    extras.update(row)
+    alias_keys = {key for keys in aliases.values() for key in keys}
+    for key, value in extras.items():
+        if key not in normalised and key not in alias_keys:
+            value = pick_value(row, [key])
+            if value == "":
+                value = pick_value(parent, [key])
+            normalised[key] = stringify(value)
     return normalised
 
 
@@ -208,7 +228,8 @@ def stringify(value: Any) -> str:
 
 def write_csv(path: Path, rows: list[dict[str, str]]) -> None:
     with path.open("w", encoding="utf-8", newline="") as handle:
-        writer = csv.DictWriter(handle, fieldnames=FIELDNAMES)
+        extra_fields = sorted({key for row in rows for key in row} - set(FIELDNAMES))
+        writer = csv.DictWriter(handle, fieldnames=FIELDNAMES + extra_fields)
         writer.writeheader()
         writer.writerows(rows)
 
@@ -226,6 +247,11 @@ def write_markdown(path: Path, rows: list[dict[str, str]], input_dir: Path) -> N
         if row.get("comment") or row.get("quote") or row.get("suggested_change"):
             key = " | ".join(
                 [
+                    row.get("package_id") or row.get("source_file") or "package not specified",
+                    "version " + (row.get("package_version") or "not specified"),
+                    row.get("package_fingerprint") or "package fingerprint not specified",
+                    row.get("candidate_id") or "candidate not specified",
+                    row.get("candidate_sha256") or "candidate hash not specified",
                     row.get("language") or "not specified",
                     row.get("material") or "not specified",
                     row.get("unit_id") or row.get("section_or_item") or "not specified",
@@ -238,6 +264,7 @@ def write_markdown(path: Path, rows: list[dict[str, str]], input_dir: Path) -> N
         "",
         f"- Input folder: `{input_dir}`",
         f"- Rows collated: {len(rows)}",
+        "- Rows may include unanswered items; this is not a count of reviewers or completed responses.",
         "",
         "## By language",
         "",

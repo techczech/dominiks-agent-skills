@@ -1,11 +1,21 @@
 ---
 name: archive-scout
-description: Search, quote and analyse a personal text archive (own writing, posts, reading highlights) with the `scout` CLI — search, cite, KWIC, collocates, n-grams, keyness, verify-quote — and write cited archive reports with a JSON sidecar. Use for "what did I write / say / read about X", usage over time, and any report quoting the archive.
+description: "Use to search, quote or analyse a personal text archive with the scout CLI and write cited reports with a JSON sidecar. Public, general version of scout-archive."
 ---
 
 # Archive Scout
 
 `scout` is a local corpus engine: it indexes folders of Markdown (writing, posts) and reading-highlight archives, and answers search, concordance and frequency questions with exact counts and citable passages. Source: [scout-core](https://github.com/techczech/scout-core) (`cargo install --git https://github.com/techczech/scout-core scout-cli`). The commands this skill uses (search, the analysis views, `verify-quote`, `cite`) never write to the sources; leave the tagging and event-editing subcommands (`correct`, `events`) alone unless the user asks.
+
+## Search the knowledge stores first
+
+- Before producing new material, search every registered corpus. The registered corpora come from `scout corpora list`.
+- Run: `scout search --hybrid --limit 20 --json "<query>"`; restrict to one corpus with `--in <corpus>`. `scout similar <passage-id>` finds neighbours.
+- Reuse a hit by reference: copy it with its passage id (`<corpus>:<path>:<line>`) or `scout cite` output as provenance. Never retype it without that. Check quotes with `scout verify-quote`.
+- Nothing reusable stays only in chat: before your final answer, file every table, visualisation, piece of evidence and search result worth keeping with `scout capture` into the project's `research/` folder, with its sources.
+- Command: `scout capture --project <folder> --kind <kind> --title "<title>" [--prompt "<question>"] [--source scout:<id>|URL|file:<path>]... [--artefact <file>] --by agent --json -` (body on stdin). `<folder>` is an existing project folder; the item is written as its own Markdown file (frontmatter: title, kind, prompt, sources, created, project, by) in that folder's `research/`, and indexed. Kinds: `evidence`, `table`, `visualisation`, `snippet`, `search`, `widget`.
+- Use it after a search, table or visualisation worth keeping, or a quote you verified. Give every hit's passage id as a `--source scout:<id>`; never retype a hit without it.
+- Read back: `scout capture --list --project <folder>` (receipts); `scout capture --where-used <file>` (Markdown in registered corpora that mentions the file). Run `scout capture --help` for the current options.
 
 ## First move: find the corpora
 
@@ -59,6 +69,8 @@ scout verify-quote '<text>' [--in …] [--json]     # exit 1 = not found
 scout cite <passage-id> [--format markdown|plain]
 scout corpora list | show <id> | add <folder> [--kind …] [--id …] | remove <id> [--keep-index]
 scout index status | build [<id>…] [--force] [--semantic]
+scout capture --project <folder> --kind <kind> --title '<title>' [--prompt …] [--source …] [--artefact <file>] --by agent --json -
+scout capture --list --project <folder> | --where-used <file>
 ```
 
 - **Query grammar** (`search` and slices): `OR`, `AND`, `-x`, `"phrase"`, `x*`, `/re/i`, and the fields `in: after: before: y: lang: genre: source: au: ti: tag: co: ty:`.

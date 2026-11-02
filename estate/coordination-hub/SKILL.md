@@ -54,7 +54,7 @@ Templates: `assets/templates/`. Scaffold, `--check`, `--status`: `scripts/scaffo
 ## Related public skills
 
 - `global-agent-instructions`: one canonical global instruction file across agent tools; hosts the first-move rule.
-- `agent-roles`: who plans, builds, reviews.
+- `agent-roles-review`: set up and review who plans, builds, reviews.
 - `dev-traffic-control`: review queue for decisions and checks.
 - `writing-modes`: register for agent-facing vs user-facing text.
 - `expository-writing`: plain, literal prose for reports.

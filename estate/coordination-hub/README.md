@@ -76,7 +76,7 @@ The script does not create the backlog or the lessons log. `references/backlog.m
 All are in this collection.
 
 - `global-agent-instructions`: one canonical global instruction file across agent tools; it hosts the first-move rule.
-- `agent-roles`: who plans, builds and reviews.
+- `agent-roles-review`: set up and review who plans, builds and reviews.
 - `dev-traffic-control`: the review queue for decisions and checks.
 - `writing-modes`: the register for agent-facing and user-facing text.
 - `expository-writing`: plain, literal prose for reports.

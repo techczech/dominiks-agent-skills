@@ -9,7 +9,7 @@ Charts: model progress over time (frontier), price or speed against intelligence
 | Source | What it gives | Terms |
 |---|---|---|
 | [Artificial Analysis](https://artificialanalysis.ai) API | intelligence, coding and agentic indexes, price, speed, media Elo | free API key; attribution required; raw snapshots must not be republished |
-| Arena (Hugging Face dataset `lmarena-ai/leaderboard-dataset`) | human-preference ratings and each model's licence | CC BY 4.0 |
+| Arena (arena.ai, formerly LMArena; Hugging Face dataset `lmarena-ai/leaderboard-dataset`) | human-preference ratings and each model's licence | CC BY 4.0 |
 | OpenRouter public exports | 30-day token share, benchmark accuracy, cost per task | CC BY 4.0 |
 
 Attribution is built into every widget footer and cannot be turned off. Arena and OpenRouter need no key.
@@ -35,7 +35,7 @@ The widgets below are screenshots of examples built from synthetic data (invente
 
 - `SKILL.md` - the procedure, options and terms.
 - `scripts/` - `aa_fetch.py` and `open_sources_fetch.py` (fetch), `aa_widget.py` with `widget_template.html` (build), `aa_lookup.py` (model lookup), plus `aa_sources.py` (adapters that turn Arena and OpenRouter data into the record shape the widget uses), `aa_logos.py` (optional company logos from an icon folder you supply) and `aa_key.py` (reads the API key and config; the only module that touches credentials).
-- `references/fields.md` - metric aliases and field map.
+- `references/` - `fields.md` (metric aliases and field map), `sources.md` (other benchmark sources to cite), `progress-and-versions.md` (Progress Index, index versions, version-change worked example).
 - `config.example.json` - template for local configuration.
 - `tests/` - unit tests using synthetic fixtures. The browser render tests are skipped unless `PLAYWRIGHT_CORE` (path to playwright-core) and `CHROME_HEADLESS_SHELL` (path to a chrome-headless-shell binary) are set.
 - `docs/` - the example images above.

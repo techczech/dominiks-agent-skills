@@ -21,6 +21,8 @@ Language record (`/language/models/free`): `id, name, slug, release_date, model_
 | ttft | performance.median_time_to_first_token_seconds | lower | |
 | e2e | performance.median_end_to_end_response_time_seconds | lower | |
 
+Price and cost aliases (input_price, output_price, blended_price, index_cost, media price): a 0 means "no provider price" in the free feed and is treated as unmeasured (skipped with a reason), like WER 0. Blended is null when input or output is null.
+
 Also in records, no alias: cache hit/write prices, time to first answer token.
 
 Media (no release date, no slug in speech-to-text):

@@ -20,8 +20,6 @@ import aa_key  # noqa: E402
 import aa_logos  # noqa: E402
 import aa_sources  # noqa: E402
 import open_sources_fetch as osf  # noqa: E402
-import aa_sources  # noqa: E402
-import open_sources_fetch as osf  # noqa: E402
 
 TEMPLATE = os.path.join(HERE, "widget_template.html")
 AA_URL = "https://artificialanalysis.ai"
@@ -41,26 +39,32 @@ def _pf(key):
     return lambda r: (r.get("performance") or {}).get(key)
 
 
-def _blended(r):
+def _blended_raw(r):
     i, o = _pr("price_1m_input_tokens")(r), _pr("price_1m_output_tokens")(r)
     return None if i is None or o is None else (3 * i + o) / 4
 
 
-def _media_price(r):
+def _media_price_raw(r):
     for k in ("price_per_1k_images", "price_per_minute"):
         if r.get(k) is not None:
             return r[k]
     return None
 
 
+def _index_cost_raw(r):
+    v = r.get("artificial_analysis_intelligence_index_cost")
+    return v.get("total_cost") if isinstance(v, dict) else v
+
+
+def _unpriced(raw):
+    """AA's free feed gives 0 (not null) for models with no provider price. A 0 price or cost
+    is treated as unmeasured, like the WER 0 rule: the row is skipped with a reason, never plotted."""
+    return lambda r: (lambda v: None if v == 0 else v)(raw(r))
+
+
 def _wer(r):
     v = r.get("aa_wer_index")
     return None if v in (None, 0) else v  # 0 looks like "unmeasured" in real data
-
-
-def _index_cost(r):
-    v = r.get("artificial_analysis_intelligence_index_cost")
-    return v.get("total_cost") if isinstance(v, dict) else v
 
 
 def _idx(label, key, domain=False):
@@ -77,16 +81,16 @@ METRICS = {
     "healthcare": dict(label="Healthcare & medical Index", kind="index", hb=True, get=_ev("artificial_analysis_healthcare_and_medical_index")),
     "engineering": dict(label="Engineering Index", kind="index", hb=True, get=_ev("artificial_analysis_engineering_index")),
     "economics": dict(label="Economics Index", kind="index", hb=True, get=_ev("artificial_analysis_economics_index")),
-    "input_price": dict(label="Input price, $ per 1M tokens", kind="price", hb=False, log=True, get=_pr("price_1m_input_tokens")),
-    "output_price": dict(label="Output price, $ per 1M tokens", kind="price", hb=False, log=True, get=_pr("price_1m_output_tokens")),
-    "blended_price": dict(label="Blended price, $ per 1M tokens", kind="price", hb=False, log=True, get=_blended, computed=True),
+    "input_price": dict(label="Input price, $ per 1M tokens", kind="price", hb=False, log=True, get=_unpriced(_pr("price_1m_input_tokens")), raw=_pr("price_1m_input_tokens"), zero0=True),
+    "output_price": dict(label="Output price, $ per 1M tokens", kind="price", hb=False, log=True, get=_unpriced(_pr("price_1m_output_tokens")), raw=_pr("price_1m_output_tokens"), zero0=True),
+    "blended_price": dict(label="Blended price, $ per 1M tokens", kind="price", hb=False, log=True, get=_unpriced(_blended_raw), raw=_blended_raw, zero0=True, computed=True),
     "speed": dict(label="Output speed, tokens per second", kind="speed", hb=True, get=_pf("median_output_tokens_per_second")),
     "ttft": dict(label="Time to first token, seconds", kind="sec", hb=False, get=_pf("median_time_to_first_token_seconds")),
     "e2e": dict(label="End-to-end response time, seconds", kind="sec", hb=False, get=_pf("median_end_to_end_response_time_seconds")),
-    "index_cost": dict(label="Cost to run the Intelligence Index, $", kind="price", hb=False, log=True, get=_index_cost),
+    "index_cost": dict(label="Cost to run the Intelligence Index, $", kind="price", hb=False, log=True, get=_unpriced(_index_cost_raw), raw=_index_cost_raw, zero0=True),
     # media
     "elo": dict(label="Arena Elo", kind="elo", hb=True, get=lambda r: r.get("elo")),
-    "price": dict(label="Price", kind="price", hb=False, log=True, get=_media_price),
+    "price": dict(label="Price", kind="price", hb=False, log=True, get=_unpriced(_media_price_raw), raw=_media_price_raw, zero0=True),
     "wer": dict(label="Word error rate index (lower is better)", kind="num", hb=False, get=_wer),
 }
 def _top(key):
@@ -152,7 +156,8 @@ def normalise(rec, metrics):
             "slug": rec.get("slug") or "", "creator": cr, "ckey": ckey(cr),
             "date": rec.get("release_date"), "ci": rec.get("ci_95"),
             "extra": rec.get("extra_lines") or [], "series": rec.get("series"),
-            "v": {m: METRICS[m]["get"](rec) for m in metrics}}
+            "v": {m: METRICS[m]["get"](rec) for m in metrics},
+            "zero": [m for m in metrics if METRICS[m].get("zero0") and METRICS[m]["raw"](rec) == 0]}
 
 
 def matches(row, term):
@@ -177,8 +182,10 @@ def better(a, b, hb):
 
 
 def select(records, chart, metrics, primary, models=None, creators=None, top=None, variants="best",
-           latest=False, since=None, require=None):
-    """Returns (rows, skipped_messages). `metrics` all computed; `require` = metrics that must be non-null."""
+           latest=False, since=None, require=None, rank_by=None):
+    """Returns (rows, skipped_messages). `metrics` all computed; `require` = metrics that must be non-null.
+    `rank_by`: metric that picks the --top rows and the best variant (rows are then ordered by `primary`);
+    used for lower-is-better primaries, where ranking by the metric itself returns the cheapest/fastest junk."""
     require = require or [primary]
     rows = [normalise(r, metrics) for r in records]
     skipped = []
@@ -207,19 +214,23 @@ def select(records, chart, metrics, primary, models=None, creators=None, top=Non
     for r in rows:
         missing = [m for m in require if r["v"].get(m) is None]
         if missing:
-            skipped.append("%s (no %s)" % (r["full"], ", ".join(missing)))
+            zero = [m for m in missing if m in r["zero"]]
+            skipped.append("%s (%s)" % (r["full"], ", ".join(
+                ["%s is 0 in the feed = no provider price, treated as unmeasured" % m if m in zero else "no %s" % m
+                 for m in missing])))
         else:
             ok.append(r)
     rows = ok
     # variants
-    hb = METRICS[primary]["hb"]
+    sel = rank_by or primary
+    hb = METRICS[sel]["hb"]
     if variants == "best":
         groups = {}
         for r in rows:
             k = (r["creator"], r["name"])
             g = groups.setdefault(k, {"best": r, "n": 0})
             g["n"] += 1
-            if better(r["v"][primary], g["best"]["v"][primary], hb):
+            if better(r["v"][sel], g["best"]["v"][sel], hb):
                 g["best"] = r
         rows = []
         for g in groups.values():
@@ -228,9 +239,12 @@ def select(records, chart, metrics, primary, models=None, creators=None, top=Non
     else:
         for r in rows:
             r["nvar"] = 1
-    rows.sort(key=lambda r: (r["v"][primary], r["name"]), reverse=hb)
+    rows.sort(key=lambda r: (r["v"][sel], r["name"]), reverse=hb)
     if top:
         rows = rows[:top]
+    if rank_by:
+        php = METRICS[primary]["hb"]
+        rows.sort(key=lambda r: (r["v"][primary], r["name"]), reverse=php)
     return rows, skipped
 
 
@@ -367,6 +381,11 @@ def main(argv=None):
     except FileNotFoundError as e:
         print("error: %s" % e)
         return 2
+    snap_date = snap.get("_snapshot_date")
+    if snap_date and not a.snapshot_date and snap_date != dt.date.today().isoformat():
+        print("WARNING: no snapshot from today; using the latest %s snapshot, dated %s (fetched %s). "
+              "If a fetch just failed, the data is OLDER than expected; say so, and check the footer date."
+              % (src, snap_date, snap["fetched_at"][:10]))
     if a.open_only and src != "arena":
         print("error: --open-only applies to --source arena (AA free data has no licence field)")
         return 2
@@ -427,9 +446,24 @@ def main(argv=None):
         cfg["metrics"] = cols
 
     models = parse_list(a.models)
-    rows, skipped = select(records, a.chart, metrics, primary, models=models,
+    rank_by = None
+    if (a.chart in ("bar", "table") and src == "aa" and not media and not models and a.top
+            and not METRICS[primary]["hb"] and "intelligence" in allowed):
+        # --top on a lower-is-better metric (price, latency): pick the N most intelligent models,
+        # then order them by the metric. Ranking by price alone returns the cheapest, weakest models.
+        rank_by = "intelligence"
+        sel_metrics = sorted(set(metrics) | {"intelligence"})
+        require = list(require) + ["intelligence"]
+        cfg["notes"].append("Top %d models by Intelligence Index, ordered by %s" % (a.top, SHORT[primary].lower()))
+        print("note: %s is lower-is-better, so --top %d = the %d highest-intelligence models, ordered by %s "
+              "(use --models to choose rows yourself)" % (primary, a.top, a.top, primary))
+    else:
+        sel_metrics = metrics
+    rows, skipped = select(records, a.chart, sel_metrics, primary, models=models,
                            creators=parse_list(a.creators), top=a.top, variants=a.variants,
-                           latest=a.latest, since=since, require=require)
+                           latest=a.latest, since=since, require=require, rank_by=rank_by)
+    for r in rows:
+        r["v"] = {m: r["v"][m] for m in metrics}
     if a.chart == "frontier":
         dated = [r for r in rows if r["date"]]
         skipped += ["%s (no release date)" % r["full"] for r in rows if not r["date"]]
@@ -506,6 +540,9 @@ def main(argv=None):
     print("wrote %s (%d bytes)" % (a.out, len(out.encode("utf-8"))))
     print("rows included: %d" % len(rows))
     print("logos: %d of %d creators" % (len(logos["map"]), len({r["creator"] for r in rows})))
+    unpriced = [x for x in skipped if "no provider price" in x]
+    if unpriced:
+        print("unpriced (price 0 in the free feed = no provider price, skipped as unmeasured): %d" % len(unpriced))
     if models or len(skipped) <= 12:
         print("rows skipped: %d%s" % (len(skipped), (" -> " + "; ".join(skipped)) if skipped else ""))
     else:

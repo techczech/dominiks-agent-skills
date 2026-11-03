@@ -229,6 +229,16 @@ def available_snapshots(prefix):
     return sorted(names)
 
 
+def fallback_warning(name):
+    """Say which older snapshot widgets will silently use when a fetch fails."""
+    found = sorted(glob.glob(os.path.join(SNAP_DIR, "*", name + ".json.gz")))
+    if not found:
+        return "WARNING: %s: fetch failed and no older snapshot exists; no widget can be built from this source." % name
+    d = os.path.basename(os.path.dirname(found[-1]))
+    return ("WARNING: %s: fetch failed. aa_widget.py will use the OLDER snapshot dated %s (its footer shows that date). "
+            "Retry, or tell the user the data is stale." % (name, d))
+
+
 def main(argv=None):
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("--source", default="all", choices=["arena", "openrouter", "all"])
@@ -251,6 +261,7 @@ def main(argv=None):
     if a.source in ("openrouter", "all"):
         for d in [x.strip() for x in a.openrouter.split(",") if x.strip()]:
             jobs.append(("openrouter-%s" % d, lambda d=d: fetch_openrouter(d, budget)))
+    failed = []
     for nm, fn in jobs:
         p = snapshot_path(nm, today)
         if os.path.exists(p) and not a.refresh:
@@ -265,11 +276,12 @@ def main(argv=None):
             write_snapshot(p, snap)
         except FetchError as e:
             print("%s: error: %s" % (nm, e))
-            print("total requests this run: %d" % budget.used)
-            return 1
+            print(fallback_warning(nm))
+            failed.append(nm)
+            continue
         print("%s: %d rows, %d requests -> %s" % (nm, len(snap["data"]), budget.used - before, p))
     print("total requests this run: %d" % budget.used)
-    return 0
+    return 1 if failed else 0
 
 
 if __name__ == "__main__":

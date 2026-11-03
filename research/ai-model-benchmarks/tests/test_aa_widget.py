@@ -31,6 +31,18 @@ IMG = fixture("text-to-image-sample.json")
 M = ["intelligence", "blended_price"]
 
 
+def _rec(name, creator, intel, i, o):
+    return {"name": name, "slug": name.lower().replace(" ", "-"), "release_date": "2026-09-01",
+            "model_creator": {"name": creator}, "evaluations": {"artificial_analysis_intelligence_index": intel},
+            "artificial_analysis_intelligence_index_cost": {"total_cost": 0} if i == 0 else None,
+            "pricing": {"price_1m_input_tokens": i, "price_1m_output_tokens": o},
+            "performance": {}}
+
+
+# AA's free feed gives price 0 (not null) to models with no provider price.
+LANG0 = dict(LANG, data=LANG["data"] + [_rec("Tiny Unpriced A", "Anthropic", 3.0, 0, 0), _rec("Tiny Unpriced B", "Google", 4.0, 0, 0)])
+
+
 class SelectTests(unittest.TestCase):
     def sel(self, **kw):
         kw.setdefault("metrics", M)
@@ -81,6 +93,25 @@ class SelectTests(unittest.TestCase):
         want = (3 * raw["price_1m_input_tokens"] + raw["price_1m_output_tokens"]) / 4
         self.assertAlmostEqual(rows[0]["v"]["blended_price"], want)
 
+    def test_zero_price_is_unmeasured_with_reason(self):
+        for metric in ("blended_price", "input_price", "output_price"):
+            rows, skipped = W.select(LANG0["data"], "bar", [metric], metric)
+            self.assertFalse(any(r["name"].startswith("Tiny Unpriced") for r in rows), metric)
+            self.assertTrue(all(r["v"][metric] > 0 for r in rows), metric)
+            msg = [x for x in skipped if x.startswith("Tiny Unpriced A")]
+            self.assertTrue(msg and "no provider price" in msg[0], (metric, skipped))
+        rows, skipped = W.select(LANG0["data"], "bar", ["index_cost"], "index_cost")
+        self.assertFalse(any(r["name"].startswith("Tiny Unpriced") for r in rows))
+        self.assertTrue(any("index_cost is 0" in x for x in skipped))
+
+    def test_top_on_lower_is_better_metric_ranks_by_intelligence_first(self):
+        rows, _ = W.select(LANG0["data"], "bar", ["blended_price", "intelligence"], "blended_price",
+                           top=3, require=["blended_price", "intelligence"], rank_by="intelligence")
+        self.assertEqual({r["name"] for r in rows}, {"Example Alpha", "Example Theta", "Example Delta"})  # top 3 by intelligence
+        prices = [r["v"]["blended_price"] for r in rows]
+        self.assertEqual(prices, sorted(prices))  # but ordered by price, cheapest first
+        self.assertFalse(any(r["name"].startswith("Tiny") for r in rows))
+
     def test_creators_alias_and_latest(self):
         rows, _ = self.sel(creators=["xAI"])
         self.assertEqual([r["name"] for r in rows], ["Example Epsilon"])
@@ -128,6 +159,29 @@ class OutputTests(unittest.TestCase):
             self.assertNotIn(FAKE_KEY, html)
             self.assertNotIn(FAKE_KEY, printed)
             self.assertIn("rows included", printed)
+
+    def test_bar_price_top_skips_unpriced_and_explains(self):
+        html, printed = self.build(["bar", "--metric", "blended_price", "--top", "4"], snap=LANG0)
+        self.assertNotIn("Tiny Unpriced", html)
+        self.assertIn("Top 4 models by Intelligence Index, ordered by blended $/1m", html.replace("Blended $/1M", "blended $/1m"))
+        self.assertIn("unpriced", printed)
+        self.assertIn("no provider price", printed)
+
+    def test_explicit_models_keep_price_ranking(self):
+        html, printed = self.build(["bar", "--metric", "blended_price", "--models", "Example Zeta,Example Alpha,Tiny Unpriced A"], snap=LANG0)
+        self.assertNotIn('"Tiny Unpriced', html)
+        self.assertIn("Tiny Unpriced A", printed)  # named in the skipped list
+        self.assertNotIn("by Intelligence Index, ordered by", html)  # --models: rows are the user's, no re-ranking
+
+    def test_stale_snapshot_warns_and_footer_shows_version_and_date(self):
+        _, printed = self.build(["bar", "--top", "3"], snap=dict(LANG, intelligence_index_version=5))
+        self.assertIn("WARNING: no snapshot from today", printed)
+        self.assertIn("2026-10-09", printed)
+        html, _ = self.build(["bar", "--top", "3"], snap=dict(LANG, intelligence_index_version=5))
+        self.assertIn("Intelligence Index v5", html)
+        self.assertIn("fetched ", html)
+        _, printed = self.build(["bar", "--top", "3", "--snapshot-date", "2026-10-09"], snap=LANG)
+        self.assertNotIn("WARNING", printed)  # an explicit date is not a silent fallback
 
     def test_synthetic_footer_has_no_source_claim_or_link(self):
         html, _ = self.build(["bar", "--synthetic", "--models", "Example Alpha"])

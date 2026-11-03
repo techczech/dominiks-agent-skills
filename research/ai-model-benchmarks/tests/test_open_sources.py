@@ -171,6 +171,33 @@ class FetchTests(unittest.TestCase):
             self.assertEqual(os.listdir(os.path.dirname(p)), ["arena-text.json.gz"])
 
 
+class FallbackWarningTests(unittest.TestCase):
+    def test_names_the_older_snapshot_that_will_be_used(self):
+        d = tempfile.mkdtemp()
+        with mock.patch.object(O, "SNAP_DIR", d):
+            self.assertIn("no older snapshot", O.fallback_warning("arena-text"))
+            O.write_snapshot(O.snapshot_path("arena-text", "2026-10-08"), {"data": [1]})
+            msg = O.fallback_warning("arena-text")
+            self.assertIn("WARNING", msg)
+            self.assertIn("2026-10-08", msg)
+
+    def test_failed_fetch_is_reported_and_other_jobs_still_run(self):
+        d = tempfile.mkdtemp()
+        calls = []
+        def fake_arena(*a, **k):
+            raise O.FetchError("request to datasets-server.huggingface.co failed")
+        def fake_or(ds, budget):
+            calls.append(ds)
+            return {"data": [1], "dataset": ds}
+        with mock.patch.object(O, "SNAP_DIR", d), mock.patch.object(O, "fetch_arena", side_effect=fake_arena), \
+                mock.patch.object(O, "fetch_openrouter", side_effect=fake_or), mock.patch("builtins.print") as pr:
+            rc = O.main(["--source", "all", "--openrouter", "rankings-daily"])
+        out = "\n".join(" ".join(map(str, c.args)) for c in pr.call_args_list)
+        self.assertEqual(rc, 1)
+        self.assertIn("WARNING", out)
+        self.assertEqual(calls, ["rankings-daily"])
+
+
 class PrettyNameTests(unittest.TestCase):
     def test_examples(self):
         cases = {

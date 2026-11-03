@@ -1,6 +1,6 @@
 ---
 name: ai-model-benchmarks
-description: "Use when building an inline HTML chart or table of AI model benchmarks, prices or arena rankings (Artificial Analysis, Arena, OpenRouter) for slides or documents."
+description: "Use when building an inline HTML chart or table of AI model benchmarks, prices or arena rankings (Artificial Analysis, Arena, OpenRouter) for slides or documents, or when asked how to show AI progress over time."
 metadata:
   short-description: Benchmark widgets and model lookup from AA, Arena and OpenRouter
 ---
@@ -21,11 +21,13 @@ Free data (Artificial Analysis API v2, Arena, OpenRouter) -> dated local snapsho
 
 | Ask | Source | Notes |
 |---|---|---|
-| intelligence, coding/agentic, price, speed, model progress over time | `aa` (default) | `aa_fetch.py`; attribution to Artificial Analysis |
-| which model do humans prefer; is it open (licence) | `arena` | human-preference rating + CI + licence; lags about a week; CC BY 4.0 |
+| intelligence, coding/agentic, price, speed | `aa` (default) | `aa_fetch.py`; attribution to Artificial Analysis |
+| progress over YEARS | AA Progress Index (not fetchable) | see "Progress over time" below |
+| which model do humans prefer; is it open (licence) | `arena` (arena.ai, formerly LMArena) | human-preference rating + CI + licence; lags about a week; CC BY 4.0 |
 | what do people actually use; OpenRouter's own benchmarks | `openrouter` | 30-day token share, benchmark accuracy and cost per task; CC BY 4.0 |
 
-- Fetch Arena/OpenRouter: `python3 -I $S/scripts/open_sources_fetch.py --source arena|openrouter|all` (reuses today's snapshot; `--arena text_style_control,text_to_image`, `--arena-top 200` to save requests, `--history` only on request; `--openrouter ...,benchmark-runs` only on request).
+- Other sources (Epoch, LiveBench, METR, ARC Prize, Scale SEAL, Vals AI; Arena's public home is arena.ai, formerly LMArena) are not fetched: `references/sources.md`.
+- Fetch Arena/OpenRouter: `python3 -I $S/scripts/open_sources_fetch.py --source arena|openrouter|all` (reuses today's snapshot; a failed fetch prints a WARNING naming the older snapshot widgets will then use, and the other jobs still run; `--arena text_style_control,text_to_image`, `--arena-top 200` to save requests, `--history` only on request; `--openrouter ...,benchmark-runs` only on request).
 - Widgets: add `--source arena|openrouter` to `aa_widget.py`. Arena: `bar`/`table` (`--arena <subset>`, `--open-only` = licence not Proprietary, licence in tooltip/table). OpenRouter: `share` (30-day usage lines, top 5 + all other, `--top` overrides), `bar`/`table` of share (`--metric share|share_latest`) or of a benchmark (`--benchmark <id>`, e.g. gpqa_diamond; cost per task in tooltip).
 - Names differ per source (Arena `model-name-high`, OpenRouter `org/model-name-20260101`); they are tidied into readable names (provider prefix and date stamps dropped, effort suffix after a comma) with the raw id in the tooltip. `--models` ignores case, `-`, `_`, spaces and dots. Creator (and logo) come from the org/provider prefix.
 - Attribution is built into each footer and cannot be turned off: Arena "Source: Arena (lmarena-ai/leaderboard-dataset), licensed under CC BY 4.0" + publish date; OpenRouter "Source: OpenRouter (openrouter.ai), licensed under CC BY 4.0" + data-as-of date; AA link + index version + fetch date.
@@ -37,7 +39,13 @@ Free data (Artificial Analysis API v2, Arena, OpenRouter) -> dated local snapsho
 2. Pick chart: `frontier` (model progress over time), `scatter` (price/speed vs intelligence), `bar` (ranking), `table` (several metrics), `share` (OpenRouter usage).
 3. `python3 -I $S/scripts/aa_widget.py <chart> --out <folder>/assets/<descriptive-name>.html [options]`
 4. Give the user the file path to open in a browser or embed in any tool that runs a local HTML file. One example: TalkWeaver and WriteFlex embed it with the line `[Simulation: assets/<name>.html]`; that syntax is specific to those apps.
-5. Say the data date (the footer shows it).
+5. Say the data date (the footer shows it). If the build prints `WARNING: no snapshot from today`, the data is older than a fresh fetch would give (for example a failed Arena fetch): retry the fetch, or tell the user the date.
+
+## Progress over time
+
+- "How much have models improved since year X" -> AA Progress Index v1 (IRT, one capability value per model, comparable across years). NOT in the free API: point to https://artificialanalysis.ai/trends#progress and use a real labelled screenshot (`talkweaver-visuals` sources-and-screenshots rules). Never pass off an Intelligence Index frontier chart as progress.
+- One-version chart back to 2022 (GPT-3.5 era): `frontier --snapshot-date 2026-10-26 --months 48` (v4.3; v5 has no scores for old models). Label the version.
+- Version-change comparisons (benchmaxxing): share of each version's top score, never raw scores. Details and worked example: `references/progress-and-versions.md`.
 
 Filename rule: descriptive kebab-case, says what it holds: `frontier-intelligence-2026-10.html`. Never `widget.html`.
 
@@ -46,6 +54,7 @@ Filename rule: descriptive kebab-case, says what it holds: `frontier-intelligenc
 - `--category language` (default) or a media category (`text-to-image`, `text-to-video`, `text-to-speech`, `speech-to-text`, ...).
 - `--models "Name A,Name B"`: case-insensitive, punctuation-tolerant substrings of name/slug/base name. `--latest`: per term keep only the newest matching model.
 - `--creators "Anthropic,OpenAI,Google"` (aliases: xAI = SpaceXAI, Qwen = Alibaba, Moonshot = Kimi). `--top N`. `--months N` (frontier). `--highlight "Name A"`.
+- Price metrics: a price or cost of 0 in the free feed means no provider price; it is treated as unmeasured (skipped with a reason, counted in the printed "unpriced" line), never plotted as $0. `--top N` on a lower-is-better metric (price, latency) with no `--models` = the N highest-intelligence models, ordered by that metric (printed and noted on the chart); use `--models` to choose rows yourself.
 - `--variants best` (default: per creator+base name keep the best-scoring effort setting; variant shown in tooltip) or `all`.
 - `bar`: `--metric` (default intelligence; media/Arena: rating with 95% CI whiskers; the axis starts near the data when values are within 15% of each other, and says so). `scatter`: `--x blended_price --y intelligence` (price axes log). `frontier`: `--metric`. `table`: `--metrics intelligence,coding,agentic,blended_price,speed` (click headers to sort).
 - `--label "Name A,Name B"` (frontier): label only the models the user names, at most 5 (the 5 highest if more). Default: only the newest record-setter; every other point is hover/focus tooltip only. Tell the user to name the models they want labelled.
@@ -73,7 +82,7 @@ Examples:
 - Do NOT promise (not in the free tier): per-benchmark scores (GPQA, HLE...), context window, open weights/licence, reasoning flag, AA's own blended price (we compute 3:1), history over time, provider-level data.
 - Nulls = not measured, never zero. Skipped, never plotted as 0. Table dash `–` = null; a visible note appears under the table when a shown column is mostly empty.
 - Coding/Agentic indexes lag: the newest frontier models often have Intelligence but null Coding/Agentic in the free feed. Check with `aa_lookup.py` before promising a coding chart; say so on the slide if a column is mostly dashes.
-- The Intelligence Index is versioned (the footer shows it). Scores from different versions are not comparable; never mix snapshots across versions in one chart.
+- The Intelligence Index is versioned (the footer shows it; v5 from 27 Oct 2026, v4.3 before). Scores from different versions are not comparable; never mix snapshots across versions in one chart. The Progress Index, Openness Index, context window and model size are on the AA site but not in the free feed.
 - Each model appears once per effort setting ("Name (Xhigh)", "(High)"). Base name = name minus trailing parenthetical.
 - Media records have no release date: `frontier` is language-only.
 
@@ -109,6 +118,7 @@ Synthetic-data screenshots (invented models, no real results): `docs/widget-bar-
 
 ## Files
 
+- `references/fields.md` (metrics), `sources.md` (all benchmark sources, cite/link ones), `progress-and-versions.md` (Progress Index, versions, worked example).
 - `scripts/aa_key.py` (credentials, config), `aa_fetch.py` (+ `load_snapshot(category, date=None)`), `open_sources_fetch.py` (+ `load_open_snapshot`), `aa_sources.py` (adapters, name tidying), `aa_logos.py`, `aa_widget.py` + `widget_template.html`, `aa_lookup.py`.
 - Tests: `python3 -I -m unittest discover -s $S/tests` (synthetic fixtures only).
 - Widgets are inline-only (no external requests, no eval, no storage) and work under a strict CSP in a sandboxed iframe. Light/dark follows `prefers-color-scheme`.

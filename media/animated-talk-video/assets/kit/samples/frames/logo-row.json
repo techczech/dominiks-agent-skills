@@ -1,0 +1,16 @@
+{
+  "id": "logo-row",
+  "scene": "Products",
+  "key": "Three assistants people already use",
+  "narration": "OpenAI, Claude and Gemini each make an assistant you can talk to.",
+  "motion": "Each card pops in at the name; the marks are the official ones from the icon sets.",
+  "elements": [
+    { "type": "floor" },
+    { "type": "person", "id": "colleague", "who": "main", "mood": "smile", "pose": "open", "x": 220, "y": 936, "look": 1 }
+  ],
+  "builds": [
+    { "cue": "OpenAI", "motion": "pop", "elements": [{ "type": "logoCard", "id": "openai", "x": 760, "y": 330, "logo": "svgl:openai", "name": "OpenAI", "size": 170 }] },
+    { "cue": "Claude", "motion": "pop", "elements": [{ "type": "logoCard", "id": "claude", "x": 1130, "y": 330, "logo": "svgl:claude-ai", "name": "Claude", "size": 170 }] },
+    { "cue": "Gemini", "motion": "pop", "elements": [{ "type": "logoCard", "id": "gemini", "x": 1500, "y": 330, "logo": "svgl:gemini", "name": "Gemini", "size": 170 }] }
+  ]
+}

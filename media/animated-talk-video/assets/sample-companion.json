@@ -1,0 +1,485 @@
+{
+  "title": "Agentic AI systems for scientific discovery: what the paper argues",
+  "citation": "Feng, B., Walther, P., Zhang, L. et al. (2026). Agentic AI systems for scientific discovery. Nature Reviews Methods Primers 6:81.",
+  "doi": "https://doi.org/10.1038/s43586-026-00534-y",
+  "date": "2026-11-06",
+  "purpose": {
+    "register": "AS DOMINIK",
+    "genre": "Self-study companion to an explainer video",
+    "reader": "Researchers interested in agentic AI for science; no prior knowledge of this paper assumed",
+    "need": "Inspect the same visual states at a chosen pace, read the narration and follow page references",
+    "irrelevant": "Video production tooling and rendering internals",
+    "contentAuthority": "outline.md narration; beats-v2.md PDF page references; original frames and widgets",
+    "review": "Headless interaction, accessibility and layout checks; no learner comprehension study"
+  },
+  "inputs": {
+    "outline": "outline.md",
+    "beats": "beats-v2.md"
+  },
+  "video": {
+    "file": "feng-2026-agentic-science-explainer.mp4",
+    "captions": "captions.vtt"
+  },
+  "syntheticVoice": "Narration uses a synthetic voice: Breeze TTS 2.",
+  "footer": [
+    "Made by Dominik Lukeš with Claude and Codex · {date}.",
+    "Synthetic voice: Breeze TTS 2.",
+    "Figures redrawn from Feng et al. 2026, © Springer Nature.",
+    "Teaching draft: figure redraws and page images are not cleared for public hosting."
+  ],
+  "copy": {
+    "description": "Watch the explainer, inspect its illustrated builds and explore the full interactive figures from Feng et al. (2026).",
+    "eyebrow": "Video and self-study companion",
+    "howTo": "Watch the video, then step through each part at your own pace.",
+    "chapters": "Explore the chapters",
+    "videoLabel": "Explainer video",
+    "inProduction": "Video in production",
+    "timingPending": "Time to follow",
+    "timingNote": "Chapter times will be confirmed when the revised video is rendered.",
+    "watch": "Watch this part",
+    "back": "Back",
+    "next": "Next",
+    "reset": "Reset",
+    "of": "of",
+    "initialState": "Opening view",
+    "textAlternative": "Read a description of this view",
+    "fullScreen": "Open full screen",
+    "sourceLinkLabel": "PDF page reference in the original paper",
+    "captionsLabel": "English captions",
+    "downloadVideo": "Download the video",
+    "furtherStudy": "Further study",
+    "furtherIntro": "Explore the visual guide, read the paper guides or open a complete interactive figure. These copies work offline; DOI links open the original source online.",
+    "skip": "Skip to self-study sections",
+    "estimatedTime": "Approx.",
+    "heroBadge": "Self-study companion",
+    "heroLead": "One or two sentences on what the video covers and what else is on this page.",
+    "ctaWatch": "Watch the video",
+    "ctaStep": "Follow the argument",
+    "ctaFigures": "Explore the figures",
+    "questionsHeading": "What this answers",
+    "progressHeading": "Track your progress",
+    "progressNote": "Progress is kept in this browser only.",
+    "navHome": "Home",
+    "navVideo": "Video",
+    "navWalkthrough": "Walkthrough",
+    "navFigures": "Figures",
+    "navConcepts": "Key terms",
+    "navGuides": "Guides",
+    "navAbout": "About",
+    "transcriptHeading": "Transcript",
+    "followVideo": "Follow the video",
+    "searchTranscript": "Search the transcript",
+    "inThePaper": "In the source",
+    "watchMoment": "Watch this moment",
+    "describeView": "Describe this view",
+    "conceptsIntro": "Choose a term to see its definition and where the explainer shows it.",
+    "conceptNotInVideo": "The explainer does not show this term.",
+    "showInWalkthrough": "Show in the walkthrough",
+    "listView": "List view",
+    "mapView": "Map view",
+    "navArgument": "Argument",
+    "navReading": "Reading",
+    "navResearch": "Research",
+    "navMaking": "Making"
+  },
+  "screens": {
+    "source": {
+      "heading": "Meet the paper and its authors",
+      "altText": "The paper’s title page introduces its journal, title and authors before connecting papers with experiments."
+    },
+    "route": {
+      "heading": "Follow the paper’s main questions",
+      "altText": "A route connects the problem, proposed systems, existing examples, operating loop, trust and limitations."
+    },
+    "card-problem": {
+      "heading": "See what research must connect",
+      "altText": "The route highlights the problem: researchers must connect knowledge across different sources."
+    },
+    "spread": {
+      "heading": "Connect knowledge across different sources",
+      "altText": "Papers, data, theory and experiments surround a researcher and must be brought together.",
+      "sourceBeat": "card-problem"
+    },
+    "by-hand": {
+      "heading": "Join knowledge through human judgement",
+      "altText": "A researcher moves between sources, making a succession of judgements."
+    },
+    "pipelines": {
+      "heading": "See where fixed pipelines struggle",
+      "altText": "A fixed pipeline and laboratory track cannot readily turn towards a new problem."
+    },
+    "llm-wall": {
+      "heading": "Bridge digital tasks and physical experiments",
+      "altText": "An agent handles search, summaries and code on one side of a dashed boundary; a laboratory instrument stands on the other."
+    },
+    "card-proposal": {
+      "heading": "Explore the paper’s proposed system",
+      "altText": "The route highlights the proposal: agentic systems connect reasoning with action."
+    },
+    "joins": {
+      "heading": "Join reasoning, tools and experimental action",
+      "altText": "An agent connects to papers, data and laboratory equipment through tool calls.",
+      "sourceBeat": "card-proposal"
+    },
+    "definition": {
+      "heading": "Separate agents, workflow and environment",
+      "altText": "An agent sits inside an organising workflow, surrounded by data, instruments and people."
+    },
+    "tools-today": {
+      "heading": "Steer familiar agents with versioned profiles",
+      "altText": "Named coding agents appear alongside a versioned Markdown profile that supplies their instructions."
+    },
+    "assembly": {
+      "heading": "Build from model to ecosystem",
+      "altText": "A foundation model gains tools to become an agent; agents form systems within a wider research ecosystem."
+    },
+    "card-systems": {
+      "heading": "Look at systems already built",
+      "altText": "The route highlights existing systems and what they have done."
+    },
+    "table3": {
+      "heading": "Locate the systems in Table 3",
+      "altText": "Table 3 presents 18 systems spanning chemistry, materials science and biology.",
+      "sourceBeat": "card-systems"
+    },
+    "families": {
+      "heading": "Compare three families of agents",
+      "altText": "Three lanes distinguish cognitive, embodied laboratory and collaborative agents."
+    },
+    "lit-mining": {
+      "heading": "Read papers into a structured table",
+      "altText": "An agent reads papers and fills a table of synthesis conditions: about 800 metal-organic frameworks, with over 90 percent precision."
+    },
+    "hypotheses": {
+      "heading": "Rank drug combinations using a knowledge graph",
+      "altText": "Literature and databases feed a knowledge graph supporting ranked drug-combination hypotheses for a biomarker."
+    },
+    "coscientist": {
+      "heading": "Coordinate code, equipment and human help",
+      "altText": "Coscientist searches the web, writes code and controls a liquid handler; a person moves the plates."
+    },
+    "crispr": {
+      "heading": "Design experiments in cancer cells",
+      "altText": "CRISPR-GPT experiments yield four knockouts in lung adenocarcinoma cells and two activations in melanoma cells."
+    },
+    "virtual-lab": {
+      "heading": "Hold a research meeting among agents",
+      "altText": "A principal investigator, specialists and a critic collaborate; 92 designed nanobodies lead to two with improved binding."
+    },
+    "co-scientist": {
+      "heading": "Nominate targets for liver fibrosis",
+      "altText": "AI Co-Scientist nominates targets; HDAC and BRD4 inhibitors suppress fibrosis in human liver organoids."
+    },
+    "card-loop": {
+      "heading": "Follow the system’s operating loop",
+      "altText": "The route highlights how systems run and revise their work."
+    },
+    "loop": {
+      "heading": "Follow tasks through planning and checking",
+      "altText": "Tasks progress through planning, action, validation and revision, supported by tools, memory and feedback."
+    },
+    "checkpoint": {
+      "heading": "Pause for a person’s approval",
+      "altText": "A consequential decision reaches a human checkpoint; the proposed system pauses if nobody answers."
+    },
+    "lnp-setup": {
+      "heading": "Equip an agent for formulation research",
+      "altText": "The lipid nanoparticle agent seeks mRNA formulations for melanoma using a lipid catalogue, papers, instructions and scripts."
+    },
+    "lnp-lab": {
+      "heading": "Review candidates before laboratory testing",
+      "altText": "Researchers review ranked formulations; approved candidates proceed to laboratory testing and results feed back into the process."
+    },
+    "card-trust": {
+      "heading": "Decide how much to trust outputs",
+      "altText": "The route highlights the researcher’s judgement of what returned results establish."
+    },
+    "outputs": {
+      "heading": "Climb from extraction to experimental confirmation",
+      "altText": "A ladder rises through extracted knowledge, ranked hypotheses, refined candidates and experimental confirmation; decisions are recorded."
+    },
+    "validation": {
+      "heading": "Check results and repeat the run",
+      "altText": "Checks progress from internal consistency to computation and wet-lab testing; repeated runs reveal variability."
+    },
+    "redirect": {
+      "heading": "See how small changes redirect reasoning",
+      "altText": "Changing a prompt, context or tool sends an agent’s reasoning along a different path."
+    },
+    "record": {
+      "heading": "Keep the full record of a run",
+      "altText": "A record collects prompts, tools, memory, intermediate steps and human interventions."
+    },
+    "report": {
+      "heading": "Record who made each consequential decision",
+      "altText": "A report records who set the goal, chose tools, fixed failures and approved irreversible actions."
+    },
+    "card-limits": {
+      "heading": "Identify the failures that remain",
+      "altText": "The route highlights remaining limitations and failures."
+    },
+    "errors": {
+      "heading": "Watch small errors accumulate across steps",
+      "altText": "A chain of steps drifts further from a target line as errors accumulate."
+    },
+    "mirage": {
+      "heading": "Question claims about an absent image",
+      "altText": "An agent describes an image never supplied, shown as an empty dashed frame."
+    },
+    "context": {
+      "heading": "Keep early limits within the model’s context",
+      "altText": "As files fill a context tray, an early constraint falls out while the agent continues answering."
+    },
+    "injection": {
+      "heading": "Recognise instructions hidden inside retrieved material",
+      "altText": "Hidden instructions in a web page, supplementary file and database field enter an agent through retrieved material."
+    },
+    "copilots": {
+      "heading": "See where people improve laboratory results",
+      "altText": "Protein cost falls by 40 percent in a GPT-5-guided cloud lab; the largest improvement coincides with human intervention. Researcher and agent appear as co-pilots."
+    },
+    "close": {
+      "heading": "Set goals and approve consequential actions",
+      "altText": "A researcher sets a goal and approves actions; a recorded trail links work to a discovery."
+    },
+    "end": {
+      "heading": "Return to the paper and sources",
+      "altText": "The paper’s title page appears beside its citation and DOI."
+    }
+  },
+  "furtherStudy": [
+    {
+      "title": "Visual guide to the paper",
+      "base": "../..",
+      "file": "visual-guide-feng-2026-agentic-science.html",
+      "destination": "study",
+      "kind": "guide",
+      "summary": "One line saying what this offers."
+    },
+    {
+      "title": "Guide to the paper: argument, sections and evidence",
+      "base": "../..",
+      "file": "guide-feng-2026-agentic-science-paper.html",
+      "destination": "study",
+      "kind": "guide",
+      "summary": "One line saying what this offers."
+    },
+    {
+      "title": "Guide for researchers: choosing and checking systems",
+      "base": "../..",
+      "file": "guide-feng-2026-for-researchers.html",
+      "destination": "study",
+      "kind": "guide",
+      "summary": "One line saying what this offers."
+    },
+    {
+      "title": "Figure 1a: from model to ecosystem",
+      "base": "../..",
+      "file": "widgets/feng-2026-fig1a-assembly.html",
+      "destination": "study",
+      "kind": "figure",
+      "summary": "One line saying what this offers."
+    },
+    {
+      "title": "Figure 1b: three families of agents",
+      "base": "../..",
+      "file": "widgets/feng-2026-fig1b-agents-over-time.html",
+      "destination": "study",
+      "kind": "figure",
+      "summary": "One line saying what this offers."
+    },
+    {
+      "title": "Figure 2a: the system framework",
+      "base": "../..",
+      "file": "widgets/feng-2026-fig2a-system-framework.html",
+      "destination": "study",
+      "kind": "figure",
+      "summary": "One line saying what this offers."
+    },
+    {
+      "title": "Figure 2b: how agents perceive their environment",
+      "base": "../..",
+      "file": "widgets/feng-2026-fig2b-perception.html",
+      "destination": "study",
+      "kind": "figure",
+      "summary": "One line saying what this offers."
+    },
+    {
+      "title": "Figure 3: the lipid nanoparticle agent",
+      "base": "../..",
+      "file": "widgets/feng-2026-fig3-lnp-agent.html",
+      "destination": "study",
+      "kind": "figure",
+      "summary": "One line saying what this offers."
+    },
+    {
+      "title": "Timeline of agentic systems",
+      "base": "../..",
+      "file": "widgets/feng-2026-timeline-agentic-systems.html",
+      "destination": "study",
+      "kind": "figure",
+      "summary": "One line saying what this offers."
+    }
+  ],
+  "keepChapterScreens": [
+    "source"
+  ],
+  "shortTitle": "Short title for the top bar",
+  "conceptGroups": [
+    {
+      "id": "group-a",
+      "title": "First group"
+    },
+    {
+      "id": "group-b",
+      "title": "Second group"
+    },
+    {
+      "id": "group-c",
+      "title": "Third group"
+    }
+  ],
+  "concepts": [
+    {
+      "id": "term-one",
+      "group": "group-a",
+      "term": "Term one",
+      "definition": "Short definition.",
+      "pages": "p. 1",
+      "related": [
+        "term-two"
+      ],
+      "screens": []
+    },
+    {
+      "id": "term-two",
+      "group": "group-b",
+      "term": "Term two",
+      "definition": "Short definition.",
+      "pages": "p. 2",
+      "related": [
+        "term-one"
+      ],
+      "screens": []
+    }
+  ],
+  "conceptsSource": "Where the definitions come from.",
+  "_optional": "shortTitle, argument, figuresIntro, reading, research, skills, making, guideDownloads, the extra copy keys, furtherStudy kind/summary and concepts are all optional; each view appears only when its data exists (Argument needs \"argument\"; Figures needs kind \"figure\" entries; Key terms needs concepts; Reading needs \"reading\"; Your research needs \"research\"; How it was made needs \"making\"). Missing copy keys fall back to built-in English. argument.chapters is keyed by the chapter title from the outline.",
+  "argument": {
+    "intro": "One sentence introducing the argument in parts.",
+    "chapters": {
+      "First chapter title (must match the outline heading)": {
+        "summary": "The answer to this chapter's question in two sentences.",
+        "pages": "p. 1"
+      }
+    }
+  },
+  "figuresIntro": [
+    "One short paragraph on what the interactive figures are and how to use them."
+  ],
+  "reading": {
+    "intro": "How to read the source.",
+    "routes": [
+      {
+        "title": "Short route",
+        "items": [
+          "Abstract (p. 1). Two minutes."
+        ]
+      },
+      {
+        "title": "Longer route",
+        "items": [
+          "Introduction (pp. 1-3). Eight minutes."
+        ]
+      }
+    ],
+    "routesNote": "Optional note under the routes.",
+    "critical": [
+      {
+        "title": "Limits the source states",
+        "intro": "",
+        "items": [
+          "A limit the authors state p. 5."
+        ]
+      },
+      {
+        "title": "Points a careful reader should notice",
+        "intro": "These are observations by this guide, not statements by the authors.",
+        "items": [
+          "Short lead. The rest of the observation p. 6."
+        ]
+      }
+    ]
+  },
+  "research": {
+    "intro": "What this means for a researcher; the translation is not the authors'.",
+    "translationLabel": "For your research",
+    "paperLabel": "What the paper says",
+    "cards": [
+      {
+        "title": "First card",
+        "paper": [
+          {
+            "type": "p",
+            "text": "What the paper says p. 2."
+          }
+        ],
+        "forYouHeading": "What this means for your research",
+        "forYou": [
+          {
+            "type": "p",
+            "text": "Your translation."
+          }
+        ]
+      },
+      {
+        "title": "A checklist card",
+        "paper": [
+          {
+            "type": "li",
+            "text": "A paper point."
+          }
+        ],
+        "forYouHeading": "What this means for your research: checklist",
+        "forYou": [
+          {
+            "type": "li",
+            "text": "Tickable item."
+          }
+        ]
+      }
+    ]
+  },
+  "skills": [
+    {
+      "name": "skill-name",
+      "role": "What the skill did",
+      "url": "https://example.org/skill",
+      "public": true
+    },
+    {
+      "name": "private-skill",
+      "role": "What it did",
+      "url": "",
+      "public": false
+    }
+  ],
+  "making": {
+    "purpose": [
+      "What this page is for."
+    ],
+    "steps": [
+      {
+        "title": "A step",
+        "text": "What happened.",
+        "date": "1 Jan"
+      }
+    ],
+    "agentNote": "Who made it and how.",
+    "reuse": "How to repeat the process."
+  },
+  "guideDownloads": {
+    "intro": "The longer guides as single pages.",
+    "note": "How the guides were drafted."
+  }
+}

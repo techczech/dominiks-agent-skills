@@ -1,0 +1,99 @@
+<title>Animated Talk Video</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400&display=swap">
+<style>
+:root{--bg:#fdfdfb;--fg:#101418;--muted:#5b6168;--rule:#e3e2dc;--panel:#f4f3ee;--green:#0a7a5c;--blue:#0f4bd8;--orange:#c2410c;--code:#f1efe8}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--bg:#111416;--fg:#ecebe6;--muted:#a3a8ad;--rule:#2b3034;--panel:#1a1e21;--green:#3fc79c;--blue:#7aa2ff;--orange:#f08a5d;--code:#1f2427;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#111416;--fg:#ecebe6;--muted:#a3a8ad;--rule:#2b3034;--panel:#1a1e21;--green:#3fc79c;--blue:#7aa2ff;--orange:#f08a5d;--code:#1f2427;color-scheme:dark}
+body{background:var(--bg);color:var(--fg);font:16px/1.6 Inter,system-ui,-apple-system,"Segoe UI",sans-serif;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:40px 64px}
+main{max-width:720px;margin:0 auto;display:flex;flex-direction:column;gap:8px}
+.kicker{color:var(--green);font-size:14px;font-weight:500}
+h1{font-size:34px;line-height:1.2;margin:4px 0 8px;font-weight:600;text-wrap:balance}
+.lede{font-size:18px;color:var(--fg);margin:0 0 12px}
+h2{font-size:21px;font-weight:600;margin:32px 0 4px;padding-top:16px;border-top:1px solid var(--rule);text-wrap:balance}
+p,li{max-width:65ch}
+ul,ol{padding-left:22px;margin:4px 0}
+li{margin:4px 0}
+code{font-family:"JetBrains Mono",ui-monospace,Menlo,monospace;font-size:.88em;background:var(--code);padding:1px 5px;border-radius:4px}
+pre{background:var(--code);border-radius:8px;padding:14px 16px;overflow-x:auto;font-family:"JetBrains Mono",ui-monospace,Menlo,monospace;font-size:14px;line-height:1.5;margin:8px 0}
+pre code{background:none;padding:0}
+.note{background:var(--panel);border-left:3px solid var(--green);padding:12px 16px;border-radius:0 8px 8px 0;margin:8px 0}
+kbd{font-family:inherit;font-size:.85em;border:1px solid var(--rule);border-bottom-width:2px;border-radius:4px;padding:0 5px;background:var(--panel)}
+.keys{display:grid;grid-template-columns:auto 1fr;gap:6px 14px;margin:8px 0}
+.keys>*{min-width:0}
+a{color:var(--blue)}
+footer{margin-top:40px;color:var(--muted);font-size:14px;border-top:1px solid var(--rule);padding-top:16px}
+</style>
+<main>
+<div class="kicker">A skill for coding agents</div>
+<h1>Animated talk video</h1>
+<p class="lede">A skill that lets a coding agent such as Claude Code turn a talk into an animated explainer video. You need no video editor and no TalkWeaver.</p>
+
+<div class="note">The skill comes as a single file, <code>animated-talk-video.skill</code>. Ask Dominik Lukeš for it; this page explains what it does and how to use it.</div>
+
+<h2>What it does</h2>
+<p>You give the agent a talk outline with a narration script, or a recording of the talk with the times of the slide changes. The agent redraws each slide as a moving scene, builds each point when the voice says it, adds captions, and writes an MP4. Next to it you get <code>captions.vtt</code>, <code>transcript.md</code> and <code>chapters.txt</code>.</p>
+<p>The style is a push-left transition between slides, a small title at the top left and short regular-weight text. Motion comes in two levels: <code>calm</code> (fades only, for dense or beginner material) and <code>standard</code>. The rules come from Dominik's work on designing instructional videos.</p>
+<p>The renderer is HyperFrames, an open-source tool from HeyGen that turns an HTML page into video.</p>
+
+<h2>What you need</h2>
+<ul>
+<li>Node 22 or later, and ffmpeg.</li>
+<li>A headless Chrome. The skill is tested with <code>chrome-headless-shell</code> and never uses your own Chrome. HyperFrames downloads one if it finds none.</li>
+<li>Disk space: about 130 MB for the HyperFrames packages in the project, 250 MB for the browser, and 195 MB of cache under <code>~/.cache/hyperframes</code>.</li>
+<li>Optional, for narration: a text-to-speech engine for a synthetic voice, and a speech-to-text engine that gives word times. On Apple Silicon the skill includes a script using Parakeet; elsewhere any engine with word timestamps, such as Whisper, will do. A captions-only video needs neither.</li>
+</ul>
+<p>A render takes one to three times the video's length on a slower laptop.</p>
+
+<h2>Install</h2>
+<p><code>animated-talk-video.skill</code> is a zip file. Unzip it into your agent's skills folder (for Claude Code, <code>~/.claude/skills</code>), then start a new session.</p>
+<p>On first use the agent scaffolds a project folder and installs HyperFrames at a pinned version, 0.8.214. The pin is there because the project releases several times a day and the kit is tested against one version. The agent also turns HyperFrames telemetry off.</p>
+
+<h2>Make a video from an outline</h2>
+<p>Write the outline in Markdown: <code>#</code> for the video title, <code>##</code> for a section, <code>###</code> for each slide. Add a layout tag in braces after the slide title, short bullets (nine words or fewer), and the spoken narration as <code>&gt;</code> lines. The skill includes a three-slide example (<code>assets/sample-outline.md</code>) and a list of tags (<code>references/inputs.md</code>).</p>
+<p>Then ask something like: “Use the animated-talk-video skill to make a video from outline.md. The audience is beginners.” The agent will:</p>
+<ol>
+<li>Ask about the audience if you have not said. If it is unknown, it uses <code>standard</code> motion and says so.</li>
+<li>Draft a plan with estimated timings and show you stills, so you see the look before any audio exists.</li>
+<li>Optionally generate synthetic narration, one clip per slide, and re-plan from the real clip lengths.</li>
+<li>Check the build, look at a still of every scene, fix problems and render.</li>
+</ol>
+<p>The first render needs a network connection for GSAP and the fonts.</p>
+
+<h2>Make a video from a recorded talk</h2>
+<p>Give the agent the recording, the outline and a file saying when each slide appeared, on the recording clock. A CSV works:</p>
+<pre><code>slide,start,reveals
+intro,0:00
+why-bread-rises,0:12.5,14.2
+s3,41</code></pre>
+<p>A slide is named by its <code>id</code> tag, by <code>s&lt;N&gt;</code> (its position among the headings), by its exact title or by its number. <code>reveals</code> are optional times when a build appeared. Without them, builds start at the first word of each phrase, found from word timings of the recording. A JSON list of <code>{ "slide", "t" }</code> objects also works. With no timings, the agent can propose slide changes from the transcript; you confirm each before it builds.</p>
+
+<h2>Review and revise</h2>
+<p>After rendering, ask for the review page. The agent serves it on your own machine: a video player and a list of scenes you can jump between.</p>
+<div class="keys">
+<span><kbd>N</kbd></span><span>Add a note at the current time. The video pauses.</span>
+<span>Click</span><span>Attach the note to a pin at that spot on the picture.</span>
+<span><kbd>⌘</kbd><kbd>Enter</kbd></span><span>Save the note. You can also leave one general note.</span>
+<span><kbd>←</kbd> <kbd>→</kbd></span><span>Previous or next scene. <kbd>Space</kbd> plays and pauses.</span>
+</div>
+<p>Click <strong>Save feedback</strong>. The page writes your notes into the project's <code>review/feedback</code> folder. Tell the agent you have saved feedback: it reads each note as a fix request at that scene and time, replies to each one and rebuilds.</p>
+
+<h2>Fonts, voices and licences</h2>
+<ul>
+<li><strong>Fonts.</strong> None are included. The default is Inter (open licence). For your own typeface, put the <code>.ttf</code> files in <code>fonts/</code> and declare them in <code>look.json</code>. The renderer ignores system fonts.</li>
+<li><strong>Voices.</strong> Clone a voice only from audio you are authorised to use: your own, recorded for this purpose, or a speaker who has agreed in writing. Label synthetic narration as synthetic in the video description. A real recording of the talk is the better source.</li>
+<li><strong>Brand logos.</strong> None are included, because they are trademarks. If a slide names an app, the agent uses a generic icon unless you add a logo file you are licensed to use.</li>
+<li><strong>Licences.</strong> HyperFrames is Apache-2.0 and installed from npm. The icons are from lucide (ISC licence). GSAP is loaded from a CDN under GreenSock's standard licence; check <a href="https://gsap.com/standard-license">gsap.com/standard-license</a> for your use. The skill's <code>PROVENANCE.md</code> has the full list.</li>
+</ul>
+
+<h2>Troubleshooting</h2>
+<ul>
+<li><strong><code>render_cancelled_parent_exited</code>.</strong> The render has to run detached. The skill's render command does this; the agent should poll its status, not wait on it.</li>
+<li><strong>Text comes out in Inter.</strong> You asked for a system font, which the renderer ignores, or the font path in <code>look.json</code> is wrong.</li>
+<li><strong>npm reports <code>ETARGET … no matching version with a date before …</code>.</strong> Your machine has a minimum-release-age policy. The agent should ask you, not override it.</li>
+<li><strong><code>check</code> warnings.</strong> <code>nested_structure_needs_subcomposition</code> and <code>container_overflow</code> on <code>.tbody</code> are harmless. Anything else is real.</li>
+<li><strong>Do not</strong> let the agent run <code>hyperframes@latest</code>, <code>init</code>, <code>add</code> or <code>skills update</code>, or use npm <code>--verbose</code> (verbose output has leaked auth tokens).</li>
+</ul>
+
+<footer>Made by Dominik Lukeš, October 2026, from design work on the TalkWeaver presentation app. Still in trial: expect changes.</footer>
+</main>

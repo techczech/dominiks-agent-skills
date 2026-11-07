@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><title>Sample widget</title>
+<style>
+html,body{margin:0;width:1920px;height:1080px;background:#fdfdfb;font-family:Inter,Helvetica,Arial,sans-serif;color:#101418;overflow:hidden}
+h1{position:absolute;left:80px;top:60px;margin:0;font-size:58px;font-weight:700}
+.bar{position:absolute;bottom:200px;width:260px;border-radius:14px 14px 0 0;background:#e4f3ee;border:4px solid #0a7a5c;opacity:0;transition:opacity .3s}
+.bar span{position:absolute;top:-64px;left:0;right:0;text-align:center;font-size:44px;font-weight:700}
+.lab{position:absolute;bottom:130px;width:260px;text-align:center;font-size:36px}
+.axis{position:absolute;left:260px;right:260px;bottom:200px;height:4px;background:#101418}
+#b1,[data-step="1"] #b2,[data-step="2"] #b2,[data-step="2"] #b3{opacity:1}
+#b1{left:420px;height:220px}#b2{left:820px;height:440px}#b3{left:1220px;height:660px;background:#0a7a5c}
+#b3 span{color:#0a7a5c}
+</style></head>
+<body data-step="0"><h1>A sample widget builds in steps</h1>
+<div class="axis"></div>
+<div class="bar" id="b1"><span>One</span></div><div class="lab" style="left:420px">First</div>
+<div class="bar" id="b2"><span>Two</span></div><div class="lab" style="left:820px">Second</div>
+<div class="bar" id="b3"><span>Three</span></div><div class="lab" style="left:1220px">Third</div>
+<script>
+var st=0;
+function set(n){st=n;document.body.dataset.step=n}
+function step(){set(Math.min(2,st+1))}
+document.addEventListener('click',step);
+document.addEventListener('keydown',function(e){if(e.key==' '||e.key=='ArrowRight'||e.key=='Enter'){e.preventDefault();step()}});
+</script></body></html>

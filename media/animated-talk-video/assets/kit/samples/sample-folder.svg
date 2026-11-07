@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 700" width="1000" height="700">
+<rect width="1000" height="700" fill="#f4f3ee"/>
+<g font-family="sans-serif" font-weight="700" fill="#101418">
+<rect x="70" y="120" width="260" height="170" rx="14" fill="#fff" stroke="#0f4bd8" stroke-width="6"/><text x="200" y="215" font-size="26" text-anchor="middle">notes_v2_FINAL</text>
+<rect x="370" y="90" width="260" height="170" rx="14" fill="#fff" stroke="#0f4bd8" stroke-width="6"/><text x="500" y="185" font-size="26" text-anchor="middle">IMG_0412.jpg</text>
+<rect x="670" y="140" width="260" height="170" rx="14" fill="#fff" stroke="#0f4bd8" stroke-width="6"/><text x="800" y="235" font-size="26" text-anchor="middle">data (copy)</text>
+<path d="M180 380 L500 560 L820 380" fill="none" stroke="#0f4bd8" stroke-width="8" stroke-linecap="round"/>
+<rect x="340" y="520" width="320" height="120" rx="18" fill="#0f4bd8"/><text x="500" y="595" font-size="40" fill="#fff" text-anchor="middle">website</text>
+<text x="500" y="60" font-size="26" text-anchor="middle" fill="#5c6570">sample image (placeholder)</text></g></svg>

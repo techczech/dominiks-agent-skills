@@ -381,6 +381,21 @@
    ]
   },
   {
+   "name": "animated-talk-video",
+   "id": "skill-animated-talk-video",
+   "category": "media",
+   "summary": "Turns a talk outline, slides or a paper into an animated explainer video with captions and a self-study companion page, using HyperFrames, local voice and word timings.",
+   "jobs": [],
+   "needs": [],
+   "packages": [],
+   "when": "",
+   "status": "published",
+   "link": "https://github.com/techczech/dominiks-agent-skills/tree/main/media/animated-talk-video",
+   "external": false,
+   "repo": null,
+   "extraLinks": []
+  },
+  {
    "name": "anonymise",
    "id": "skill-anonymise",
    "category": "writing",

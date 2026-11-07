@@ -1,0 +1,27 @@
+{
+  "id": "agent-tools",
+  "scene": "The agent uses tools",
+  "key": "The agent searches, then reads",
+  "narration": "The agent searches the files, then opens the two that match. What it reads lands in its context.",
+  "motion": "Tool-call arrows wipe out of the agent window with a chip naming each tool; the file names and then the extracted text slip land on the context tray.",
+  "elements": [
+    { "type": "floor" },
+    { "type": "person", "id": "colleague", "who": "main", "mood": "neutral", "pose": "point", "x": 150, "y": 936, "s": 0.8, "look": 1 },
+    { "type": "agent", "id": "agent", "x": 300, "y": 250, "w": 880, "h": 650, "tray": 230 },
+    { "type": "message", "id": "ask", "x": 340, "y": 330, "w": 520, "h": 84, "rows": ["Find last year's evaluation."], "size": 30 }
+  ],
+  "builds": [
+    { "cue": "searches the files", "elements": [
+      { "type": "tool", "id": "call-search", "from": [1180, 400], "to": [1440, 400], "label": "search_files", "icon": "search", "labelAt": [1215, 320], "motion": "wipe:r,0.6" },
+      { "type": "stack", "id": "files", "x": 1480, "y": 400, "w": 170, "h": 230, "n": 3, "motion": "pop" }
+    ] },
+    { "cue": "two that match", "elements": [
+      { "type": "filename", "id": "fn1", "x": 340, "y": 700, "label": "programme-review-draft.docx", "w": 440, "motion": "slide:260,-250,0.7" },
+      { "type": "filename", "id": "fn2", "x": 340, "y": 770, "label": "may-presentation.pptx", "w": 440, "motion": "slide:260,-300,0.7" }
+    ] },
+    { "cue": "what it reads", "elements": [
+      { "type": "tool", "id": "call-read", "from": [1180, 560], "to": [1440, 560], "label": "read_file", "icon": "file-text", "labelAt": [1215, 480], "motion": "wipe:r,0.6" },
+      { "type": "slip", "id": "text", "x": 800, "y": 585, "w": 340, "h": 160, "name": "review.docx", "rows": 1, "hitRows": [[0, ["Evaluation: 82%"]]], "motion": "slide:640,-120,0.7" }
+    ] }
+  ]
+}

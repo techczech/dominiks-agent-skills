@@ -1,0 +1,22 @@
+{
+  "id": "search-person",
+  "scene": "A person searches",
+  "key": "Searching starts with a person",
+  "narration": "You type what you remember into the search box and the results come back as a list of files.",
+  "motion": "The search box pops in at \"search box\" with the typed query; the three file names slide in under it at \"list of files\".",
+  "elements": [
+    { "type": "floor" },
+    { "type": "plant", "x": 1780, "y": 936, "s": 1.1 },
+    { "type": "person", "id": "colleague", "who": "main", "mood": "think", "pose": "think", "x": 300, "y": 936, "look": 1 }
+  ],
+  "builds": [
+    { "cue": "search box", "motion": "pop", "elements": [
+      { "type": "searchBox", "id": "box", "x": 600, "y": 300, "w": 1200, "h": 112, "size": 44, "query": "evaluation figures last year" }
+    ] },
+    { "cue": "list of files", "motion": "slide:0,30,0.6", "elements": [
+      { "type": "filename", "id": "r1", "x": 640, "y": 500, "label": "programme-review-draft.docx", "w": 700, "size": 32 },
+      { "type": "filename", "id": "r2", "x": 640, "y": 600, "label": "handover-notes-feb.pdf", "w": 700, "size": 32 },
+      { "type": "filename", "id": "r3", "x": 640, "y": 700, "label": "may-presentation.pptx", "w": 700, "size": 32 }
+    ] }
+  ]
+}

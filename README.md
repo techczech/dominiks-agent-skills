@@ -90,6 +90,7 @@ Research workflows: papers, sources, translation, corpus linguistics and model b
 
 Presentations and teaching content.
 
+- [designing-visuals-for-learning](teaching/designing-visuals-for-learning/): Design slides, graphics, diagrams and interactive explanations that manage cognitive load, direct attention and support understanding.
 - [talkweaver](teaching/talkweaver/): Lets agents write and revise presentation content for the TalkWeaver app, including converting PowerPoint files and processing recordings.
 
 ### [writing](writing/)

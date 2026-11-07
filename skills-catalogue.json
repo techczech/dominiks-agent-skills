@@ -576,6 +576,24 @@
    "extraLinks": []
   },
   {
+   "name": "designing-visuals-for-learning",
+   "id": "skill-designing-visuals-for-learning",
+   "category": "teaching",
+   "summary": "Design slides, graphics, diagrams and interactive explanations that manage cognitive load, direct attention and support understanding.",
+   "jobs": [
+    "teaching",
+    "media"
+   ],
+   "needs": [],
+   "packages": [],
+   "when": "You want to manage cognitive load and direct attention in slides, graphics, diagrams or interactive explanations.",
+   "status": "published",
+   "link": "https://github.com/techczech/dominiks-agent-skills/tree/main/teaching/designing-visuals-for-learning",
+   "external": false,
+   "repo": null,
+   "extraLinks": []
+  },
+  {
    "name": "dev-traffic-control",
    "id": "skill-dev-traffic-control",
    "category": "dev",

@@ -1,0 +1,4 @@
+interface:
+  display_name: "Designing Visuals for Learning"
+  short_description: "Manage cognitive load in explanatory visuals"
+  default_prompt: "Use $designing-visuals-for-learning to design or review a visual explanation for my audience."

@@ -1,0 +1,4 @@
+interface:
+  display_name: "TalkWeaver visuals"
+  short_description: "Create portable visuals and source-linked galleries"
+  default_prompt: "Use $talkweaver-visuals to suggest or create visuals and a copy-code gallery for the selected TalkWeaver presentation."

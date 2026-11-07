@@ -948,6 +948,21 @@
    "extraLinks": []
   },
   {
+   "name": "talkweaver-visuals",
+   "id": "skill-talkweaver-visuals",
+   "category": "teaching",
+   "summary": "Builds SVG figures, interactive HTML widgets and a source-linked visual gallery for presentations, with a figure-only mode for video.",
+   "jobs": [],
+   "needs": [],
+   "packages": [],
+   "when": "",
+   "status": "published",
+   "link": "https://github.com/techczech/dominiks-agent-skills/tree/main/teaching/talkweaver-visuals",
+   "external": false,
+   "repo": null,
+   "extraLinks": []
+  },
+  {
    "name": "text-as-graph",
    "id": "skill-text-as-graph",
    "category": "philosophy-for-agents",

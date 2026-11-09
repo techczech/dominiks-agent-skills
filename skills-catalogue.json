@@ -151,6 +151,10 @@
      "why": "Turn the PDF into Markdown so the agent can read its text, tables and figures."
     },
     {
+     "skill": "research-reproducibility",
+     "why": "Before you change anything, have the agent keep a record of sources, decisions and runs, so the work can be checked and rerun."
+    },
+    {
      "skill": "zotero-wrangler",
      "why": "File the paper and your notes in your Zotero library."
     },
@@ -831,10 +835,12 @@
    "id": "skill-research-reproducibility",
    "category": "research",
    "summary": "Records research actions, sources, model and analysis runs and decisions so the work stays reconstructable and can be handed over or rerun.",
-   "jobs": [],
+   "jobs": [
+    "research"
+   ],
    "needs": [],
    "packages": [],
-   "when": "",
+   "when": "You are doing research work with an agent and want each source, decision and run recorded, so someone else, or a fresh agent, can check or rerun it.",
    "status": "published",
    "link": "https://github.com/techczech/dominiks-agent-skills/tree/main/research/research-reproducibility",
    "external": false,

@@ -11,6 +11,7 @@ Research workflows: papers, sources, translation, corpus linguistics and model b
 - [claim-fact-checker](claim-fact-checker/): Checks every factual claim in a report against its sources, one isolated checker per claim, and writes findings and a fix plan.
 - [corpus-tools-skill](https://github.com/techczech/corpus-tools-skill): Sets up a local corpus-linguistics toolchain on a Mac (NLTK, spaCy, Stanza, Corpus Workbench, OPUS) with a parallel-concordance tool. Draft. (separate repository)
 - [paper-reviewer-skill](paper-reviewer-skill/): Imports a paper from Zotero, extracts its text, figures and tables, and writes structured reviews.
+- [research-reproducibility](research-reproducibility/): Records research actions, sources, model and analysis runs and decisions so the work stays reconstructable and can be handed over or rerun.
 - [research-translation](research-translation/): Runs auditable translation and back-translation of participant-facing research documents such as consent forms.
 - [sketchengine-skill](https://github.com/techczech/sketchengine-skill): Connects an agent to Sketch Engine to run word sketches, word lists and keyword analyses on its corpora. (separate repository)
 - [zotero-wrangler](zotero-wrangler/): Manages Zotero imports, linked notes, evidence-backed tags and scoped native full-text discovery.

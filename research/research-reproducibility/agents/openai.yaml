@@ -1,0 +1,4 @@
+interface:
+  display_name: "Research Reproducibility"
+  short_description: "Decide what research evidence and decisions to record as work proceeds."
+  default_prompt: "Use $research-reproducibility to identify the next material recording decision and update the existing project records proportionately."

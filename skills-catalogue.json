@@ -827,6 +827,21 @@
    "extraLinks": []
   },
   {
+   "name": "research-reproducibility",
+   "id": "skill-research-reproducibility",
+   "category": "research",
+   "summary": "Records research actions, sources, model and analysis runs and decisions so the work stays reconstructable and can be handed over or rerun.",
+   "jobs": [],
+   "needs": [],
+   "packages": [],
+   "when": "",
+   "status": "published",
+   "link": "https://github.com/techczech/dominiks-agent-skills/tree/main/research/research-reproducibility",
+   "external": false,
+   "repo": null,
+   "extraLinks": []
+  },
+  {
    "name": "research-translation",
    "id": "skill-research-translation",
    "category": "research",

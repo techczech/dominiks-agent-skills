@@ -389,10 +389,21 @@
    "id": "skill-animated-talk-video",
    "category": "media",
    "summary": "Turns a talk outline, slides or a paper into an animated explainer video with captions and a self-study companion page, using HyperFrames, local voice and word timings.",
-   "jobs": [],
-   "needs": [],
-   "packages": [],
-   "when": "",
+   "jobs": [
+    "media",
+    "teaching"
+   ],
+   "needs": [
+    "packages",
+    "local-model"
+   ],
+   "packages": [
+    "Node.js",
+    "HyperFrames",
+    "ffmpeg",
+    "parakeet-mlx"
+   ],
+   "when": "You want an animated explainer video of a talk or paper, with captions and a page where viewers can explore it at their own pace.",
    "status": "published",
    "link": "https://github.com/techczech/dominiks-agent-skills/tree/main/media/animated-talk-video",
    "external": false,
@@ -991,10 +1002,14 @@
    "id": "skill-talkweaver-visuals",
    "category": "teaching",
    "summary": "Builds SVG figures, interactive HTML widgets and a source-linked visual gallery for presentations, with a figure-only mode for video.",
-   "jobs": [],
-   "needs": [],
+   "jobs": [
+    "teaching"
+   ],
+   "needs": [
+    "app"
+   ],
    "packages": [],
-   "when": "",
+   "when": "You build talks in TalkWeaver and want figures, interactive widgets or a visual gallery for them.",
    "status": "published",
    "link": "https://github.com/techczech/dominiks-agent-skills/tree/main/teaching/talkweaver-visuals",
    "external": false,

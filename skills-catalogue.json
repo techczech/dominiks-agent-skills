@@ -705,10 +705,13 @@
    "id": "skill-hill-climb",
    "category": "dev",
    "summary": "Improve work in scored rounds (rubric judges and programmatic checks) or score options with independent judges, and render an HTML report of rubric, per-criterion scores, implementer responses and cost.",
-   "jobs": [],
+   "jobs": [
+    "building",
+    "writing"
+   ],
    "needs": [],
    "packages": [],
-   "when": "",
+   "when": "You want work improved in scored rounds until independent judges and checks agree it meets a target, or you want options scored by judges who did not write them instead of trusting a proposer's \"recommended\".",
    "status": "published",
    "link": "https://github.com/techczech/dominiks-agent-skills/tree/main/dev/hill-climb",
    "external": false,

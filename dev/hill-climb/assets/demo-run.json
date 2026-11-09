@@ -1,0 +1,1033 @@
+{
+  "title": "Synthetic demo: settings page polish",
+  "mode": "climb",
+  "goal": "Make the settings page clearer at the smallest real window.",
+  "caller": "demo fixture",
+  "owner": "—",
+  "started": "2026-11-06",
+  "ended": "2026-11-06",
+  "status": "target-met",
+  "provenance": "SYNTHETIC DEMO DATA, made up to exercise every report section (two models × two seats, implementer responses, usage). Not a real run.",
+  "target": {
+    "threshold": 8.5,
+    "rule": "every seat ≥ 8.5 overall and the small-window check passes",
+    "hidden_from_judges": true
+  },
+  "budget": {
+    "rounds": "cap 5"
+  },
+  "human_signal": [
+    {
+      "kind": "preference",
+      "text": "I keep losing the save button",
+      "source": "demo"
+    },
+    {
+      "kind": "house-rule",
+      "text": "One gear icon per settings group",
+      "source": "demo"
+    }
+  ],
+  "rubric": {
+    "version": 1,
+    "scale": "1-10",
+    "overall": "judge holistic",
+    "criteria": [
+      {
+        "id": "hierarchy",
+        "name": "Hierarchy",
+        "description": "Primary action stands out",
+        "source": "human",
+        "anchors": {
+          "3": "Save hidden among links",
+          "6": "Save visible but competes",
+          "9": "Save is the obvious next step"
+        }
+      },
+      {
+        "id": "contrast",
+        "name": "Contrast",
+        "description": "Readable labels in light and dark",
+        "source": "derived"
+      },
+      {
+        "id": "clarity",
+        "name": "Clarity",
+        "description": "Group names say what is inside",
+        "source": "derived"
+      }
+    ],
+    "checks": [
+      {
+        "id": "small-window",
+        "name": "Fits 1000 px window"
+      },
+      {
+        "id": "preserved",
+        "name": "All existing settings still reachable",
+        "kind": "preservation"
+      }
+    ],
+    "locked": [
+      {
+        "text": "Settings stay in a separate window",
+        "source": "demo owner decision"
+      }
+    ]
+  },
+  "metrics": [
+    {
+      "id": "violations",
+      "name": "Geometry violations",
+      "direction": "lower",
+      "unit": "count"
+    }
+  ],
+  "agents": [
+    {
+      "id": "orch",
+      "name": "Orchestrator",
+      "role": "orchestrator",
+      "requested_model": "claude-opus-5-5",
+      "returned_model": "claude-opus-5-5",
+      "route": "main session"
+    },
+    {
+      "id": "builder",
+      "name": "Builder",
+      "role": "builder",
+      "requested_model": "claude-sonnet-5-5",
+      "returned_model": "claude-sonnet-5-5",
+      "route": "subagent",
+      "effort": "medium"
+    },
+    {
+      "id": "opus-1",
+      "name": "Opus #1",
+      "role": "judge",
+      "requested_model": "claude-opus-5-5",
+      "returned_model": "claude-opus-5-5",
+      "route": "subagent",
+      "same_family": true
+    },
+    {
+      "id": "opus-2",
+      "name": "Opus #2",
+      "role": "judge",
+      "requested_model": "claude-opus-5-5",
+      "returned_model": "claude-opus-5-5",
+      "route": "subagent",
+      "same_family": true
+    },
+    {
+      "id": "sol-1",
+      "name": "Sol #1",
+      "role": "judge",
+      "requested_model": "gpt-6.1-sol",
+      "returned_model": "gpt-6.1-sol",
+      "route": "subagent",
+      "effort": "high",
+      "link": "(demo link)"
+    },
+    {
+      "id": "sol-2",
+      "name": "Sol #2",
+      "role": "judge",
+      "requested_model": "gpt-6.1-sol",
+      "returned_model": "gpt-6.1-sol",
+      "route": "subagent",
+      "effort": "high",
+      "link": "(demo link)"
+    },
+    {
+      "id": "sealed",
+      "name": "Sealed judge",
+      "role": "judge",
+      "sealed": true,
+      "requested_model": "claude-sonnet-5-5",
+      "returned_model": "claude-sonnet-5-5",
+      "route": "subagent",
+      "notes": "Round 0 and stop only"
+    }
+  ],
+  "subjects": [
+    {
+      "id": "candidate",
+      "name": "Settings page",
+      "kind": "candidate"
+    },
+    {
+      "id": "ref",
+      "name": "Reference app",
+      "kind": "comparator"
+    }
+  ],
+  "rounds": [
+    {
+      "n": 0,
+      "summary": "Baseline.",
+      "scores": [
+        {
+          "judge": "opus-1",
+          "subject": "candidate",
+          "criterion": "overall",
+          "score": 6
+        },
+        {
+          "judge": "opus-1",
+          "subject": "candidate",
+          "criterion": "hierarchy",
+          "score": 5
+        },
+        {
+          "judge": "opus-1",
+          "subject": "candidate",
+          "criterion": "contrast",
+          "score": 7
+        },
+        {
+          "judge": "opus-1",
+          "subject": "candidate",
+          "criterion": "clarity",
+          "score": 6
+        },
+        {
+          "judge": "opus-2",
+          "subject": "candidate",
+          "criterion": "overall",
+          "score": 6.5
+        },
+        {
+          "judge": "opus-2",
+          "subject": "candidate",
+          "criterion": "hierarchy",
+          "score": 5
+        },
+        {
+          "judge": "opus-2",
+          "subject": "candidate",
+          "criterion": "contrast",
+          "score": 7
+        },
+        {
+          "judge": "opus-2",
+          "subject": "candidate",
+          "criterion": "clarity",
+          "score": 7
+        },
+        {
+          "judge": "sol-1",
+          "subject": "candidate",
+          "criterion": "overall",
+          "score": 5.5
+        },
+        {
+          "judge": "sol-1",
+          "subject": "candidate",
+          "criterion": "hierarchy",
+          "score": 4
+        },
+        {
+          "judge": "sol-1",
+          "subject": "candidate",
+          "criterion": "contrast",
+          "score": 6
+        },
+        {
+          "judge": "sol-1",
+          "subject": "candidate",
+          "criterion": "clarity",
+          "score": 6
+        },
+        {
+          "judge": "sol-2",
+          "subject": "candidate",
+          "criterion": "overall",
+          "score": 6.5
+        },
+        {
+          "judge": "sol-2",
+          "subject": "candidate",
+          "criterion": "hierarchy",
+          "score": 6
+        },
+        {
+          "judge": "sol-2",
+          "subject": "candidate",
+          "criterion": "contrast",
+          "score": 7
+        },
+        {
+          "judge": "sol-2",
+          "subject": "candidate",
+          "criterion": "clarity",
+          "score": 6
+        },
+        {
+          "judge": "opus-1",
+          "subject": "ref",
+          "criterion": "overall",
+          "score": 8.0
+        },
+        {
+          "judge": "opus-1",
+          "subject": "ref",
+          "criterion": "hierarchy",
+          "score": 8.0
+        },
+        {
+          "judge": "opus-1",
+          "subject": "ref",
+          "criterion": "contrast",
+          "score": 8.5
+        },
+        {
+          "judge": "opus-1",
+          "subject": "ref",
+          "criterion": "clarity",
+          "score": 7.5
+        },
+        {
+          "judge": "opus-2",
+          "subject": "ref",
+          "criterion": "overall",
+          "score": 8.5
+        },
+        {
+          "judge": "opus-2",
+          "subject": "ref",
+          "criterion": "hierarchy",
+          "score": 8.5
+        },
+        {
+          "judge": "opus-2",
+          "subject": "ref",
+          "criterion": "contrast",
+          "score": 8.0
+        },
+        {
+          "judge": "opus-2",
+          "subject": "ref",
+          "criterion": "clarity",
+          "score": 8.5
+        },
+        {
+          "judge": "sol-1",
+          "subject": "ref",
+          "criterion": "overall",
+          "score": 8.0
+        },
+        {
+          "judge": "sol-1",
+          "subject": "ref",
+          "criterion": "hierarchy",
+          "score": 7.5
+        },
+        {
+          "judge": "sol-1",
+          "subject": "ref",
+          "criterion": "contrast",
+          "score": 8.5
+        },
+        {
+          "judge": "sol-1",
+          "subject": "ref",
+          "criterion": "clarity",
+          "score": 8.0
+        },
+        {
+          "judge": "sol-2",
+          "subject": "ref",
+          "criterion": "overall",
+          "score": 8.0
+        },
+        {
+          "judge": "sol-2",
+          "subject": "ref",
+          "criterion": "hierarchy",
+          "score": 8.0
+        },
+        {
+          "judge": "sol-2",
+          "subject": "ref",
+          "criterion": "contrast",
+          "score": 8.0
+        },
+        {
+          "judge": "sol-2",
+          "subject": "ref",
+          "criterion": "clarity",
+          "score": 8.0
+        },
+        {
+          "judge": "sealed",
+          "subject": "candidate",
+          "criterion": "overall",
+          "score": 6
+        }
+      ],
+      "metrics": {
+        "violations": 14
+      },
+      "checks": {
+        "small-window": false
+      },
+      "judge_notes": [
+        {
+          "judge": "sol-1",
+          "text": "Save sits below the fold at 1000 px."
+        },
+        {
+          "judge": "opus-1",
+          "text": "Three different gear icons."
+        }
+      ],
+      "response": {
+        "by": "builder",
+        "summary": "Hierarchy was lowest on every seat; fixed the save position first.",
+        "acted_on": [
+          {
+            "from": "sol-1",
+            "finding": "Save below the fold at 1000 px",
+            "action": "Sticky footer with Save",
+            "criteria": [
+              "hierarchy"
+            ]
+          },
+          {
+            "from": "opus-1",
+            "finding": "Three gear icons",
+            "action": "One gear per group",
+            "criteria": [
+              "clarity"
+            ]
+          }
+        ],
+        "declined": [
+          {
+            "from": "opus-2",
+            "finding": "Add search to settings",
+            "why": "New feature; held for later"
+          }
+        ],
+        "escalated": [
+          {
+            "from": "sol-2",
+            "finding": "Merge settings into the main window",
+            "why": "Locked owner decision; not changed"
+          }
+        ]
+      },
+      "decisions": [
+        {
+          "by": "builder",
+          "decision": "Sticky footer for Save",
+          "reason": "Two seats flagged it",
+          "criteria": [
+            "hierarchy"
+          ],
+          "evidence": [
+            {
+              "type": "text",
+              "label": "Footer label",
+              "before": "Apply changes",
+              "after": "Save"
+            }
+          ]
+        }
+      ],
+      "usage": [
+        {
+          "agent": "opus-1",
+          "started": "2026-11-06T09:00:00Z",
+          "ended": "2026-11-06T09:03:00Z",
+          "tokens_in": 38000,
+          "tokens_out": 1500,
+          "cost": null,
+          "cost_basis": "subscription"
+        },
+        {
+          "agent": "opus-2",
+          "started": "2026-11-06T09:00:00Z",
+          "ended": "2026-11-06T09:04:00Z",
+          "tokens_in": 38000,
+          "tokens_out": 1700,
+          "cost": null,
+          "cost_basis": "subscription"
+        },
+        {
+          "agent": "sol-1",
+          "started": "2026-11-06T09:00:00Z",
+          "ended": "2026-11-06T09:05:00Z",
+          "tokens_in": 36000,
+          "tokens_out": 2100,
+          "cost": 0.0,
+          "cost_basis": "subscription"
+        },
+        {
+          "agent": "sol-2",
+          "started": "2026-11-06T09:00:00Z",
+          "ended": "2026-11-06T09:06:00Z",
+          "tokens_in": 36000,
+          "tokens_out": 1900,
+          "cost": 0.0,
+          "cost_basis": "subscription"
+        },
+        {
+          "agent": "builder",
+          "started": "2026-11-06T09:07:00Z",
+          "ended": "2026-11-06T09:25:00Z",
+          "tokens_in": 120000,
+          "tokens_out": 9000,
+          "cost": 0.71,
+          "cost_basis": "list-price-estimate"
+        }
+      ]
+    },
+    {
+      "n": 1,
+      "scores": [
+        {
+          "judge": "opus-1",
+          "subject": "candidate",
+          "criterion": "overall",
+          "score": 7.5
+        },
+        {
+          "judge": "opus-1",
+          "subject": "candidate",
+          "criterion": "hierarchy",
+          "score": 7
+        },
+        {
+          "judge": "opus-1",
+          "subject": "candidate",
+          "criterion": "contrast",
+          "score": 7.5
+        },
+        {
+          "judge": "opus-1",
+          "subject": "candidate",
+          "criterion": "clarity",
+          "score": 8
+        },
+        {
+          "judge": "opus-2",
+          "subject": "candidate",
+          "criterion": "overall",
+          "score": 8
+        },
+        {
+          "judge": "opus-2",
+          "subject": "candidate",
+          "criterion": "hierarchy",
+          "score": 8
+        },
+        {
+          "judge": "opus-2",
+          "subject": "candidate",
+          "criterion": "contrast",
+          "score": 7
+        },
+        {
+          "judge": "opus-2",
+          "subject": "candidate",
+          "criterion": "clarity",
+          "score": 8
+        },
+        {
+          "judge": "sol-1",
+          "subject": "candidate",
+          "criterion": "overall",
+          "score": 7
+        },
+        {
+          "judge": "sol-1",
+          "subject": "candidate",
+          "criterion": "hierarchy",
+          "score": 7
+        },
+        {
+          "judge": "sol-1",
+          "subject": "candidate",
+          "criterion": "contrast",
+          "score": 6.5
+        },
+        {
+          "judge": "sol-1",
+          "subject": "candidate",
+          "criterion": "clarity",
+          "score": 7
+        },
+        {
+          "judge": "sol-2",
+          "subject": "candidate",
+          "criterion": "overall",
+          "score": 7.5
+        },
+        {
+          "judge": "sol-2",
+          "subject": "candidate",
+          "criterion": "hierarchy",
+          "score": 7.5
+        },
+        {
+          "judge": "sol-2",
+          "subject": "candidate",
+          "criterion": "contrast",
+          "score": 7
+        },
+        {
+          "judge": "sol-2",
+          "subject": "candidate",
+          "criterion": "clarity",
+          "score": 7
+        },
+        {
+          "judge": "opus-1",
+          "subject": "ref",
+          "criterion": "overall",
+          "score": 8.1
+        },
+        {
+          "judge": "opus-1",
+          "subject": "ref",
+          "criterion": "hierarchy",
+          "score": 8.1
+        },
+        {
+          "judge": "opus-1",
+          "subject": "ref",
+          "criterion": "contrast",
+          "score": 8.6
+        },
+        {
+          "judge": "opus-1",
+          "subject": "ref",
+          "criterion": "clarity",
+          "score": 7.6
+        },
+        {
+          "judge": "opus-2",
+          "subject": "ref",
+          "criterion": "overall",
+          "score": 8.6
+        },
+        {
+          "judge": "opus-2",
+          "subject": "ref",
+          "criterion": "hierarchy",
+          "score": 8.6
+        },
+        {
+          "judge": "opus-2",
+          "subject": "ref",
+          "criterion": "contrast",
+          "score": 8.1
+        },
+        {
+          "judge": "opus-2",
+          "subject": "ref",
+          "criterion": "clarity",
+          "score": 8.6
+        },
+        {
+          "judge": "sol-1",
+          "subject": "ref",
+          "criterion": "overall",
+          "score": 8.1
+        },
+        {
+          "judge": "sol-1",
+          "subject": "ref",
+          "criterion": "hierarchy",
+          "score": 7.6
+        },
+        {
+          "judge": "sol-1",
+          "subject": "ref",
+          "criterion": "contrast",
+          "score": 8.6
+        },
+        {
+          "judge": "sol-1",
+          "subject": "ref",
+          "criterion": "clarity",
+          "score": 8.1
+        },
+        {
+          "judge": "sol-2",
+          "subject": "ref",
+          "criterion": "overall",
+          "score": 8.1
+        },
+        {
+          "judge": "sol-2",
+          "subject": "ref",
+          "criterion": "hierarchy",
+          "score": 8.1
+        },
+        {
+          "judge": "sol-2",
+          "subject": "ref",
+          "criterion": "contrast",
+          "score": 8.1
+        },
+        {
+          "judge": "sol-2",
+          "subject": "ref",
+          "criterion": "clarity",
+          "score": 8.1
+        }
+      ],
+      "metrics": {
+        "violations": 5
+      },
+      "checks": {
+        "small-window": true
+      },
+      "judge_notes": [
+        {
+          "judge": "sol-2",
+          "text": "Grey labels fail contrast in light mode."
+        }
+      ],
+      "response": {
+        "by": "builder",
+        "summary": "Contrast now lowest; raised label contrast one step.",
+        "acted_on": [
+          {
+            "from": "sol-2",
+            "finding": "Grey labels fail contrast",
+            "action": "Label colour to secondary ink",
+            "criteria": [
+              "contrast"
+            ]
+          }
+        ],
+        "reverted": [
+          {
+            "change": "Bolder group headings",
+            "why": "Pairwise judge preferred previous; within noise"
+          }
+        ]
+      },
+      "usage": [
+        {
+          "agent": "opus-1",
+          "started": "2026-11-06T09:30:00Z",
+          "ended": "2026-11-06T09:33:00Z",
+          "tokens_in": 39000,
+          "tokens_out": 1400,
+          "cost": null,
+          "cost_basis": "subscription"
+        },
+        {
+          "agent": "opus-2",
+          "started": "2026-11-06T09:30:00Z",
+          "ended": "2026-11-06T09:33:00Z",
+          "tokens_in": 39000,
+          "tokens_out": 1500,
+          "cost": null,
+          "cost_basis": "subscription"
+        },
+        {
+          "agent": "sol-1",
+          "started": "2026-11-06T09:30:00Z",
+          "ended": "2026-11-06T09:35:00Z",
+          "tokens_in": 37000,
+          "tokens_out": 2000,
+          "cost": 0.0,
+          "cost_basis": "subscription"
+        },
+        {
+          "agent": "sol-2",
+          "started": "2026-11-06T09:30:00Z",
+          "ended": "2026-11-06T09:34:00Z",
+          "tokens_in": 37000,
+          "tokens_out": 1800,
+          "cost": 0.0,
+          "cost_basis": "subscription"
+        },
+        {
+          "agent": "builder",
+          "started": "2026-11-06T09:36:00Z",
+          "ended": "2026-11-06T09:44:00Z",
+          "tokens_in": 60000,
+          "tokens_out": 4000,
+          "cost": 0.33,
+          "cost_basis": "list-price-estimate"
+        }
+      ],
+      "pairwise": [
+        {
+          "judge": "sol-1",
+          "winner": "current",
+          "reason": "Save no longer hidden"
+        }
+      ]
+    },
+    {
+      "n": 2,
+      "summary": "Every seat ≥ 8.5; check passes.",
+      "scores": [
+        {
+          "judge": "opus-1",
+          "subject": "candidate",
+          "criterion": "overall",
+          "score": 8.5
+        },
+        {
+          "judge": "opus-1",
+          "subject": "candidate",
+          "criterion": "hierarchy",
+          "score": 8.5
+        },
+        {
+          "judge": "opus-1",
+          "subject": "candidate",
+          "criterion": "contrast",
+          "score": 8.5
+        },
+        {
+          "judge": "opus-1",
+          "subject": "candidate",
+          "criterion": "clarity",
+          "score": 8.5
+        },
+        {
+          "judge": "opus-2",
+          "subject": "candidate",
+          "criterion": "overall",
+          "score": 9
+        },
+        {
+          "judge": "opus-2",
+          "subject": "candidate",
+          "criterion": "hierarchy",
+          "score": 9
+        },
+        {
+          "judge": "opus-2",
+          "subject": "candidate",
+          "criterion": "contrast",
+          "score": 8.5
+        },
+        {
+          "judge": "opus-2",
+          "subject": "candidate",
+          "criterion": "clarity",
+          "score": 9
+        },
+        {
+          "judge": "sol-1",
+          "subject": "candidate",
+          "criterion": "overall",
+          "score": 8.5
+        },
+        {
+          "judge": "sol-1",
+          "subject": "candidate",
+          "criterion": "hierarchy",
+          "score": 8.5
+        },
+        {
+          "judge": "sol-1",
+          "subject": "candidate",
+          "criterion": "contrast",
+          "score": 8.5
+        },
+        {
+          "judge": "sol-1",
+          "subject": "candidate",
+          "criterion": "clarity",
+          "score": 8
+        },
+        {
+          "judge": "sol-2",
+          "subject": "candidate",
+          "criterion": "overall",
+          "score": 8.5
+        },
+        {
+          "judge": "sol-2",
+          "subject": "candidate",
+          "criterion": "hierarchy",
+          "score": 8.5
+        },
+        {
+          "judge": "sol-2",
+          "subject": "candidate",
+          "criterion": "contrast",
+          "score": 9
+        },
+        {
+          "judge": "sol-2",
+          "subject": "candidate",
+          "criterion": "clarity",
+          "score": 8
+        },
+        {
+          "judge": "opus-1",
+          "subject": "ref",
+          "criterion": "overall",
+          "score": 8.2
+        },
+        {
+          "judge": "opus-1",
+          "subject": "ref",
+          "criterion": "hierarchy",
+          "score": 8.2
+        },
+        {
+          "judge": "opus-1",
+          "subject": "ref",
+          "criterion": "contrast",
+          "score": 8.7
+        },
+        {
+          "judge": "opus-1",
+          "subject": "ref",
+          "criterion": "clarity",
+          "score": 7.7
+        },
+        {
+          "judge": "opus-2",
+          "subject": "ref",
+          "criterion": "overall",
+          "score": 8.7
+        },
+        {
+          "judge": "opus-2",
+          "subject": "ref",
+          "criterion": "hierarchy",
+          "score": 8.7
+        },
+        {
+          "judge": "opus-2",
+          "subject": "ref",
+          "criterion": "contrast",
+          "score": 8.2
+        },
+        {
+          "judge": "opus-2",
+          "subject": "ref",
+          "criterion": "clarity",
+          "score": 8.7
+        },
+        {
+          "judge": "sol-1",
+          "subject": "ref",
+          "criterion": "overall",
+          "score": 8.2
+        },
+        {
+          "judge": "sol-1",
+          "subject": "ref",
+          "criterion": "hierarchy",
+          "score": 7.7
+        },
+        {
+          "judge": "sol-1",
+          "subject": "ref",
+          "criterion": "contrast",
+          "score": 8.7
+        },
+        {
+          "judge": "sol-1",
+          "subject": "ref",
+          "criterion": "clarity",
+          "score": 8.2
+        },
+        {
+          "judge": "sol-2",
+          "subject": "ref",
+          "criterion": "overall",
+          "score": 8.2
+        },
+        {
+          "judge": "sol-2",
+          "subject": "ref",
+          "criterion": "hierarchy",
+          "score": 8.2
+        },
+        {
+          "judge": "sol-2",
+          "subject": "ref",
+          "criterion": "contrast",
+          "score": 8.2
+        },
+        {
+          "judge": "sol-2",
+          "subject": "ref",
+          "criterion": "clarity",
+          "score": 8.2
+        },
+        {
+          "judge": "sealed",
+          "subject": "candidate",
+          "criterion": "overall",
+          "score": 8.4
+        }
+      ],
+      "metrics": {
+        "violations": 2
+      },
+      "checks": {
+        "small-window": true
+      },
+      "usage": [
+        {
+          "agent": "opus-1",
+          "started": "2026-11-06T09:50:00Z",
+          "ended": "2026-11-06T09:53:00Z",
+          "tokens_in": 39000,
+          "tokens_out": 1300,
+          "cost": null,
+          "cost_basis": "subscription"
+        },
+        {
+          "agent": "opus-2",
+          "started": "2026-11-06T09:50:00Z",
+          "ended": "2026-11-06T09:52:00Z",
+          "tokens_in": 39000,
+          "tokens_out": 1200,
+          "cost": null,
+          "cost_basis": "subscription"
+        },
+        {
+          "agent": "sol-1",
+          "started": "2026-11-06T09:50:00Z",
+          "ended": "2026-11-06T09:54:00Z",
+          "tokens_in": 37000,
+          "tokens_out": 1900,
+          "cost": 0.0,
+          "cost_basis": "subscription"
+        },
+        {
+          "agent": "sol-2",
+          "started": "2026-11-06T09:50:00Z",
+          "ended": "2026-11-06T09:55:00Z",
+          "tokens_in": 37000,
+          "tokens_out": 1700,
+          "cost": 0.0,
+          "cost_basis": "subscription"
+        }
+      ],
+      "pairwise": [
+        {
+          "judge": "opus-2",
+          "winner": "current",
+          "reason": "Labels readable"
+        }
+      ]
+    }
+  ],
+  "outcome": {
+    "verdict": "Every seat ≥ 8.5; small-window check passes",
+    "owner_verdict": "n/a (demo)",
+    "later": [
+      "Search in settings"
+    ]
+  }
+}

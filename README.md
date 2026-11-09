@@ -34,6 +34,7 @@ Building and checking software, designs and documents.
 - [cognitive-walkthrough](dev/cognitive-walkthrough/): Runs a cognitive walkthrough on a mockup, screenshot or live page to check how easily a new user can learn it, and writes a learnability report.
 - [design-first-dev](dev/design-first-dev/): Takes an app or feature from user journeys and drawn designs to a locked mockup before any code is written.
 - [dev-traffic-control](dev/dev-traffic-control/): Lets agents file test requests and reviews in Dev Traffic Control, a desktop review app, and collect the answers.
+- [hill-climb](dev/hill-climb/): Improve work in scored rounds (rubric judges and programmatic checks) or score options with independent judges, and render an HTML report of rubric, per-criterion scores, implementer responses and cost.
 - [image-to-design](dev/image-to-design/): Takes a design from a written brief through generated mockups to HTML/CSS, keeping every prompt, image and revision on disk.
 - [project-changelog](dev/project-changelog/): Keeps a structured changelog folder in a repository alongside its git history.
 - [single-html-document](dev/single-html-document/): Builds self-contained single-file HTML documents (reports, explainers, slide decks, feedback forms) that work offline.

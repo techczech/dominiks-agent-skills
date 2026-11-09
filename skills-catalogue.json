@@ -701,6 +701,21 @@
    "extraLinks": []
   },
   {
+   "name": "hill-climb",
+   "id": "skill-hill-climb",
+   "category": "dev",
+   "summary": "Improve work in scored rounds (rubric judges and programmatic checks) or score options with independent judges, and render an HTML report of rubric, per-criterion scores, implementer responses and cost.",
+   "jobs": [],
+   "needs": [],
+   "packages": [],
+   "when": "",
+   "status": "published",
+   "link": "https://github.com/techczech/dominiks-agent-skills/tree/main/dev/hill-climb",
+   "external": false,
+   "repo": null,
+   "extraLinks": []
+  },
+  {
    "name": "image-to-design",
    "id": "skill-image-to-design",
    "category": "dev",

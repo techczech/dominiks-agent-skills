@@ -1,0 +1,519 @@
+{
+  "title": "T3 Code UI overhaul (example)",
+  "mode": "climb",
+  "goal": "Make T3 Code's UI look as if it had a full-time designer, then score higher than Claude Code and Codex.",
+  "caller": "example reconstructed from a video",
+  "owner": "the video's author",
+  "started": "2026-11-02",
+  "ended": "2026-11-03",
+  "status": "target-met",
+  "provenance": "ILLUSTRATIVE RECONSTRUCTION, not affiliated with or checked by the video's author. Based on the narration of 'Agents Sucked At UI (Until Today)', Theo (t3.gg), YouTube xq0eB8vxeqk, 3 Nov 2026, read from its transcript. Scores are as heard and approximate; round boundaries after round 3 are approximate. No screenshots or exact changes were available, so evidence is notes only.",
+  "target": {
+    "threshold": 9.0,
+    "rule": "every council judge scores the screenshots ≥ 9 (later raised to 9.5, then 10)",
+    "hidden_from_judges": false
+  },
+  "budget": {
+    "time": "about 17.6 h parallel agent time",
+    "cost": "about $250 for the work shown (list-price estimate; mostly subscriptions)"
+  },
+  "human_signal": [
+    {
+      "kind": "correction",
+      "text": "Critique of the fonts, border radius, icons and font hierarchy",
+      "source": "user critique on X that started the run"
+    },
+    {
+      "kind": "comparator",
+      "text": "Should score higher than the two competitor apps in every ranking",
+      "source": "owner follow-up, phase 2, with Claude Code and Codex screenshots"
+    },
+    {
+      "kind": "preference",
+      "text": "Too grayscale; restore some colour",
+      "source": "owner prompt, 10/10 phase"
+    }
+  ],
+  "rubric": {
+    "version": 1,
+    "scale": "1-10",
+    "overall": "judge holistic score of the screenshot set",
+    "criteria": [
+      {
+        "id": "hierarchy",
+        "name": "Hierarchy",
+        "description": "What the eye lands on first; sidebar receding behind content",
+        "source": "derived"
+      },
+      {
+        "id": "typography",
+        "name": "Typography",
+        "description": "Fonts, fallback font, size and weight scale",
+        "source": "human"
+      },
+      {
+        "id": "iconography",
+        "name": "Iconography",
+        "description": "Icon visibility and consistency",
+        "source": "human"
+      },
+      {
+        "id": "colour",
+        "name": "Colour and contrast",
+        "description": "Readable body text in light mode; colour where it carries meaning",
+        "source": "human"
+      },
+      {
+        "id": "consistency",
+        "name": "Consistency",
+        "description": "Same label, radius and indicator for the same thing across surfaces",
+        "source": "derived"
+      }
+    ],
+    "changes": [
+      {
+        "round": 4,
+        "version": 2,
+        "what": "Comparators added to the judging panel (Claude Code, Codex screenshots); fresh context",
+        "why": "Owner judged the 9/10 result not good enough next to competitors"
+      }
+    ]
+  },
+  "agents": [
+    {
+      "id": "orchestrator",
+      "name": "Orchestrator",
+      "role": "orchestrator",
+      "requested_model": "Claude Opus 5.5",
+      "returned_model": null,
+      "route": "main agent thread",
+      "notes": "Ran the judge panel each round"
+    },
+    {
+      "id": "builder",
+      "name": "Builder",
+      "role": "builder",
+      "requested_model": "Claude Opus 5.5",
+      "returned_model": null,
+      "route": "same thread",
+      "notes": "Made the UI changes and before/after diagrams"
+    },
+    {
+      "id": "sol",
+      "name": "GPT-6.1 Sol",
+      "role": "judge",
+      "requested_model": "gpt-6.1-sol",
+      "returned_model": null,
+      "route": "delegate (Codex)",
+      "notes": "Fastest judge; used alone until it reached the threshold in phase 2"
+    },
+    {
+      "id": "opus",
+      "name": "Opus 5.5",
+      "role": "judge",
+      "requested_model": "claude-opus-5-5",
+      "returned_model": null,
+      "route": "delegate (Claude Code)",
+      "notes": ""
+    },
+    {
+      "id": "muse",
+      "name": "Muse Wonderful",
+      "role": "judge",
+      "requested_model": "muse-wonderful",
+      "returned_model": null,
+      "route": "delegate (Muse)",
+      "notes": "Paused when usage ran low"
+    }
+  ],
+  "subjects": [
+    {
+      "id": "candidate",
+      "name": "T3 Code (PR)",
+      "kind": "candidate"
+    },
+    {
+      "id": "main",
+      "name": "T3 Code main (before)",
+      "kind": "baseline"
+    },
+    {
+      "id": "claude-code",
+      "name": "Claude Code",
+      "kind": "comparator"
+    },
+    {
+      "id": "codex",
+      "name": "Codex",
+      "kind": "comparator"
+    }
+  ],
+  "rounds": [
+    {
+      "n": 1,
+      "summary": "Phase 1. Council scores the existing UI.",
+      "scores": [
+        {
+          "judge": "opus",
+          "subject": "candidate",
+          "criterion": "overall",
+          "score": 6
+        },
+        {
+          "judge": "sol",
+          "subject": "candidate",
+          "criterion": "overall",
+          "score": 6.5
+        },
+        {
+          "judge": "muse",
+          "subject": "candidate",
+          "criterion": "overall",
+          "score": 6
+        }
+      ],
+      "judge_notes": [
+        {
+          "judge": "opus",
+          "text": "A bunch of things it didn't like and a list of recommendations (not quoted in the source)."
+        }
+      ],
+      "decisions": [
+        {
+          "by": "builder",
+          "decision": "Make before/after diagrams with arrows",
+          "reason": "Owner could not see the differences late at night",
+          "evidence": []
+        }
+      ],
+      "response": {
+        "by": "builder",
+        "summary": "Applied the council's recommendations as one batch of subtle changes; every judge was below 7.",
+        "acted_on": [
+          {
+            "from": "council",
+            "finding": "Typography and hierarchy (not itemised in the source)",
+            "action": "Changed the fallback font.",
+            "criteria": [
+              "typography",
+              "hierarchy",
+              "consistency"
+            ]
+          },
+          {
+            "from": "council",
+            "finding": "Typography and hierarchy (not itemised in the source)",
+            "action": "Thread title leads changed so the label above it recedes.",
+            "criteria": [
+              "typography",
+              "hierarchy",
+              "consistency"
+            ]
+          },
+          {
+            "from": "council",
+            "finding": "Typography and hierarchy (not itemised in the source)",
+            "action": "Branch name truncation now cuts the part that does not matter instead of the part that does.",
+            "criteria": [
+              "typography",
+              "hierarchy",
+              "consistency"
+            ]
+          },
+          {
+            "from": "council",
+            "finding": "Typography and hierarchy (not itemised in the source)",
+            "action": "Card radius changed; inline code softened and its unnecessary borders removed.",
+            "criteria": [
+              "typography",
+              "hierarchy",
+              "consistency"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "n": 2,
+      "summary": "Phase 1. Scores after the first batch.",
+      "scores": [
+        {
+          "judge": "opus",
+          "subject": "candidate",
+          "criterion": "overall",
+          "score": 8
+        },
+        {
+          "judge": "sol",
+          "subject": "candidate",
+          "criterion": "overall",
+          "score": 8
+        },
+        {
+          "judge": "muse",
+          "subject": "candidate",
+          "criterion": "overall",
+          "score": 7.5
+        }
+      ],
+      "decisions": [
+        {
+          "by": "builder",
+          "decision": "Further polish from round 2 findings",
+          "reason": "Below 9",
+          "evidence": [
+            {
+              "type": "note",
+              "text": "Changes not itemised in the source."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "n": 3,
+      "summary": "Phase 1 target met: every judge 9. Owner compared the app with Claude Code and ChatGPT by eye and judged it still not good enough.",
+      "scores": [
+        {
+          "judge": "opus",
+          "subject": "candidate",
+          "criterion": "overall",
+          "score": 9
+        },
+        {
+          "judge": "sol",
+          "subject": "candidate",
+          "criterion": "overall",
+          "score": 9
+        },
+        {
+          "judge": "muse",
+          "subject": "candidate",
+          "criterion": "overall",
+          "score": 9
+        }
+      ],
+      "decisions": [
+        {
+          "by": "owner",
+          "decision": "Start a fresh thread with competitor screenshots in the judging panel",
+          "reason": "Scores in isolation were higher than the owner's own comparison",
+          "evidence": []
+        }
+      ]
+    },
+    {
+      "n": 4,
+      "summary": "Phase 2, fresh context, comparators in the panel. The same PR that scored 9 in phase 1 now scores 7.4 from Sol.",
+      "scores": [
+        {
+          "judge": "sol",
+          "subject": "main",
+          "criterion": "overall",
+          "score": 7.0
+        },
+        {
+          "judge": "sol",
+          "subject": "candidate",
+          "criterion": "overall",
+          "score": 7.4
+        },
+        {
+          "judge": "sol",
+          "subject": "claude-code",
+          "criterion": "overall",
+          "score": 8.3
+        },
+        {
+          "judge": "sol",
+          "subject": "codex",
+          "criterion": "overall",
+          "score": 8.5
+        },
+        {
+          "judge": "muse",
+          "subject": "main",
+          "criterion": "overall",
+          "score": 6.2
+        },
+        {
+          "judge": "muse",
+          "subject": "candidate",
+          "criterion": "overall",
+          "score": 6.9
+        },
+        {
+          "judge": "muse",
+          "subject": "claude-code",
+          "criterion": "overall",
+          "score": 8.1
+        },
+        {
+          "judge": "muse",
+          "subject": "codex",
+          "criterion": "overall",
+          "score": 7.6
+        }
+      ],
+      "judge_notes": [
+        {
+          "judge": "muse",
+          "text": "Rated one comparator's UI as unclear."
+        }
+      ],
+      "decisions": [
+        {
+          "by": "owner",
+          "decision": "Stage the judges: Sol alone until it reaches the threshold, then Opus, then Muse",
+          "reason": "Muse usage running out; slow judges delaying rounds",
+          "evidence": []
+        }
+      ]
+    },
+    {
+      "n": 5,
+      "scores": [
+        {
+          "judge": "sol",
+          "subject": "candidate",
+          "criterion": "overall",
+          "score": 8.1
+        }
+      ]
+    },
+    {
+      "n": 6,
+      "scores": [
+        {
+          "judge": "sol",
+          "subject": "candidate",
+          "criterion": "overall",
+          "score": 8.9
+        }
+      ]
+    },
+    {
+      "n": 7,
+      "summary": "Sol reaches 9; Opus brought in.",
+      "scores": [
+        {
+          "judge": "sol",
+          "subject": "candidate",
+          "criterion": "overall",
+          "score": 9.0
+        },
+        {
+          "judge": "opus",
+          "subject": "candidate",
+          "criterion": "overall",
+          "score": 7.1
+        }
+      ]
+    },
+    {
+      "n": 8,
+      "scores": [
+        {
+          "judge": "opus",
+          "subject": "candidate",
+          "criterion": "overall",
+          "score": 8.7
+        }
+      ]
+    },
+    {
+      "n": 9,
+      "summary": "Sol and Opus both 9; Muse 7.9, then usage ran out. Changes across phase 2: consistent labels across surfaces, calmer sidebar colour and text hierarchy, consistent radius, fonts and indicators, better body contrast in light mode.",
+      "scores": [
+        {
+          "judge": "sol",
+          "subject": "candidate",
+          "criterion": "overall",
+          "score": 9.0
+        },
+        {
+          "judge": "opus",
+          "subject": "candidate",
+          "criterion": "overall",
+          "score": 9.0
+        },
+        {
+          "judge": "muse",
+          "subject": "candidate",
+          "criterion": "overall",
+          "score": 7.9
+        }
+      ],
+      "decisions": [
+        {
+          "by": "owner",
+          "decision": "Fork a worktree and raise the target to 9.5 in every category",
+          "reason": "There is room between 9 and 10",
+          "evidence": [
+            {
+              "type": "note",
+              "text": "Phase 3 took 10 more rounds; collapsed into round 10 here."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "n": 10,
+      "summary": "Phase 3 end (10 iterations collapsed). Every judge rated every category ≥ 9.5 by the last iteration; Opus's overall was 9.3. Comparator screenshots never changed, yet their scores rose.",
+      "scores": [
+        {
+          "judge": "opus",
+          "subject": "candidate",
+          "criterion": "overall",
+          "score": 9.3
+        },
+        {
+          "judge": "opus",
+          "subject": "candidate",
+          "criterion": "hierarchy",
+          "score": 9.5
+        },
+        {
+          "judge": "opus",
+          "subject": "claude-code",
+          "criterion": "overall",
+          "score": 9.1
+        },
+        {
+          "judge": "opus",
+          "subject": "codex",
+          "criterion": "overall",
+          "score": 9.0
+        }
+      ],
+      "judge_notes": [
+        {
+          "judge": "orchestrator",
+          "text": "Owner suspects stating the 9.5 target to judges inflated scores; next time hide it."
+        }
+      ],
+      "decisions": [
+        {
+          "by": "owner",
+          "decision": "Run a 10/10 branch with an added colour preference",
+          "reason": "Too grayscale",
+          "evidence": [
+            {
+              "type": "note",
+              "text": "Owner on the 10/10 result: merge reads clearly as a button, icons more visible, light-mode syntax far more readable."
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "outcome": {
+    "verdict": "Every judge ≥ 9.5 in every category (phase 3); later 10/10 from Sol and Muse",
+    "owner_verdict": "\"This objectively just feels better than it was before.\" Shipped behind a beta toggle.",
+    "notes": "Lessons the source draws: programmatic scores beat judge scores where available; comparators change judges' scores; hide the target from judges.",
+    "later": [
+      "Make the UI work on a small screen"
+    ]
+  }
+}

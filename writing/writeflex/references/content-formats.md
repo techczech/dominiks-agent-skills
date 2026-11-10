@@ -36,7 +36,7 @@ For pieces beside the manifest, `content_root` is `""`. The `files` array contro
 - Keep a self-contained unit together in one subfolder: a report with its widgets, a literature bundle with its CSV. Do not split it by file type.
 - A Folio's folders hold supporting material, never another Folio. If you find a folder there with `_report-structure.json`, an Index Note `_<folder>_INDEX.md` with a `## Running order` list, or a `.folio-backup.json`, ask the writer. To undo it: remove the `## Running order` section, rename `_<folder>_INDEX.md` and `_<folder>_MAP.canvas` to plain names, and move `.folio-backup.json` into `archive/` under a plain name. Never delete.
 - There is no exports folder. Current exports stay where the writer exported them. Move superseded exports to `archive/exports-<YYYY-MM-DD>/`.
-- Scout captures may use subfolders of `research/`: `scout capture --project <folder> --into literature/notes ...` writes `research/literature/notes/<name>.md`; omit `--into` for a top-level capture. Every capture is listed in `research/_manifest.jsonl`. After moving a captured file within `research/` yourself, run `scout capture --project <folder> --moved <old> <new>` (paths relative to `research/`; old must be gone, new must exist). It updates only the capture's receipt in the manifest: it does not move the file, rewrite links or provenance, or rebuild the index. It also does not rewrite other `sources[].file` values: after `--moved`, check `research/_manifest.jsonl` for `sources[].file` values that still point at the old locations of files you moved (artefacts moved alongside a capture), and fix them. To merge two `research/` folders, move the files and record each with `--moved`, or append the incoming `_manifest.jsonl` lines and fix their `sources[].file` paths (relative to the Folio root). `--where-used` skips `research/`. Material scout did not capture may use any subfolder.
+- Captured research units (one Markdown file each, indexed in `research/_manifest.jsonl`) may sit in subfolders of `research/`. After moving one yourself, fix any `sources[].file` value in `research/_manifest.jsonl` that still points at the old location (paths relative to the Folio root). Anything else may use any subfolder.
 
 ## Canonical active files
 
@@ -57,7 +57,7 @@ Preserve existing metadata and known history; do not invent earlier creation dat
 - A move is one change. In the same change, rewrite every reference to the moved file inside the Folio: relative Markdown links and images, includes, frontmatter `source:` paths, `research/_manifest.jsonl` `sources[].file` (relative to the Folio root, not to `research/`), `[Simulation: …]` lines, and relative links that leave the Folio (recount the `../`).
 - Absolute paths and `writeflex://` links in archived records stay as they were; they describe the past.
 - Use `git mv` when the Folio is in git. Never delete to tidy; move.
-- Write a canonical move map `research/move-map.tsv` in the same change: one row per moved file, old path, a tab, new path, workspace-relative. Keep move dates and versions in the associated record’s metadata. WriteFlex version history is keyed by path, and a move made outside WriteFlex detaches it until the writer reattaches it with that map. Do not edit `.writeflex/` or `.bridle/` to fix history.
+- Write a canonical move map `research/move-map.tsv` in the same change: one row per moved file, old path, a tab, new path, workspace-relative. Keep move dates and versions in the associated record’s metadata. WriteFlex version history is keyed by path, and a move made outside WriteFlex detaches it until it is reattached with that map: `writeflex follow-history --map research/move-map.tsv` does that (it writes only the version journal; `writeflex undo-history <id>` reverses it). Do not edit `.writeflex/` or `.bridle/` to fix history.
 - To prove nothing was deleted, check every row of the move map: the new path exists and the old one is gone. If an old path is intentionally reused for the current canonical document, verify the archived previous content and hash and the new canonical document’s provenance and body instead of requiring that path to be absent. Do not rely on git rename detection, which reports a heavily edited moved file as a deletion plus an addition.
 - A `*.writeflex-backup` belongs to the file as it was when WriteFlex made it. After files are moved or renamed outside WriteFlex it may describe a different file. Never restore from one by hand.
 
@@ -65,9 +65,9 @@ Preserve existing metadata and known history; do not invent earlier creation dat
 
 Verify every declared file exists within the intended collection. Missing parts must be reported even if the app quietly omits them. Do not include covers, Index Notes, backups or underscore-prefixed support files, `.canvas` files or anything under `.folio-bin/` as prose chapters merely because they are Markdown. Never infer a Folio from a numbered directory.
 
-When exposed, `folio.create_manifest` derives its initial list/order from existing files and refuses any existing manifest. It does not accept an arbitrary requested chapter order; inspect its resulting proposal or file before claiming that order is satisfied.
+`writeflex create-manifest <folder>` derives the initial list and order from existing files and refuses any existing manifest. It does not take an arbitrary chapter order: read the manifest it wrote before claiming an order is satisfied.
 
-## Folio workspace files (WriteFlex 0.27.0-alpha.10)
+## Folio workspace files
 
 WriteFlex opens a Folio as one workspace: tabs Outline, Text, Cards, Map, Flags, Evidence, Files; the binder in the sidebar; an inspector that replaces it. The tabs add no file types beyond those below. Everything an agent reads or edits is a file in the Folio folder.
 
@@ -93,13 +93,13 @@ A portable pipe table is valid preparation material:
 | Scope | Keep the introduction |
 ```
 
-With an exposed `objects.insert`, supply inner markup only; the capability owns the appropriate fences. Use its current schema for table, Mermaid, Markmap or SVG input. Do not nest an already fenced object inside another fence. SVG content remains untrusted; retain the app's validation and sanitisation path.
+With `writeflex insert-object`, supply inner markup only; the command adds the fences. `writeflex describe insert-object` gives the kinds (table, Mermaid, mind map, SVG). Do not nest an already fenced object inside another fence. SVG content remains untrusted; retain the app's validation and sanitisation path.
 
 WriteFlex post-it annotations are lines beginning with `//` outside fenced or indented code. Preserve them in the working source. The app's export pipeline strips frontmatter and these annotations; a plain copy of the source does not. Keep code comments inside code blocks intact. Before sharing any independently prepared output, inspect the resulting artefact for notes and metadata; do not claim it passed WriteFlex's export pipeline.
 
 ## Interactive widgets
 
-From WriteFlex 0.22. A widget is an interactive HTML page (a calculator, a chart, a simulation, a quiz) that runs live inside the document as a block, with a caption bar (title from the file's `<title>`, file name, Reload, Open file). It is one self-contained HTML file inside the Workspace, put in the text by one line.
+A widget is an interactive HTML page (a calculator, a chart, a simulation, a quiz) that runs live inside the document as a block, with a caption bar (title from the file's `<title>`, file name, Reload, Open file). It is one self-contained HTML file inside the Workspace, put in the text by one line.
 
 **The embed line**
 
@@ -111,7 +111,7 @@ From WriteFlex 0.22. A widget is an interactive HTML page (a calculator, a chart
 
 - Insert object → Widget… (straight after Image…), or the command **Insert widget…** in the palette: a picker lists the HTML files in the document's folder and below; Enter inserts the line at the cursor.
 - Drag an HTML file from inside the Workspace onto the text: the line lands at the drop point. A file from outside the Workspace is refused.
-- Agents use the verbs `widgets.create` (a new widget), `widgets.insert` (an existing HTML file), `widgets.remove` and `widgets.list`; see app operations. The three that write are proposals: the writer accepts or discards each, and nothing is written until they accept.
+- The command line has no widget operation. To embed an HTML file that already sits in the Collection, `writeflex insert` the embed line (shown first: the writer accepts or discards it). A new HTML file is not a document: write one only when the writer asked you to, into `assets/` beside the document, and say so.
 
 **How to write a good widget (checklist)**
 
@@ -125,10 +125,10 @@ From WriteFlex 0.22. A widget is an interactive HTML page (a calculator, a chart
 
 **Exports**
 
-- Not built yet (planned for the 0.22 release): HTML export keeping the widget working, a still picture in Word, and a tick box in the export dialog to leave widgets out. Until then do not promise a reader that an exported file carries the widget; check the installed build.
+- Do not promise a reader that an exported file carries a working widget until you have checked the export. A Word export holds a still picture.
 
 Treat widget HTML as untrusted code even when you wrote it: keep it in the Workspace, never point a widget line outside it, and do not weaken the sealing to make a widget work.
 
 ## Source and app ownership
 
-The application handles snapshots, proposal acceptance, internal history and export models. Ordinary external file edits do not establish those effects. A live buffer and disk can differ: preparing a separate revision is preferable when its current state cannot be obtained. Do not edit app configuration, `.bridle` journals, caches or compiled application files during content work.
+The application handles snapshots, proposal acceptance, internal history and export models. Ordinary external file edits do not establish those effects. A live buffer and disk can differ: preparing a separate revision is preferable when its current state cannot be obtained. Do not edit app configuration, `.bridle` or `.writeflex` journals, caches or compiled application files during content work.

@@ -103,6 +103,7 @@ Do not use Web Bundles as the primary plan. They remain experimental and were re
 - Avoid external module scripts or leftover split chunks in the final file.
 - Materialize downloadable attachments with `Blob` URLs and `a.download`, not with multi-megabyte `data:` anchors.
 - Keep the final output valid as ordinary HTML.
+- Browser target: current evergreen browsers (Chrome, Edge, Firefox, Safari). Baseline "newly available" features are fine. Use a "limited availability" feature only as progressive enhancement with an inline fallback of about 20 lines or fewer; never an npm polyfill or runtime import. Web-platform how-to: `references/vendor/modern-web-guidance/INDEX.md`.
 
 ## Default Tooling
 

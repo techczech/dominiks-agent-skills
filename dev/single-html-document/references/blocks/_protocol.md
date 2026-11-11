@@ -20,6 +20,10 @@ assets/blocks/<name>.example.yml    canonical authoring example
 
 Add or remove a block by editing all three together. If you change the schema in the `.md`, update the `.js` and `.example.yml` in the same change. This colocation is the main drift defence.
 
+## Find-in-page
+
+Collapsed or tabbed content must stay findable with the browser's find-in-page: use `<details>` (exclusive groups via the `name` attribute) or `hidden="until-found"` with a `beforematch` listener that syncs the visible state.
+
 ## Source Shape
 
 A block instance lives inside page front matter or a sidecar YAML/JSON file as one entry in a `blocks` list:

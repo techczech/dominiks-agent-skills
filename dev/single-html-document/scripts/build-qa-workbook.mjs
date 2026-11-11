@@ -1176,7 +1176,7 @@ function buildCss() {
 }
 
 * { box-sizing: border-box; }
-html { scroll-behavior: smooth; }
+@media (prefers-reduced-motion: no-preference) { html { scroll-behavior: smooth; } }
 html, body { margin: 0; min-height: 100%; padding: 0; }
 body {
   font-family: var(--sans);

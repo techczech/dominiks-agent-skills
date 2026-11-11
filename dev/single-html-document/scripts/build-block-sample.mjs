@@ -187,7 +187,7 @@ html, body {
   overflow-x: clip;
   overflow-wrap: anywhere;
 }
-html { scroll-behavior: smooth; }
+@media (prefers-reduced-motion: no-preference) { html { scroll-behavior: smooth; } }
 body { width: 100%; max-width: 100%; }
 .page-back-to-top {
   position: fixed;

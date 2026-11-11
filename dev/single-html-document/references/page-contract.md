@@ -10,7 +10,7 @@ Blocks can be perfectly designed in isolation and still produce an unreadable pa
 
 ### 1. Section navigation by default
 
-Any deliverable longer than a single short article must expose a sidebar table of contents. The TOC sticks to the viewport on wide screens and is reachable from a button on narrow screens. Each section gets a stable id; clicking a TOC entry jumps with smooth scroll and updates the URL hash.
+Any deliverable longer than a single short article must expose a sidebar table of contents. The TOC sticks to the viewport on wide screens and is reachable from a button on narrow screens. Each section gets a stable id; clicking a TOC entry jumps (with smooth scroll only under `prefers-reduced-motion: no-preference`) and updates the URL hash.
 
 This means: a deliverable behaves like a multi-page site without actually being one. Readers can ⌘-F across all sections and they can deep-link to a specific section by URL.
 
@@ -54,6 +54,15 @@ Every page should be printable from the browser without losing structure. The TO
 
 All page-level resources (fonts, icons, scripts, images) must be inlined. The page contract inherits this from the architecture rules and the audit script enforces it. No CDN, no external fonts, no remote stylesheets.
 
+### 7. Accessible by default
+
+- `lang` on `<html>`; landmarks (`header`, `nav`, `main`, `footer`).
+- Visible `:focus-visible` outline with 3:1 contrast; text contrast 4.5:1.
+- A `forced-colors` fallback (borders and outlines must survive system colours).
+- Font sizes in `rem`, so the reader's browser text size applies.
+- `color-scheme` set on `:root` to the active theme.
+- Animation and smooth scroll only inside `@media (prefers-reduced-motion: no-preference)`.
+
 ## What The Build Shell Provides
 
 The shell that `build-block-sample.mjs` emits implements the contract automatically:
@@ -61,7 +70,7 @@ The shell that `build-block-sample.mjs` emits implements the contract automatica
 - `body { overflow-x: clip }`
 - The page-shell container with `min-width: 0` cascading down through its descendants
 - A sidebar TOC generated from `<h2>` headings inside `section.sample-section[id]`
-- Smooth-scroll behaviour on hash navigation
+- Smooth-scroll behaviour on hash navigation, only under `prefers-reduced-motion: no-preference`
 - Print stylesheet that hides the TOC and lets sections flow naturally
 - Hooks for renderers that need to opt out (e.g. a deliberately-wide code listing) by adding `data-allow-overflow` to the block root; the shell respects that flag.
 

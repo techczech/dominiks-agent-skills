@@ -1,15 +1,14 @@
-# TalkWeaver operation availability
+# What an agent can and cannot do in TalkWeaver
 
-The app's typed bridge includes read/save/compile, Pathway management, metadata, export and presentation operations. These are internal interfaces unless a connected tool explicitly exposes them. The skill does not ship or assume an external content CLI.
+Commands exist only for set-up, settings and this skill's install: see [CLI](cli.md). Everything else goes through files and the app's own windows.
 
-| Available surface | Appropriate action |
+| Surface | Appropriate action |
 | --- | --- |
-| Read-only file access | Inspect the outline, identity tokens, assets and existing manifests; produce a proposed revision. |
-| Authorised content-file writes with editor state resolved | Apply narrow source/manifest changes; preserve unknown fields and verify fresh bytes. Report file changes without claiming app lifecycle effects. |
-| A connected app capability | Use its current parameters and policy; honour refusal/proposal outcomes. |
-| A verified existing compiler/preview command | Check its actual help or documented invocation, installed version and output paths; compile to a fresh destination and inspect its output. |
-| UI control already available | Use observed app commands when authorised; do not assume a keyboard shortcut executed successfully. |
+| Read-only file access | Inspect outlines, slide IDs, assets, manifests; produce a proposed revision. |
+| Authorised content-file writes, editor state resolved | Apply narrow source and manifest changes; preserve unknown fields; verify fresh bytes. Report file changes without claiming app lifecycle effects. |
+| The app's windows, when you can drive them | Use observed commands when authorised. Do not assume a keyboard shortcut ran. |
+| `talkweaver setup`, `settings`, `agent` | See [CLI](cli.md). |
 
-Existing source entrypoints such as `prepareSource` and save IPC handlers document behaviour; their presence does not grant an external agent a callable tool. Development commands build or launch the application, not an individual presentation. Do not substitute the retired standalone presentation pipeline for the bundled compiler without verifying format compatibility and user intent.
+No command compiles, previews, exports or publishes a talk. If you cannot drive the app, finish the content draft or the change proposal and say the app preview is unverified. That does not stop useful authoring work.
 
-If no compiler is exposed, finish the content draft or change proposal and identify app preview as unverified. That limitation does not prevent useful authoring work.
+Do not substitute any older presentation pipeline for the app's own compiler without verifying format compatibility and the person's intent.

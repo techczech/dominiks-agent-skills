@@ -5,7 +5,7 @@
 - Identify the source PPTX, existing extraction bundle or legacy handout export; inspect its instructions and destination. Keep the original read-only. Use a fresh output directory.
 - Default PPTX route: the separate **TalkWeaver PPT Extractor** application. Its portable extraction and derived TalkWeaver outline are distinct outputs. Do not assume an importer inside TalkWeaver has the same interface.
 - Use an observed UI command or an actually exposed app tool. Current Extractor UI: choose **PowerPoint**, choose the destination parent, optionally configure original-slide rendering in **Settings**, then **Extract PowerPoint**. Verify labels and results in the installed version.
-- If an existing source checkout is explicitly the selected operational surface, its documented `scripts/smoke-real-pptx.mjs` accepts a source PPTX and fresh temporary output. Verify its README, script and Node runtime before use. It is a source-checkout smoke command, not an installed production CLI: it also relocates a bundle, runs a frozen compiler and attempts slide rendering. Inspect `smoke-report.json` and retained artefacts; a zero exit does not prove original rendering succeeded. Do not install/build the app or invent extraction flags.
+- No installed command-line extractor exists. Do not build the app, run development scripts or invent extraction flags.
 
 ## Inspect the extraction
 

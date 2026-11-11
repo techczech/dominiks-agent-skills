@@ -2,6 +2,8 @@
 
 ## Select the intended content
 
+- After a talk or workshop has been delivered and recorded, "a handout" (with "more explanation to go along with the slides") means the Run's **Notes**, drafted from the recording into the Run pack, approved in TalkWeaver and exported with the Run handout. It never means a new web page or a page on another site.
+
 - Establish whether the user wants the whole Talk or a named Run, and whether the deliverable is local or public. Reuse the existing Talk; do not scaffold a separate handout website by default.
 - For a Talk, use the intended canonical outline revision and current editor content, resolving unsaved edits before export.
 - For a Run, read its identity, event/date and `slideSet`; use the app's Run handout operation. A Pathway Run requires its selected slide order, not the whole outline.
@@ -9,7 +11,7 @@
 
 ## Build locally
 
-Discover the installed app's export/build UI or connected tool. Internal handlers `talk:export-handout` and `run:build-handout` describe existing operations; they are not shell commands. Do not invoke private IPC by inventing a bridge. A separately verified compiler CLI is usable only with its documented handout mode and compatible source format.
+Discover the installed app's export/build UI or connected tool. The app's export operations are not shell commands, and no command-line handout builder exists. Do not invent a bridge. A separately verified compiler CLI is usable only with its documented handout mode and compatible source format.
 
 Current Talk export writes `dist/<slug>-handout.html` beside the outline and returns its path. Run builds return the actual output path plus selected `slideIds` and `missing` references; use those results rather than guessing the filename. Check missing references and inspect the generated output before claiming the requested cut is complete. Do not hand-edit generated HTML.
 

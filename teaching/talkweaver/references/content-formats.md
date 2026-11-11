@@ -28,7 +28,27 @@ Speaker-only explanation belongs here.
 :::
 ```
 
-In the inspected compiler, structural `##` through `######` headings each begin a slide block; `#` is a title boundary. Headings inside code fences or HTML comments are not slide boundaries. Do not split source with an unrestricted heading regex. A slide block includes its trigger line, notes and body until the next structural heading.
+The hierarchy is part of the presentation. `#` names the Talk; `##` establishes a section; a bodyless `###` with `####` children establishes a subsection; its `####` children are ordinary content slides. A direct `###` content slide under a `##` section is also valid. Do not flatten a section-and-subsection plan into a sequence of `###` slides. Verify the resulting section and subsection memberships with the current compiler parser or app outliner.
+
+```markdown
+# Talk title
+
+## Section heading
+
+### Subsection heading
+
+#### Content slide within the subsection
+
+- The explanation belongs here.
+
+### Direct content slide within the section
+
+- This slide has a section but no subsection.
+```
+
+Heading depth supplies the hierarchy. `####` is not inherently a card: container layouts such as carousel, cards, image-grid or contrast can absorb child headings as cards; an ordinary subsection must retain its children as separate slides. Keep subsection dividers bodyless and put the explanation on their child slides. Preserve the author's deliberate existing containers and heading levels when reusing a source Talk.
+
+In the compiler, structural `##` through `######` headings each begin a slide block; `#` is a title boundary. Headings inside code fences or HTML comments are not slide boundaries. Do not split source with an unrestricted heading regex. A slide block includes its trigger line, notes and body until the next structural heading.
 
 Preserve `{id=...}` identifiers and their references. On application save, TalkWeaver can stamp missing IDs, record ledger history and return stamped content. File edits alone do not perform that lifecycle. Keep existing IDs across title changes and moves; new/copied slides need distinct identities under the app's rules, not duplicates of the original IDs.
 
@@ -36,7 +56,7 @@ Use the existing trigger line immediately below its heading. Preserve existing l
 
 ## Pathway
 
-The inspected app stores Pathways in `<vault>/_PRESENTATIONS/<talk-slug>/manifest.json`, under a `pathways` array. Verify this against the actual vault/version before a write. Merge into the existing manifest; preserve all other fields.
+The app stores Pathways in `<vault>/_PRESENTATIONS/<talk-slug>/manifest.json`, under a `pathways` array. Verify this against the actual vault/version before a write. Merge into the existing manifest; preserve all other fields.
 
 ```json
 {

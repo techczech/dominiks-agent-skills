@@ -252,7 +252,7 @@ const PAGE_BACK_TO_TOP_SCRIPT = `
     backToTop.className = 'page-back-to-top';
     backToTop.setAttribute('aria-label', 'Back to top');
     backToTop.innerHTML = '↑';
-    backToTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+    backToTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth') }));
     document.body.appendChild(backToTop);
     const showThreshold = 320;
     const updateBackToTop = () => {

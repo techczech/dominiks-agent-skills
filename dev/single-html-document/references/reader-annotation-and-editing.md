@@ -134,7 +134,8 @@ UI requirements:
 - show existing notes in a drawer or review-all-notes panel
 - let readers jump from a note back to the highlighted text
 - let readers edit and delete notes before export
-- persist draft notes in `localStorage`
+- persist draft notes in `localStorage` when available: browser storage is optional, every read and write sits in try/catch, and the page must work fully with storage blocked (SharePoint viewer, private windows)
+- render reader-typed or imported text with `textContent` or `replaceChildren`, never `innerHTML`
 - export notes as versioned JSON, and optionally as Markdown or rich text for
   email/chat workflows
 - make storage boundaries explicit: local notes stay in this browser until the

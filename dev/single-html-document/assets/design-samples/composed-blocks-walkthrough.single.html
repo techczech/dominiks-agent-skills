@@ -23,7 +23,7 @@ html, body {
   overflow-x: clip;
   overflow-wrap: anywhere;
 }
-html { scroll-behavior: smooth; }
+@media (prefers-reduced-motion: no-preference) { html { scroll-behavior: smooth; } }
 body { width: 100%; max-width: 100%; }
 .page-back-to-top {
   position: fixed;
@@ -461,7 +461,7 @@ function mount(root, data) {
     btn.addEventListener('click', () => {
       const el = lineEls[(j.atLine || 1) - 1];
       if (!el) return;
-      el.scrollIntoView({ block: 'center', behavior: 'smooth' });
+      el.scrollIntoView({ block: 'center', behavior: (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth') });
       el.setAttribute('data-flash', '');
       setTimeout(() => el.removeAttribute('data-flash'), 1200);
     });
@@ -4995,14 +4995,14 @@ function init(options) {
     function jumpTo(id) {
       const target = document.getElementById(id);
       if (target) {
-        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        target.scrollIntoView({ behavior: (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth'), block: 'start' });
         history.replaceState(null, '', `#${id}`);
       }
       // On narrow viewports, hide after navigation; on wide, leave visible.
       if (window.matchMedia && window.matchMedia('(max-width: 880px)').matches) setState('hidden');
     }
     function jumpToTop() {
-      window.scrollTo({ top: 0, behavior: 'smooth' });
+      window.scrollTo({ top: 0, behavior: (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth') });
       history.replaceState(null, '', window.location.pathname + window.location.search);
     }
 
@@ -5173,17 +5173,28 @@ function init(options) {
 const STYLE_ID = 'page-global-search-pattern-style';
 const CSS = `
 .page-global-search {
+  /* Native <dialog>: reset the UA box so only our look shows. */
   position: fixed;
   inset: 0;
   z-index: 60;
   display: none;
+  box-sizing: border-box;
+  width: 100%;
+  height: 100%;
+  max-width: none;
+  max-height: none;
+  margin: 0;
+  border: 0;
   align-items: flex-start;
   justify-content: center;
-  padding-top: 6vh;
+  padding: 6vh 0 0;
   background: rgba(0, 0, 0, 0.35);
   backdrop-filter: blur(2px);
+  color: inherit;
+  overflow: hidden;
 }
-body[data-global-search-open="true"] .page-global-search { display: flex; }
+.page-global-search[open] { display: flex; }
+.page-global-search::backdrop { background: transparent; }
 .page-global-search__panel {
   width: min(36rem, 92vw);
   max-height: 80vh;
@@ -5418,9 +5429,8 @@ function init(options) {
     let lastResults = [];
     let keyNav = -1;
 
-    const overlay = document.createElement('div');
+    const overlay = document.createElement('dialog');
     overlay.className = 'page-global-search';
-    overlay.setAttribute('role', 'dialog');
     overlay.setAttribute('aria-label', 'Search the page');
 
     const panel = document.createElement('div');
@@ -5458,20 +5468,28 @@ function init(options) {
     document.body.appendChild(overlay);
 
     const setOpen = (open) => {
-      document.body.setAttribute('data-global-search-open', open ? 'true' : 'false');
       if (open) {
+        if (overlay.open) return;
         if (docs == null) docs = buildIndex();
         // Reset hint visibility
         hint.style.display = '';
         list.style.display = '';
-        setTimeout(() => { input.focus(); input.select(); }, 30);
-      } else {
-        input.value = '';
-        list.innerHTML = '';
-        hint.style.display = '';
-        keyNav = -1;
+        document.body.setAttribute('data-global-search-open', 'true');
+        overlay.showModal();
+        input.focus();
+        input.select();
+      } else if (overlay.open) {
+        overlay.close();
       }
     };
+    // Esc, Close and programmatic close all end here; focus returns natively.
+    overlay.addEventListener('close', () => {
+      document.body.setAttribute('data-global-search-open', 'false');
+      input.value = '';
+      list.innerHTML = '';
+      hint.style.display = '';
+      keyNav = -1;
+    });
 
     const renderResults = () => {
       list.innerHTML = '';
@@ -5510,7 +5528,7 @@ function init(options) {
       setOpen(false);
       const target = document.getElementById(id);
       if (!target) return;
-      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      target.scrollIntoView({ behavior: (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth'), block: 'start' });
       history.replaceState(null, '', `#${id}`);
       target.classList.remove('page-global-search-flash');
       // Force reflow so the animation restarts.
@@ -5543,9 +5561,6 @@ function init(options) {
       } else if (e.key === 'Enter') {
         e.preventDefault();
         if (keyNav >= 0 && lastResults[keyNav]) jumpTo(lastResults[keyNav].id);
-      } else if (e.key === 'Escape') {
-        e.preventDefault();
-        setOpen(false);
       }
     });
     closeBtn.addEventListener('click', () => setOpen(false));
@@ -5577,7 +5592,7 @@ function init(options) {
       window.__pageSearch = {
         open: () => setOpen(true),
         close: () => setOpen(false),
-        toggle: () => setOpen(document.body.getAttribute('data-global-search-open') !== 'true'),
+        toggle: () => setOpen(!overlay.open),
       };
     }
   });
@@ -5595,22 +5610,34 @@ function init(options) {
 // To add programmatically (e.g. from another pattern), call
 // window.__pageKeyboardHelp.register({ keys: 'T', label: 'Open contents' }).
 //
-// The overlay is keyboard-first: ? to open, Esc to close.
+// The overlay is a native <dialog> (showModal): Esc, focus containment and
+// focus return are the browser's. ? to open, Esc to close.
 
 const STYLE_ID = 'page-keyboard-help-pattern-style';
 const CSS = `
 .page-keyboard-help {
+  /* Native <dialog>: reset the UA box so only our look shows. */
   position: fixed;
   inset: 0;
   z-index: 70;
   display: none;
+  box-sizing: border-box;
+  width: 100%;
+  height: 100%;
+  max-width: none;
+  max-height: none;
+  margin: 0;
+  border: 0;
   align-items: center;
   justify-content: center;
   padding: 1rem;
   background: rgba(0, 0, 0, 0.35);
   backdrop-filter: blur(2px);
+  color: inherit;
+  overflow: hidden;
 }
-body[data-keyboard-help-open="true"] .page-keyboard-help { display: flex; }
+.page-keyboard-help[open] { display: flex; }
+.page-keyboard-help::backdrop { background: transparent; }
 .page-keyboard-help__panel {
   width: min(28rem, 92vw);
   background: white;
@@ -5709,8 +5736,15 @@ function rerender() {
 }
 
 function setOpen(open) {
-  document.body.setAttribute('data-keyboard-help-open', open ? 'true' : 'false');
-  if (open) rerender();
+  if (!overlay) return;
+  if (open) {
+    if (overlay.open) return;
+    rerender();
+    document.body.setAttribute('data-keyboard-help-open', 'true');
+    overlay.showModal();
+  } else if (overlay.open) {
+    overlay.close();
+  }
 }
 function register(entry) {
   if (!entry || !entry.keys || !entry.label) return;
@@ -5743,9 +5777,8 @@ function init(options) {
   ready(() => {
     ensureStyle(document);
 
-    overlay = document.createElement('div');
+    overlay = document.createElement('dialog');
     overlay.className = 'page-keyboard-help';
-    overlay.setAttribute('role', 'dialog');
     overlay.setAttribute('aria-label', 'Keyboard shortcuts');
 
     const panel = document.createElement('div');
@@ -5776,6 +5809,9 @@ function init(options) {
     overlay.appendChild(panel);
     document.body.appendChild(overlay);
 
+    overlay.addEventListener('close', () => {
+      document.body.setAttribute('data-keyboard-help-open', 'false');
+    });
     closeBtn.addEventListener('click', () => setOpen(false));
     overlay.addEventListener('click', (e) => {
       if (e.target === overlay) setOpen(false);
@@ -5786,10 +5822,7 @@ function init(options) {
       if (isEditableTarget(e.target)) return;
       if (e.key === opts.shortcut) {
         e.preventDefault();
-        setOpen(document.body.getAttribute('data-keyboard-help-open') !== 'true');
-      } else if (e.key === 'Escape' && document.body.getAttribute('data-keyboard-help-open') === 'true') {
-        e.preventDefault();
-        setOpen(false);
+        setOpen(!overlay.open);
       }
     });
 
@@ -5797,7 +5830,7 @@ function init(options) {
       window.__pageKeyboardHelp = {
         open: () => setOpen(true),
         close: () => setOpen(false),
-        toggle: () => setOpen(document.body.getAttribute('data-keyboard-help-open') !== 'true'),
+        toggle: () => setOpen(!overlay.open),
         register,
       };
     }
@@ -5820,7 +5853,7 @@ function init(options) {
     backToTop.className = 'page-back-to-top';
     backToTop.setAttribute('aria-label', 'Back to top');
     backToTop.innerHTML = '↑';
-    backToTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+    backToTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth') }));
     document.body.appendChild(backToTop);
     const showThreshold = 320;
     const updateBackToTop = () => {

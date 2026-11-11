@@ -18,17 +18,28 @@
 const STYLE_ID = 'page-global-search-pattern-style';
 const CSS = `
 .page-global-search {
+  /* Native <dialog>: reset the UA box so only our look shows. */
   position: fixed;
   inset: 0;
   z-index: 60;
   display: none;
+  box-sizing: border-box;
+  width: 100%;
+  height: 100%;
+  max-width: none;
+  max-height: none;
+  margin: 0;
+  border: 0;
   align-items: flex-start;
   justify-content: center;
-  padding-top: 6vh;
+  padding: 6vh 0 0;
   background: rgba(0, 0, 0, 0.35);
   backdrop-filter: blur(2px);
+  color: inherit;
+  overflow: hidden;
 }
-body[data-global-search-open="true"] .page-global-search { display: flex; }
+.page-global-search[open] { display: flex; }
+.page-global-search::backdrop { background: transparent; }
 .page-global-search__panel {
   width: min(36rem, 92vw);
   max-height: 80vh;
@@ -264,9 +275,8 @@ export function init(options) {
     let lastResults = [];
     let keyNav = -1;
 
-    const overlay = document.createElement('div');
+    const overlay = document.createElement('dialog');
     overlay.className = 'page-global-search';
-    overlay.setAttribute('role', 'dialog');
     overlay.setAttribute('aria-label', 'Search the page');
 
     const panel = document.createElement('div');
@@ -304,20 +314,28 @@ export function init(options) {
     document.body.appendChild(overlay);
 
     const setOpen = (open) => {
-      document.body.setAttribute('data-global-search-open', open ? 'true' : 'false');
       if (open) {
+        if (overlay.open) return;
         if (docs == null) docs = buildIndex();
         // Reset hint visibility
         hint.style.display = '';
         list.style.display = '';
-        setTimeout(() => { input.focus(); input.select(); }, 30);
-      } else {
-        input.value = '';
-        list.innerHTML = '';
-        hint.style.display = '';
-        keyNav = -1;
+        document.body.setAttribute('data-global-search-open', 'true');
+        overlay.showModal();
+        input.focus();
+        input.select();
+      } else if (overlay.open) {
+        overlay.close();
       }
     };
+    // Esc, Close and programmatic close all end here; focus returns natively.
+    overlay.addEventListener('close', () => {
+      document.body.setAttribute('data-global-search-open', 'false');
+      input.value = '';
+      list.innerHTML = '';
+      hint.style.display = '';
+      keyNav = -1;
+    });
 
     const renderResults = () => {
       list.innerHTML = '';
@@ -356,7 +374,7 @@ export function init(options) {
       setOpen(false);
       const target = document.getElementById(id);
       if (!target) return;
-      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      target.scrollIntoView({ behavior: (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth'), block: 'start' });
       history.replaceState(null, '', `#${id}`);
       target.classList.remove('page-global-search-flash');
       // Force reflow so the animation restarts.
@@ -389,9 +407,6 @@ export function init(options) {
       } else if (e.key === 'Enter') {
         e.preventDefault();
         if (keyNav >= 0 && lastResults[keyNav]) jumpTo(lastResults[keyNav].id);
-      } else if (e.key === 'Escape') {
-        e.preventDefault();
-        setOpen(false);
       }
     });
     closeBtn.addEventListener('click', () => setOpen(false));
@@ -423,7 +438,7 @@ export function init(options) {
       window.__pageSearch = {
         open: () => setOpen(true),
         close: () => setOpen(false),
-        toggle: () => setOpen(document.body.getAttribute('data-global-search-open') !== 'true'),
+        toggle: () => setOpen(!overlay.open),
       };
     }
   });

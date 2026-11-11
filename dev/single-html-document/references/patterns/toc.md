@@ -38,7 +38,7 @@ The sidebar has three states tracked on `body[data-toc-state]`:
 - `rail` — sidebar shrinks to a 3rem rail with just the icon. The collapse button toggles between rail and expanded; the close button hides entirely.
 - `hidden` — sidebar not visible. A floating launcher (book-open icon, top-left) reopens it.
 
-Each state persists in `localStorage` so the reader's preference carries across reloads.
+Each state persists in `localStorage` when available, so the reader's preference carries across reloads. Storage is optional: every read and write is in try/catch, and the TOC works fully when storage is blocked (SharePoint viewer, private windows).
 
 The list is a **tree** — h2 entries with chevrons that expand or collapse their h3/h4 children. By default all chevrons start collapsed (only top-level entries visible); the **Show levels** footer toggle gives the reader three runtime options:
 

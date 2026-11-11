@@ -68,7 +68,8 @@ Rules the contract enforces:
 - **Pure vanilla.** No framework imports, no runtime fetch, no global state shared across patterns. Patterns may register on `window` if they want to expose a public API (e.g. `window.__pageToc.open()`), but they must namespace under `__page<Name>`.
 - **Self-contained styling.** Required CSS lives in the pattern module (injected via a `<style>` element) so the pattern works in any host that adopts it.
 - **Shortcut-safe.** Keyboard shortcuts must respect editable contexts: ignore the shortcut when focus is in an `<input>`, `<textarea>`, or `[contenteditable]` element unless the user explicitly asks otherwise.
-- **No race with other patterns.** Patterns do not directly call into each other. If `toc` and `global-search` both need to open an overlay, they coordinate through DOM state (e.g. `body[data-overlay-open]`) and Esc handling, not by importing from each other.
+- **No race with other patterns.** Patterns do not directly call into each other. If `toc` and `global-search` both need to open an overlay, they coordinate through DOM state (e.g. `body[data-overlay-open]`), not by importing from each other.
+- **Native overlays.** Modal overlays are `<dialog>` opened with `showModal()`; lightweight palettes and menus use `popover`. The browser supplies focus containment, Esc, the inert background, top layer and focus return, so write no `role="dialog"`, `aria-modal`, focus trap or Esc handler, and never `alert()`, `confirm()` or `prompt()`. Use the element for behaviour only and style it fully to the page design: reset the UA `border`, `padding`, `max-width`, `max-height` and `margin`, style `::backdrop`, and set `display` only under `[open]`. Close through `dialog.close()` and clean up in the `close` event.
 
 ## Build Pipeline
 

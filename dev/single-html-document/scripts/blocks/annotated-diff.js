@@ -241,7 +241,7 @@ export function mount(root, data) {
     btn.addEventListener('click', () => {
       const el = lineEls[(j.atLine || 1) - 1];
       if (!el) return;
-      el.scrollIntoView({ block: 'center', behavior: 'smooth' });
+      el.scrollIntoView({ block: 'center', behavior: (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth') });
       el.setAttribute('data-flash', '');
       setTimeout(() => el.removeAttribute('data-flash'), 1200);
     });

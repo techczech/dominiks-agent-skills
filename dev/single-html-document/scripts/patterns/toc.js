@@ -646,14 +646,14 @@ export function init(options) {
     function jumpTo(id) {
       const target = document.getElementById(id);
       if (target) {
-        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        target.scrollIntoView({ behavior: (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth'), block: 'start' });
         history.replaceState(null, '', `#${id}`);
       }
       // On narrow viewports, hide after navigation; on wide, leave visible.
       if (window.matchMedia && window.matchMedia('(max-width: 880px)').matches) setState('hidden');
     }
     function jumpToTop() {
-      window.scrollTo({ top: 0, behavior: 'smooth' });
+      window.scrollTo({ top: 0, behavior: (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth') });
       history.replaceState(null, '', window.location.pathname + window.location.search);
     }
 

@@ -5,22 +5,34 @@
 // To add programmatically (e.g. from another pattern), call
 // window.__pageKeyboardHelp.register({ keys: 'T', label: 'Open contents' }).
 //
-// The overlay is keyboard-first: ? to open, Esc to close.
+// The overlay is a native <dialog> (showModal): Esc, focus containment and
+// focus return are the browser's. ? to open, Esc to close.
 
 const STYLE_ID = 'page-keyboard-help-pattern-style';
 const CSS = `
 .page-keyboard-help {
+  /* Native <dialog>: reset the UA box so only our look shows. */
   position: fixed;
   inset: 0;
   z-index: 70;
   display: none;
+  box-sizing: border-box;
+  width: 100%;
+  height: 100%;
+  max-width: none;
+  max-height: none;
+  margin: 0;
+  border: 0;
   align-items: center;
   justify-content: center;
   padding: 1rem;
   background: rgba(0, 0, 0, 0.35);
   backdrop-filter: blur(2px);
+  color: inherit;
+  overflow: hidden;
 }
-body[data-keyboard-help-open="true"] .page-keyboard-help { display: flex; }
+.page-keyboard-help[open] { display: flex; }
+.page-keyboard-help::backdrop { background: transparent; }
 .page-keyboard-help__panel {
   width: min(28rem, 92vw);
   background: white;
@@ -119,8 +131,15 @@ function rerender() {
 }
 
 function setOpen(open) {
-  document.body.setAttribute('data-keyboard-help-open', open ? 'true' : 'false');
-  if (open) rerender();
+  if (!overlay) return;
+  if (open) {
+    if (overlay.open) return;
+    rerender();
+    document.body.setAttribute('data-keyboard-help-open', 'true');
+    overlay.showModal();
+  } else if (overlay.open) {
+    overlay.close();
+  }
 }
 
 export function register(entry) {
@@ -155,9 +174,8 @@ export function init(options) {
   ready(() => {
     ensureStyle(document);
 
-    overlay = document.createElement('div');
+    overlay = document.createElement('dialog');
     overlay.className = 'page-keyboard-help';
-    overlay.setAttribute('role', 'dialog');
     overlay.setAttribute('aria-label', 'Keyboard shortcuts');
 
     const panel = document.createElement('div');
@@ -188,6 +206,9 @@ export function init(options) {
     overlay.appendChild(panel);
     document.body.appendChild(overlay);
 
+    overlay.addEventListener('close', () => {
+      document.body.setAttribute('data-keyboard-help-open', 'false');
+    });
     closeBtn.addEventListener('click', () => setOpen(false));
     overlay.addEventListener('click', (e) => {
       if (e.target === overlay) setOpen(false);
@@ -198,10 +219,7 @@ export function init(options) {
       if (isEditableTarget(e.target)) return;
       if (e.key === opts.shortcut) {
         e.preventDefault();
-        setOpen(document.body.getAttribute('data-keyboard-help-open') !== 'true');
-      } else if (e.key === 'Escape' && document.body.getAttribute('data-keyboard-help-open') === 'true') {
-        e.preventDefault();
-        setOpen(false);
+        setOpen(!overlay.open);
       }
     });
 
@@ -209,7 +227,7 @@ export function init(options) {
       window.__pageKeyboardHelp = {
         open: () => setOpen(true),
         close: () => setOpen(false),
-        toggle: () => setOpen(document.body.getAttribute('data-keyboard-help-open') !== 'true'),
+        toggle: () => setOpen(!overlay.open),
         register,
       };
     }

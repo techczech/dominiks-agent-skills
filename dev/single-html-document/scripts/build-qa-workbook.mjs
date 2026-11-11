@@ -1015,14 +1015,15 @@ function buildRuntime() {
   }
 
   function openFeedbackDialog() {
-    const existing = document.querySelector(".feedback-dialog-backdrop");
+    const existing = document.querySelector("dialog.feedback-dialog-backdrop");
     if (existing) existing.remove();
     const filename = buildFilename();
     const instructions = instructionText(filename);
-    const backdrop = document.createElement("div");
+    const backdrop = document.createElement("dialog");
     backdrop.className = "feedback-dialog-backdrop";
+    backdrop.setAttribute("aria-labelledby", "feedback-dialog-title");
     backdrop.innerHTML =
-      '<div class="feedback-dialog" role="dialog" aria-modal="true" aria-labelledby="feedback-dialog-title">' +
+      '<div class="feedback-dialog">' +
         '<button type="button" class="dialog-close" data-action="close-feedback-dialog" aria-label="Close">x</button>' +
         '<h2 id="feedback-dialog-title">Send feedback</h2>' +
         '<p>Choose how you want to send the feedback. Download is best when you can attach a file to an email. Copy is useful when you want to paste the JSON into a message.</p>' +
@@ -1034,9 +1035,11 @@ function buildRuntime() {
         '<pre class="instruction-preview">' + escapeHtml(instructions) + '</pre>' +
       '</div>';
     document.body.appendChild(backdrop);
-    backdrop.querySelector("[data-action='close-feedback-dialog']").addEventListener("click", () => backdrop.remove());
+    backdrop.addEventListener("close", () => backdrop.remove());
+    backdrop.showModal();
+    backdrop.querySelector("[data-action='close-feedback-dialog']").addEventListener("click", () => backdrop.close());
     backdrop.addEventListener("click", (event) => {
-      if (event.target === backdrop) backdrop.remove();
+      if (event.target === backdrop) backdrop.close();
     });
     backdrop.querySelector("[data-action='dialog-download-json']").addEventListener("click", () => {
       downloadJson(filename);
@@ -1611,14 +1614,26 @@ h1 {
 }
 
 .feedback-dialog-backdrop {
+  /* Native <dialog>: reset the UA box so only our look shows. */
   position: fixed;
   inset: 0;
   z-index: 1000;
-  display: grid;
+  display: none;
+  box-sizing: border-box;
+  width: 100%;
+  height: 100%;
+  max-width: none;
+  max-height: none;
+  margin: 0;
+  border: 0;
   place-items: center;
   padding: 18px;
   background: rgba(16, 32, 51, 0.38);
+  color: inherit;
+  overflow: hidden;
 }
+.feedback-dialog-backdrop[open] { display: grid; }
+.feedback-dialog-backdrop::backdrop { background: transparent; }
 
 .feedback-dialog {
   position: relative;

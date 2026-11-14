@@ -3,7 +3,7 @@ name: talkweaver
 description: Use TalkWeaver, a presentation app. Create and revise talks as Markdown outlines, cut Pathways, convert PowerPoint decks, make handouts (including any handout or follow-up notes after a delivered talk or workshop), process recordings into Scripts or Notes, set up publishing and read or change the app's settings through its command line. Content and app use, not TalkWeaver development.
 metadata:
   app: talkweaver
-  app-version: 0.44.0
+  app-version: 0.44.5
 ---
 
 # TalkWeaver

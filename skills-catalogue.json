@@ -877,6 +877,21 @@
    "extraLinks": []
   },
   {
+   "name": "research-snack",
+   "id": "skill-research-snack",
+   "category": "research",
+   "summary": "Check a public claim against primary data with an AI agent and publish a reproducible Research Snack with sources, charts and measured research usage.",
+   "jobs": [],
+   "needs": [],
+   "packages": [],
+   "when": "",
+   "status": "published",
+   "link": "https://github.com/techczech/dominiks-agent-skills/tree/main/research/research-snack",
+   "external": false,
+   "repo": null,
+   "extraLinks": []
+  },
+  {
    "name": "research-translation",
    "id": "skill-research-translation",
    "category": "research",

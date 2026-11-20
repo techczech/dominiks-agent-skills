@@ -1,0 +1,4 @@
+interface:
+  display_name: "Model Council"
+  short_description: "Get approved second opinions from other models"
+  default_prompt: "Use $model-council to get an independent second opinion on this plan before I proceed."

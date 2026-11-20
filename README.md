@@ -36,6 +36,7 @@ Building and checking software, designs and documents.
 - [dev-traffic-control](dev/dev-traffic-control/): Lets agents file test requests and reviews in Dev Traffic Control, a desktop review app, and collect the answers.
 - [hill-climb](dev/hill-climb/): Improve work in scored rounds (rubric judges and programmatic checks) or score options with independent judges, and render an HTML report of rubric, per-criterion scores, implementer responses and cost.
 - [image-to-design](dev/image-to-design/): Takes a design from a written brief through generated mockups to HTML/CSS, keeping every prompt, image and revision on disk.
+- [model-council](dev/model-council/): Get approved independent model opinions through T3 delegates, subscription CLIs or local routes, retaining evidence and disagreements.
 - [project-changelog](dev/project-changelog/): Keeps a structured changelog folder in a repository alongside its git history.
 - [single-html-document](dev/single-html-document/): Builds self-contained single-file HTML documents (reports, explainers, slide decks, feedback forms) that work offline.
 - [skill-explorer](https://github.com/techczech/skill-explorer): Turns a SKILL.md file into an interactive web page showing its structure, code and connections. (separate repository)

@@ -801,6 +801,21 @@
    "extraLinks": []
   },
   {
+   "name": "model-council",
+   "id": "skill-model-council",
+   "category": "dev",
+   "summary": "Get approved independent model opinions through T3 delegates, subscription CLIs or local routes, retaining evidence and disagreements.",
+   "jobs": [],
+   "needs": [],
+   "packages": [],
+   "when": "",
+   "status": "published",
+   "link": "https://github.com/techczech/dominiks-agent-skills/tree/main/dev/model-council",
+   "external": false,
+   "repo": null,
+   "extraLinks": []
+  },
+  {
    "name": "paper-reviewer-skill",
    "id": "skill-paper-reviewer-skill",
    "category": "research",

@@ -9,7 +9,8 @@ A Research Snack is a short public write-up of a quick check of a claim seen in 
 
 - Site repo (build, frontmatter fields, deploy): [research-snacks](https://github.com/techczech/research-snacks) (public; read its `AGENTS.md` and `README.md`). Live: https://researchsnacks.semanticmachines.fyi.
 - Reference entry: `entries/2026-11-16-one-in-270-jobs/`. Copy its shape.
-- Working material: keep raw extracts, scratch scripts, checksums and notes outside the published entry folder. Copy only final shareable `data/`, `code/` and `charts/` into the entry.
+- Working material: keep raw extracts, scratch scripts, checksums and notes outside the published entry folder.
+- Data and code live in the public `techczech/research-snacks-data` repo, not on the site. The entry carries only `index.md` and `charts/` (each chart's PNG, CSV and Vega-Lite spec); it links to its data and code folders on GitHub.
 - Style: British English; short, literal prose. Draft from a verified facts brief, preserve the author’s wording and distinguish the author’s judgement from the agent’s work.
 
 ## House rules (Dominik, 16 November 2026)
@@ -29,6 +30,8 @@ A Research Snack is a short public write-up of a quick check of a claim seen in 
     Include a table of model, role, calls, tokens read and tokens written from `python3 scripts/session-usage.py <session.jsonl>` (for Claude Code; for another harness, use its reported usage records and state the coverage), plus the other tools. Say that tokens read include the cached history and what the count covers.
 12. **Times are measured** from the transcript timestamps, with the timezone stated (UK time is the series convention); human time is an estimate and says so.
 13. **Name the judgement steps** (a sort, a mapping) and add a caveats section ("What this does not show").
+14. **No first person without the author.** Write "I", "my claim" or "my post" only for wording the author has written or approved. Otherwise name him: "Dominik's 2011 post", "Dominik claimed".
+15. **The author sees every snack before it goes live.** Show him a preview of a new snack, or of a substantial revision, and publish only after he has looked at it. Corrections he asked for may go live once he has seen the preview.
 
 ## Page structure
 
@@ -45,10 +48,10 @@ Headline figures that are one number, not a chart, are HTML infographics: write 
 ## Process
 
 1. Answer the question first. The author decides whether it becomes a public snack.
-2. Keep analysis scripts, source extracts with checksums, notes on decisions, and a verified facts brief with every number, the timeline, method, caveats and verbatim citations. Only shareable final files belong in the published entry.
+2. Keep analysis scripts, source extracts with checksums, notes on decisions, and a verified facts brief with every number, the timeline, method, caveats and verbatim citations. Only shareable final files are published: data and code in the data repo, charts in the entry.
 3. Make charts as PNG plus CSV and Vega-Lite spec (rule 7). Use clear units, zero-based bars, distinguish missing observations from zero, preserve uncertainty and supply source notes. Do not use purple or pink. The build adds the contents sidebar from the H2/H3 headings, so give sections short, specific headings.
 4. Draft `entries/YYYY-MM-DD-slug/index.md` from the verified facts brief. Check every number against `data/`, and add references, tables and the token table.
 5. Before publishing, add `snacks/<entry-id>/` to the public `techczech/research-snacks-data` repo: `README.md`, `METHOD.md`, `data/`, `code/` and `expected/`. State which page numbers each output checks and name the judgement steps. Read each provider's own redistribution terms and record the decision in `DATA-SOURCES.md`; publish IPUMS extract definitions, recreation code and derived aggregates, never microdata. Withhold corpus text unless its licence clearly permits it, and exclude personal account data. Run `uv sync` and `uv run check.py <entry-id>` in a fresh clone; the expected tables must match before publishing. Scan the complete tree and Git history for private information and secrets. The site build adds the folder's “Check it yourself” link automatically.
 6. Build with `bun run build` (Astro; content stays in the same entry Markdown and asset folders). Run `bun run check`, then look at the page headlessly (serve `site/` with `python3 -m http.server`; `file://` breaks the absolute stylesheet) and read screenshots of the tables and the citation block. The build updates `/rss.xml` automatically with complete entry summaries, dates, links and category/tag labels; readers can subscribe at https://researchsnacks.semanticmachines.fyi/rss.xml.
-7. Contributors submit the checked change for review. Only maintainers with explicit publication authorisation may push and deploy: run `scripts/deploy.sh --production` from clean `main`, then check the entry URL and `/rss.xml` return 200. For a fork, use its own deployment configuration.
+7. Deploy a preview (`scripts/deploy.sh --preview`) and show it to the author (rule 15). Only after he has looked at it, maintainers with publication authorisation push and deploy: run `scripts/deploy.sh --production` from clean `main`, then check the entry URL and `/rss.xml` return 200. For a fork, use its own deployment configuration.
 8. Record what was checked and any remaining limits beside the work. If a data provider requires bibliography registration, remind the author to submit the publication.

@@ -1097,6 +1097,24 @@
    "extraLinks": []
   },
   {
+   "name": "unslop",
+   "id": "skill-unslop",
+   "category": "writing",
+   "summary": "Review prose against author intent, reader needs and evidence, with independent critic and repair records.",
+   "jobs": [
+    "writing",
+    "agent-setup"
+   ],
+   "needs": [],
+   "packages": [],
+   "when": "You want an independent critic to review prose sentence by sentence against the author's purpose, reader needs and sources, and delete empty content.",
+   "status": "published",
+   "link": "https://github.com/techczech/dominiks-agent-skills/tree/main/writing/unslop",
+   "external": false,
+   "repo": null,
+   "extraLinks": []
+  },
+  {
    "name": "ux-journeys",
    "id": "skill-ux-journeys",
    "category": "dev",

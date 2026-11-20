@@ -105,6 +105,7 @@ Editing, anonymising and organising writing.
 - [anonymise](writing/anonymise/): Finds and redacts personal information in text on your own machine with an open-weight model, with no cloud service.
 - [doc-editorial-skill](writing/doc-editorial-skill/): Audits, reviews and fact-checks markdown documentation, proposing each change and asking before editing.
 - [readability-skill](https://github.com/techczech/readability-skill): Helps write more readable text and design more readable slides. (separate repository)
+- [unslop](writing/unslop/): Review prose against author intent, reader needs and evidence, with independent critic and repair records.
 - [writeflex](writing/writeflex/): Lets agents read, organise and prepare Markdown content for the WriteFlex app.
 
 <!-- skill-index:end -->

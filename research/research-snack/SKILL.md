@@ -1,11 +1,13 @@
 ---
 name: research-snack
-description: Use to check a public claim quickly against primary data with an agent and publish the result as a Research Snack on researchsnacks.semanticmachines.fyi, or to revise an existing snack.
+description: Use to check a public claim quickly against primary data with an agent, or to build a small evidence-based tool, and publish the result as a Research Snack on researchsnacks.semanticmachines.fyi; or to revise an existing snack.
 ---
 
 # Research Snack
 
 A Research Snack is a short public write-up of a quick check of a claim seen in the wild (a post, a talk, a headline). The agent goes to the primary data, produces numbers, tables and charts, and the page records how long it took, what the human did, what the AI did, the dead ends and the caveats. The point of the series: how quickly a claim can be checked now, not that the AI is always right.
+
+A snack can also be a **tool snack**: a small interactive tool built on evidence (reference entry: `entries/2026-11-21-roman-numerals-across-periods/`). The tool is embedded in the page, and the write-up explains the subject first and how the tool's judgements were made second.
 
 - Site repo (build, frontmatter fields, deploy): [research-snacks](https://github.com/techczech/research-snacks) (public; read its `AGENTS.md` and `README.md`). Live: https://researchsnacks.semanticmachines.fyi.
 - Reference entry: `entries/2026-11-16-one-in-270-jobs/`. Copy its shape.
@@ -31,14 +33,15 @@ A Research Snack is a short public write-up of a quick check of a claim seen in 
 12. **Times are measured** from the transcript timestamps, with the timezone stated (UK time is the series convention); human time is an estimate and says so.
 13. **Name the judgement steps** (a sort, a mapping) and add a caveats section ("What this does not show").
 14. **No first person without the author.** Write "I", "my claim" or "my post" only for wording the author has written or approved. Otherwise name him: "Dominik's 2011 post", "Dominik claimed".
-15. **The author sees every snack before it goes live.** Show him a preview of a new snack, or of a substantial revision, and publish only after he has looked at it. Corrections he asked for may go live once he has seen the preview.
+15. **Say when a model council was used.** If other models reviewed the research (see the [model-council skill](https://github.com/techczech/dominiks-agent-skills/tree/main/dev/model-council)), the entry names the members and the route each ran on, links the packet and every answer in the data repo, says what the council changed and what it did not settle, and links the site's About page section on model councils for the general explanation instead of repeating it. Record a cancelled or silent member too. A council is a second opinion, not verification: claims it raised are checked against sources before they change the page.
+16. **The author sees every snack before it goes live.** Show him a preview of a new snack, or of a substantial revision, and publish only after he has looked at it. Corrections he asked for may go live once he has seen the preview.
 
 ## Page structure
 
 The argument first, then a separate closing part about how it was made. Use H2 sections, each with H3 subsections; the contents sidebar shows the H2s and opens the H3s of the section being read.
 
-1. `## The claim`: `### What was said` (quote, link), `### Where the number seems to come from`.
-2. `## The answer`: `### In short`, then a subsection on the scope or meaning claim.
+1. `## The claim`: `### What was said` (quote, link), `### Where the number seems to come from`. A tool snack uses `## The request` (the author's words) instead.
+2. `## The answer`: `### In short`, then a subsection on the scope or meaning claim. A tool snack embeds the tool here (an iframe with an embed mode, plus a link to open it full-page) and adds a findings section on where the tool's judgements come from: what they are for, how they were made, and that they are editorial judgements unless counted from data.
 3. Findings as two to four H2 sections named by what they show (not "Results"), each with H3s for tables and charts.
 4. `## Limits of this check`: the caveats; they belong to the argument.
 5. `## How this was made` (exact heading; the build moves everything from here into a separate shaded appendix and adds References, Files and Cite this page to it): `### Timeline`, `### Data and method`, `### Models, tools and tokens`. Do not list the data and code files by hand: the build lists them under Files.
@@ -47,6 +50,7 @@ Headline figures that are one number, not a chart, are HTML infographics: write 
 
 ## Process
 
+0. **Scope before research** (new, November 2026) ([references/scoping.md](references/scoping.md)). First write a quick domain map of the field (5 to 10 minutes): terms, positions, methods, data, pitfalls and gaps. Then grill the author, one question at a time, about what they already know, what they want to know, their method preferences and their data ideas. Record the answers in a brief that also sets out an exploration space with time boxes. Skip this only for a narrow fact check that the author has already scoped.
 1. Answer the question first. The author decides whether it becomes a public snack.
 2. Keep analysis scripts, source extracts with checksums, notes on decisions, and a verified facts brief with every number, the timeline, method, caveats and verbatim citations. Only shareable final files are published: data and code in the data repo, charts in the entry.
 3. Make charts as PNG plus CSV and Vega-Lite spec (rule 7). Use clear units, zero-based bars, distinguish missing observations from zero, preserve uncertainty and supply source notes. Do not use purple or pink. The build adds the contents sidebar from the H2/H3 headings, so give sections short, specific headings.

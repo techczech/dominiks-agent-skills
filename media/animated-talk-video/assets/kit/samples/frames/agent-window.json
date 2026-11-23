@@ -1,0 +1,12 @@
+{
+  "id": "agent-window",
+  "scene": "The agent window with its tab inside the title bar",
+  "key": false,
+  "narration": "Tool user: the agent works with your files.",
+  "motion": "The window pops in; the message follows.",
+  "elements": [
+    { "type": "textblock", "id": "label", "x": 300, "y": 130, "align": "start", "lines": [ { "text": "Tool user", "size": 44 } ] },
+    { "type": "agent", "id": "agent", "x": 300, "y": 240, "w": 960, "h": 640, "tray": 220, "title": "Task" },
+    { "type": "message", "id": "ask", "x": 340, "y": 340, "w": 560, "h": 110, "text": "Find the evaluation.", "size": 40 }
+  ]
+}

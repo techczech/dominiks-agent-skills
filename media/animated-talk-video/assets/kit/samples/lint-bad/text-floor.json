@@ -1,0 +1,5 @@
+{ "id": "text-floor", "key": false, "narration": "Small text.", "elements": [
+  { "type": "text", "id": "small", "x": 200, "y": 400, "text": "A caption at thirty pixels", "size": 30 },
+  { "type": "text", "id": "axis-ok", "x": 200, "y": 500, "text": "26 px is fine for an axis label", "size": 26, "role": "axis" },
+  { "type": "chip", "id": "chip", "x": 200, "y": 600, "text": "a chip at 26 px" }
+] }

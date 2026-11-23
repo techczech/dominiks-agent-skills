@@ -1,0 +1,36 @@
+{
+  "id": "relation-relate",
+  "scene": "Built on models",
+  "key": false,
+  "narration": "Figma and Canva do design, and Manus, from China, helps with research.",
+  "motion": "Action arrows (N88): one row per subject; the verb rides on the arrow at its word; the first row stays while the second arrives.",
+  "elements": [
+    { "type": "relate", "id": "do-s0", "parts": ["subject:0"], "rows": [
+      { "subject": { "mark": ["svgl:figma", "svgl:canva"], "name": "Figma · Canva" }, "verb": "do", "result": { "mark": "pen-tool", "label": "Design" } },
+      { "subject": { "mark": "svgl:manus", "name": "Manus", "caption": "From China" }, "verb": "helps with", "result": { "mark": "search", "label": "Research" } } ] }
+  ],
+  "builds": [
+    { "cue": "do design", "motion": "pop", "stagger": 0.4, "elements": [
+      { "type": "relate", "id": "do-v0", "parts": ["verb:0"], "motion": "wipe:r,0.5", "rows": [
+        { "subject": { "mark": ["svgl:figma", "svgl:canva"], "name": "Figma · Canva" }, "verb": "do", "result": { "mark": "pen-tool", "label": "Design" } },
+        { "subject": { "mark": "svgl:manus", "name": "Manus", "caption": "From China" }, "verb": "helps with", "result": { "mark": "search", "label": "Research" } } ] },
+      { "type": "relate", "id": "do-r0", "parts": ["result:0"], "rows": [
+        { "subject": { "mark": ["svgl:figma", "svgl:canva"], "name": "Figma · Canva" }, "verb": "do", "result": { "mark": "pen-tool", "label": "Design" } },
+        { "subject": { "mark": "svgl:manus", "name": "Manus", "caption": "From China" }, "verb": "helps with", "result": { "mark": "search", "label": "Research" } } ] } ] },
+    { "cue": "Manus", "motion": "pop", "elements": [
+      { "type": "relate", "id": "do-s1", "parts": ["subject:1"], "rows": [
+        { "subject": { "mark": ["svgl:figma", "svgl:canva"], "name": "Figma · Canva" }, "verb": "do", "result": { "mark": "pen-tool", "label": "Design" } },
+        { "subject": { "mark": "svgl:manus", "name": "Manus", "caption": "From China" }, "verb": "helps with", "result": { "mark": "search", "label": "Research" } } ] } ] },
+    { "cue": "from China", "motion": "fade", "elements": [
+      { "type": "relate", "id": "do-c1", "parts": ["scap:1"], "rows": [
+        { "subject": { "mark": ["svgl:figma", "svgl:canva"], "name": "Figma · Canva" }, "verb": "do", "result": { "mark": "pen-tool", "label": "Design" } },
+        { "subject": { "mark": "svgl:manus", "name": "Manus", "caption": "From China" }, "verb": "helps with", "result": { "mark": "search", "label": "Research" } } ] } ] },
+    { "cue": "helps with research", "motion": "pop", "stagger": 0.4, "elements": [
+      { "type": "relate", "id": "do-v1", "parts": ["verb:1"], "motion": "wipe:r,0.5", "rows": [
+        { "subject": { "mark": ["svgl:figma", "svgl:canva"], "name": "Figma · Canva" }, "verb": "do", "result": { "mark": "pen-tool", "label": "Design" } },
+        { "subject": { "mark": "svgl:manus", "name": "Manus", "caption": "From China" }, "verb": "helps with", "result": { "mark": "search", "label": "Research" } } ] },
+      { "type": "relate", "id": "do-r1", "parts": ["result:1"], "rows": [
+        { "subject": { "mark": ["svgl:figma", "svgl:canva"], "name": "Figma · Canva" }, "verb": "do", "result": { "mark": "pen-tool", "label": "Design" } },
+        { "subject": { "mark": "svgl:manus", "name": "Manus", "caption": "From China" }, "verb": "helps with", "result": { "mark": "search", "label": "Research" } } ] } ] }
+  ]
+}

@@ -1,0 +1,6 @@
+{ "id": "raw-highlight", "key": false, "narration": "A highlight drawn from a raw rect.", "elements": [
+  { "type": "box", "id": "a", "x": 300, "y": 400, "w": 440, "h": 200, "text": "Model" },
+  { "type": "box", "id": "b", "x": 1000, "y": 400, "w": 440, "h": 200, "text": "Harness" }
+], "builds": [
+  { "cue": "model", "elements": [ { "type": "rect", "id": "picture-focus-0", "x": 292, "y": 392, "w": 456, "h": 216, "r": 20, "fill": "none", "stroke": "#0a7a5c", "sw": 6 } ] }
+] }

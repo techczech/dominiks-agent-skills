@@ -1,0 +1,16 @@
+{
+  "id": "box",
+  "scene": "Labelled boxes",
+  "key": false,
+  "narration": "A question goes in and an answer comes back.",
+  "motion": "The question pops in, then the arrow wipes down, then the answer pops in.",
+  "elements": [
+    { "type": "box", "id": "question", "x": 300, "y": 300, "w": 560, "h": 200, "text": "Question" }
+  ],
+  "builds": [
+    { "cue": "answer comes back", "motion": "pop", "elements": [
+      { "type": "box", "id": "answer", "x": 1060, "y": 300, "w": 560, "h": 200, "text": "Answer", "tone": "accent" },
+      { "type": "box", "id": "model", "x": 560, "y": 640, "w": 800, "h": 300, "text": "A long label shrinks to fit the box", "icon": "brain", "tone": "muted" }
+    ] }
+  ]
+}

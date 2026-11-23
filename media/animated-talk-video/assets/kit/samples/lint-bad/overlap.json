@@ -1,0 +1,6 @@
+{ "id": "overlap", "key": false, "narration": "A badge and a highlight edge on other text.", "elements": [
+  { "type": "text", "id": "words", "x": 300, "y": 500, "text": "Everything the model can see", "size": 56 },
+  { "type": "badge", "id": "badge", "x": 420, "y": 480, "n": 1 },
+  { "type": "box", "id": "card", "x": 1000, "y": 300, "w": 500, "h": 200, "text": "Harness" },
+  { "type": "text", "id": "caption", "x": 1200, "y": 500, "text": "Across the border", "size": 40, "anchor": "middle" }
+] }

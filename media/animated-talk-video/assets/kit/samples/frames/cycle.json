@@ -1,0 +1,21 @@
+{
+  "id": "cycle",
+  "scene": "A loop",
+  "key": false,
+  "narration": "The model asks the harness for a tool, the computer runs it, and the result goes back to the model, again and again.",
+  "motion": "Nodes pop in order; each arrow wipes; the return curve wipes last.",
+  "elements": [
+    { "type": "cycle", "id": "loop", "parts": ["node:0"], "nodes": [ { "label": "Model", "icon": "brain" }, { "label": "Harness", "icon": "terminal" }, { "label": "Computer", "icon": "computer" } ], "returnLabel": "repeat until done" }
+  ],
+  "builds": [
+    { "cue": "asks the harness", "motion": "pop", "elements": [
+      { "type": "cycle", "id": "loop-2", "parts": ["step:0", "node:1"], "nodes": [ { "label": "Model", "icon": "brain" }, { "label": "Harness", "icon": "terminal" }, { "label": "Computer", "icon": "computer" } ], "returnLabel": "repeat until done" }
+    ] },
+    { "cue": "computer runs it", "motion": "pop", "elements": [
+      { "type": "cycle", "id": "loop-3", "parts": ["step:1", "node:2"], "nodes": [ { "label": "Model", "icon": "brain" }, { "label": "Harness", "icon": "terminal" }, { "label": "Computer", "icon": "computer" } ], "returnLabel": "repeat until done" }
+    ] },
+    { "cue": "goes back to the model", "motion": "wipe:l,0.8", "elements": [
+      { "type": "cycle", "id": "loop-4", "parts": ["return", "label"], "nodes": [ { "label": "Model", "icon": "brain" }, { "label": "Harness", "icon": "terminal" }, { "label": "Computer", "icon": "computer" } ], "returnLabel": "repeat until done" }
+    ] }
+  ]
+}

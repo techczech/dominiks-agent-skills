@@ -1,0 +1,17 @@
+{
+  "id": "steps-list",
+  "scene": "A list of the steps the video shows",
+  "key": false,
+  "narration": "Five things most people do not know their desktop agent apps can do now.",
+  "motion": "The lead line lands, then the rows rise one by one.",
+  "elements": [
+    { "type": "steps", "id": "list", "lead": "Five things most people don't know their desktop agent apps can do now",
+      "items": [
+        { "label": "Show you a chart instead of a table", "thumb": "stills/chat.png" },
+        { "label": "Make a video by writing code", "thumb": "stills/cycle.png" },
+        { "label": "Check how much usage they have left", "thumb": "stills/stats.png" },
+        { "label": "Split the work into new chats", "thumb": "stills/box.png" },
+        { "label": "Send sub-agents to argue it out", "thumb": "stills/agent-window.png" }
+      ] }
+  ]
+}

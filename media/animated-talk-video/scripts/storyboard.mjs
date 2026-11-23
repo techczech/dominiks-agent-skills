@@ -84,8 +84,9 @@ if (existsSync(path.join(proj, 'plan.json'))) {
       await frameCard({ ...frame, scene: frame.scene ?? sc.slide.section }, { narration })
       cards[cards.length - 1].timing = `scene ${sc.start} to ${sc.end} s; builds at ${(sc.units ?? []).map(u => `${u.t}s`).join(', ') || 'none'}`
     } else if (lay === 'widget' || lay === 'embed') {
-      await widget.prepare(sc.slide, { projDir: proj, warn })
-      const { abs } = widget.stillsFor(sc.slide, proj)
+      const wslide = sc.fullWidth != null ? { ...sc.slide, fullWidth: sc.fullWidth } : sc.slide
+      await widget.prepare(wslide, { projDir: proj, warn })
+      const { abs } = widget.stillsFor(wslide, proj)
       cards.push({ n: cards.length + 1, id: sc.slideId, scene: sc.slide.section, key: sc.slide.title, narration, kind: 'widget', imgs: abs.map(p => b64(readFileSync(p), 'image/png')),
         motion: `The widget's own picture, cross-fading from state to state at ${(sc.units ?? []).map(u => `"${u.text}" (${u.t} s)`).join(', ') || 'no steps'}.`, cues: (sc.units ?? []).map(u => u.text), notes: [] })
     } else {

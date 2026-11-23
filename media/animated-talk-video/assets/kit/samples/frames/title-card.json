@@ -1,0 +1,238 @@
+{
+ "clipPictures": false,
+ "id": "title",
+ "key": false,
+ "narration": "",
+ "scene": "title",
+ "elements": [
+  {
+   "type": "rect",
+   "id": "dark",
+   "x": 0,
+   "y": 0,
+   "w": 1920,
+   "h": 1080,
+   "fill": "#101c2c",
+   "stroke": "none"
+  },
+  {
+   "type": "rect",
+   "id": "label-pill",
+   "x": 120,
+   "y": 96,
+   "w": 380,
+   "h": 96,
+   "r": 48,
+   "fill": "none",
+   "stroke": "#ffb4a2",
+   "sw": 3
+  },
+  {
+   "type": "text",
+   "id": "label",
+   "x": 310,
+   "y": 157,
+   "text": "Video summary",
+   "size": 40,
+   "color": "#ffb4a2",
+   "anchor": "middle",
+   "weight": 400
+  },
+  {
+   "type": "text",
+   "id": "title-1",
+   "x": 120,
+   "y": 345,
+   "text": "From tool maker",
+   "size": 104,
+   "color": "#ffffff",
+   "anchor": "start",
+   "weight": 400
+  },
+  {
+   "type": "text",
+   "id": "title-2",
+   "x": 120,
+   "y": 468,
+   "text": "to tool user",
+   "size": 104,
+   "color": "#ffb4a2",
+   "anchor": "start",
+   "weight": 400
+  },
+  {
+   "type": "text",
+   "id": "subtitle-0",
+   "x": 120,
+   "y": 590,
+   "text": "How AI in 2026 reshapes the space of",
+   "size": 41,
+   "color": "#d7e0ea",
+   "anchor": "start",
+   "weight": 400
+  },
+  {
+   "type": "text",
+   "id": "subtitle-1",
+   "x": 120,
+   "y": 648,
+   "text": "possibilities for learning technology",
+   "size": 41,
+   "color": "#d7e0ea",
+   "anchor": "start",
+   "weight": 400
+  },
+  {
+   "type": "text",
+   "id": "byline",
+   "x": 120,
+   "y": 930,
+   "text": "Dominik Lukeš · ALT Annual General Meeting · 11 November 2026",
+   "size": 36,
+   "color": "#ffffff",
+   "anchor": "start",
+   "weight": 400
+  },
+  {
+   "type": "rect",
+   "id": "stage-panel",
+   "x": 930,
+   "y": 230,
+   "w": 910,
+   "h": 540,
+   "r": 28,
+   "fill": "#f6f8f6",
+   "stroke": "none"
+  },
+  {
+   "type": "icon",
+   "id": "stage-mark0",
+   "icon": "svgl:openai",
+   "x": 1018.0,
+   "y": 262,
+   "size": 100,
+   "color": "#0a7a5c"
+  },
+  {
+   "type": "text",
+   "id": "stage-name0",
+   "x": 1068.0,
+   "y": 418,
+   "text": "Oracle",
+   "size": 40,
+   "color": "#101418",
+   "anchor": "middle",
+   "weight": 400
+  },
+  {
+   "type": "box",
+   "id": "question",
+   "x": 956,
+   "y": 470,
+   "w": 224,
+   "h": 96,
+   "text": "Question"
+  },
+  {
+   "type": "arrow",
+   "id": "qa",
+   "x1": 1068.0,
+   "y1": 566,
+   "x2": 1068.0,
+   "y2": 618,
+   "color": "#0a7a5c",
+   "sw": 4
+  },
+  {
+   "type": "box",
+   "id": "answer",
+   "x": 956,
+   "y": 618,
+   "w": 224,
+   "h": 96,
+   "text": "Answer"
+  },
+  {
+   "type": "icon",
+   "id": "stage-mark1",
+   "icon": "wrench",
+   "x": 1286.0,
+   "y": 262,
+   "size": 100,
+   "color": "#0a7a5c"
+  },
+  {
+   "type": "text",
+   "id": "stage-name1",
+   "x": 1336.0,
+   "y": 418,
+   "text": "Tool maker",
+   "size": 40,
+   "color": "#101418",
+   "anchor": "middle",
+   "weight": 400
+  },
+  {
+   "type": "box",
+   "id": "made-app",
+   "x": 1224,
+   "y": 470,
+   "w": 224,
+   "h": 244,
+   "text": "App",
+   "icon": "app-window"
+  },
+  {
+   "type": "arrow",
+   "id": "stage-arrow1",
+   "x1": 1184,
+   "y1": 330,
+   "x2": 1218,
+   "y2": 330,
+   "color": "#0a7a5c",
+   "sw": 4
+  },
+  {
+   "type": "icon",
+   "id": "stage-mark2",
+   "icon": "message-square",
+   "x": 1602.0,
+   "y": 262,
+   "size": 100,
+   "color": "#0a7a5c"
+  },
+  {
+   "type": "text",
+   "id": "stage-name2",
+   "x": 1652.0,
+   "y": 418,
+   "text": "Tool user",
+   "size": 40,
+   "color": "#101418",
+   "anchor": "middle",
+   "weight": 400
+  },
+  {
+   "type": "agent",
+   "id": "tool-user-window",
+   "x": 1492,
+   "y": 492,
+   "w": 320,
+   "h": 222,
+   "title": ""
+  },
+  {
+   "type": "arrow",
+   "id": "stage-arrow2",
+   "x1": 1452,
+   "y1": 330,
+   "x2": 1486,
+   "y2": 330,
+   "color": "#0a7a5c",
+   "sw": 4
+  }
+ ],
+ "builds": [],
+ "motion": "Spoken object arrivals and transient highlights; relationships persist.",
+ "source": "ALT AGM summary, 11 Nov 2026: the house title card. Copy it, change the label, two title lines, subtitle, byline and the picture panel (x 930-1840, y 230-770)."
+}

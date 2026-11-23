@@ -4,7 +4,7 @@
 
 This skill lets a coding agent such as Claude Code turn a talk into an animated explainer video. You give it a talk outline with a narration script, or a recording of the talk with the times of the slide changes. The agent redraws each slide as a moving scene, builds each point when the voice says it, adds captions, and writes an MP4. Next to it you get `captions.vtt`, `transcript.md` and `chapters.txt`.
 
-The style is a push-left transition between slides, a small title top-left and short regular-weight text. Motion comes in two levels: `calm` (fades only, for dense or beginner material) and `standard`.
+The style is a push-left transition between scenes, no titles on screens (titles appear only on the title page and section cards) and short regular-weight text at least 34 px high. Motion comes in two levels: `calm` (fades only, for dense or beginner material) and `standard`. `SKILL.md` is the entry point: a 12-step flow with a pre-release check (`node tools/prerelease.mjs .`) before anything is sent. The rules are in `references/rules.md`.
 
 The renderer is HyperFrames, an open-source tool from HeyGen that turns an HTML page into video. You do not need TalkWeaver.
 
@@ -19,7 +19,7 @@ A render takes one to three times the video's length on a slower laptop.
 
 ## Install
 
-The skill arrives as `animated-talk-video.skill`, which is a zip file, or as a folder. Unzip it, or copy the folder, into your agent's skills folder (for Claude Code, `~/.claude/skills`), then start a new session.
+Copy the `animated-talk-video` folder from the public repository (https://github.com/techczech/dominiks-agent-skills/tree/main/media/animated-talk-video) into your agent's skills folder (for Claude Code, `~/.claude/skills`), then start a new session.
 
 On first use the agent scaffolds a project folder and installs HyperFrames at a pinned version, 0.8.214. The pin is there because the project releases several times a day and the kit is tested against one version. The agent also turns HyperFrames telemetry off.
 
@@ -30,7 +30,7 @@ Write the outline in Markdown: `#` for the video title, `##` for a section, `###
 Then ask something like: "Use the animated-talk-video skill to make a video from outline.md. The audience is beginners." The agent will:
 
 1. Ask about the audience if you have not said. If it is unknown, it uses `standard` motion and says so.
-2. Draft a plan with estimated timings and show you stills, so you see the look before any audio exists.
+2. Draft a plan with estimated timings and a storyboard page, which you approve before any audio or render.
 3. Optionally generate synthetic narration, one clip per slide, and re-plan from the real clip lengths.
 4. Check the build, look at a still of every scene, fix problems and render.
 
@@ -38,7 +38,7 @@ The first render needs a network connection for GSAP and the fonts.
 
 ## Illustrated scenes and widgets
 
-Slides do not have to be bullet lists. An `illustration` slide is drawn from a small JSON file: a recurring line-art character, objects (documents, drawers, a search box, an agent chat window with tool calls, charts, logos) and build steps that arrive at the spoken words. `node tools/storyboard.mjs .` puts every frame on one page with its narration and movement: show that page to the author before any voice or render. A `widget` slide shows a self-contained HTML chart or diagram from the talk, stepped through its states (captured as stills with the headless browser). `references/inputs.md` has both formats; `assets/kit/samples/frames/` has three examples.
+Slides do not have to be bullet lists. An `illustration` slide is drawn from a small JSON file: a recurring line-art character, objects (documents, drawers, a search box, an agent chat window with tool calls, charts, logos) and build steps that arrive at the spoken words. `node tools/storyboard.mjs .` puts every frame on one page with its narration and movement: show that page to the author before any voice or render. A `widget` slide shows a self-contained HTML chart or diagram from the talk, stepped through its states (captured as stills with the headless browser). `references/inputs.md` has both formats; `assets/kit/samples/frames/` has an example of each element, with its still in `assets/kit/samples/stills/`.
 
 ## Make a video from a recorded talk
 
@@ -66,10 +66,10 @@ Tell the agent you have saved feedback. It reads the notes, treats each as a fix
 
 ## Fonts, voices and licences
 
-- **Fonts.** None are included. The default is Inter (open licence), which HyperFrames supplies. Dominik's talks use Microsoft Trebuchet MS, which cannot be redistributed, so it is not here. For your own typeface, put the `.ttf` files in `fonts/` and declare them in `look.json`. The renderer ignores system fonts.
+- **Fonts.** Four open-licence families (Fraunces, Alegreya Sans, Geist, Inter) come with the kit in `assets/kit/fonts/`; `look.json` `type` picks the preset. Dominik's talks use Microsoft Trebuchet MS, which cannot be redistributed, so it is not here. For your own typeface, put the `.ttf` files in `fonts/` and declare them in `look.json`. The renderer ignores system fonts.
 - **Voices.** Clone a voice only from audio you are authorised to use: your own, recorded for this purpose, or a speaker who has agreed in writing. Label synthetic narration as synthetic in the video description.
 - **Brand logos.** None are included, because they are trademarks. If a slide names an app, the build reads the official mark from an icon set you point it at (`iconSets` in `look.json`, or the `TALKWEAVER_ICONS` environment variable: TalkWeaver's `compiler/assets/icons` folder). Without such a folder the video shows the product name only and the build warns.
-- **Licences.** HyperFrames is Apache-2.0 and installed from npm. The line-art characters and props are original drawings made for this kit (see `PROVENANCE.md`). The 41 icons are from lucide (ISC licence; notice in `assets/kit/icons/LICENSE.txt`). GSAP is loaded from a CDN under GreenSock's standard licence: check https://gsap.com/standard-license for your use. `PROVENANCE.md` has the full list.
+- **Licences.** HyperFrames is Apache-2.0 and installed from npm, not bundled. The line-art characters and props are original drawings made for this kit. The 41 icons are from lucide (ISC licence; notice in `assets/kit/icons/LICENSE.txt`). The bundled fonts (Fraunces, Alegreya Sans, Geist, Inter) are under the SIL Open Font License 1.1; copyright lines in `assets/kit/fonts/LICENCE-NOTE.md`, licence texts beside them. GSAP is loaded from a CDN under GreenSock's standard licence: check https://gsap.com/standard-license for your use.
 
 ## Troubleshooting
 

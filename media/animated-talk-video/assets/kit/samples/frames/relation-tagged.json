@@ -1,0 +1,21 @@
+{
+  "id": "relation-tagged",
+  "scene": "Returning labs",
+  "key": false,
+  "narration": "Meta, known for its open Llama models, now has the Muse models, a Muse assistant and Muse Code.",
+  "motion": "Tag and badge (N88): what Meta is hangs under its name as a caption; what it has arrives as tags joined to the card, each at its name.",
+  "elements": [
+    { "type": "tagged", "id": "meta-card", "parts": ["card:0"], "cards": [ { "mark": "svgl:meta", "name": "Meta", "caption": "Open Llama models",
+      "tags": [ { "text": "Muse models" }, { "text": "Muse assistant" }, { "text": "Muse Code" } ] } ] }
+  ],
+  "builds": [
+    { "cue": "open Llama models", "motion": "fade", "elements": [ { "type": "tagged", "id": "meta-caption", "parts": ["caption:0"], "cards": [ { "mark": "svgl:meta", "name": "Meta", "caption": "Open Llama models",
+      "tags": [ { "text": "Muse models" }, { "text": "Muse assistant" }, { "text": "Muse Code" } ] } ] } ] },
+    { "cue": "Muse models", "motion": "pop", "elements": [ { "type": "tagged", "id": "meta-t0", "parts": ["tag:0.0"], "cards": [ { "mark": "svgl:meta", "name": "Meta", "caption": "Open Llama models",
+      "tags": [ { "text": "Muse models" }, { "text": "Muse assistant" }, { "text": "Muse Code" } ] } ] } ] },
+    { "cue": "Muse assistant", "motion": "pop", "elements": [ { "type": "tagged", "id": "meta-t1", "parts": ["tag:0.1"], "cards": [ { "mark": "svgl:meta", "name": "Meta", "caption": "Open Llama models",
+      "tags": [ { "text": "Muse models" }, { "text": "Muse assistant" }, { "text": "Muse Code" } ] } ] } ] },
+    { "cue": "Muse Code", "motion": "pop", "elements": [ { "type": "tagged", "id": "meta-t2", "parts": ["tag:0.2"], "cards": [ { "mark": "svgl:meta", "name": "Meta", "caption": "Open Llama models",
+      "tags": [ { "text": "Muse models" }, { "text": "Muse assistant" }, { "text": "Muse Code" } ] } ] } ] }
+  ]
+}

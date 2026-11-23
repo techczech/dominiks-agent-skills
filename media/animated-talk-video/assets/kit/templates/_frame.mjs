@@ -12,9 +12,15 @@
 //   motion     per build or per element: rise (default) | fade | pop | slide:dx,dy[,sec] | move:dx,dy | wipe:r|l|d|u[,sec]. Every one has a job:
 //              pop = an object arrives, slide = travel that shows a sequence, wipe = a line / arrow / drawer fills in along its direction.
 //
-// Element types: see TYPES below (people, props, logos, text, shapes). Coordinates are absolute on the 1920x1080 frame.
+// Element types: see TYPES below (people, props, logos, relationships, text, shapes). Coordinates are absolute on the 1920x1080 frame.
+// Relationships (N87, N88): `transform`, `relate`, `tagged` draw what a sentence links (fields: _draw.mjs above each function). Each element
+//   draws the `parts` it names (default all) from a layout computed on the whole spec, so a relationship is split over cues by repeating
+//   the same spec with different `parts` and ids: e.g. base { type: "transform", id: "t-in", parts: ["input"], ...spec }, then a build at
+//   the verb with { ...spec, id: "t-verb", parts: ["node", "verb"] } and one at the output noun with parts ["output"]. splitRelation() does this.
+//   Which form, and which items belong together, is decided by reading the sentence and written into the frame; never inferred from counts.
 import * as D from './_draw.mjs'
 import * as C from './_cast.mjs'
+import * as G from './_geom.mjs'
 
 const P = (o, k, d) => (o[k] ?? d)
 const pt = (v, d) => (Array.isArray(v) ? v : d)
@@ -43,7 +49,7 @@ export const TYPES = {
   agent: (e, id) => D.agentWindow(id + '-win', e.x, e.y, e.w, e.h, { title: P(e, 'title', ''), trayH: P(e, 'tray', 0), trayLabel: P(e, 'trayLabel', "Model's context"), chatbot: !!e.chatbot }),
   tray: (e, id) => D.tray(id + '-tray', e.x, e.y, e.w, e.h, P(e, 'label', "Model's context")),
   tool: (e, id) => D.toolArrow(id + '-arrow', ...pt(e.from, [0, 0]), ...pt(e.to, [0, 0]), { label: e.label, ic: e.icon, lx: e.labelAt?.[0], ly: e.labelAt?.[1] }),
-  message: (e) => D.chatMsg(e.x, e.y, e.w, e.h, [].concat(e.rows ?? e.text ?? ''), P(e, 'size', 28), e.agent ? D.GT : D.PAPER, e.agent ? D.GREEN : D.INK),
+  message: (e) => D.chatMsg(e.x, e.y, e.w, e.h, [].concat(e.rows ?? e.text ?? ''), P(e, 'size', 34), e.agent ? D.GT : D.PAPER, e.agent ? D.GREEN : D.INK),
   // documents and records
   page: (e, id) => D.page(id + '-p', e.x, e.y, e.w ?? 200, e.h ?? 260, e),
   slip: (e, id) => D.slip(id + '-s', e.x, e.y, e.w ?? 420, e.h ?? 260, e.name ?? 'file.txt', e),
@@ -68,6 +74,22 @@ export const TYPES = {
   book: (e, id) => D.book(id + '-b', e.x, e.y, P(e, 'w', 86), P(e, 'h', 58)),
   badge: (e) => D.numBadge(e.x, e.y, e.n ?? 1, P(e, 'r', 24)),
   agentMark: (e) => D.agentMark(e.x, e.y, P(e, 'r', 22)),
+  // relationships (N87, N88): what a sentence links, drawn as the link. Each takes `parts` so one relationship can arrive over several cues.
+  transform: (e, id) => D.transform(id + '-tf', e),   // input as it looks -> verb node (actor's mark or AI spark) -> output as it looks; first choice
+  relate: (e, id) => D.relate(id + '-rl', e),         // subject card -> verb pill on an arrow -> result card, one row per subject; "X does Y"
+  tagged: (e, id) => D.tagged(id + '-tg', e),         // card + caption (is) + tags / corner badge (has); with no tags, a peer row that fits one view
+  // house elements (D1-D13): drawn from kit geometry, no title/kicker/footer. See _draw.mjs above each function for the fields; `parts` splits one over cues.
+  box: (e, id) => D.boxEl(id + '-bx', e),                         // {x,y,w,h,text,icon?,tone?}  labelled box, label centred and auto-fitted 40-56 px
+  quote: (e, id) => D.quoteEl(id + '-q', e),                      // {text,source,date?,figure?,x?,y?,w?}  parts: mark text source figure
+  stat: (e, id) => D.statEl(id + '-s', e),                        // {value,label,x,y}  x = centre
+  stats: (e, id) => D.statEl(id + '-s', e),                       // {items:[{value,label}] (up to 4),x?,y?,w?}  parts: value:i label:i
+  step: (e, id) => D.stepEl(id + '-st', e),                       // {n?,of?,text,accent?,sub?,picture?}  full-screen step card  parts: num text sub picture
+  steps: (e, id) => D.stepsEl(id + '-ss', e),                     // {lead?,items:[{label,thumb?|icon?}]} up to 6  parts: lead item:i
+  textblock: (e, id) => D.textblockEl(id + '-tb', e),             // {lines:[{text,size?,color?}],align?,x?,y?,picture?}  parts: text picture
+  cycle: (e, id) => D.cycleEl(id + '-cy', e),                     // {nodes:[{label,icon}],returnLabel?,x?,y?,w?}  parts: node:i step:i return label
+  focus: (e, id, cx) => D.focusEl(id + '-f', e, cx.target(e.target)),   // {target: id | [x,y,w,h], pad?}  the one highlight style
+  pointer: (e, id, cx) => D.pointerEl(id + '-pt', e, typeof e.to === 'string' ? cx.target(e.to) : null),   // {from:[x,y],to:id|[x,y],label?,color?}
+  chat: (e, id) => D.chatEl(id + '-ch', e),                       // {messages:[{who:"user"|"agent",text,kind?}],title?,x,y,w,h}  parts: frame msg:i
   // text and shapes
   text: (e) => D.text(e.x, e.y, e.text ?? '', P(e, 'size', 32), P(e, 'weight', 400), e.color ?? D.INK, P(e, 'anchor', 'start')),
   lines: (e) => D.lines(e.x, e.y, e.rows ?? [], P(e, 'size', 32), e.step ?? null, P(e, 'weight', 400), e.color ?? D.INK, P(e, 'anchor', 'start')),
@@ -81,7 +103,22 @@ export const TYPES = {
   image: (e) => `<image href="${String(e.src).replace(/&/g, '&amp;').replace(/"/g, '&quot;')}" x="${e.x ?? 0}" y="${e.y ?? 0}" width="${e.w ?? 1920}" height="${e.h ?? 1080}" preserveAspectRatio="xMidYMid meet"/>`
 }
 
-const MOTIONS = new Set(['rise', 'fade', 'pop', 'slide', 'move', 'wipe'])
+// splitRelation(spec, groups): one element per group of part names (same spec, ids `${spec.id}-<n>`), ready to put in builds.
+//   groups = [["card:0"], ["caption:0", "badge:0"], ...]; every part is drawn once only if the groups cover relationParts(spec) once.
+export const relationParts = D.relationParts
+//   Warns (warn, default console.warn) when a part is drawn by two groups or by none.
+export function splitRelation(spec, groups, warn = m => console.warn('warn ' + m)) {
+  const all = D.relationParts(spec), count = new Map(all.map(p => [p, 0]))
+  for (const g of groups) for (const p of D.matchParts(spec, g)) count.set(p, (count.get(p) ?? 0) + 1)
+  const twice = all.filter(p => count.get(p) > 1), never = all.filter(p => !count.get(p))
+  if (twice.length) warn(`splitRelation ${spec.id ?? spec.type}: drawn more than once: ${twice.join(', ')}`)
+  if (never.length) warn(`splitRelation ${spec.id ?? spec.type}: never drawn: ${never.join(', ')}`)
+  return groups.map((parts, i) => ({ ...spec, id: `${spec.id ?? spec.type}-${i}`, parts }))
+}
+
+// a motion an element type has unless it or its build names one: a highlight fades in
+export const DEFAULT_MOTION = { focus: 'fade' }
+const MOTIONS = new Set(['rise', 'fade', 'pop', 'slide', 'move', 'wipe', 'turn'])
 const nWords = s => String(s ?? '').trim().split(/\s+/).filter(Boolean).length
 
 // frame -> { svg, inner, base: [ids], builds: [{ cue, at, items: [{id, motion}], hide, dim }], warnings }
@@ -96,42 +133,59 @@ export function frameToSvg(frame, opts = {}) {
   const prefix = opts.prefix ?? ''
   const seen = new Set()
   let auto = 0
+  // element lookup for `focus` / `pointer` targets: any element of this frame, base or builds, by id
+  const byId = new Map()
+  for (const e of frame.elements ?? []) if (e.id) byId.set(e.id, e)
+  for (const b of frame.builds ?? []) for (const e of b.elements ?? []) if (e.id) byId.set(e.id, e)
+  const cx = { target: t => (Array.isArray(t) ? t : G.resolveTarget(t, { byId })) }
   const draw = (e, where) => {
     if (!TYPES[e.type]) throw new Error(`${frame.id}: unknown element type "${e.type}" in ${where} (use ${Object.keys(TYPES).join(', ')})`)
     const id = e.id ?? `${e.type}-${++auto}`
     if (seen.has(id)) throw new Error(`${frame.id}: duplicate element id "${id}"`)
     seen.add(id)
     let body
-    try { body = TYPES[e.type](e, id).replace(/^<g id="(floor|plant|window|clock|stress-marks)"/, `<g id="${id}-in"`) } catch (err) { throw new Error(`${frame.id}: element "${id}" (${e.type}): ${err.message}`) }
-    return { id, svg: `<g id="${id}">${body}</g>` }
+    D.ctxState.el = `${frame.id ?? 'frame'}/${id}`
+    try { body = TYPES[e.type](e, id, cx).replace(/^<g id="(floor|plant|window|clock|stress-marks)"/, `<g id="${id}-in"`) } catch (err) { throw new Error(`${frame.id}: element "${id}" (${e.type}): ${err.message}`) }
+    // highlights may sit over other elements: tell the HyperFrames layout check (12 Nov, ALT AGM project)
+    return { id, svg: `<g id="${id}"${e.type === 'focus' || id.includes('picture-focus-') ? ' data-layout-allow-overlap="true"' : ''}>${body}</g>` }
   }
-  const keyLines = [].concat(frame.key ?? [])
+  const keyLines = frame.key === false ? [] : [].concat(frame.key ?? [])
   const words = nWords(keyLines.join(' '))
   if (words > 9) warn(`key phrase is ${words} words; at most 9`)
   if (!words && frame.key !== false) warn('no key phrase (N35: one key phrase per frame, top-left)')
   let inner = ''
   const base = []
   const baseSvg = (frame.elements ?? []).map(e => { const d = draw(e, 'elements'); base.push(d.id); return d.svg }).join('')
-  inner += `<g id="base">${baseSvg}${keyLines.length ? D.key(keyLines) : ''}</g>`
+  inner += `${frame.clipPictures ? '<defs><clipPath id="picture-clip"><rect x="80" y="100" width="1760" height="800"/></clipPath></defs>' : ''}<g id="base"${frame.clipPictures ? ' clip-path="url(#picture-clip)"' : ''}>${baseSvg}${keyLines.length ? D.key(keyLines) : ''}</g>`
   const builds = (frame.builds ?? []).map((b, i) => {
     if (b.motion && !MOTIONS.has(String(b.motion).split(':')[0])) throw new Error(`${frame.id}: build ${i + 1}: unknown motion "${b.motion}"`)
     const items = (b.elements ?? []).map(e => {
       const d = draw(e, `build ${i + 1}`)
-      const mo = e.motion ?? b.motion ?? 'rise'
+      const mo = e.motion ?? DEFAULT_MOTION[e.type] ?? b.motion ?? 'rise'
       if (!MOTIONS.has(String(mo).split(':')[0])) throw new Error(`${frame.id}: element "${d.id}": unknown motion "${mo}"`)
-      inner += d.svg.replace(`<g id="${d.id}">`, `<g id="${d.id}" class="build" data-build="${i + 1}">`)
+      inner += d.svg.replace(`<g id="${d.id}"`, `<g id="${d.id}" class="build" data-build="${i + 1}"`)
       return { id: d.id, motion: mo }
     })
     for (const h of b.hide ?? []) if (![...seen].includes(h)) warn(`build ${i + 1} hides "${h}", which is not an element`)
     if (!b.cue && b.at == null) warn(`build ${i + 1} has no cue (words) and no at (seconds); it will be spread by the planner`)
-    return { cue: b.cue ?? b.text ?? `build ${i + 1}`, at: b.at ?? null, items, hide: b.hide ?? [], dim: b.dim ?? {}, stagger: b.stagger ?? 0.14 }
+    return { cue: b.cue ?? b.text ?? `build ${i + 1}`, at: b.at ?? null, items, hide: b.hide ?? [], dim: b.dim ?? {}, stagger: b.stagger ?? 0.14, zoom: b.zoom }
   })
   // ids a build hides or dims must exist
   for (const b of builds) for (const id of Object.keys(b.dim)) if (!seen.has(id)) warn(`dim names "${id}", which is not an element`)
   const pref = s => s.replace(/\bid="([^"]+)"/g, `id="${prefix}$1"`).replace(/url\(#([^)]+)\)/g, `url(#${prefix}$1)`).replace(/(href="#)([^"]+)"/g, `$1${prefix}$2"`)
   inner = pref(inner)
-  const svg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080" width="1920" height="1080"><title>${(frame.id ?? '').replace(/&/g, '&amp;')}</title><rect id="${prefix}paper" width="1920" height="1080" fill="${D.PAPER}"/>${inner}</svg>`
+  const svg = `<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 1920 1080" width="1920" height="1080"><title>${(frame.id ?? '').replace(/&/g, '&amp;')}</title><rect id="${prefix}bg-paper" width="1920" height="1080" fill="${D.PAPER}"/>${inner}</svg>`
+  // every id in a frame is unique: animation selectors address elements by id, and a duplicate would be moved twice. The build fails on any.
+  const dup = duplicateIds(svg)
+  if (dup.length) throw new Error(`${frame.id}: duplicate SVG ids ${dup.slice(0, 8).join(', ')}${dup.length > 8 ? ' …' : ''}`)
   return { svg, inner, base, builds, warnings, prefix }
+}
+
+// ids that occur more than once in an SVG string (the build fails on any)
+export function duplicateIds(svg) {
+  const n = new Map()
+  for (const m of svg.matchAll(/\sid="([^"]+)"/g)) n.set(m[1], (n.get(m[1]) ?? 0) + 1)
+  return [...n].filter(([, k]) => k > 1).map(([id]) => id)
 }
 
 // the settled picture: everything built, nothing hidden by a swap or dimmed (what the storyboard page shows). Hidden-by-swap
@@ -141,9 +195,11 @@ export function frameStill(frame, opts = {}) {
   let svg = r.svg
   const hidden = new Set(r.builds.flatMap(b => b.hide))
   for (const id of hidden) svg = removeGroup(svg, id)
-  for (const b of r.builds) for (const [id, op] of Object.entries(b.dim)) svg = svg.replace(new RegExp(`<g id="${id}"`), `<g id="${id}" opacity="${op}"`)
+  for (const [id, op] of new Map(r.builds.flatMap(b => Object.entries(b.dim)))) svg = svg.replace(new RegExp(`<g id="${id}"`), `<g id="${id}" opacity="${op}"`)
+  for (const b of [...new Map(r.builds.filter(b => b.zoom).map(b => [b.zoom.id, b])).values()]) { const z = zoomTransform(b.zoom); svg = svg.replace(`<g id="${b.zoom.id}"`, `<g transform="translate(${z.x} ${z.y}) scale(${z.scale})" id="${b.zoom.id}"`); }
   return { ...r, svg }
 }
+export function zoomTransform(z) { const scale = z.scale ?? 1; return { scale, x: 960 - scale * (z.cx ?? 960), y: 490 - scale * (z.cy ?? 490) }; }
 function removeGroup(svg, id) {
   const open = svg.indexOf(`<g id="${id}"`)
   if (open < 0) return svg

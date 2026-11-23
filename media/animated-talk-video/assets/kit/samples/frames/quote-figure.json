@@ -1,0 +1,10 @@
+{
+  "id": "quote-figure",
+  "scene": "A quotation beside a portrait",
+  "key": false,
+  "narration": "A short quotation with its speaker's picture.",
+  "motion": "The portrait fades in, then the words, then the source.",
+  "elements": [
+    { "type": "quote", "id": "q", "text": "The tool user works with the files and software on your computer.", "source": "A speaker", "figure": "sample-folder.svg" }
+  ]
+}

@@ -1,0 +1,17 @@
+{
+  "id": "pointer",
+  "scene": "A pointer",
+  "key": false,
+  "narration": "Look at this box here.",
+  "motion": "The pointer wipes in toward the box.",
+  "elements": [
+    { "type": "box", "id": "target", "x": 1000, "y": 400, "w": 560, "h": 240, "text": "The part to notice" },
+    { "type": "box", "id": "other", "x": 300, "y": 760, "w": 560, "h": 160, "text": "Nearby", "tone": "muted" }
+  ],
+  "builds": [
+    { "cue": "this box", "motion": "wipe:r,0.6", "elements": [
+      { "type": "pointer", "id": "p1", "from": [560, 300], "to": "target", "label": "Here" },
+      { "type": "pointer", "id": "p2", "from": [1300, 840], "to": "target", "color": "accent" }
+    ] }
+  ]
+}

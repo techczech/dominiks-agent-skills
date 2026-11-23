@@ -1,0 +1,10 @@
+{
+  "id": "quote",
+  "scene": "A quotation",
+  "key": false,
+  "narration": "In January, Dean Ball predicted that the least important thing you could do with frontier AI would be getting chatbots to answer questions.",
+  "motion": "The mark and the words fade in as spoken; the source line lands last.",
+  "elements": [
+    { "type": "quote", "id": "q", "text": "By the end of this year, the least important thing you will be able to do with frontier AI systems will be getting chatbots to answer questions.", "source": "Dean Ball", "date": "January 2026" }
+  ]
+}

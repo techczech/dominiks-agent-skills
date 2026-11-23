@@ -1,0 +1,37 @@
+{
+  "id": "chat",
+  "scene": "A chat",
+  "key": false,
+  "narration": "You ask, it searches your files, reads two of them and answers.",
+  "motion": "Messages arrive one by one.",
+  "elements": [
+    { "type": "chat", "id": "c", "y": 120, "w": 1320, "h": 800, "title": "Chat", "parts": ["frame", "msg:0"], "messages": [
+      { "who": "user", "text": "Find last year's evaluation and tell me the headline figure." },
+      { "who": "agent", "kind": "thought", "text": "Thought for 4 seconds" },
+      { "who": "agent", "kind": "search", "text": "Searched: evaluation 2025" },
+      { "who": "agent", "kind": "tool", "text": "read_file(review.docx)" },
+      { "who": "agent", "kind": "result", "text": "Evaluation: 82% positive" },
+      { "who": "agent", "text": "The headline figure is 82 percent positive, from the programme review." }
+    ] }
+  ],
+  "builds": [
+    { "cue": "searches your files", "motion": "rise", "elements": [
+      { "type": "chat", "id": "c-2", "y": 120, "w": 1320, "h": 800, "parts": ["msg:1", "msg:2", "msg:3", "msg:4"], "messages": [
+      { "who": "user", "text": "Find last year's evaluation and tell me the headline figure." },
+      { "who": "agent", "kind": "thought", "text": "Thought for 4 seconds" },
+      { "who": "agent", "kind": "search", "text": "Searched: evaluation 2025" },
+      { "who": "agent", "kind": "tool", "text": "read_file(review.docx)" },
+      { "who": "agent", "kind": "result", "text": "Evaluation: 82% positive" },
+      { "who": "agent", "text": "The headline figure is 82 percent positive, from the programme review." }
+    ] } ] },
+    { "cue": "answers", "motion": "rise", "elements": [
+      { "type": "chat", "id": "c-3", "y": 120, "w": 1320, "h": 800, "parts": ["msg:5"], "messages": [
+      { "who": "user", "text": "Find last year's evaluation and tell me the headline figure." },
+      { "who": "agent", "kind": "thought", "text": "Thought for 4 seconds" },
+      { "who": "agent", "kind": "search", "text": "Searched: evaluation 2025" },
+      { "who": "agent", "kind": "tool", "text": "read_file(review.docx)" },
+      { "who": "agent", "kind": "result", "text": "Evaluation: 82% positive" },
+      { "who": "agent", "text": "The headline figure is 82 percent positive, from the programme review." }
+    ] } ] }
+  ]
+}

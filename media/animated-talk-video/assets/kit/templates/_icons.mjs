@@ -54,14 +54,71 @@ function parseSvg(raw) {
   const [, , vw, vh] = vb.split(/[\s,]+/).map(Number)
   return { inner: m[2].replace(/<title>[\s\S]*?<\/title>/g, '').replace(/\n\s*/g, ' ').trim(), viewBox: vb, w: vw, h: vh, tag }
 }
-const WHITE = /^(#fff|#ffff|#ffffff|white)$/i
-// a one-colour white mark (dark-mode variant) -> ink; marks with real colours are left alone
-function lightModeFix(inner, ink) {
-  const fills = [...inner.matchAll(/fill="([^"]+)"/g)].map(x => x[1]).filter(v => v !== 'none' && !/^url\(/.test(v))
-  if (fills.length && fills.every(v => WHITE.test(v))) return inner.replace(/fill="(#fff|#ffff|#ffffff|white)"/gi, `fill="${ink}"`)
-  return inner
+const WHITE = /^(#fff|#ffff|#ffffff|white|rgb\(\s*255\s*,\s*255\s*,\s*255\s*\))$/i
+let WARN = null   // set per resolveIcon() call from opts.warn
+// lightModeFix(): a one-colour white mark (a dark-mode variant) -> ink; any mark with another painted colour stays as drawn (N89).
+// Every painted element is evaluated with its inherited fill and stroke: parent <g>, a <use> instance's context (the referenced
+// element in <defs> paints with the <use>'s fill), the default black fill of a shape with no fill, and white strokes. When the
+// paint cannot be resolved safely (CSS classes or <style>, an unknown reference, foreign content) the mark is kept as drawn and a
+// warning names it. Exported for tools/test-light-mode.mjs.
+const PAINTED = new Set(['path', 'circle', 'rect', 'ellipse', 'polygon', 'polyline', 'line', 'text', 'tspan'])
+const CONTAINERS = new Set(['g', 'svg', 'symbol', 'a', 'switch'])
+const NOT_DRAWN = new Set(['defs', 'clippath', 'mask', 'lineargradient', 'radialgradient', 'pattern', 'marker', 'filter', 'title', 'desc', 'metadata', 'stop'])
+function parseAttrs(t) {
+  const a = {}
+  for (const m of t.matchAll(/([\w:-]+)\s*=\s*"([^"]*)"/g)) a[m[1]] = m[2]
+  for (const m of t.matchAll(/([\w:-]+)\s*=\s*'([^']*)'/g)) a[m[1]] = m[2]
+  if (a.style) for (const d of a.style.split(';')) { const [k, v] = d.split(':').map(x => x?.trim()); if (k && v) a[k] = v }
+  return a
 }
-const mark = (parsed, source, ink) => ({ kind: 'mark', inner: lightModeFix(parsed.inner, ink).replace(/currentColor/g, ink), viewBox: parsed.viewBox, w: parsed.w, h: parsed.h, source })
+function svgTree(inner) {
+  const root = { name: 'root', attrs: {}, kids: [] }, stack = [root]
+  for (const m of inner.matchAll(/<(\/?)([a-zA-Z][\w:-]*)((?:[^>"']|"[^"]*"|'[^']*')*?)(\/?)>/g)) {
+    const [, close, name, rest, self] = m
+    if (close) { if (stack.length > 1) stack.pop(); continue }
+    const node = { name: name.toLowerCase(), attrs: parseAttrs(rest), kids: [] }
+    stack.at(-1).kids.push(node)
+    if (!self) stack.push(node)
+  }
+  return root
+}
+export function paintedColours(inner) {
+  if (/<style\b/i.test(inner) || /\sclass\s*=/.test(inner)) return { unresolved: 'CSS styling' }
+  const root = svgTree(inner), ids = new Map(), out = []
+  const index = n => { if (n.attrs.id) ids.set(n.attrs.id, n); n.kids.forEach(index) }
+  index(root)
+  let unresolved = null
+  const val = (v, inh) => (v === undefined || v === 'inherit' ? inh : v)
+  const paint = (n, inh, depth = 0) => {
+    if (unresolved) return
+    if (depth > 24) { unresolved = 'reference loop'; return }
+    if (NOT_DRAWN.has(n.name)) return
+    const fill = val(n.attrs.fill, inh.fill), stroke = val(n.attrs.stroke, inh.stroke)
+    if (n.name === 'use') {
+      const ref = (n.attrs.href ?? n.attrs['xlink:href'] ?? '').replace(/^#/, ''), t = ids.get(ref)
+      if (!t) { unresolved = `<use> of unknown #${ref}`; return }
+      return paint(t.name === 'symbol' ? { ...t, name: 'g' } : t, { fill, stroke }, depth + 1)
+    }
+    if (n.name === 'root' || CONTAINERS.has(n.name)) { n.kids.forEach(k => paint(k, { fill, stroke }, depth + 1)); return }
+    if (PAINTED.has(n.name)) {
+      if (n.name !== 'line' && fill !== 'none') out.push(fill ?? 'black')
+      if (stroke !== undefined && stroke !== 'none') out.push(stroke)
+      n.kids.forEach(k => paint(k, { fill, stroke }, depth + 1))
+      return
+    }
+    unresolved = `<${n.name}> content`
+  }
+  paint(root, { fill: undefined, stroke: undefined })
+  return unresolved ? { unresolved } : { colours: out.map(c => String(c).trim().toLowerCase()) }
+}
+export function lightModeFix(inner, ink, label = 'mark', warn = WARN) {
+  const r = paintedColours(inner)
+  if (r.unresolved) { warn?.(`logo ${label}: kept as drawn (light-mode recolouring cannot resolve ${r.unresolved})`); return inner }
+  if (!r.colours.length || !r.colours.every(c => WHITE.test(c))) return inner
+  const W = '(#fff|#ffff|#ffffff|white|rgb\\(\\s*255\\s*,\\s*255\\s*,\\s*255\\s*\\))'
+  return inner.replace(new RegExp(`\\b(fill|stroke)="${W}"`, 'gi'), `$1="${ink}"`).replace(new RegExp(`\\b(fill|stroke)\\s*:\\s*${W}`, 'gi'), `$1:${ink}`)
+}
+const mark = (parsed, source, ink) => ({ kind: 'mark', inner: lightModeFix(parsed.inner, ink, source).replace(/currentColor/g, ink), viewBox: parsed.viewBox, w: parsed.w, h: parsed.h, source })
 
 function lucide(name, dir) {
   const p = new URL(`${name}.svg`, KIT_ICONS)
@@ -92,6 +149,7 @@ function brand(name, dir, ink) {
 }
 
 export function resolveIcon(spec, opts = {}) {
+  WARN = opts.warn ?? null
   const s = String(spec ?? '').trim()
   if (!s) return null
   const m = s.match(/^([a-z-]+):(.+)$/i)

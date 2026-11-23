@@ -1,0 +1,10 @@
+{
+  "id": "stat",
+  "scene": "One number",
+  "key": false,
+  "narration": "Three quarters of teams already use it.",
+  "motion": "The number fades in; the label follows.",
+  "elements": [
+    { "type": "stat", "id": "s", "value": "75%", "label": "of teams already use it", "x": 960, "y": 380 }
+  ]
+}

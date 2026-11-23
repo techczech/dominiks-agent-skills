@@ -13,7 +13,7 @@
 import { readFileSync } from 'node:fs'
 import path from 'node:path'
 import { kit } from './_kit.mjs'
-import { frameToSvg } from './_frame.mjs'
+import { frameToSvg, zoomTransform } from './_frame.mjs'
 
 export const layout = 'illustration'
 export const css = `
@@ -37,6 +37,10 @@ export function motionJs(sel, mot, tt, calm, hasTransform = false) {
   const [name, arg = ''] = String(mot).split(':')
   const fade = `tl.fromTo(${sel}, { opacity: 0 }, { opacity: 1, duration: 0.4, ease: "power1.out" }, ${tt});\n`
   if (calm || name === 'fade') return fade
+  if (name === 'turn') {
+    const [cx = 960, cy = 792, dur = 0.9] = arg.split(',').map(Number)
+    return `tl.set(${sel}, { opacity: 1 }, ${tt});\ntl.fromTo(${sel}, { attr: { transform: "rotate(0 ${cx} ${cy})" } }, { attr: { transform: "rotate(360 ${cx} ${cy})" }, duration: ${dur}, ease: "none" }, ${tt});\n`
+  }
   if (name === 'rise') return `tl.fromTo(${sel}, { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: 0.45, ease: "power2.out" }, ${tt});\n`
   if (name === 'pop') return `tl.fromTo(${sel}, { opacity: 0, scale: 0.9, transformOrigin: "50% 50%", transformBox: "fill-box" }, { opacity: 1, scale: 1, duration: 0.4, ease: "back.out(1.7)" }, ${tt});\n`
   if (name === 'slide') {
@@ -63,13 +67,31 @@ export function render(slide, ctx) {
   const calm = ctx.motion === 'calm'
   const q = id => JSON.stringify(`#${sid}-${id}`)
   let js = ''
+  const zoomState = {}
   r.builds.forEach((bd, i) => {
     const t = b[i]
-    bd.items.forEach((it, j) => { js += motionJs(q(it.id), it.motion, f2(t + j * bd.stagger), calm) })
-    for (const id of bd.hide) js += `tl.to(${q(id)}, { opacity: 0, duration: 0.3, ease: "power1.out" }, ${f2(t)});\n`
+    if (bd.zoom) {
+      // 12 Nov 2026: tween between two explicit transforms. A bare tl.to read the markup's transform (the LAST zoom's end state) as its
+      // start, so the first zoom of every picture flashed blank and regrew from a corner (the "jumps" at the picture screens).
+      const z = zoomTransform(bd.zoom), zid = bd.zoom.id, ident = 'translate(0 0) scale(1)'
+      const from = zoomState[zid] ?? ident
+      if (!(zid in zoomState)) js += `tl.set(${q(zid)}, { attr: { transform: "${ident}" } }, 0);\n`
+      // a zoom that the next zoom of the same picture interrupts ends where that one starts, so no tween is cut mid-way
+      const nextT = r.builds.map((b2, i2) => (i2 > i && b2.zoom?.id === zid ? b[i2] : null)).find(v => v != null)
+      const zdur = f2(nextT != null ? Math.max(0.3, Math.min(1.2, nextT - t - 0.02)) : 1.2)
+      zoomState[zid] = `translate(${z.x} ${z.y}) scale(${z.scale})`
+      js += `tl.fromTo(${q(zid)}, { attr: { transform: "${from}" } }, { attr: { transform: "${zoomState[zid]}" }, duration: ${zdur}, ease: "sine.inOut", immediateRender: false }, ${f2(t)});\n`
+    }
+    bd.items.forEach((it, j) => {
+      const at = t + j * bd.stagger
+      js += motionJs(q(it.id), it.motion, f2(at), calm)
+      // These authored rings briefly accent the spoken picture part, then clear.
+      if (it.id.startsWith('picture-focus-')) js += `tl.to(${q(it.id)}, { opacity: 0, duration: 0.18, ease: "power1.out" }, ${f2(at + 0.8)});\n`
+    })
+    for (const id of bd.hide) js += `tl.to(${q(id)}, { opacity: 0, duration: ${id.includes("v3-label") ? 0 : 0.3}, ease: "power1.out" }, ${f2(t)});\n`
     for (const [id, v] of Object.entries(bd.dim)) js += `tl.to(${q(id)}, { opacity: ${v}, duration: 0.5, ease: "power1.inOut" }, ${f2(t)});\n`
   })
   if (!n) k.warn('illustration has no builds: nothing arrives while the voice runs (N32); add builds')
-  const html = `<div class="il" id="${sid}fig">${r.svg.replace(/<svg ([^>]*)>/, '<svg $1 font-family="Inter, system-ui, sans-serif">').replace(/<title>[\s\S]*?<\/title>/, '')}</div>`
+  const html = `<div class="il" id="${sid}fig">${r.svg.replace(/<svg ([^>]*)>/, '<svg $1 style="font-family:var(--sans)">').replace(/<title>[\s\S]*?<\/title>/, '')}</div>`
   return { html, js, cls: 'il-scene' }
 }

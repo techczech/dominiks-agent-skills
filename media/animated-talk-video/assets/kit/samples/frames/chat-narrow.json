@@ -1,0 +1,14 @@
+{
+  "id": "chat-narrow",
+  "scene": "A chat in a centred, narrower window",
+  "key": false,
+  "narration": "You ask for the survey results; it finds them and tells you what came first.",
+  "motion": "Messages arrive one by one.",
+  "elements": [
+    { "type": "chat", "id": "c", "y": 90, "w": 1320, "h": 640, "title": "Chat", "messages": [
+      { "who": "user", "text": "Find the results of our staff training survey. Which topics do people want most? Don't give me a table, show me." },
+      { "who": "agent", "kind": "tool", "text": "search_files: training survey" },
+      { "who": "agent", "text": "I found the 2026 results on the HR team site: 212 responses. Using AI tools safely comes first overall, but not in every department. Pick a department to see how it changes." }
+    ] }
+  ]
+}

@@ -1,0 +1,7 @@
+{ "id": "raw-polyline", "key": false, "narration": "A loop drawn as lines and arrows.", "elements": [
+  { "type": "box", "id": "a", "x": 200, "y": 300, "w": 440, "h": 240, "text": "Model" },
+  { "type": "box", "id": "b", "x": 1280, "y": 300, "w": 440, "h": 240, "text": "Computer" },
+  { "type": "line", "id": "p1", "x1": 1500, "y1": 540, "x2": 1500, "y2": 760, "sw": 4 },
+  { "type": "line", "id": "p2", "x1": 1500, "y1": 760, "x2": 420, "y2": 760, "sw": 4 },
+  { "type": "arrow", "id": "p3", "x1": 420, "y1": 760, "x2": 420, "y2": 540, "sw": 4 }
+] }

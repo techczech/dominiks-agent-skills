@@ -39,9 +39,20 @@ node tools/hf.mjs snapshot --scenes --moves   also one per scene change, mid-mov
 node tools/hf.mjs snapshot --at 4,17,36    exact times
 node tools/hf.mjs render                   detached render to renders/<folder>.mp4, log in render.log
 node tools/hf.mjs status                   tail of render.log
+node tools/hf.mjs prerelease [--mp4 f]     the pre-release gate below (`check` runs it after the HyperFrames check)
 ```
 
 Expected `check` output on a kit video: 0 errors; warnings `nested_structure_needs_subcomposition` (each scene is inline, not a sub-composition; render works) and `container_overflow ... overflowed top Npx` on `.tbody` (the body is lifted for the small title modes; harmless); contrast "N/N pass WCAG AA". Anything else is real: read it.
+
+## Pre-release gate (D14)
+
+```
+node tools/prerelease.mjs . [--mp4 file]   one line per check: pass | warn | fail | not-run, with its rule number
+node tools/make-covers.mjs . [--from mp4|svg]   cover.jpg, thumbnail.jpg, cover-og.jpg (N73): svg stand-in before the render, mp4 first frame after
+node tools/jump-scan.mjs video.mp4 [out.json] [threshold]   hard picture jumps in a render (used by the gate; also standalone)
+```
+
+It must pass before a final render is published or sent. Exit 1 on any fail; a warning needs one sentence in the build report. It writes nothing into the project (it restores `.hyperframes/` after the HyperFrames check) and stays under about 4 minutes: a HyperFrames check that takes longer is reported `not-run`, so run `node tools/hf.mjs check` on its own then. Checks: frame lint (`kit/tools/lint-frames.mjs`), HyperFrames check and contrast, title page and `thumbnail.jpg` (N65, N73), storyboard newer than the frames (N44), narration lint (N50, N41, N42, N74, N67), key phrases (N35), "journey" in labels (N86), visual cadence (N68, N32), on the MP4 (the `--mp4` file, else a `*web*.mp4` or the newest MP4 in the project or `renders/`): jump scan, loudness -16 LUFS within 0.5, duration against `plan.json`, web file under 25 MB; companion page (N63); private strings from an optional `prerelease-deny.txt` (one term per line, `#` comments; N78). A check whose input is missing is `not-run`. The N74 speaker surname comes from `companion.json` (`speaker`, else the citation's leading surname). It ends with the rules it cannot check, which are looked at in the stills.
 
 ## Render recipe
 
@@ -53,15 +64,15 @@ Expected `check` output on a kit video: 0 errors; warnings `nested_structure_nee
 ## Fonts
 
 - The renderer ignores system fonts. `Trebuchet MS`, `system-ui`, `sans-serif`, monospace names are mapped to bundled or Google fonts (Inter, Roboto, JetBrains Mono) fetched at render time. A page set in a system font comes out in Inter. A still in Inter when you expected another font means the `@font-face` path is wrong.
-- The kit's default look uses Inter (open licence, mapped automatically): nothing to supply. For another typeface put the `.ttf` files in `fonts/` and declare them in `look.json`:
+- The kit bundles Fraunces, Alegreya Sans, Geist and Inter (OFL, Latin subsets, about 230 KB) in `kit/fonts/`; the composition loads them by `@font-face` from `kit/fonts/` (relative to `index.html`). `look.json` `"type"` picks `geist` (default), `fraunces-alegreya` or `inter` (D18); `"fonts": { "display", "text", "mono" }` overrides single families. For another typeface put your own licensed files in `fonts/` and declare them:
 
 ```json
-{ "sans": "\"My Font\", Inter, sans-serif",
-  "fonts": [ { "family": "My Font", "weight": 400, "src": "fonts/my-font-regular.ttf" },
-             { "family": "My Font", "weight": 700, "src": "fonts/my-font-bold.ttf" } ] }
+{ "fonts": { "text": "My Font" },
+  "fontFaces": [ { "family": "My Font", "weight": 400, "src": "fonts/my-font-regular.ttf" },
+                 { "family": "My Font", "weight": 700, "src": "fonts/my-font-bold.ttf" } ] }
 ```
 
-- **No font is included in this skill.** Dominik's talks use Microsoft Trebuchet MS, which is not redistributable; the skill does not ship it. Supply your own licensed font or a free one (Inter, Source Sans 3, Open Sans, Lato: SIL OFL or Apache). `fonts/` is gitignored in scaffolded projects.
+- Only the OFL fonts in `kit/fonts/` ship with the skill (licences in `kit/fonts/LICENCE-NOTE.md`). Dominik's talks use Microsoft Trebuchet MS, which is not redistributable; the skill does not ship it. Check in a still that the face really loaded (`node kit/tools/frame-still.mjs frame.json out.png` draws one frame through chrome-headless-shell with the faces; rsvg cannot load `@font-face`).
 - A monospace stack falls back to JetBrains Mono unless a mono file is bundled. Say which you used in the report.
 
 ## Composition rules the renderer enforces

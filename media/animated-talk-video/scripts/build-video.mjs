@@ -25,9 +25,9 @@ const look = existsSync(path.join(proj, 'look.json')) ? read('look.json') : {}
 delete look._note
 
 const scenes = plan.scenes.map(sc => ({
-  slide: sc.slide, start: sc.start, end: sc.end, builds: (sc.units ?? []).map(u => u.t),
+  slide: sc.fullWidth != null ? { ...sc.slide, fullWidth: sc.fullWidth } : sc.slide, start: sc.start,   // D19: a scene's fullWidth reaches every template call, not only render end: sc.end, builds: (sc.units ?? []).map(u => u.t),
   ...(sc.highlights?.length ? { highlights: sc.highlights } : {}),
-  ...(sc.motion ? { motion: sc.motion } : {}), ...(sc.transition ? { transition: sc.transition } : {})
+  ...(sc.readFloor != null ? { readFloor: sc.readFloor } : {}), ...(sc.motion ? { motion: sc.motion } : {}), ...(sc.transition ? { transition: sc.transition } : {})
 }))
 // captionFixes: [["recogniser slip", "what was said"]]; "/regex/" for a pattern. Case-insensitive.
 const fixRe = a => { const m = String(a).match(/^\/(.*)\/[a-z]*$/); return new RegExp(m ? m[1] : String(a).replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'gi') }
@@ -52,7 +52,7 @@ await prepareScenes(scenes, { projDir: proj, warn: m => console.error('note ' + 
 const { html, warnings, moves } = compose({
   projDir: proj, iconSets,
   look, duration, audio: plan.audio ? { src: plan.audio } : null, scenes, captions,
-  titleMode: opt['title-mode'] ?? plan.titleMode ?? 'kicker', afterIntro: opt['after-intro'] ?? plan.afterIntro
+  profile: plan.profile ?? look.profile, titleMode: opt['title-mode'] ?? plan.titleMode ?? 'none', afterIntro: opt['after-intro'] ?? plan.afterIntro
 })
 const settleOf = Object.fromEntries(moves.map(m => [m.id, m.settle]))
 writeFileSync(path.join(proj, 'index.html'), html)

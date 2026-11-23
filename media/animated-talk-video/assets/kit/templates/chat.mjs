@@ -15,11 +15,11 @@ export const units = slide => slide.items.map(i => i.text)
 
 export const css = `
 .ct .band { position: absolute; left: 0; right: 0; top: 255px; bottom: 90px; display: flex; align-items: center; justify-content: center; }
-.ct .win { width: 1500px; background: #fff; border-radius: 26px; box-shadow: 0 0 0 2px #d5d8dd; padding: 34px 54px 38px; font-size: 34px; line-height: 1.35; color: #101418; --k-reasoning: #6d47c9; --k-context: #7a6200; --k-call: #b45309; --k-result: #a21caf; --k-answer: #0f766e; }
+.ct .win { width: 1320px; background: #fff; border-radius: 26px; box-shadow: 0 0 0 2px #d5d8dd; padding: 34px 54px 38px; font-size: 34px; line-height: 1.35; color: #101418; --k-reasoning: #6d47c9; --k-context: #7a6200; --k-call: #b45309; --k-result: #a21caf; --k-answer: #0f766e; }
 .ct .m { position: relative; }
 .ct .m + .m { margin-top: 22px; }
 .ct .user { display: flex; justify-content: flex-end; }
-.ct .bub { max-width: 900px; background: #eceef1; border-radius: 30px; padding: 14px 30px; }
+.ct .bub { max-width: 800px; background: #eceef1; border-radius: 30px; padding: 14px 30px; }
 .ct .part { --k: var(--k-reasoning); }
 .ct .part.context { --k: var(--k-context); } .ct .part.tool { --k: var(--k-call); } .ct .part.result { --k: var(--k-result); }
 .ct .ph { display: flex; align-items: center; gap: 12px; font-size: 0.84em; font-weight: 700; color: var(--k); }

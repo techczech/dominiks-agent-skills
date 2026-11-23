@@ -1,0 +1,7 @@
+{ "id": "arrow-style", "key": false, "narration": "Red, thick and diagonal arrows.", "elements": [
+  { "type": "box", "id": "a", "x": 200, "y": 700, "w": 400, "h": 200, "text": "Here" },
+  { "type": "arrow", "id": "red", "x1": 900, "y1": 300, "x2": 1500, "y2": 300, "color": "#b42318", "sw": 4 },
+  { "type": "arrow", "id": "thick", "x1": 900, "y1": 400, "x2": 1500, "y2": 400, "sw": 9 },
+  { "type": "arrow", "id": "diagonal", "x1": 700, "y1": 800, "x2": 1300, "y2": 560, "sw": 4 },
+  { "type": "arrow", "id": "dashed", "x1": 900, "y1": 900, "x2": 1500, "y2": 900, "sw": 4, "dash": "12 8" }
+] }

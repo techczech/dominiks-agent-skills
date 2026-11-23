@@ -1,69 +1,62 @@
 ---
 name: animated-talk-video
-description: "Use to turn a talk outline, slides or a recorded talk into an animated explainer video (MP4, captions) with HyperFrames."
+description: "Use for any request to make a video: an explainer, a video summary of a talk or workshop, short videos for participants, a paper explainer or an animated story. Builds the MP4, captions and companion page with HyperFrames from an outline, slides, transcript or recording."
 ---
 
 # Animated talk video
 
-Talk or script -> narrative -> illustrated storyboard -> timed scenes -> MP4. The slides are the key points, not the video: every spoken idea is shown as a picture of the thing itself (motion-principles sections 11-14). Kit of plain-JS templates (20 templates, ~75 layout tags, incl. `illustration` and `widget`), planner, builder, review page. HyperFrames pinned 0.8.214 renders. Node >= 22, ffmpeg, chrome-headless-shell. No TalkWeaver needed.
+The single entry point for every video. Source -> brief -> narrative -> script -> storyboard (approved) -> voice -> plan -> build -> pre-release check -> render -> companion. Every spoken idea is shown as a picture of the thing itself; the slides are the key points, not the video. Kit of plain-JS templates and frame elements, planner, builder, lint, pre-release gate, review page. HyperFrames pinned 0.8.214. Node >= 22, ffmpeg, chrome-headless-shell. No TalkWeaver needed. Setup: `references/hyperframes-setup.md`.
 
-## Load order
+## Use when
 
-1. `references/motion-principles.md` (rules; overrides taste; sections 11-14 are the current house style) and `references/agent-brief.md` (steps, report format).
-2. `references/inputs.md` (outline tags, timings, words, cues) before writing an outline or running the planner.
-3. `references/hyperframes-setup.md` before installing or rendering.
-4. `designing-instructional-videos` (narrative planning, voice-image roles) and, for narration, `expository-writing` then `unslop`.
-5. Charts, logos and widgets: `talkweaver-visuals` and `ai-model-benchmarks`; reuse the talk's own widgets as scenes (N39).
+Any request for a video: explainer, talk or workshop summary, participant videos, paper explainer, story, a silent explainer top (the `explainers` skill sends those here). Not for slides (`talkweaver`).
 
-## Routes
+## Rules of the flow
 
-- **A. Outline only.** Outline + narration (`>` lines) -> draft plan with estimated timings -> optional synthetic narration -> real timings -> video. Voice cloning only from audio the user is authorised to use; label the narration synthetic.
-- **B. Recording + slide timings.** Real voice, the default for Dominik's recorded talks. Timings: TalkWeaver run JSON (`slideTimeIndex`), or CSV/JSON the user writes by hand (`inputs.md`). A short video is a cut of in-order excerpts chosen for the talk's through-line; each excerpt gets illustrated frames (N33), not its slide's bullets.
-- **C. TalkWeaver package** (exporter not built yet). Expected inputs: `audio/voice.m4a`, `session.json`, `transcript.words.json`, `outline.md`, `look.json`, `fonts/`, `images/`, optional `cues.json` (layout in `agent-brief.md` Step 1C). Same planner as B.
+- Rules are in `references/rules.md`, grouped by the steps below. Newest wins; no brief or earlier build overrides one (N75). If a skill will not load through the Skill tool, read its `SKILL.md` from the skills library.
+- Every step ends with a one-line report of what was decided or produced. Hand Dominik only choices that are his (genre, look, which first, approval).
+- Each comment he gives on a video goes into `feedback-ledger.md` (optional local log of the user's comments, kept beside the skill or in the project and created on first use; never part of the published skill) the same day, before the fix (D15); columns: date, video, his words, decision, where it now lives. Add a rule to `rules.md` only when it is general: a rule that held for one video goes in that video's notes.
+- Work in the video's project folder (`new-video.mjs`), never a new Documents or chat folder.
 
-## Steps
+## The flow
 
-0. Genre, mode and audience (N31, N45: `explain` for beginners and hard ideas, `navigate` for paper, report or talk tours; paper explainers default to `navigate`), then narrative (N40, N50: an introduction, a bridge sentence into every section, difficult ideas split over screens with concrete examples): save the audience's starting knowledge, the claims and the narrative outline (or the chosen excerpts) as files and review them. Then storyboard: write frame JSON per scene (`references/inputs.md`), run `node tools/storyboard.mjs .` (every frame as a still with its key phrase, narration and movement, N44). **Dominik approves the storyboard before any voice or render.**
-1. Scaffold: `node scripts/new-video.mjs <dir> [--outline file] [--install]`. Work inside `<dir>` (`tools/`, `kit/`, `look.json`).
-2. Route-specific plan (`agent-brief.md` Step 1A/1B/1C): `node tools/plan-from-timings.mjs --outline outline.md [--timings f] [--words f] [--durations f] [--cues f] [--audio audio/voice.m4a] --out plan.json`.
-3. Read `plan.json` sources and every warning; fix timings (cues, or edit `units[].t`), caption fixes, motion level.
-4. `node tools/build-video.mjs .` -> `index.html`, `scenes.json`, `captions.vtt`, `transcript.md`, `chapters.txt`. Never hand-edit `index.html`.
-5. `node tools/hf.mjs check` (0 errors, contrast AA), then `node tools/hf.mjs snapshot --scenes --moves`. **Open every still and look**, including for empty or text-only frames while the voice runs (N32). Fix, rebuild, re-snap.
-6. `node tools/hf.mjs render` (detached; poll `node tools/hf.mjs status`). No command blocks longer than 4 minutes.
-7. Review loop: `node kit/tools/review-page.mjs .`, `... serve .` (127.0.0.1:4777), read `review/feedback/*.json`, one reply per note, rebuild. Stop the server after.
-8. Companion page (N63, N71): `node tools/companion.mjs . --out companion` builds the self-study app from the same outline, frames, `plan.json`/`scenes.json`, `cues.json`, `captions.vtt`, `chapters.txt` and the MP4. Views: home hub with progress; video with chapter timeline and synced transcript; Argument (the paper's case one chapter at a time: table of contents, an "In short" answer, numbered steps with thumbnails that open the build in a viewer); the widgets in self-study mode; a key-terms map; Apply (how researchers can apply the source, marked as our translation); Making (purpose, how an agent made it, the skills used with links). An optional Reading view (reading routes, read critically) exists but is off by default. Every view appears only when `companion.json` has its data (`argument`, `concepts`, `research`, `making`, `skills`, `reading`; example: `assets/sample-companion.json`). Section cards are left out unless listed in `keepChapterScreens`. The video is embedded only when its timings match the outline. Screenshot every view at desktop and phone width, light and dark, before handing it over.
-   Publishing (Cloudflare Pages): files are capped at 25 MB, so point `video.file` at a web encode (`-preset slow -tune animation -crf 30 -c:a aac -b:a 96k -movflags +faststart` took 6 minutes of 1080p from 55 MB to 16 MB with no visible loss). Pages static assets ignore Range requests, so Safari will not play the video and chapter seeks fail: deploy with a Pages Function at `functions/media/[[path]].js` that answers Range with 206 (template: `assets/pages-range-function.js`). New projects need `wrangler pages project create --force` once (wrangler 4.15x delegates to Workers otherwise). Replace draft and copyright notices in `footer` before going public; publishing third-party figure redraws is the owner's decision.
-9. Report in the `agent-brief.md` section 5 format.
+1. **Brief.** In: request, source. Rules: step 1 (N31, N45, N76, N81, D16). Skill: `designing-instructional-videos`. Write `brief.md`: genre, audience, `explain` or `navigate`, source type, length, voice, privacy cleared, approval state. Ask only what is his.
+2. **Evidence and privacy.** In: the source. Rules: step 2 (N78-N80, N37-N39, N52, N62). Skills: `talkweaver` recording processing for transcripts, `talkweaver-visuals` for widgets and logos, `ai-model-benchmarks` for charts. Out: a source list, real captures masked, a privacy note.
+3. **Narrative outline.** Rules: step 3 (N40, N50, N55-N57). Skill: `designing-instructional-videos`, "Plan the spoken story". Out: `outline.md` with `mode:` frontmatter, audience knowledge, claims, per part entry/question/exit, section card titles. Format: `references/inputs.md`.
+4. **Narration script.** Rules: step 4 (N41, N42, N64, N74). Skills in order: `expository-writing`, `cohesion-review`, `unslop`. Out: `>` lines in the outline, read aloud in order.
+5. **Storyboard.** Rules: step 5 (D1-D13, N33-N36, N47, N49, N54, N65, N73). Scaffold once: `node scripts/new-video.mjs <dir> [--outline file] [--install]`. Write frame JSON from kit elements only (`references/inputs.md`), then `node tools/storyboard.mjs .` and `node kit/tools/lint-frames.mjs .`. Out: `frames/`, the storyboard page.
+6. **Approval.** Dominik approves the storyboard before any voice or render (N44). Record it in `brief.md`. Report: the storyboard path.
+7. **Voice and word times.** Rules and commands: `references/voice.md` (house narrator, pace, takes, loudness). Silent videos skip this step.
+8. **Plan.** Rules: step 8 (2.1-2.5, N46, N48, N69). Command: `node tools/plan-from-timings.mjs --outline outline.md [--timings f] [--words f] [--durations f] [--cues f] [--audio audio/voice.m4a] --out plan.json`. Read every `source` and warning. Route detail: `references/agent-brief.md`.
+9. **Build.** Rules: step 9. `node tools/build-video.mjs .` (writes `index.html`, `scenes.json`, `captions.vtt`, `transcript.md`, `chapters.txt`; never hand-edit `index.html`), then `node tools/hf.mjs check`.
+10. **Pre-release check.** `node tools/prerelease.mjs .` must pass, then `node tools/hf.mjs snapshot --scenes --moves` and open every still (list in `rules.md` step 10). Fix, rebuild, repeat. Nothing is sent or published before it passes. Warnings need a sentence in the report.
+11. **Render and review.** `node tools/hf.mjs render` (detached; poll `node tools/hf.mjs status`; no command over 4 minutes), loudness (`voice.md`), then the review page (`references/agent-brief.md`). One reply per note; every note into the ledger. Stop servers afterwards.
+12. **Companion and publish.** `references/companion.md`: `node tools/companion.mjs . --out companion`, screenshots of every view, web encode, deploy. Publishing needs his go-ahead; repeat the privacy pass first. Author example: on the author's own talks site the talk page is this companion, never the site's plain page. Report format: `references/agent-brief.md`.
 
-## Defaults (house style, Dominik Lukes)
+## Branches by source
 
-- No titles on explainer screens (N54): title mode `none`, frame `key` empty. Section cards carry the progress strip and a lead-in title built on a verb or a question; those titles are the chapters (N55-N57). (`kicker`, `tab`, `intro-then-none`, `full` remain on request.)
-- Deliverable = MP4 + self-study companion page: the video embedded, chapters as a clickable table of contents, a step-through per section, and widgets in self-study mode (N63; rule in `designing-visuals-for-learning`). Widget scenes use `?video=1` (N60); screenshots are large and zoomed (N61).
-- Transition `push-left` 1.2 s between slides; no shaders; interludes crossfade; no transition over a build.
-- `navigate` density (N65-N70): open on a title card; screenshots for one sentence only; narration at about 150 words a minute; a visual event every 2-3 s, never more than 4 s without one; problems shown failing; the storyboard shows every state on a timeline, and a draft render goes with it.
-- Every point punctuated by a visual arriving at its word; a new screen for each elaboration, about five elements at most (N48, N49); section cards with one big picture and the bridge spoken over them (N47); voice continuous across moves, never a silent gap at a scene change (N46); a paper explainer opens on the paper's title page and shows its figures and tables (N52).
-- Every frame illustrated; one key phrase (<= 9 words) per frame; something arrives as each scene lands; line-art cast and agent-as-chat-window system (N36); official logos from TalkWeaver's icon sets for named products (N38).
-- Rules: every movement has a job; two motion levels (`calm`, `standard`); builds start at the spoken word, never before; short changing phrases (<= 9 words), regular weight, not bold; boxes subtle; connectors touch boxes; content vertically centred; lucide concept icons, never emoji; captions cleaned, word-timed, below y 990; chapters from sections.
-- Dense or beginner content: `calm`. Audience unknown: `standard`, and say so.
-- Look: paper/ink/accents in `kit/templates/index.mjs`; font Inter unless the user supplies one (`hyperframes-setup.md`).
+Only the differences; every other step is as above.
 
-## Never
+| Step | TalkWeaver deck | Transcript only | Paper | Other materials |
+| --- | --- | --- | --- | --- |
+| 1 Brief | Audience from the outline and Run notes | Ask audience; summary genre (N76) | `navigate` | Ask genre and audience |
+| 2 Evidence | Deck, Run JSON, transcript, Notes; reuse widgets (`?video=1`) and logos | The transcript is the evidence, not the soundtrack | Title page, figures, tables, licence note (N52) | Evidence inventory first; real screenshots (N80) |
+| 3-4 Script | Deck gives the order; new script (N76) unless he wants his voice | New connected script, 5-7 min per hour (N76) | Open on a claim about the subject, then the paper (N50, N65) | Script from the brief |
+| 7 Voice | Route A house narrator; route B only if asked | Route A | Route A (house narrator, not `paper-reading.md`) | Route A, or none |
+| 12 Companion | Notes link to the videos; a session gets one companion (N85) | Single or series | Argument view (N72) | Per video |
 
-- Leave a mostly empty frame or a slide-bullet scene on screen while the voice explains something that could be shown.
-- Narrate numbered steps, hedges or "what it does not mean" (N41, N42).
-- Write narration as slogans or clipped fragments; it is one person explaining in linked sentences (N64).
-- Leave silence at a scene change, open a section on a text-only card, or keep adding panels to one screen when the narration has moved to a new element (N46, N47, N49).
-- Add facts, numbers, names, redrawn logos, music, sound effects, lower-thirds, slogans or calls to action the speaker or outline did not give.
-- Reorder content to fit speech; correct the outline or the speaker silently (show the outline, report the difference).
-- Invent build times without flagging them `fallback`.
-- Use `hyperframes@latest`, `init`, `add`, `skills update`, a shader transition, or real Chrome.
-- Ship or bundle a font you are not licensed to redistribute; clone a voice without authorisation; present a synthetic voice as a person.
-- Leave a render or review server running; run verbose package-manager output.
-- Skip the stills.
+Route C (a TalkWeaver package exporter) is not built; use route B with the real TalkWeaver outputs.
 
-## Files
+## Where everything lives
 
-- `scripts/`: `new-video.mjs`, `plan-from-timings.mjs`, `build-video.mjs`, `hf.mjs` (`check` also warns on empty frames, N32), `join-clips.mjs`, `review.mjs`, `build-gallery.mjs` (every layout once, incl. illustration and widget), `storyboard.mjs <dir> [--png]` (the approval page, N44), `companion.mjs <dir> [--out companion]` (self-study page, N63), `transcribe-words.py`, `align-words.mjs`.
-- `assets/kit/`: `templates/` (`illustration.mjs` + `_frame.mjs`, `_draw.mjs`, `_cast.mjs` = the line-art generator; `widget.mjs`; `_icons.mjs` = lucide / tabler / brand-logo resolver), `icons/` (41 lucide), `tools/` (review page, feedback server, vendor-icons, `shoot.mjs` headless stills), `samples/` (images, `frames/*.json` sample frames, `sample-widget.html`). `assets/sample-outline.md`: three-slide outline.
-- Illustrated scenes: `{illustration frame=frames/x.json}`; frame JSON format and element types in `references/inputs.md`. Widget scenes: `{widget src=widgets/x.html steps=N}` (stills per state). Logos: `{icon=svgl:openai}` or a `logo` element, read from TalkWeaver's icon sets (`look.json` `iconSets` or env `TALKWEAVER_ICONS`), never shipped.
-- `PROVENANCE.md`: origin and licences. `README.md`: for colleagues.
+- `references/`: `rules.md` rules by step with N and D ids; `voice.md`; `companion.md`; `agent-brief.md` routes, commands, report; `inputs.md` outline, plan and frame JSON formats; `hyperframes-setup.md` version pin, fonts, render traps; `feedback-ledger.md` running comments: an optional local log, created on first use, never published. History, not loaded per video and not in the published skill: `feedback-audit-*.md`, `consolidation-*.md`; `motion-principles.md` points to `rules.md`.
+- `scripts/`: `new-video.mjs`, `plan-from-timings.mjs`, `build-video.mjs`, `hf.mjs`, `prerelease.mjs`, `make-covers.mjs`, `jump-scan.mjs`, `join-clips.mjs`, `storyboard.mjs`, `companion.mjs`, `embed-player.mjs`, `transcribe-words.py`, `align-words.mjs`, `build-gallery.mjs`. `build-journey.mjs` is only for an independent talk gallery.
+- `assets/kit/`: `templates/` (slide templates, frame elements, line-art generator), `icons/` (lucide), `tools/` (`lint-frames.mjs`, review page, `shoot.mjs`), `samples/`. Samples: `assets/sample-outline.md`, `assets/sample-companion.json`.
+- Sibling skills: `designing-instructional-videos` (genre, narrative, review gate), `designing-visuals-for-learning` (shared principles), `text-to-speech` and `speech-to-text` (engines), `talkweaver`, `talkweaver-visuals`, `explainers` (silent tops, shared player).
+- `README.md` for colleagues, with the licence summary.
+
+## Hard stops
+
+- No `hyperframes@latest`, `init`, `add`, `skills update`, shader transitions or real Chrome; no verbose package-manager output.
+- No bundled font you may not redistribute; no voice clone without authorisation; a synthetic voice is labelled synthetic.
+- No render or review server left running. No skipping the stills. No release before step 10 passes.

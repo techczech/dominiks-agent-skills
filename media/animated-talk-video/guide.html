@@ -29,11 +29,11 @@ footer{margin-top:40px;color:var(--muted);font-size:14px;border-top:1px solid va
 <h1>Animated talk video</h1>
 <p class="lede">A skill that lets a coding agent such as Claude Code turn a talk into an animated explainer video. You need no video editor and no TalkWeaver.</p>
 
-<div class="note">The skill comes as a single file, <code>animated-talk-video.skill</code>. Ask Dominik Lukeš for it; this page explains what it does and how to use it.</div>
+<div class="note">The skill is a folder in the public repository <a href="https://github.com/techczech/dominiks-agent-skills/tree/main/media/animated-talk-video">techczech/dominiks-agent-skills</a>; this page explains what it does and how to use it.</div>
 
 <h2>What it does</h2>
 <p>You give the agent a talk outline with a narration script, or a recording of the talk with the times of the slide changes. The agent redraws each slide as a moving scene, builds each point when the voice says it, adds captions, and writes an MP4. Next to it you get <code>captions.vtt</code>, <code>transcript.md</code> and <code>chapters.txt</code>.</p>
-<p>The style is a push-left transition between slides, a small title at the top left and short regular-weight text. Motion comes in two levels: <code>calm</code> (fades only, for dense or beginner material) and <code>standard</code>. The rules come from Dominik's work on designing instructional videos.</p>
+<p>The style is a push-left transition between slides, no titles on screens (titles appear only on the title page and section cards) and short regular-weight text at least 34 px high. Motion comes in two levels: <code>calm</code> (fades only, for dense or beginner material) and <code>standard</code>. The rules come from Dominik's work on designing instructional videos.</p>
 <p>The renderer is HyperFrames, an open-source tool from HeyGen that turns an HTML page into video.</p>
 
 <h2>What you need</h2>
@@ -46,7 +46,7 @@ footer{margin-top:40px;color:var(--muted);font-size:14px;border-top:1px solid va
 <p>A render takes one to three times the video's length on a slower laptop.</p>
 
 <h2>Install</h2>
-<p><code>animated-talk-video.skill</code> is a zip file. Unzip it into your agent's skills folder (for Claude Code, <code>~/.claude/skills</code>), then start a new session.</p>
+<p>Copy the <code>animated-talk-video</code> folder from the <a href="https://github.com/techczech/dominiks-agent-skills/tree/main/media/animated-talk-video">public repository</a> into your agent's skills folder (for Claude Code, <code>~/.claude/skills</code>), then start a new session.</p>
 <p>On first use the agent scaffolds a project folder and installs HyperFrames at a pinned version, 0.8.214. The pin is there because the project releases several times a day and the kit is tested against one version. The agent also turns HyperFrames telemetry off.</p>
 
 <h2>Make a video from an outline</h2>
@@ -80,10 +80,10 @@ s3,41</code></pre>
 
 <h2>Fonts, voices and licences</h2>
 <ul>
-<li><strong>Fonts.</strong> None are included. The default is Inter (open licence). For your own typeface, put the <code>.ttf</code> files in <code>fonts/</code> and declare them in <code>look.json</code>. The renderer ignores system fonts.</li>
+<li><strong>Fonts.</strong> Four open-licence families (Fraunces, Alegreya Sans, Geist, Inter) come with the kit; <code>look.json</code> <code>type</code> picks the preset. For your own typeface, put the <code>.ttf</code> files in <code>fonts/</code> and declare them in <code>look.json</code>. The renderer ignores system fonts.</li>
 <li><strong>Voices.</strong> Clone a voice only from audio you are authorised to use: your own, recorded for this purpose, or a speaker who has agreed in writing. Label synthetic narration as synthetic in the video description. A real recording of the talk is the better source.</li>
 <li><strong>Brand logos.</strong> None are included, because they are trademarks. If a slide names an app, the agent uses a generic icon unless you add a logo file you are licensed to use.</li>
-<li><strong>Licences.</strong> HyperFrames is Apache-2.0 and installed from npm. The icons are from lucide (ISC licence). GSAP is loaded from a CDN under GreenSock's standard licence; check <a href="https://gsap.com/standard-license">gsap.com/standard-license</a> for your use. The skill's <code>PROVENANCE.md</code> has the full list.</li>
+<li><strong>Licences.</strong> HyperFrames is Apache-2.0 and installed from npm, not bundled. The line-art characters and props are original drawings made for the kit. The icons are from lucide (ISC licence; notice in <code>assets/kit/icons/LICENSE.txt</code>). The bundled fonts (Fraunces, Alegreya Sans, Geist, Inter) are under the SIL Open Font License 1.1; notices in <code>assets/kit/fonts/</code>. GSAP is loaded from a CDN under GreenSock's standard licence; check <a href="https://gsap.com/standard-license">gsap.com/standard-license</a> for your use. Brand logos are not shipped.</li>
 </ul>
 
 <h2>Troubleshooting</h2>

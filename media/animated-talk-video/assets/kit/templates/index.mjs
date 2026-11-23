@@ -37,10 +37,14 @@ import * as analogy from './analogy.mjs'
 import * as illustration from './illustration.mjs'
 import * as widget from './widget.mjs'
 import { f, esc, wc } from './_kit.mjs'
+import { resolveFonts, fontFaceCss, FONT_DIR, DEFAULT_TYPE, MONO_DEFAULT } from './_fonts.mjs'
 import { kit } from './_kit.mjs'
+import { readFileSync } from 'node:fs'
+import path from 'node:path'
 
 export const TEMPLATES = { section, statement, quote, list, iconrow, equation, cycle, timeline, process: processTpl, compare, cards, stats, code, media, table, chart, chat, analogy, illustration, widget }
 export { f, esc }
+export { resolveFonts, fontFaceCss, PRESETS as TYPE_PRESETS } from './_fonts.mjs'
 export { TITLE_MODES, TITLE_DY, resolveTitleModes, applyTitleMode, titleModeCss, sectionTabs } from './_kit.mjs'
 
 // ---------------------------------------------------------------- look
@@ -48,25 +52,28 @@ export const defaultLook = {   // paper/ink/accent tokens from Dominik's talk de
   paper: '#fdfdfb', ink: '#101418', muted: '#5c6570', hairline: '#e3e2dc',
   accents: { green: '#0a7a5c', blue: '#0f4bd8', orange: '#c2410c', red: '#b42318' },
   tints: { green: '#e4f3ee', blue: '#e8eefc', orange: '#fcece3', red: '#fbe9e7' },
-  // The renderer ignores system fonts. With no `fonts` entry, HyperFrames maps "Inter" to a bundled Google font at render
-  // time (needs network once; cached). To use your own font, put the .ttf files in fonts/ and list them in look.json:
-  //   "fonts": [{ "family": "My Font", "weight": 400, "src": "fonts/my-font-regular.ttf" }, { ... "weight": 700 ... }]
-  //   "sans": "\"My Font\", Inter, sans-serif"
+  // House typography (D18, _fonts.mjs): `type` picks a preset ("geist" default, Dominik 13 Nov; "fraunces-alegreya", "inter");
+  // `fonts: { display, text, mono }` overrides single families. Bundled files load from kit/fonts/ (the renderer ignores system fonts).
+  // Own font files: "fontFaces": [{ "family": "My Font", "weight": 400, "src": "fonts/my-font-regular.ttf" }] and "fonts": { "text": "My Font" }.
   // Never ship a font you are not licensed to redistribute (see references/hyperframes-setup.md).
-  sans: 'Inter, system-ui, sans-serif',
-  mono: '"JetBrains Mono", ui-monospace, "SF Mono", Menlo, Consolas, monospace',
-  fonts: []
+  type: DEFAULT_TYPE,
+  fonts: {},
+  mono: MONO_DEFAULT
 }
 
-export function lookCss(look = defaultLook) {
+export function lookCss(look = defaultLook, opts = {}) {
   const L = { ...defaultLook, ...look, accents: { ...defaultLook.accents, ...look.accents }, tints: { ...defaultLook.tints, ...look.tints } }
-  return L.fonts.map(x => `@font-face { font-family: "${x.family}"; font-weight: ${x.weight}; src: url("${x.src}") format("truetype"); }`).join('\n') + `
+  const F = resolveFonts(L)
+  return fontFaceCss(L, opts.fontBase ?? FONT_DIR) + `
 :root { --paper: ${L.paper}; --ink: ${L.ink}; --muted: ${L.muted}; --hairline: ${L.hairline};
 ${Object.entries(L.accents).map(([k, v]) => `  --${k}: ${v};`).join('\n')}
 ${Object.entries(L.tints).map(([k, v]) => `  --tint-${k}: ${v};`).join('\n')}
-  --sans: ${L.sans}; --mono: ${L.mono}; }`
+  --sans: ${F.text}; --display: ${F.display}; --mono: ${F.mono}; --dw: ${F.dw}; --track: ${F.track}em; }`
 }
 
+// .hl (highlight layer behind a unit's text) is emitted only when a scene uses it: HyperFrames lints any z-index:-1 rule (negative_z_index); compose() adds `isolation:isolate` inline to each parent (hlParents) so the layer paints above the parent's own background, never behind it, and the lint sees a stacking context.
+export const hlCss = `.hl { position: absolute; inset: 0; z-index: -1; opacity: 0; border-radius: inherit; background: var(--hlc, var(--tint-orange)); pointer-events: none; }
+`
 export const baseCss = `
 * { margin: 0; padding: 0; box-sizing: border-box; }
 html, body { width: 1920px; height: 1080px; overflow: hidden; background: var(--paper); }
@@ -79,7 +86,6 @@ body { font-family: var(--sans); color: var(--ink); }
 .topbar.nk h2 { margin-top: 0; }
 .topbar h2 { font-size: 62px; font-weight: 400; letter-spacing: 0; margin-top: 12px; line-height: 1.1; }
 .rule { height: 3px; background: rgba(16,20,24,0.14); margin-top: 22px; transform-origin: left center; }
-.hl { position: absolute; inset: 0; z-index: -1; opacity: 0; border-radius: inherit; background: var(--hlc, var(--tint-orange)); pointer-events: none; }
 .ico { display: inline-flex; flex: none; width: 1em; height: 1em; }
 .ico svg { width: 100%; height: 100%; }
 /* captions live outside the scenes (shader transitions capture the scene DOM). Content stays above y=990. */
@@ -120,7 +126,8 @@ export function resolveLayout(tags) {
   return { layout: 'list', variant: undefined, exact: false, tag: tagList[0] ?? '(none)', template: list }   // untagged slide = plain list
 }
 
-function prepare(slide) {
+function prepare(slide, scene) {
+  if (scene?.fullWidth != null) slide = { ...slide, fullWidth: scene.fullWidth }   // D19: a widget scene sets fullWidth on the scene or the slide
   const r = resolveLayout(slide.layout)
   return { r, slide: { ...slide, variant: slide.variant ?? r.variant } }
 }
@@ -131,7 +138,7 @@ export const handTimesFor = (slide, ctx) => { const { r, slide: s } = prepare(sl
 // Async pre-step for templates that need files made before render (widget stills). build-video calls it before compose().
 export async function prepareScenes(scenes, opts = {}) {
   for (const [i, sc] of scenes.entries()) {
-    const { r, slide } = prepare(sc.slide)
+    const { r, slide } = prepare(sc.slide, sc)
     if (r.template.prepare) await r.template.prepare(slide, { ...opts, warn: m => (opts.warn ?? console.error)(`s${i + 1}: ${m}`) })
   }
 }
@@ -221,8 +228,24 @@ export function cleanCaptions(words, { fixes = [], maxWords = 8, maxDur = 3.4, m
 // ---------------------------------------------------------------- compose
 const GSAP_SRC = 'https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js'
 
-// titleMode (default 'kicker', N30): 'full' | 'kicker' | 'tab' | 'intro-then-none' | 'none' for the video; scene.titleMode overrides it per scene; afterIntro: 'kicker' keeps a kicker after the intro card.
-export function compose({ look = defaultLook, duration, audio = null, scenes, captions = [], iconSets, projDir, titleMode = 'kicker', afterIntro }) {
+const hlParents = h => h.replace(/<(\w+)([^>]*)>(?=<i class="hl")/g, (m, tag, a) => /isolation/.test(a) ? m : /\sstyle="/.test(a) ? `<${tag}${a.replace(/\sstyle="/, ' style="isolation:isolate;')}>` : `<${tag}${a} style="isolation:isolate">`)
+
+// Read-time floor under which a scene's compose warning fires: 2 s by default; profile "silent" (D16, plan.json or look.json) gives step cards
+// (a frame with a `step` element, or only step/textblock elements of at most 8 words) 1.2 s; scene.readFloor overrides either.
+const READ_FLOOR = 2, SILENT_FLOOR = 1.2
+export function readFloorOf(sc, profile, projDir) {
+  if (sc.readFloor != null) return +sc.readFloor
+  if (profile !== 'silent') return READ_FLOOR
+  let fr = sc.slide.frameData
+  try { if (!fr && sc.slide.frame) fr = JSON.parse(readFileSync(path.resolve(projDir ?? process.cwd(), sc.slide.frame), 'utf8')) } catch {}
+  const els = fr ? [...(fr.elements ?? []), ...(fr.builds ?? []).flatMap(b => b.elements ?? [])] : []
+  if (els.some(e => e.type === 'step')) return SILENT_FLOOR
+  const words = els.reduce((n, e) => n + (e.lines ?? []).reduce((m, l) => m + wc(l.text ?? ''), 0), 0)
+  return els.length && els.every(e => e.type === 'textblock') && words <= 8 ? SILENT_FLOOR : READ_FLOOR
+}
+
+// titleMode (default 'none', N54; was 'kicker', N30): 'full' | 'kicker' | 'tab' | 'intro-then-none' | 'none' for the video; scene.titleMode overrides it per scene; afterIntro: 'kicker' keeps a kicker after the intro card.
+export function compose({ look = defaultLook, duration, audio = null, scenes, captions = [], iconSets, projDir, titleMode = 'none', afterIntro, profile = look.profile }) {
   const warnings = []
   const L = { ...defaultLook, ...look, accents: { ...defaultLook.accents, ...look.accents }, tints: { ...defaultLook.tints, ...look.tints } }
   const used = new Set(), plan = []
@@ -231,14 +254,15 @@ export function compose({ look = defaultLook, duration, audio = null, scenes, ca
     const prev = scenes[i - 1]
     const tr = i === 0 ? { d: 0 } : pickTransition(prev, sc, i)
     if (tr.legacyShader) warnings.push(`s${i + 1}: shader "${tr.legacyShader}" is no longer supported; used ${DEFAULT_TRANSITION}`)
-    if (i && sc.end - sc.start < tr.d + 2) warnings.push(`s${i + 1}: scene is ${(sc.end - sc.start).toFixed(1)} s long and its ${tr.name} takes ${tr.d} s; the content has under 2 s to read`)
+    const floor = readFloorOf(sc, profile, projDir)
+    if (i && sc.end - sc.start < tr.d + floor) warnings.push(`s${i + 1}: scene is ${(sc.end - sc.start).toFixed(1)} s long and its ${tr.name} takes ${tr.d} s; the content has under ${floor} s to read`)
     plan.push({ ...sc, tr })
   })
   let html = '', js = '', css = ''
   const ids = []
   plan.forEach((sc, i) => {
     const sid = 's' + (i + 1); ids.push(sid)
-    const { r, slide } = prepare(sc.slide)
+    const { r, slide } = prepare(sc.slide, sc)
     const motion = sc.motion ?? suggestMotion(sc.slide)
     for (const m of lint(sc.slide)) warnings.push(`${sid}: ${m}`)
     const dIn = sc.tr.d, dOut = plan[i + 1]?.tr.d ?? 0
@@ -249,7 +273,7 @@ export function compose({ look = defaultLook, duration, audio = null, scenes, ca
     used.add(r.template)
     if (slide.inserted) warnings.push(`${sid}: INSERTED scene "${r.layout}" (not in the outline)${slide.nodes ? ' from speech: ' + slide.nodes.map(n => `"${n.said}"@${n.t}`).join('; ') : ''}`)
     const ds = sc.start, de = Math.min(duration, sc.end + dOut)   // visible from its move's start until the next scene's move has finished
-    html += `<div id="${sid}" class="scene clip ${out.cls ?? ''}" ${out.style ? `style="${out.style}" ` : ''}data-start="${f(ds)}" data-duration="${f(de - ds)}">${out.html}</div>\n`
+    html += hlParents(`<div id="${sid}" class="scene clip ${out.cls ?? ''}" ${out.style ? `style="${out.style}" ` : ''}data-start="${f(ds)}" data-duration="${f(de - ds)}">${out.html}</div>\n`)
     js += out.js
   })
   const moves = []
@@ -269,7 +293,7 @@ export function compose({ look = defaultLook, duration, audio = null, scenes, ca
     <style>
 ${lookCss(L)}
 ${baseCss}
-${css}
+${html.includes('class="hl"') ? hlCss : ''}${css}
     </style>
   </head>
   <body>

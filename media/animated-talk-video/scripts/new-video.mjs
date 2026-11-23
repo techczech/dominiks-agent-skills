@@ -3,8 +3,8 @@
 // usage: node new-video.mjs <dir> [--title "Talk title"] [--outline path/to/outline.md] [--install]
 //   --outline   copy this outline into the project (default: a stub; assets/sample-outline.md shows every layout tag used by the smoke test)
 //   --install   run `npm install --save-exact hyperframes@0.8.214` in the project (131 MB; skip it and the CLI runs through npx instead)
-// Creates: kit/ (templates, icons, review tools; yours to edit), tools/ (plan, build, hf, join-clips), look.json, outline.md, hyperframes.json,
-// package.json, .gitignore, fonts/ audio/ assets/. No font is bundled: see references/hyperframes-setup.md.
+// Creates: kit/ (templates, icons, review tools; yours to edit), tools/ (plan, build, hf, join-clips, prerelease, make-covers, jump-scan), look.json, outline.md, hyperframes.json,
+// package.json, .gitignore, fonts/ audio/ assets/. House fonts (Fraunces, Alegreya Sans, Geist, Inter; OFL) come with the kit in kit/fonts/ and load by @font-face from there; look.json `type` picks the preset (D18).
 import { cpSync, mkdirSync, writeFileSync, readFileSync, existsSync, readdirSync } from 'node:fs'
 import { spawnSync } from 'node:child_process'
 import { fileURLToPath } from 'node:url'
@@ -22,7 +22,14 @@ const PIN = '0.8.214'
 mkdirSync(dir, { recursive: true })
 for (const d of ['fonts', 'audio', 'assets', 'tools']) mkdirSync(path.join(dir, d), { recursive: true })
 cpSync(path.join(skill, 'assets/kit'), path.join(dir, 'kit'), { recursive: true })
-for (const f of ['plan-from-timings.mjs', 'build-video.mjs', 'hf.mjs', 'join-clips.mjs', 'build-gallery.mjs', 'align-words.mjs', 'storyboard.mjs', 'companion.mjs']) cpSync(path.join(here, f), path.join(dir, 'tools', f))
+// Fingerprint of the kit as copied: prerelease.mjs lists any kit file this project later changes, so the fix goes back to the skill (D15).
+{
+  const { createHash } = await import('node:crypto'), files = {}
+  const walk = (d, rel = '') => { for (const n of readdirSync(d, { withFileTypes: true })) { const r = rel ? rel + '/' + n.name : n.name; if (n.isDirectory()) walk(path.join(d, n.name), r); else files[r] = createHash('sha256').update(readFileSync(path.join(d, n.name))).digest('hex') } }
+  walk(path.join(dir, 'kit'))
+  writeFileSync(path.join(dir, 'kit/.kit-manifest.json'), JSON.stringify({ made: new Date().toISOString(), files }, null, 1) + '\n')
+}
+for (const f of ['plan-from-timings.mjs', 'build-video.mjs', 'hf.mjs', 'join-clips.mjs', 'build-gallery.mjs', 'align-words.mjs', 'storyboard.mjs', 'companion.mjs', 'companion-player.mjs', 'companion-series.mjs', 'prerelease.mjs', 'jump-scan.mjs', 'make-covers.mjs']) cpSync(path.join(here, f), path.join(dir, 'tools', f))
 const put = (f, s) => writeFileSync(path.join(dir, f), s)
 put('hyperframes.json', JSON.stringify({
   $schema: 'https://hyperframes.heygen.com/schema/hyperframes.json',
@@ -37,6 +44,8 @@ put('package.json', JSON.stringify({
     plan: 'node tools/plan-from-timings.mjs --outline outline.md --out plan.json',
     build: 'node tools/build-video.mjs .',
     check: 'node tools/hf.mjs check',
+    prerelease: 'node tools/prerelease.mjs .',
+    covers: 'node tools/make-covers.mjs .',
     snapshot: 'node tools/hf.mjs snapshot --scenes',
     render: 'node tools/hf.mjs render',
     status: 'node tools/hf.mjs status',
@@ -47,7 +56,7 @@ put('package.json', JSON.stringify({
 }, null, 2) + '\n')
 put('.gitignore', 'node_modules/\nfonts/\nsnaps/\nrenders/\nrender.*\n*.log\nfeedback/\n')
 put('look.json', JSON.stringify({
-  _note: 'Overrides for the kit look (see defaultLook in kit/templates/index.mjs). Keys: paper, ink, muted, hairline, accents{green,blue,orange,red}, tints{...}, sans, mono, fonts[{family,weight,src}]. Delete this _note line or leave it.'
+  _note: 'Overrides for the kit look (see defaultLook in kit/templates/index.mjs). Keys: paper, ink, muted, hairline, accents{green,blue,orange,red}, tints{...}, type (fraunces-alegreya | geist | inter; kit/fonts/ holds the files), fonts{display,text,mono} (family names), fontFaces[{family,weight,src}] for your own files, mono. Delete this _note line or leave it.'
 }, null, 2) + '\n')
 const stub = o.outline ? readFileSync(o.outline, 'utf8') : `# ${o.title ?? 'Video title'}\n\n## First section\n\n### First slide\n{list}\n- First point\n- Second point\n> Narration for this slide, one paragraph, in the words to be spoken.\n`
 put('outline.md', stub)

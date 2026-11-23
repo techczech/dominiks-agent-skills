@@ -1,0 +1,4 @@
+{ "id": "padding", "key": false, "narration": "Text hard against a box border.", "elements": [
+  { "type": "rect", "id": "card", "x": 200, "y": 300, "w": 440, "h": 120, "r": 20, "fill": "#ffffff" },
+  { "type": "text", "id": "label", "x": 214, "y": 375, "text": "Question", "size": 48 }
+] }

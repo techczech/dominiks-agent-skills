@@ -1,0 +1,10 @@
+{
+  "id": "step-card",
+  "scene": "A step card with a picture",
+  "key": false,
+  "narration": "First, ask for a picture, not a table.",
+  "motion": "The number lands, the sentence rises, the picture fades in.",
+  "elements": [
+    { "type": "step", "id": "st", "n": 1, "of": 5, "text": "Ask for a picture,", "accent": "not a table.", "picture": "stills/agent-window.png" }
+  ]
+}

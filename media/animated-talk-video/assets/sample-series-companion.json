@@ -1,0 +1,69 @@
+{
+  "title": "Example session",
+  "series": {
+    "videos": [
+      {
+        "id": "01-example",
+        "dir": "../01-example",
+        "title": "Example video"
+      }
+    ]
+  },
+  "argument": {
+    "intro": "Replace with source-backed session introduction.",
+    "parts": [
+      {
+        "id": "example-question",
+        "title": "Example question?",
+        "summary": "Replace with the source answer.",
+        "video": "01-example",
+        "slides": "Example section",
+        "tryIt": {
+          "prompt": "Replace with an authored prompt.",
+          "doneWhen": "Replace with an authored check."
+        },
+        "activity": null
+      }
+    ]
+  },
+  "conceptGroups": [
+    {
+      "id": "example",
+      "title": "Example group"
+    }
+  ],
+  "concepts": [
+    {
+      "id": "example-term",
+      "group": "example",
+      "term": "Example term",
+      "definition": "Replace with a source definition.",
+      "related": [],
+      "parts": [
+        "example-question"
+      ],
+      "screens": [
+        "01-example/example-screen"
+      ]
+    }
+  ],
+  "research": {
+    "intro": "Replace with authored application guidance.",
+    "translationLabel": "Our translation",
+    "paperLabel": "Source",
+    "cards": []
+  },
+  "furtherStudy": [],
+  "skills": [],
+  "making": {},
+  "footer": [],
+  "copy": {
+    "description": "Replace with the session description.",
+    "navHome": "Home",
+    "navVideo": "Video",
+    "navArgument": "Argument",
+    "navConcepts": "Key terms",
+    "navResearch": "Apply",
+    "navMaking": "Making"
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "id": "step",
+  "scene": "A step card",
+  "key": false,
+  "narration": "First, the model reads the task.",
+  "motion": "The number lands, then the text rises.",
+  "elements": [
+    { "type": "step", "id": "st", "n": 1, "of": 3, "text": "The model reads the task", "sub": "It decides what to do first." }
+  ]
+}

@@ -1,0 +1,7 @@
+{
+  "skip": {
+    "agent-tools.json": "legacy sample from before D1-D13: 26-30 px text, a key phrase, a left-aligned message; kept to show the older elements",
+    "search-person.json": "legacy sample from before D1-D13: a key phrase and 32 px file names",
+    "logo-row.json": "legacy sample from before D1-D13: a key phrase"
+  }
+}

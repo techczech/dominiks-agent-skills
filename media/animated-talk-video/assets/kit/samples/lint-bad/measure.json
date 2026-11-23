@@ -1,0 +1,8 @@
+{
+  "id": "measure",
+  "scene": "A line that runs across the whole screen (D19, warning)",
+  "key": false,
+  "elements": [
+    { "type": "text", "id": "long", "x": 100, "y": 500, "size": 44, "text": "The model reads the whole task, decides what to do first and then calls the tool it needs" }
+  ]
+}

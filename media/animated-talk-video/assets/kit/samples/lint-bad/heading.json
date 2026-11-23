@@ -1,0 +1,5 @@
+{ "id": "heading", "key": "Agents run tools in a loop", "narration": "A key phrase, a top-left title and an accent bar.", "elements": [
+  { "type": "rect", "id": "bar", "x": 80, "y": 70, "w": 84, "h": 8, "r": 4, "fill": "#0a7a5c", "stroke": null },
+  { "type": "text", "id": "title", "x": 80, "y": 150, "text": "How the loop works", "size": 64, "weight": 700 },
+  { "type": "box", "id": "b", "x": 600, "y": 500, "w": 600, "h": 200, "text": "Model" }
+] }

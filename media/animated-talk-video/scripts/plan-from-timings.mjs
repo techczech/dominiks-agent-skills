@@ -10,7 +10,9 @@
 //   --audio <path>       narration file the video plays (relative to the project), e.g. audio/voice.m4a.
 //   --from <s> --to <s>  cut a stretch out of a long recording: timings are on the recording clock, words and audio on the cut clock.
 //   --end <s>            end of the last scene when no --to / audio length is known.
-//   --title <text>       video title (default: the outline's "# " heading).
+//   --title <text>       video title (default: the outline's "# " heading). It is metadata only: no title scene unless --title-scene (route A) or a timing row named "title" (route B) asks for one.
+//   --title-scene        route A: also put a title scene first, drawn from the "# " heading.
+//   --profile silent     write "profile": "silent" into plan.json (D16: step cards get a 1.2 s read floor; first scene may be a statement).
 // With no --timings the scenes run in outline order, lengths from --durations, else estimated from the narration (2.6 words/s) or the unit count.
 import { readFileSync, writeFileSync, existsSync } from 'node:fs'
 import { fileURLToPath, pathToFileURL } from 'node:url'
@@ -34,7 +36,7 @@ const plain = t => String(t).replace(/\*\*([^*]+)\*\*/g, '$1').replace(/\*\*/g, 
 
 // ---------------------------------------------------------------- outline
 const PALETTE = ['green', 'orange', 'blue', 'red']
-const KEYED = new Set(['id', 'layout', 'accent', 'variant', 'motion', 'transition', 'from', 'kicker', 'head', 'heads', 'focus', 'titlemode', 'dense', 'continues', 'frame', 'src', 'steps', 'stepmode', 'stepmap', 'wait', 'key'])
+const KEYED = new Set(['id', 'layout', 'accent', 'variant', 'motion', 'transition', 'from', 'kicker', 'head', 'heads', 'focus', 'titlemode', 'dense', 'continues', 'frame', 'src', 'steps', 'stepmode', 'stepmap', 'wait', 'key', 'fullwidth'])
 const CHAT_ROLES = new Set(['user', 'reasoning', 'context', 'tool', 'result', 'assistant'])
 
 function parseOutline(text) {
@@ -112,7 +114,7 @@ function slideObject(s) {
   if (t.heads) slide.heads = t.heads.split('|').map(x => x.replace(/_/g, ' '))
   if (s.images.length) slide.images = s.images
   if (lay === 'illustration') { slide.frame = t.frame ?? s.images.find(i => /\.json$/i.test(i.src))?.src; if (t.key) slide.key = t.key.replace(/_/g, ' ') }
-  if (lay === 'widget') { slide.src = t.src ?? s.images.find(i => /\.html?$/i.test(i.src))?.src; if (t.steps != null) slide.steps = Number(t.steps); if (t.stepmode) slide.stepmode = t.stepmode; if (t.stepmap) slide.stepmap = String(t.stepmap).replace(/[|;]/g, ','); if (t.wait) slide.wait = Number(t.wait) }
+  if (lay === 'widget') { slide.src = t.src ?? s.images.find(i => /\.html?$/i.test(i.src))?.src; if (t.steps != null) slide.steps = Number(t.steps); if (t.stepmode) slide.stepmode = t.stepmode; if (t.stepmap) slide.stepmap = String(t.stepmap).replace(/[|;]/g, ','); if (t.wait) slide.wait = Number(t.wait); if (t.fullwidth != null) slide.fullWidth = !/^(false|no|0)$/i.test(String(t.fullwidth)) }
   if (lay === 'quote') {
     const src = items.find(i => /^[—–]\s*|^--\s+/.test(i.text))
     if (src) { slide.source = src.text.replace(/^[—–]\s*|^--\s+/, ''); items = items.filter(i => i !== src) }
@@ -229,7 +231,7 @@ if (A.timings) {
   }
 } else {
   const durations = A.durations ? readJson(A.durations) : {}
-  const list = [...(deck.title ? [titleSlide()] : []), ...slides]
+  const list = [...(deck.title && A['title-scene'] ? [titleSlide()] : []), ...slides]
   let clock = 0
   for (const s of list) {
     const id = s.tags.id ?? `s${s.n}`
@@ -321,7 +323,7 @@ const out = scenes.map((sc, idx) => {
 })
 
 const plan = {
-  title, duration, audio: A.audio ?? null, titleMode: 'kicker',
+  title, ...(A.profile ? { profile: A.profile } : {}), duration, audio: A.audio ?? null, titleMode: 'none',
   captionFixes: [],   // [["recogniser slip", "what was said"]]: add after reading the captions against the outline
   wordsEstimated: !haveWords && estWords.length > 0,   // true = draft captions from the narration text at 2.6 words/s; replace with real word timings
   scenes: out, words: haveWords ? words : estWords, buildSources: sources, warnings

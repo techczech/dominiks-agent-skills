@@ -1,0 +1,10 @@
+{
+  "id": "title-picture",
+  "scene": "An opening card with an icon",
+  "key": false,
+  "narration": "Most people chat with AI. Their desktop agent apps can do much more.",
+  "motion": "The icon fades in, then the lines rise.",
+  "elements": [
+    { "type": "textblock", "id": "open", "picture": "bot", "lines": [ { "text": "Most people chat with AI.", "size": 88 }, { "text": "Their desktop agent apps can do much more.", "size": 56, "color": "#5c6570" } ] }
+  ]
+}

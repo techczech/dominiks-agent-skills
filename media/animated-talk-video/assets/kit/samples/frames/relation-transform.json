@@ -1,0 +1,27 @@
+{
+  "id": "relation-transform",
+  "scene": "Added features",
+  "key": false,
+  "narration": "The shop now summarises customer reviews.",
+  "motion": "Transformation (N88): the reviews arrive at their noun, the AI node and verb at the verb, the one summary after it. One spec, split with parts.",
+  "elements": [
+    { "type": "transform", "id": "rev-actor", "parts": ["actor"], "x": 160, "y": 170, "w": 1600, "h": 720,
+      "actor": { "mark": "shopping-cart", "name": "The shop" },
+      "input": { "look": "reviews", "n": 4, "label": "Customer reviews" },
+      "verb": { "text": "summarises" },
+      "output": { "look": "summary", "title": "Customers say", "label": "One summary" } }
+  ],
+  "builds": [
+    { "cue": "summarises", "motion": "pop", "elements": [
+      { "type": "transform", "id": "rev-verb", "parts": ["node", "verb"], "x": 160, "y": 170, "w": 1600, "h": 720,
+        "actor": { "mark": "shopping-cart", "name": "The shop" }, "input": { "look": "reviews", "n": 4, "label": "Customer reviews" },
+        "verb": { "text": "summarises" }, "output": { "look": "summary", "title": "Customers say", "label": "One summary" } } ] },
+    { "cue": "customer reviews", "motion": "pop", "stagger": 0.6, "elements": [
+      { "type": "transform", "id": "rev-input", "parts": ["input"], "x": 160, "y": 170, "w": 1600, "h": 720,
+        "actor": { "mark": "shopping-cart", "name": "The shop" }, "input": { "look": "reviews", "n": 4, "label": "Customer reviews" },
+        "verb": { "text": "summarises" }, "output": { "look": "summary", "title": "Customers say", "label": "One summary" } },
+      { "type": "transform", "id": "rev-output", "parts": ["output"], "motion": "wipe:r,0.6", "x": 160, "y": 170, "w": 1600, "h": 720,
+        "actor": { "mark": "shopping-cart", "name": "The shop" }, "input": { "look": "reviews", "n": 4, "label": "Customer reviews" },
+        "verb": { "text": "summarises" }, "output": { "look": "summary", "title": "Customers say", "label": "One summary" } } ] }
+  ]
+}

@@ -1,0 +1,5 @@
+{ "id": "raw-quote", "key": false, "narration": "A quotation drawn from an icon and lines of text.", "elements": [
+  { "type": "icon", "id": "quote-book", "icon": "book-open", "x": 170, "y": 300, "size": 160, "color": "#0a7a5c" },
+  { "type": "text", "id": "quote-0", "x": 390, "y": 400, "text": "“The least important thing you will do", "size": 56 },
+  { "type": "text", "id": "quote-1", "x": 390, "y": 470, "text": "is getting chatbots to answer questions.”", "size": 56 }
+] }

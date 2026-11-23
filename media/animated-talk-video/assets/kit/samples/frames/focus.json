@@ -1,0 +1,16 @@
+{
+  "id": "focus",
+  "scene": "A highlight",
+  "key": false,
+  "narration": "The harness is the part that runs the tools.",
+  "motion": "The highlight fades in around the harness; the next one replaces it.",
+  "elements": [
+    { "type": "box", "id": "a", "x": 200, "y": 380, "w": 480, "h": 240, "text": "Model", "icon": "brain" },
+    { "type": "box", "id": "b", "x": 720, "y": 380, "w": 480, "h": 240, "text": "Harness", "icon": "terminal" },
+    { "type": "box", "id": "c", "x": 1240, "y": 380, "w": 480, "h": 240, "text": "Computer", "icon": "computer" }
+  ],
+  "builds": [
+    { "cue": "harness", "elements": [ { "type": "focus", "id": "f1", "target": "b" } ] },
+    { "cue": "runs the tools", "at": 6, "hide": ["f1"], "elements": [ { "type": "focus", "id": "f2", "target": "c" } ] }
+  ]
+}

@@ -1,0 +1,10 @@
+{
+  "id": "textblock",
+  "scene": "Plain text",
+  "key": false,
+  "narration": "Alex Morgan, Centre for Learning Design, Example University.",
+  "motion": "Lines rise one by one.",
+  "elements": [
+    { "type": "textblock", "id": "who", "lines": [ { "text": "Alex Morgan", "size": 88 }, { "text": "Centre for Learning Design, Example University", "size": 52, "color": "#5c6570" }, { "text": "Annual Teaching Conference, 11 November 2026", "size": 52, "color": "#5c6570" } ] }
+  ]
+}

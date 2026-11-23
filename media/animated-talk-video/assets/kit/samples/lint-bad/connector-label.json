@@ -1,0 +1,6 @@
+{ "id": "connector-label", "key": false, "narration": "A label sitting on its connector.", "elements": [
+  { "type": "box", "id": "a", "x": 200, "y": 400, "w": 400, "h": 200, "text": "Model" },
+  { "type": "box", "id": "b", "x": 1300, "y": 400, "w": 400, "h": 200, "text": "Computer" },
+  { "type": "arrow", "id": "link", "x1": 600, "y1": 500, "x2": 1300, "y2": 500, "sw": 4 },
+  { "type": "text", "id": "link-label", "x": 950, "y": 512, "text": "Runs a tool", "size": 40, "anchor": "middle" }
+] }

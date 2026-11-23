@@ -1,0 +1,10 @@
+{
+  "id": "stats",
+  "scene": "A row of numbers",
+  "key": false,
+  "narration": "Three numbers, one after another.",
+  "motion": "Each number and its label arrive on their cue.",
+  "elements": [
+    { "type": "stats", "id": "row", "y": 380, "items": [ { "value": "75%", "label": "of teams" }, { "value": "3x", "label": "faster" }, { "value": "2026", "label": "the year it turned" } ] }
+  ]
+}

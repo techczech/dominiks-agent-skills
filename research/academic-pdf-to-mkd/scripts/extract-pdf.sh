@@ -103,7 +103,13 @@ if [ "$ENGINE" = "auto" ]; then
     echo -e "${BOLD}[Stage 1] Engine Detection${NC}"
     PY="python3"
     if [ -d "$SCRIPT_DIR/../.venv" ]; then PY="$SCRIPT_DIR/../.venv/bin/python"; fi
-    ENGINE="$("$PY" "$SCRIPT_DIR/detect-engine.py" "$PDF_PATH")"
+    DETECTION="$("$PY" "$SCRIPT_DIR/detect-engine.py" "$PDF_PATH" --with-reason)"
+    read -r ENGINE REASON <<< "$DETECTION"
+    if [ "$REASON" = "table-heavy" ] && [ "${MINERU_ALLOW_DOWNLOAD:-0}" != "1" ] &&
+        ! bash "$SCRIPT_DIR/mineru-extract.sh" --models-cached; then
+        echo "Warning: This paper has many tables. MinerU models are missing, so using Docling, whose table cells were unreliable in the benchmark. Re-run with MINERU_ALLOW_DOWNLOAD=1 to enable MinerU." >&2
+        ENGINE="docling"
+    fi
     echo -e "  Chosen engine: ${GREEN}$ENGINE${NC}"
     echo ""
 fi
@@ -130,7 +136,7 @@ case "$ENGINE" in
         run_in_venv "$SCRIPT_DIR/pymupdf4llm-extract.py" "$PDF_PATH" "$OUTPUT_DIR" "$PAPER_ID"
         ;;
     math)
-        echo -e "${BOLD}[Stage 2] MinerU Extraction (math-heavy)${NC}"
+        echo -e "${BOLD}[Stage 2] MinerU Extraction${NC}"
         bash "$SCRIPT_DIR/mineru-extract.sh" "$PDF_PATH" "$OUTPUT_DIR" "$PAPER_ID"
         ;;
     poppler)

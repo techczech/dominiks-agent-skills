@@ -11,12 +11,12 @@ Extracts academic PDFs into structured Markdown, with figures, tables, and page 
 
 | Engine | When chosen | Notes |
 |---|---|---|
-| **docling** *(default for most papers)* | Two-column papers, layout-heavy PDFs, fall-through case | MIT. Runs on whatever accelerator PyTorch finds (MPS, CUDA, else CPU). Best figures/tables. |
+| **docling** *(default for most papers)* | Two-column papers, layout-heavy PDFs, fall-through case | MIT. Runs on whatever accelerator PyTorch finds (MPS, CUDA, else CPU). Layout and figure extraction. |
 | **fast** *(pymupdf4llm)* | Short (≤12 pp), dense, low-math, born-digital | AGPL. No model load — sub-second on small docs. |
-| **math** *(MinerU)* | Math-symbol density ≥ 4% of word count | Apache-2.0 with usage thresholds. Strong on formulas. **~4.5 GB models, not bundled — first run downloads them (see below).** |
+| **math** *(MinerU)* | Table-heavy papers or maths-symbol density ≥ 2.5% of word count | Apache-2.0 with usage thresholds. Strong on tables and formulas. **~4.5 GB of models require download opt-in.** |
 | **poppler** *(fallback)* | Explicit `--engine poppler` when no Python venv | GPL. Deterministic, no models, weak structure. |
 
-Auto-detection rules live in `scripts/detect-engine.py` — math-symbol ratio (`∑∫∂∇...` + numbered-equation markers), page count, and words-per-page.
+Auto-detection checks for at least two distinct numbered tables with a row of five or more numeric columns near each caption, then checks maths-symbol ratio, page count and words per page. Table-heavy auto runs fall back to Docling with a warning when MinerU models are missing and download is disabled. An explicit `--engine` overrides auto-detection.
 
 These four were chosen from a wider survey of eight extractors — Docling, Marker,
 MinerU, pymupdf4llm, markitdown, Nougat, olmOCR and Poppler — on two criteria:
@@ -30,6 +30,14 @@ papers (2026-10-28) and not adopted: on born-digital papers it was about nine
 times slower than Docling with no accuracy gain. It did better than Docling on
 the one scanned chapter, but OCRmyPDF already covers scans here. Results and a
 reproducible setup are in `research/2026-10-27-unlimited-ocr-bench/`.
+
+OCRia-1 was tested on the same ten papers (24–25 November 2026). The
+26 November decision declined adoption given ordinary-paper accuracy, a
+restrictive licence and about 35 times Docling's measured time per page on
+different hardware. Across eight source-checked tables, Docling got 12 of 382
+cells wrong and lost structure in all eight. MinerU had zero errors on both
+measures. OCRia-1 had four structure errors. See
+`research/2026-11-24-ocria-1-bench/`.
 
 ## Prerequisites
 
